@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +10,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -65,45 +66,52 @@
                 android:drawablePadding="16dp"
                 android:gravity="center_vertical"
                 android:hint="@string/email_hint"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:paddingStart="12dp"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:textColor="@color/colorPrimaryText"
                 android:textColorHint="@color/colorSecondaryText"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@id/et_password_sign_in"
+                app:layout_constraintBottom_toTopOf="@id/til_password_sign_in"
                 app:layout_constraintEnd_toEndOf="@+id/tv_sign_in_title"
                 app:layout_constraintStart_toStartOf="@+id/tv_sign_in_title"
                 app:layout_constraintTop_toBottomOf="@id/tv_sign_in_title"
                 tools:ignore="RtlSymmetry" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/et_password_sign_in"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_password_sign_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="27dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="27dp"
                 android:fontFamily="@font/poppins"
-                android:background="@drawable/custom_edit_text_rounded"
-                android:drawableStart="@drawable/ic_password"
-                android:drawableEnd="@drawable/ic_show"
+                app:startIconTint="@color/colorPrimary"
+                app:startIconDrawable="@drawable/ic_password"
+                app:boxBackgroundMode="outline"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorPrimary"
                 android:drawablePadding="16dp"
                 android:gravity="center_vertical"
                 android:hint="@string/password_hint"
-                android:inputType="textPassword"
-                android:paddingStart="12dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="15dp"
-                android:paddingBottom="16dp"
-                android:textColor="@color/colorPrimaryText"
                 android:textColorHint="@color/colorSecondaryText"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/ll_remember_me_forget_password"
                 app:layout_constraintEnd_toEndOf="@+id/et_email_sign_in"
                 app:layout_constraintStart_toStartOf="@+id/et_email_sign_in"
-                app:layout_constraintTop_toBottomOf="@id/et_email_sign_in" />
+                app:layout_constraintTop_toBottomOf="@id/et_email_sign_in" >
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_password_sign_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_edit_text_rounded"
+                    android:inputType="textPassword"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:id="@+id/ll_remember_me_forget_password"
@@ -112,9 +120,9 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@id/btn_sign_in"
-                app:layout_constraintEnd_toEndOf="@+id/et_password_sign_in"
-                app:layout_constraintStart_toStartOf="@+id/et_password_sign_in"
-                app:layout_constraintTop_toBottomOf="@id/et_password_sign_in">
+                app:layout_constraintEnd_toEndOf="@+id/til_password_sign_in"
+                app:layout_constraintStart_toStartOf="@+id/til_password_sign_in"
+                app:layout_constraintTop_toBottomOf="@id/til_password_sign_in">
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/cb_remember_me"
@@ -223,8 +231,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:layout_marginBottom="30dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/btn_sign_in_using_google"
                 app:layout_constraintStart_toStartOf="@+id/btn_sign_in_using_google"
                 app:layout_constraintTop_toBottomOf="@id/btn_sign_in_using_google">
