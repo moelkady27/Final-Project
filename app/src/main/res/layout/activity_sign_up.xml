@@ -117,6 +117,7 @@
                 android:textColorHint="@color/colorSecondaryText"
                 android:textSize="16sp"
                 app:passwordToggleEnabled="true"
+                app:passwordToggleTint="?attr/colorControlNormal"
                 app:boxBackgroundMode="outline"
                 app:layout_constraintBottom_toTopOf="@id/til_confirm_password_sign_up"
                 app:layout_constraintEnd_toEndOf="@+id/et_email_sign_up"
@@ -129,6 +130,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/custom_edit_text_rounded"
                     android:inputType="textPassword"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="16sp" />
 
@@ -150,6 +153,7 @@
                 android:textColorHint="@color/colorSecondaryText"
                 android:textSize="16sp"
                 app:passwordToggleEnabled="true"
+                app:passwordToggleTint="?attr/colorControlNormal"
                 app:layout_constraintBottom_toTopOf="@id/cb_terms_and_conditions"
                 app:layout_constraintEnd_toEndOf="@+id/til_password_sign_up"
                 app:layout_constraintStart_toStartOf="@+id/til_password_sign_up"
@@ -161,6 +165,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/custom_edit_text_rounded"
                     android:inputType="textPassword"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="16sp" />
 
