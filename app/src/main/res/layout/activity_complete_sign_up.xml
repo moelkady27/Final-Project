@@ -19,7 +19,7 @@
             android:layout_height="wrap_content" >
 
             <FrameLayout
-                android:id="@+id/fl_header_btn_back"
+                android:id="@+id/toolbar_validation"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="27dp"
@@ -51,9 +51,9 @@
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="30sp"
                 app:layout_constraintBottom_toTopOf="@id/tv_complete_sign_up_title_2"
-                app:layout_constraintEnd_toEndOf="@+id/fl_header_btn_back"
-                app:layout_constraintStart_toStartOf="@+id/fl_header_btn_back"
-                app:layout_constraintTop_toBottomOf="@+id/fl_header_btn_back" />
+                app:layout_constraintEnd_toEndOf="@+id/toolbar_validation"
+                app:layout_constraintStart_toStartOf="@+id/toolbar_validation"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_validation" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_complete_sign_up_title_2"

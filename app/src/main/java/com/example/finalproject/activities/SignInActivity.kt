@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import com.example.finalproject.R
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_sign_in.btn_sign_in
+import kotlinx.android.synthetic.main.activity_sign_in.tv_forget_password
 import kotlinx.android.synthetic.main.activity_sign_in.tv_register_now
 
 class SignInActivity : AppCompatActivity() {
@@ -22,6 +23,9 @@ class SignInActivity : AppCompatActivity() {
             finish()
         }
 
+        tv_forget_password.setOnClickListener {
+            startActivity(Intent(this@SignInActivity , VerificationCodeActivity::class.java))
+        }
     }
 }
 

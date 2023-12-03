@@ -18,25 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <FrameLayout
-                android:id="@+id/fl_header_btn_back"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="27dp"
-                android:layout_marginTop="27dp"
-                android:background="@drawable/back_button_background"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_validation"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/tv_verification_code_title_1">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:background="@drawable/ic_arrow_back" />
-
-            </FrameLayout>
+            </androidx.appcompat.widget.Toolbar>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_verification_code_title_1"
@@ -51,9 +41,9 @@
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="30sp"
                 app:layout_constraintBottom_toTopOf="@id/tv_verification_code_title_2"
-                app:layout_constraintEnd_toEndOf="@+id/fl_header_btn_back"
-                app:layout_constraintStart_toStartOf="@+id/fl_header_btn_back"
-                app:layout_constraintTop_toBottomOf="@+id/fl_header_btn_back" />
+                app:layout_constraintEnd_toEndOf="@+id/toolbar_validation"
+                app:layout_constraintStart_toStartOf="@+id/toolbar_validation"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_validation" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_verification_code_title_2"
