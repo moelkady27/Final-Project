@@ -17,7 +17,7 @@
     <string name="or_sign_in" translatable="false">Or</string>
     <string name="new_member" translatable="false">New Member?</string>
     <string name="register_now" translatable="false"><u>Register now</u></string>
-    <string name="sign_in_using_google" translatable="false">Sign in using Google</string>
+    <string name="sign_in_using_google" translatable="false">Sign In Using Google</string>
     <string name="tv_sign_up_title" translatable="false">By Creating a Free Account</string>
     <string name="user_name_hint" translatable="false">User Name</string>
     <string name="confirm_password_hint" translatable="false">Confirm Password</string>
@@ -27,7 +27,7 @@
         <font color='#FF413F58'>and</font>
         <font color='#FF6C63FF'><u>Conditions.</u></font></string>
     <string name="next" translatable="false">Next</string>
-    <string name="sign_up_using_google" translatable="false">Sign up using Google</string>
+    <string name="sign_up_using_google" translatable="false">Sign Up Using Google</string>
     <string name="already_a_member" translatable="false">Already a member?</string>
     <string name="log_in" translatable="false"><u>Log In</u></string>
 </resources>

@@ -68,7 +68,7 @@
                 android:gravity="center_vertical"
                 android:hint="@string/user_name_hint"
                 android:inputType="text"
-                android:padding="12dp"
+                android:padding="16dp"
                 android:textColor="@color/colorPrimaryText"
                 android:textColorHint="@color/colorSecondaryText"
                 android:textSize="16sp"
@@ -90,7 +90,7 @@
                 android:gravity="center_vertical"
                 android:hint="@string/email_hint"
                 android:inputType="textEmailAddress"
-                android:padding="12dp"
+                android:padding="16dp"
                 android:textColor="@color/colorPrimaryText"
                 android:textColorHint="@color/colorSecondaryText"
                 android:textSize="16sp"
@@ -114,6 +114,7 @@
                 android:inputType="textPassword"
                 android:textColorHint="@color/colorSecondaryText"
                 android:textSize="16sp"
+                android:background="@drawable/custom_edit_text_rounded"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="?attr/colorControlNormal"
                 app:boxBackgroundMode="outline"
@@ -130,7 +131,7 @@
                     android:inputType="textPassword"
                     android:padding="16dp"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,6 +150,7 @@
                 android:inputType="textPassword"
                 android:textColorHint="@color/colorSecondaryText"
                 android:textSize="16sp"
+                android:background="@drawable/custom_edit_text_rounded"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="?attr/colorControlNormal"
                 app:layout_constraintBottom_toTopOf="@id/cb_terms_and_conditions"
@@ -164,7 +166,7 @@
                     android:inputType="textPassword"
                     android:padding="16dp"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -172,7 +174,7 @@
                 android:id="@+id/cb_terms_and_conditions"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins"
                 android:text="@string/terms_and_conditions"
                 android:textColor="@color/colorPrimaryText"
@@ -183,23 +185,25 @@
                 app:layout_constraintTop_toBottomOf="@id/til_confirm_password_sign_up"
                 tools:checked="false" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_next_sign_up"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginEnd="45dp"
                 android:background="@drawable/button_background"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center_horizontal"
-                android:paddingTop="14dp"
-                android:paddingBottom="14dp"
+                android:paddingTop="9dp"
+                android:paddingBottom="9dp"
                 android:text="@string/next"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="18sp"
+                app:icon="@drawable/ic_arrow_next"
+                app:iconGravity="textEnd"
                 app:layout_constraintBottom_toTopOf="@id/btn_sign_up_using_google"
                 app:layout_constraintEnd_toEndOf="@+id/cb_terms_and_conditions"
                 app:layout_constraintStart_toStartOf="@+id/cb_terms_and_conditions"
@@ -216,6 +220,8 @@
                 android:drawableStart="@drawable/ic_google"
                 android:gravity="center"
                 android:padding="16dp"
+                android:paddingStart="35dp"
+                android:paddingEnd="35dp"
                 android:text="@string/sign_up_using_google"
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimaryText"
