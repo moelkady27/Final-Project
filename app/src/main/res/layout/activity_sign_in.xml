@@ -170,10 +170,11 @@
                 android:id="@+id/ll_or"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:weightSum="5"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="10dp"
+                android:weightSum="5"
                 app:layout_constraintBottom_toTopOf="@id/btn_sign_in_using_google"
                 app:layout_constraintEnd_toEndOf="@+id/btn_sign_in"
                 app:layout_constraintStart_toStartOf="@+id/btn_sign_in"
@@ -182,16 +183,16 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
-                    android:layout_weight="2"
                     android:layout_gravity="center"
                     android:layout_margin="16dp"
+                    android:layout_weight="2"
                     android:background="@color/colorPrimaryText" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_bold"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins_bold"
                     android:text="@string/or_sign_in"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryText"
@@ -200,9 +201,9 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
-                    android:layout_weight="2"
                     android:layout_gravity="center"
                     android:layout_margin="16dp"
+                    android:layout_weight="2"
                     android:background="@color/colorPrimaryText" />
 
             </LinearLayout>
@@ -211,24 +212,20 @@
                 android:id="@+id/btn_sign_in_using_google"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/button_using_google_background"
-                android:fontFamily="@font/poppins_bold"
+                android:backgroundTint="@color/colorThemeGrey"
                 android:drawableStart="@drawable/ic_google"
-                android:gravity="center"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start|center_vertical"
                 android:padding="16dp"
-                android:paddingStart="35dp"
-                android:paddingEnd="35dp"
+                android:drawablePadding="20dp"
                 android:text="@string/sign_in_using_google"
-                android:textAllCaps="false"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@id/ll_new_member"
                 app:layout_constraintEnd_toEndOf="@+id/ll_or"
                 app:layout_constraintStart_toStartOf="@+id/ll_or"
-                app:layout_constraintTop_toBottomOf="@id/ll_or" />
+                app:layout_constraintTop_toBottomOf="@+id/ll_or" />
 
             <LinearLayout
                 android:id="@+id/ll_new_member"
