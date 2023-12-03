@@ -1,33 +1,33 @@
 <resources>
-    <string name="app_name">FinalProject</string>
+    <string name="app_name" translatable="false">FinalProject</string>
 
-    <string name="content_description">image</string>
-    <string name="tv_welcome_title_1">
+    <string name="content_description" translatable="false">image</string>
+    <string name="tv_welcome_title_1" translatable="false">
         <font color='#FF6C63FF'>Discover</font>
         <font color='#FF000000'>and Find Your \n Perfect</font>
         <font color='#FF6C63FF'>Dream House</font></string>
-    <string name="tv_welcome_title_2">Explore and Locate Your Ideal Dream House</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="sign_in">Sign In</string>
-    <string name="tv_sign_in_title">Sign In to Access Your Account</string>
-    <string name="email_hint">Email Address</string>
-    <string name="password_hint">Password</string>
-    <string name="cb_remember_me_sign_in">Remember me</string>
-    <string name="tv_forget_password_sign_in"><u>Forget password ?</u></string>
-    <string name="or_sign_in">Or</string>
-    <string name="new_member">New Member?</string>
-    <string name="register_now"><u>Register now</u></string>
-    <string name="sign_in_using_google">Sign in using Google</string>
-    <string name="tv_sign_up_title">By Creating a Free Account</string>
-    <string name="user_name_hint">User Name</string>
-    <string name="confirm_password_hint">Confirm Password</string>
-    <string name="terms_and_conditions">
+    <string name="tv_welcome_title_2" translatable="false">Explore and Locate Your Ideal Dream House</string>
+    <string name="sign_up" translatable="false">Sign Up</string>
+    <string name="sign_in" translatable="false">Sign In</string>
+    <string name="tv_sign_in_title" translatable="false">Sign In to Access Your Account</string>
+    <string name="email_hint" translatable="false">Email Address</string>
+    <string name="password_hint" translatable="false">Password</string>
+    <string name="cb_remember_me_sign_in" translatable="false">Remember me</string>
+    <string name="tv_forget_password_sign_in" translatable="false"><u>Forget password ?</u></string>
+    <string name="or_sign_in" translatable="false">Or</string>
+    <string name="new_member" translatable="false">New Member?</string>
+    <string name="register_now" translatable="false"><u>Register now</u></string>
+    <string name="sign_in_using_google" translatable="false">Sign in using Google</string>
+    <string name="tv_sign_up_title" translatable="false">By Creating a Free Account</string>
+    <string name="user_name_hint" translatable="false">User Name</string>
+    <string name="confirm_password_hint" translatable="false">Confirm Password</string>
+    <string name="terms_and_conditions" translatable="false">
         <font color='#FF413F58'>By checking the box you agree to our</font>
         <font color='#FF6C63FF'><u>Terms</u></font>
         <font color='#FF413F58'>and</font>
         <font color='#FF6C63FF'><u>Conditions.</u></font></string>
-    <string name="next">Next</string>
-    <string name="sign_up_using_google">Sign up using Google</string>
-    <string name="already_a_member">Already a member?</string>
-    <string name="log_in"><u>Log In</u></string>
+    <string name="next" translatable="false">Next</string>
+    <string name="sign_up_using_google" translatable="false">Sign up using Google</string>
+    <string name="already_a_member" translatable="false">Already a member?</string>
+    <string name="log_in" translatable="false"><u>Log In</u></string>
 </resources>

@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name" translatable="false">FinalProject</string>
+
+    <string name="content_description" translatable="false">image</string>
+    <string name="tv_welcome_title_1" translatable="false">
+        <font color='#FF6C63FF'>Discover</font>
+        <font color='#FF000000'>and Find Your \n Perfect</font>
+        <font color='#FF6C63FF'>Dream House</font></string>
+    <string name="tv_welcome_title_2" translatable="false">Explore and Locate Your Ideal Dream House</string>
+    <string name="sign_up" translatable="false">اشتراك</string>
+    <string name="sign_in" translatable="false">تسجيل الدخول</string>
+    <string name="tv_sign_in_title" translatable="false">سجل الدخول ليمكنك الوصول لحسابك</string>
+    <string name="email_hint" translatable="false">عنوان البريد الإلكتروني</string>
+    <string name="password_hint" translatable="false">كلمة المرور</string>
+    <string name="cb_remember_me_sign_in" translatable="false">تذكرنى</string>
+    <string name="tv_forget_password_sign_in" translatable="false"><u>نسيت كلمة المرور ؟</u></string>
+    <string name="or_sign_in" translatable="false">او</string>
+    <string name="new_member" translatable="false">عضو جديد؟</string>
+    <string name="register_now" translatable="false"><u>سجل الان</u></string>
+    <string name="sign_in_using_google" translatable="false">قم بتسجيل الدخول باستخدام جوجل</string>
+    <string name="tv_sign_up_title" translatable="false">عن طريق إنشاء حساب مجاني</string>
+    <string name="user_name_hint" translatable="false">اسم المستخدم</string>
+    <string name="confirm_password_hint" translatable="false">تأكيد كلمة المرور</string>
+    <string name="terms_and_conditions" translatable="false">
+        <font color='#FF413F58'>من خلال تحديد المربع فإنك توافق على</font>
+        <font color='#FF6C63FF'><u>الشروط </u></font>
+        <font color='#FF413F58'>و</font>
+        <font color='#FF6C63FF'><u>الأحكام الخاصة بنا.</u></font></string>
+    <string name="next" translatable="false">التالي</string>
+    <string name="sign_up_using_google" translatable="false">قم بالتسجيل باستخدام جوجل</string>
+    <string name="already_a_member" translatable="false">عضوا فعلا؟</string>
+    <string name="log_in" translatable="false"><u>تسجيل الدخول</u></string>
+</resources>
