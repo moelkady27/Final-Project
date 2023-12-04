@@ -35,5 +35,4 @@ class CompleteSignUpActivity : AppCompatActivity() {
             onBackPressed()
         }
     }
-
 }

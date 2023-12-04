@@ -30,4 +30,19 @@
     <string name="sign_up_using_google" translatable="false">قم بالتسجيل باستخدام جوجل</string>
     <string name="already_a_member" translatable="false">عضوا فعلا؟</string>
     <string name="log_in" translatable="false"><u>تسجيل الدخول</u></string>
+
+    <string name="tv_verification_code_title_1" translatable="false">أدخل رمز التحقق المكون من ٤ أرقام</string>
+    <string name="tv_verification_code_title_2" translatable="false">سيتم اعادة إرسال الرمز إلى بريدك الإلكتروني. ستنتهي صلاحية هذا الرمز خلال 01:30</string>
+    <string name="tv_did_not_receive_a_code" translatable="false">لم تتلق الرمز؟</string>
+    <string name="resend" translatable="false"><u>إعادة إرسال</u></string>
+    <string name="tv_complete_sign_up_title_1" translatable="false">املأ سيرتك الذاتية للبدء</string>
+    <string name="tv_title_2" translatable="false">سيتم عرض هذه البيانات في ملف تعريف حسابك للأمان</string>
+    <string name="first_name_hint" translatable="false">الاسم الأول</string>
+    <string name="last_name_hint" translatable="false">اسم العائلة</string>
+    <string name="gender_hint" translatable="false">الجنس</string>
+    <string name="phone_number_hint" translatable="false">رقم التليفون</string>
+    <string name="tv_upload_photo_title_1" translatable="false">قم بتحميل ملف تعريف الصور الخاص بك</string>
+    <string name="from_gallery" translatable="false">من المعرض</string>
+    <string name="take_photo" translatable="false">قم بالتقاط صورة</string>
+
 </resources>
