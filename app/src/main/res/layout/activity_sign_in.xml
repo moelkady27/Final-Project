@@ -226,8 +226,8 @@
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/ll_remember_me_forget_password"
-                app:layout_constraintStart_toStartOf="@+id/ll_remember_me_forget_password"
+                app:layout_constraintEnd_toEndOf="@+id/btn_sign_in"
+                app:layout_constraintStart_toStartOf="@+id/btn_sign_in"
                 app:layout_constraintTop_toBottomOf="@+id/ll_or" />
 
             <LinearLayout

@@ -4,16 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.finalproject.R
-import kotlinx.android.synthetic.main.activity_verification_code.btn_next_verification_code
+import kotlinx.android.synthetic.main.activity_set_location.btn_next_set_location
+import kotlinx.android.synthetic.main.activity_set_location.toolbar_set_location
 import kotlinx.android.synthetic.main.activity_verification_code.toolbar_validation
 
-class VerificationCodeActivity : AppCompatActivity() {
+class SetLocationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_verification_code)
+        setContentView(R.layout.activity_set_location)
 
-        btn_next_verification_code.setOnClickListener {
-            startActivity(Intent(this@VerificationCodeActivity, ResetPasswordActivity::class.java))
+        btn_next_set_location.setOnClickListener {
+            startActivity(Intent(this@SetLocationActivity, SignUpSuccessActivity::class.java))
         }
 
         setUpActionBar()
@@ -21,7 +22,7 @@ class VerificationCodeActivity : AppCompatActivity() {
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(toolbar_validation)
+        setSupportActionBar(toolbar_set_location)
 
         val actionBar = supportActionBar
         if (actionBar != null) {
@@ -30,8 +31,9 @@ class VerificationCodeActivity : AppCompatActivity() {
             actionBar.title = ""
         }
 
-        toolbar_validation.setNavigationOnClickListener {
+        toolbar_set_location.setNavigationOnClickListener {
             onBackPressed()
         }
     }
+
 }

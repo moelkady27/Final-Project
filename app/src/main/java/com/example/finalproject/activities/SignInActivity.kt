@@ -20,11 +20,10 @@ class SignInActivity : AppCompatActivity() {
 
         tv_register_now.setOnClickListener {
             startActivity(Intent(this@SignInActivity, SignUpActivity::class.java))
-            finish()
         }
 
         tv_forget_password.setOnClickListener {
-            startActivity(Intent(this@SignInActivity , VerificationCodeActivity::class.java))
+            startActivity(Intent(this@SignInActivity , ForgotPasswordActivity::class.java))
         }
     }
 }

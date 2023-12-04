@@ -1,8 +1,10 @@
 package com.example.finalproject.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.finalproject.R
+import kotlinx.android.synthetic.main.activity_upload_preview.btn_next_upload_preview
 import kotlinx.android.synthetic.main.activity_upload_preview.toolbar_upload_preview
 import kotlinx.android.synthetic.main.activity_verification_code.toolbar_validation
 
@@ -10,6 +12,10 @@ class UploadPreviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload_preview)
+
+        btn_next_upload_preview.setOnClickListener {
+            startActivity(Intent(this@UploadPreviewActivity, SetLocationActivity::class.java))
+        }
 
         setUpActionBar()
 
