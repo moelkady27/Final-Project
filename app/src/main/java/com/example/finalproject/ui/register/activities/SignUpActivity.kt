@@ -8,9 +8,6 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
-import com.example.finalproject.ui.SignInActivity
-import com.example.finalproject.ui.VerificationCodeActivity
-import com.example.finalproject.ui.register.request.SignUpRequest
 import com.example.finalproject.ui.register.viewModels.SignUpViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.btn_next_sign_up
 import kotlinx.android.synthetic.main.activity_sign_up.et_confirm_password_sign_up

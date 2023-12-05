@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.finalproject.R
+import com.example.finalproject.ui.register.activities.SignInActivity
 import kotlinx.android.synthetic.main.activity_reset_password_success.btn_back_reset_password_success
 
 class ResetPasswordSuccessActivity : AppCompatActivity() {
