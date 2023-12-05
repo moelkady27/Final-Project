@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.finalproject.R
+import com.example.finalproject.ui.register.activities.SignUpActivity
 import kotlinx.android.synthetic.main.activity_sign_in.tv_forget_password
 import kotlinx.android.synthetic.main.activity_sign_in.tv_register_now
 
