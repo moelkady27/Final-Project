@@ -13,7 +13,7 @@ class SetLocationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_set_location)
 
         btn_next_set_location.setOnClickListener {
-            startActivity(Intent(this@SetLocationActivity, SignUpSuccessActivity::class.java))
+            startActivity(Intent(this@SetLocationActivity, CongratsActivity::class.java))
         }
 
         setUpActionBar()
