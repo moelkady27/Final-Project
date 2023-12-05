@@ -18,6 +18,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_check"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.appcompat.widget.Toolbar>
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_check_your_mail"
                 android:layout_width="match_parent"
@@ -32,7 +42,7 @@
                 app:layout_constraintBottom_toTopOf="@id/tv_check_your_mail_title_1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/toolbar_check"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_check_your_mail_title_1"
