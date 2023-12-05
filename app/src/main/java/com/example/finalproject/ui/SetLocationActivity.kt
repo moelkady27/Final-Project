@@ -1,20 +1,19 @@
-package com.example.finalproject.activities
+package com.example.finalproject.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.finalproject.R
-import kotlinx.android.synthetic.main.activity_reset_password.btn_next_reset_password
-import kotlinx.android.synthetic.main.activity_reset_password.toolbar_reset_password
+import kotlinx.android.synthetic.main.activity_set_location.btn_next_set_location
 import kotlinx.android.synthetic.main.activity_set_location.toolbar_set_location
 
-class ResetPasswordActivity : AppCompatActivity() {
+class SetLocationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reset_password)
+        setContentView(R.layout.activity_set_location)
 
-        btn_next_reset_password.setOnClickListener {
-            startActivity(Intent(this@ResetPasswordActivity, ResetPasswordSuccessActivity::class.java))
+        btn_next_set_location.setOnClickListener {
+            startActivity(Intent(this@SetLocationActivity, SignUpSuccessActivity::class.java))
         }
 
         setUpActionBar()
@@ -22,7 +21,7 @@ class ResetPasswordActivity : AppCompatActivity() {
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(toolbar_reset_password)
+        setSupportActionBar(toolbar_set_location)
 
         val actionBar = supportActionBar
         if (actionBar != null) {
@@ -31,7 +30,7 @@ class ResetPasswordActivity : AppCompatActivity() {
             actionBar.title = ""
         }
 
-        toolbar_reset_password.setNavigationOnClickListener {
+        toolbar_set_location.setNavigationOnClickListener {
             onBackPressed()
         }
     }

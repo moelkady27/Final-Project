@@ -1,4 +1,4 @@
-package com.example.finalproject.activities
+package com.example.finalproject.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,6 @@ import android.os.Bundle
 import com.example.finalproject.R
 import kotlinx.android.synthetic.main.activity_complete_sign_up.btn_next_sign_up
 import kotlinx.android.synthetic.main.activity_complete_sign_up.toolbar_complete_sign_up
-import kotlinx.android.synthetic.main.activity_verification_code.toolbar_validation
 
 class CompleteSignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

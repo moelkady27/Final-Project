@@ -1,19 +1,19 @@
-package com.example.finalproject.activities
+package com.example.finalproject.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.finalproject.R
-import kotlinx.android.synthetic.main.activity_verification_code.btn_next_verification_code
-import kotlinx.android.synthetic.main.activity_verification_code.toolbar_validation
+import kotlinx.android.synthetic.main.activity_reset_password.btn_next_reset_password
+import kotlinx.android.synthetic.main.activity_reset_password.toolbar_reset_password
 
-class VerificationCodeActivity : AppCompatActivity() {
+class ResetPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_verification_code)
+        setContentView(R.layout.activity_reset_password)
 
-        btn_next_verification_code.setOnClickListener {
-            startActivity(Intent(this@VerificationCodeActivity, ResetPasswordActivity::class.java))
+        btn_next_reset_password.setOnClickListener {
+            startActivity(Intent(this@ResetPasswordActivity, ResetPasswordSuccessActivity::class.java))
         }
 
         setUpActionBar()
@@ -21,7 +21,7 @@ class VerificationCodeActivity : AppCompatActivity() {
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(toolbar_validation)
+        setSupportActionBar(toolbar_reset_password)
 
         val actionBar = supportActionBar
         if (actionBar != null) {
@@ -30,8 +30,9 @@ class VerificationCodeActivity : AppCompatActivity() {
             actionBar.title = ""
         }
 
-        toolbar_validation.setNavigationOnClickListener {
+        toolbar_reset_password.setNavigationOnClickListener {
             onBackPressed()
         }
     }
+
 }
