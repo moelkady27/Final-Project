@@ -1,9 +1,11 @@
 package com.example.finalproject.retrofit
 
+import com.example.finalproject.ui.register.models.CompleteSignUpResponse
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
 import com.example.finalproject.ui.register.models.SignUpResponse
 import com.example.finalproject.ui.register.models.VerificationCodeSignUpResponse
+import com.example.finalproject.ui.register.request.CompleteSignUpRequest
 import com.example.finalproject.ui.register.request.SignInRequest
 import com.example.finalproject.ui.register.request.SignUpRequest
 import com.example.finalproject.ui.register.request.VerificationCodeSignUpRequest
@@ -37,4 +39,9 @@ interface ApiService {
     fun resendCode(
         @Path("id") userId: String
     ): Call<ResendCodeResponse>
+
+    @POST("api/v1/auth/complete-signup")
+    fun complete(
+        @Body req: CompleteSignUpRequest
+    ) : Call<CompleteSignUpResponse>
 }

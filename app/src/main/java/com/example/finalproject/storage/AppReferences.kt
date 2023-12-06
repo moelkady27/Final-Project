@@ -34,4 +34,18 @@ object AppReferences {
         return sharedPreferences.getString("userId", "")!!
     }
 
+    fun setToken(context: Activity?, state: String) {
+        val sharedPreferences: SharedPreferences =
+            context!!.getSharedPreferences("token", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putString("token", state)
+        editor.apply()
+    }
+
+    fun getToken(context: Context?): String {
+        val sharedPreferences: SharedPreferences =
+            context!!.getSharedPreferences("token", Context.MODE_PRIVATE)
+        return sharedPreferences.getString("token", "")!!
+    }
+
 }

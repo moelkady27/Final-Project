@@ -1,15 +1,14 @@
 package com.example.finalproject.ui.register.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
-import com.example.finalproject.ui.CompleteSignUpActivity
 import com.example.finalproject.ui.register.viewModels.VerificationCodeSignUpViewModel
 import kotlinx.android.synthetic.main.activity_verification_code_sign_up.btn_verify_code
 import kotlinx.android.synthetic.main.activity_verification_code_sign_up.et_code_box
@@ -33,21 +32,27 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
 
                     Log.e("VerificationCodeSignUpActivity", "Verification successful: Status - ${it.status}")
 
-                    Log.e("VerificationCodeSignUpActivity", "Message - ${it.message}")
+                    Log.e("VerificationCodeSignUpActivity", "Message - ${it.status}")
 
-                    val message = it.message
-                    if (message.isNotBlank()) {
-                        Toast.makeText(this@VerificationCodeSignUpActivity, message, Toast.LENGTH_LONG).show()
+                    val status = it.status
+                    if (status.isNotBlank()) {
+                        Log.e("VerificationCodeSignUpActivity", "Verification status: $status")
+
+                        if (it.status == "success") {
+                            AppReferences.setLoginState(this, true)
+                            AppReferences.setToken(this, it.token)
+                        }
+
                     } else {
                         Log.e("VerificationCodeSignUpActivity", "Empty or null message received.")
                     }
-
-                    startActivity(Intent(this@VerificationCodeSignUpActivity, CompleteSignUpActivity::class.java))
                 }
-            })
+            }
+        )
 
         verificationCodeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
             error?.let {
+                Log.e("VerificationCodeSignUpActivity", "Error: $error")
                 Toast.makeText(this@VerificationCodeSignUpActivity, it, Toast.LENGTH_LONG).show()
             }
         })
@@ -86,6 +91,7 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
             val verificationCode = verificationCodeString.toInt()
 
             verificationCodeSignUpViewModel.verifyAccount(userId, verificationCode)
+            startActivity(Intent(this@VerificationCodeSignUpActivity, CompleteSignUpActivity::class.java))
         } else {
             Toast.makeText(this, "Verification code cannot be empty", Toast.LENGTH_LONG).show()
         }
@@ -96,11 +102,17 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
 
         verificationCodeSignUpViewModel.resendCode(userId)
 
-        verificationCodeSignUpViewModel.resendCodeResponseLiveData.observe(this, Observer { response ->
-            response?.let {
-                Toast.makeText(this@VerificationCodeSignUpActivity, "Resend Code Successful", Toast.LENGTH_LONG).show()
-            }
-        })
+        verificationCodeSignUpViewModel.resendCodeResponseLiveData.observe(
+            this,
+            Observer { response ->
+                response?.let {
+                    Toast.makeText(
+                        this@VerificationCodeSignUpActivity,
+                        "Resend Code Successful",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
 
         verificationCodeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
             error?.let {

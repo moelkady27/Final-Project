@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import androidx.lifecycle.Observer
 import com.example.finalproject.storage.AppReferences
-import com.example.finalproject.ui.CompleteSignUpActivity
 import com.example.finalproject.ui.ForgotPasswordActivity
 import com.example.finalproject.ui.MainActivity
 import com.example.finalproject.ui.register.viewModels.SignInViewModel
