@@ -35,10 +35,6 @@ class SignInActivity : AppCompatActivity() {
 
                 AppReferences.setLoginState(this@SignInActivity, true)
 
-                AppReferences.setUserId(this@SignInActivity, it.user._id)
-
-                Log.e("SignInActivity", "Login successful: userId - ${it.user._id}")
-
                 if (it.user.isVerified) {
                     val intent = Intent(this@SignInActivity, MainActivity::class.java)
                     startActivity(intent)

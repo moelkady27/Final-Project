@@ -10,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class VerificationCodeSignUpViewModel : ViewModel(){
+class VerificationCodeSignUpViewModel : ViewModel() {
 
     val verificationCodeSignUpResponseLiveData: MutableLiveData<VerificationCodeSignUpResponse> = MutableLiveData()
     val errorLiveData: MutableLiveData<String> = MutableLiveData()

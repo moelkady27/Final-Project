@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
+import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.ui.register.viewModels.SignUpViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.btn_next_sign_up
 import kotlinx.android.synthetic.main.activity_sign_up.et_confirm_password_sign_up
@@ -32,7 +33,13 @@ class SignUpActivity : AppCompatActivity() {
 
                 Log.e("SignUpActivity", "Response Message: $message")
 
-                startActivity(Intent(this@SignUpActivity, SignInActivity::class.java))
+                val userId = it.user._id
+
+                AppReferences.setUserId(this@SignUpActivity, userId)
+
+                Log.e("SignUpActivity", "Sign Up successful: userId - $userId")
+
+                startActivity(Intent(this@SignUpActivity, VerificationCodeSignUpActivity::class.java))
                 finish()
             }
         })
