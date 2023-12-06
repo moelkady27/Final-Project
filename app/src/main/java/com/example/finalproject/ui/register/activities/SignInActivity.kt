@@ -40,7 +40,7 @@ class SignInActivity : AppCompatActivity() {
                 Log.e("SignInActivity", "Login successful: userId - ${it.user._id}")
 
                 if (it.user.isVerified) {
-                    val intent = Intent(this@SignInActivity, CompleteSignUpActivity::class.java)//MainActivity
+                    val intent = Intent(this@SignInActivity, MainActivity::class.java)
                     startActivity(intent)
                 } else {
                     val intent = Intent(this@SignInActivity, VerificationCodeSignUpActivity::class.java)

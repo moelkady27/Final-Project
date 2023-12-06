@@ -36,7 +36,12 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
 
                     Log.e("VerificationCodeSignUpActivity", "Message - ${it.message}")
 
-                    Toast.makeText(this@VerificationCodeSignUpActivity, it.message, Toast.LENGTH_LONG).show()
+                    val message = it.message
+                    if (message.isNotBlank()) {
+                        Toast.makeText(this@VerificationCodeSignUpActivity, message, Toast.LENGTH_LONG).show()
+                    } else {
+                        Log.e("VerificationCodeSignUpActivity", "Empty or null message received.")
+                    }
 
                     AppReferences.setLoginState(this@VerificationCodeSignUpActivity, true)
 
@@ -55,7 +60,7 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
         }
 
         tv_Resend.setOnClickListener {
-
+            resendCode()
         }
 
         setUpActionBar()
@@ -78,8 +83,33 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
 
     private fun verifyCode() {
         val userId = AppReferences.getUserId(this@VerificationCodeSignUpActivity)
-        val verificationCode = et_code_box.text.toString().toInt()
+        val verificationCodeString = et_code_box.text.toString()
 
-        verificationCodeSignUpViewModel.verifyAccount(userId, verificationCode)
+        if (verificationCodeString.isNotEmpty()) {
+            val verificationCode = verificationCodeString.toInt()
+
+            verificationCodeSignUpViewModel.verifyAccount(userId, verificationCode)
+        } else {
+            Toast.makeText(this, "Verification code cannot be empty", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun resendCode() {
+        val userId = AppReferences.getUserId(this@VerificationCodeSignUpActivity)
+
+        verificationCodeSignUpViewModel.resendCode(userId)
+
+        verificationCodeSignUpViewModel.resendCodeResponseLiveData.observe(this, Observer { response ->
+            if (response != null) {
+                Toast.makeText(this@VerificationCodeSignUpActivity, response.message, Toast.LENGTH_LONG).show()
+            }
+        })
+
+        verificationCodeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
+            error?.let {
+                Log.e("VerificationCodeSignUpActivity", "Resend Code Failed: Error - $it")
+                Toast.makeText(this@VerificationCodeSignUpActivity, it, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 }

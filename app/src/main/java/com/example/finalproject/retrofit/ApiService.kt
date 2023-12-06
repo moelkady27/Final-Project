@@ -1,5 +1,6 @@
 package com.example.finalproject.retrofit
 
+import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
 import com.example.finalproject.ui.register.models.SignUpResponse
 import com.example.finalproject.ui.register.models.VerificationCodeSignUpResponse
@@ -8,6 +9,7 @@ import com.example.finalproject.ui.register.request.SignUpRequest
 import com.example.finalproject.ui.register.request.VerificationCodeSignUpRequest
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -30,4 +32,9 @@ interface ApiService {
         @Path("id") userId: String,
         @Body request: VerificationCodeSignUpRequest
     ): Call<VerificationCodeSignUpResponse>
+
+    @GET("/api/v1/auth/resend-code/{id}")
+    fun resendCode(
+        @Path("id") userId: String
+    ): Call<ResendCodeResponse>
 }
