@@ -31,7 +31,7 @@ class CompleteSignUpActivity : AppCompatActivity() {
         completeSignUpViewModel = ViewModelProvider(this).get(CompleteSignUpViewModel::class.java)
 
         btn_next_sign_up.setOnClickListener {
-                completeProfile()
+            completeProfile()
         }
 
     }
@@ -57,23 +57,17 @@ class CompleteSignUpActivity : AppCompatActivity() {
         val gender = et_gender.text.toString().trim()
         val phoneNumber = et_phone_number.text.toString().trim()
 
-        completeSignUpViewModel.completeSignUp(firstName, lastName, gender, phoneNumber)
+        val token = AppReferences.getToken(this@CompleteSignUpActivity)
+
+        completeSignUpViewModel.completeSignUp(token, firstName, lastName, gender, phoneNumber)
 
         completeSignUpViewModel.completeSignUpResponseLiveData.observe(this, Observer { response ->
             response?.let {
-                Log.e("CompleteSignUpActivity", "Status: ${it.status}")
+                val status = it.status
 
-                var token = intent.getStringExtra("TOKEN_EXTRA")
+                Log.e("CompleteSignUpActivity", "Status: $status")
 
-                token = AppReferences.getToken(this@CompleteSignUpActivity)
-
-                Log.e("CompleteSignUpActivity", "TokenSignUp: $token")
-
-                Toast.makeText(
-                        this@CompleteSignUpActivity,
-                        "Complete Sign Up Successful",
-                        Toast.LENGTH_LONG
-                    ).show()
+                Toast.makeText(this@CompleteSignUpActivity, status, Toast.LENGTH_LONG).show()
 
                 startActivity(Intent(this@CompleteSignUpActivity, UploadPhotoActivity::class.java))
             }

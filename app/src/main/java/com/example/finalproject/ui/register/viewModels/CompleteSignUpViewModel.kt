@@ -14,10 +14,10 @@ class CompleteSignUpViewModel : ViewModel() {
     val completeSignUpResponseLiveData: MutableLiveData<CompleteSignUpResponse> = MutableLiveData()
     val errorLiveData: MutableLiveData<String> = MutableLiveData()
 
-    fun completeSignUp(firstName: String, lastName: String, gender: String, phoneNumber: String) {
+    fun completeSignUp(token: String, firstName: String, lastName: String, gender: String, phoneNumber: String) {
         val data = CompleteSignUpRequest(firstName, lastName, gender, phoneNumber)
 
-        RetrofitClient.instance.complete(data)
+        RetrofitClient.instance.complete("Bearer $token", data)
             .enqueue(object : Callback<CompleteSignUpResponse> {
                 override fun onResponse(
                     call: Call<CompleteSignUpResponse>,

@@ -44,6 +44,7 @@ interface ApiService {
 
     @POST("api/v1/auth/complete-signup")
     fun complete(
+        @Header("Authorization") token: String,
         @Body req: CompleteSignUpRequest
     ) : Call<CompleteSignUpResponse>
 }
