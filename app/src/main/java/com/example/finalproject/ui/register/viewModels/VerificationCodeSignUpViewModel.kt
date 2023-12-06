@@ -39,8 +39,8 @@ class VerificationCodeSignUpViewModel : ViewModel() {
             })
     }
 
-    fun resendCode(userId: String) {
-        RetrofitClient.instance.resendCode(userId)
+    fun resendCode(token: String, userId: String) {
+        RetrofitClient.instance.resendCode("Bearer $token", userId)
             .enqueue(object : Callback<ResendCodeResponse> {
                 override fun onResponse(
                     call: Call<ResendCodeResponse>,

@@ -26,6 +26,45 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
         verificationCodeSignUpViewModel =
             ViewModelProvider(this).get(VerificationCodeSignUpViewModel::class.java)
 
+        verificationCodeSignUpViewModel.verificationCodeSignUpResponseLiveData.observe(
+            this,
+            Observer { response ->
+                response?.let {
+
+                    AppReferences.setLoginState(this, true)
+
+                    val status = it.status
+
+                    Log.e(
+                        "VerificationCodeSignUpActivity",
+                        "Verification successful: Status - ${it.status}"
+                    )
+
+                    Toast.makeText(this, status, Toast.LENGTH_LONG).show()
+
+                    startActivity(Intent(this, CompleteSignUpActivity::class.java))
+                }
+            })
+
+        verificationCodeSignUpViewModel.resendCodeResponseLiveData.observe(
+            this,
+            Observer { response ->
+                response?.let {
+                    Toast.makeText(
+                        this@VerificationCodeSignUpActivity,
+                        "Resend Code Successful",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+
+        verificationCodeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
+            error?.let {
+                Log.e("VerificationCodeSignUpActivity", "Resend Code Error: $error")
+                Toast.makeText(this@VerificationCodeSignUpActivity, it, Toast.LENGTH_LONG).show()
+            }
+        })
+
         btn_verify_code.setOnClickListener {
             verifyCode()
         }
@@ -63,50 +102,18 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
 
             verificationCodeSignUpViewModel.verifyAccount(token, userId, verificationCode)
 
-            verificationCodeSignUpViewModel.verificationCodeSignUpResponseLiveData.observe(
-                this,
-                Observer { response ->
-                    response?.let {
 
-                        AppReferences.setLoginState(this, true)
-
-                        val status = it.status
-
-                        Log.e("VerificationCodeSignUpActivity", "Verification successful: Status - ${it.status}")
-
-                        Toast.makeText(this, status, Toast.LENGTH_LONG).show()
-
-                        startActivity(Intent(this, CompleteSignUpActivity::class.java))
-                    }
-                })
-        }
-        else {
+        } else {
             Toast.makeText(this, "Verification code cannot be empty", Toast.LENGTH_LONG).show()
         }
     }
 
     private fun resendCode() {
         val userId = AppReferences.getUserId(this@VerificationCodeSignUpActivity)
+        val token = AppReferences.getToken(this@VerificationCodeSignUpActivity)
 
-        verificationCodeSignUpViewModel.resendCode(userId)
+        verificationCodeSignUpViewModel.resendCode(token, userId)
 
-        verificationCodeSignUpViewModel.resendCodeResponseLiveData.observe(
-            this,
-            Observer { response ->
-                response?.let {
-                    Toast.makeText(
-                        this@VerificationCodeSignUpActivity,
-                        "Resend Code Successful",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-            })
 
-        verificationCodeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
-            error?.let {
-                Log.e("VerificationCodeSignUpActivity", "Resend Code Error: $error")
-                Toast.makeText(this@VerificationCodeSignUpActivity, it, Toast.LENGTH_LONG).show()
-            }
-        })
     }
 }

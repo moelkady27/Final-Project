@@ -26,25 +26,6 @@ class SignUpActivity : AppCompatActivity() {
 
         signUpViewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
 
-        tv_login.setOnClickListener {
-            startActivity(Intent(this@SignUpActivity, SignInActivity::class.java))
-            finish()
-        }
-
-        btn_next_sign_up.setOnClickListener {
-            register()
-        }
-
-    }
-
-    private fun register() {
-        val userName = et_username_sign_up.text.toString().trim()
-        val email = et_email_sign_up.text.toString().trim()
-        val password = et_password_sign_up.text.toString().trim()
-        val confirmPass = et_confirm_password_sign_up.text.toString().trim()
-
-        signUpViewModel.signUp(userName, email, password, confirmPass)
-
         signUpViewModel.signUpResponseLiveData.observe(this@SignUpActivity, Observer { response ->
             response?.let {
                 val message = it.message
@@ -73,6 +54,26 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this@SignUpActivity, it, Toast.LENGTH_LONG).show()
             }
         })
+
+        tv_login.setOnClickListener {
+            startActivity(Intent(this@SignUpActivity, SignInActivity::class.java))
+            finish()
+        }
+
+        btn_next_sign_up.setOnClickListener {
+            register()
+        }
+
+    }
+
+    private fun register() {
+        val userName = et_username_sign_up.text.toString().trim()
+        val email = et_email_sign_up.text.toString().trim()
+        val password = et_password_sign_up.text.toString().trim()
+        val confirmPass = et_confirm_password_sign_up.text.toString().trim()
+
+        signUpViewModel.signUp(userName, email, password, confirmPass)
+
     }
 
 }

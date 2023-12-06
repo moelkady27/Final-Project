@@ -39,6 +39,7 @@ interface ApiService {
 
     @GET("/api/v1/auth/resend-code/{id}")
     fun resendCode(
+        @Header("Authorization") token: String,
         @Path("id") userId: String
     ): Call<ResendCodeResponse>
 

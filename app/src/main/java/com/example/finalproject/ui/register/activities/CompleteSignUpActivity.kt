@@ -30,6 +30,24 @@ class CompleteSignUpActivity : AppCompatActivity() {
 
         completeSignUpViewModel = ViewModelProvider(this).get(CompleteSignUpViewModel::class.java)
 
+        completeSignUpViewModel.completeSignUpResponseLiveData.observe(this, Observer { response ->
+            response?.let {
+                val status = it.status
+
+                Log.e("CompleteSignUpActivity", "Status: $status")
+
+                Toast.makeText(this@CompleteSignUpActivity, status, Toast.LENGTH_LONG).show()
+
+                startActivity(Intent(this@CompleteSignUpActivity, UploadPhotoActivity::class.java))
+            }
+        })
+
+        completeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
+            error?.let {
+                Toast.makeText(this@CompleteSignUpActivity, it, Toast.LENGTH_LONG).show()
+            }
+        })
+
         btn_next_sign_up.setOnClickListener {
             completeProfile()
         }
@@ -61,22 +79,6 @@ class CompleteSignUpActivity : AppCompatActivity() {
 
         completeSignUpViewModel.completeSignUp(token, firstName, lastName, gender, phoneNumber)
 
-        completeSignUpViewModel.completeSignUpResponseLiveData.observe(this, Observer { response ->
-            response?.let {
-                val status = it.status
 
-                Log.e("CompleteSignUpActivity", "Status: $status")
-
-                Toast.makeText(this@CompleteSignUpActivity, status, Toast.LENGTH_LONG).show()
-
-                startActivity(Intent(this@CompleteSignUpActivity, UploadPhotoActivity::class.java))
-            }
-        })
-
-        completeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
-            error?.let {
-                Toast.makeText(this@CompleteSignUpActivity, it, Toast.LENGTH_LONG).show()
-            }
-        })
     }
 }
