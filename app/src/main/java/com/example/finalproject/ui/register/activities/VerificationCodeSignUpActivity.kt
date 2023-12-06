@@ -23,39 +23,8 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verification_code_sign_up)
 
-        verificationCodeSignUpViewModel = ViewModelProvider(this).get(VerificationCodeSignUpViewModel::class.java)
-
-        verificationCodeSignUpViewModel.verificationCodeSignUpResponseLiveData.observe(
-            this,
-            Observer { response ->
-                response?.let {
-
-                    Log.e("VerificationCodeSignUpActivity", "Verification successful: Status - ${it.status}")
-
-                    Log.e("VerificationCodeSignUpActivity", "Message - ${it.status}")
-
-                    val status = it.status
-                    if (status.isNotBlank()) {
-                        Log.e("VerificationCodeSignUpActivity", "Verification status: $status")
-
-                        if (it.status == "success") {
-                            AppReferences.setLoginState(this, true)
-                            AppReferences.setToken(this, it.token)
-                        }
-
-                    } else {
-                        Log.e("VerificationCodeSignUpActivity", "Empty or null message received.")
-                    }
-                }
-            }
-        )
-
-        verificationCodeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
-            error?.let {
-                Log.e("VerificationCodeSignUpActivity", "Error: $error")
-                Toast.makeText(this@VerificationCodeSignUpActivity, it, Toast.LENGTH_LONG).show()
-            }
-        })
+        verificationCodeSignUpViewModel =
+            ViewModelProvider(this).get(VerificationCodeSignUpViewModel::class.java)
 
         btn_verify_code.setOnClickListener {
             verifyCode()
@@ -91,8 +60,33 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
             val verificationCode = verificationCodeString.toInt()
 
             verificationCodeSignUpViewModel.verifyAccount(userId, verificationCode)
-            startActivity(Intent(this@VerificationCodeSignUpActivity, CompleteSignUpActivity::class.java))
-        } else {
+
+            verificationCodeSignUpViewModel.verificationCodeSignUpResponseLiveData.observe(
+                this,
+                Observer { response ->
+                    response?.let {
+
+                        Log.e("VerificationCodeSignUpActivity", "Verification successful: Status - ${it.status}")
+
+                        Log.e("VerificationCodeSignUpActivity", "Message - ${it.status}")
+
+                        AppReferences.setLoginState(this, true)
+                        val token = it.token
+
+                        AppReferences.setToken(this@VerificationCodeSignUpActivity , token)
+
+
+                        val intent = Intent(this, CompleteSignUpActivity::class.java)
+                        intent.putExtra("TOKEN_EXTRA", token)
+
+                        Log.e("VerificationCodeSignUpActivity", "Token - ${it.token}")
+
+                        startActivity(intent)
+
+                    }
+                })
+        }
+        else {
             Toast.makeText(this, "Verification code cannot be empty", Toast.LENGTH_LONG).show()
         }
     }

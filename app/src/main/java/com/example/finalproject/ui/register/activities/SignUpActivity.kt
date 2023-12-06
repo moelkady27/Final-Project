@@ -26,30 +26,6 @@ class SignUpActivity : AppCompatActivity() {
 
         signUpViewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
 
-        signUpViewModel.signUpResponseLiveData.observe(this@SignUpActivity, Observer { response ->
-            response?.let {
-                val message = it.message
-                Toast.makeText(baseContext, message, Toast.LENGTH_LONG).show()
-
-                Log.e("SignUpActivity", "Response Message: $message")
-
-                val userId = it.user._id
-
-                AppReferences.setUserId(this@SignUpActivity, userId)
-
-                Log.e("SignUpActivity", "Sign Up successful: userId - $userId")
-
-                startActivity(Intent(this@SignUpActivity, VerificationCodeSignUpActivity::class.java))
-                finish()
-            }
-        })
-
-        signUpViewModel.errorLiveData.observe(this@SignUpActivity, Observer { error ->
-            error?.let {
-                Toast.makeText(this@SignUpActivity, it, Toast.LENGTH_LONG).show()
-            }
-        })
-
         tv_login.setOnClickListener {
             startActivity(Intent(this@SignUpActivity, SignInActivity::class.java))
             finish()
@@ -68,6 +44,35 @@ class SignUpActivity : AppCompatActivity() {
         val confirmPass = et_confirm_password_sign_up.text.toString().trim()
 
         signUpViewModel.signUp(userName, email, password, confirmPass)
+
+        signUpViewModel.signUpResponseLiveData.observe(this@SignUpActivity, Observer { response ->
+            response?.let {
+                val message = it.message
+                Toast.makeText(baseContext, message, Toast.LENGTH_LONG).show()
+
+                Log.e("SignUpActivity", "Response Message: $message")
+
+//                val userId = it.user._id
+
+                val token = it.token
+
+//                AppReferences.setUserId(this@SignUpActivity, userId)
+                AppReferences.setToken(this@SignUpActivity, token)
+
+//                Log.e("SignUpActivity", "Sign Up successful: userId - $userId")
+
+                Log.e("SignUpActivity", "Sign Up successful: token - $token")
+
+                startActivity(Intent(this@SignUpActivity, VerificationCodeSignUpActivity::class.java))
+                finish()
+            }
+        })
+
+        signUpViewModel.errorLiveData.observe(this@SignUpActivity, Observer { error ->
+            error?.let {
+                Toast.makeText(this@SignUpActivity, it, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
 }

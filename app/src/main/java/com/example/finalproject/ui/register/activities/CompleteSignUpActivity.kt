@@ -1,10 +1,10 @@
 package com.example.finalproject.ui.register.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
@@ -31,16 +31,7 @@ class CompleteSignUpActivity : AppCompatActivity() {
         completeSignUpViewModel = ViewModelProvider(this).get(CompleteSignUpViewModel::class.java)
 
         btn_next_sign_up.setOnClickListener {
-//            startActivity(Intent(this@CompleteSignUpActivity, UploadPhotoActivity::class.java))
-            if (AppReferences.getLoginState(this@CompleteSignUpActivity)) {
                 completeProfile()
-            } else {
-                Toast.makeText(
-                    this@CompleteSignUpActivity,
-                    "You need to be logged in to complete your profile.",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
         }
 
     }
@@ -72,11 +63,18 @@ class CompleteSignUpActivity : AppCompatActivity() {
             response?.let {
                 Log.e("CompleteSignUpActivity", "Status: ${it.status}")
 
+                var token = intent.getStringExtra("TOKEN_EXTRA")
+
+                token = AppReferences.getToken(this@CompleteSignUpActivity)
+
+                Log.e("CompleteSignUpActivity", "Token: $token")
+
                 Toast.makeText(
-                    this@CompleteSignUpActivity,
-                    "Complete Sign Up Successful",
-                    Toast.LENGTH_LONG
-                ).show()
+                        this@CompleteSignUpActivity,
+                        "Complete Sign Up Successful",
+                        Toast.LENGTH_LONG
+                    ).show()
+
                 startActivity(Intent(this@CompleteSignUpActivity, UploadPhotoActivity::class.java))
             }
         })

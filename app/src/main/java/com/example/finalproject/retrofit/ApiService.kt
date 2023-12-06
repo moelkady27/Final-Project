@@ -29,6 +29,7 @@ interface ApiService {
         @Body req: SignInRequest
     ) : Call<SignInResponse>
 
+//    @Header("Authorization") token: String,
     @POST("api/v1/auth/verification/{id}")
     fun verifyAccount(
         @Path("id") userId: String,

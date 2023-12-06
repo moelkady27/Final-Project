@@ -15,22 +15,22 @@ class SignUpViewModel : ViewModel() {
     val signUpResponseLiveData: MutableLiveData<SignUpResponse> = MutableLiveData()
     val errorLiveData: MutableLiveData<String> = MutableLiveData()
 
-    fun signUp(userName: String, email: String, password: String, confirmPass: String) {
-        val data = SignUpRequest(userName, email, password, confirmPass)
+    fun signUp(username: String, email: String, password: String, confirmPass: String) {
+        val data = SignUpRequest(username, email, password, confirmPass)
 
         RetrofitClient.instance.signup(data)
             .enqueue(object : Callback<SignUpResponse> {
-            override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
-                if (response.isSuccessful) {
-                    signUpResponseLiveData.value = response.body()
-                } else {
-                    errorLiveData.value = response.errorBody()?.string()
+                override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
+                    if (response.isSuccessful) {
+                        signUpResponseLiveData.value = response.body()
+                    } else {
+                        errorLiveData.value = response.errorBody()?.string()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
-                errorLiveData.value = t.message
-            }
-        })
+                override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                    errorLiveData.value = t.message
+                }
+            })
     }
 }
