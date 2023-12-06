@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        logout
         textView.setOnClickListener {
             AppReferences.setLoginState(this@MainActivity, false)
             startActivity(Intent(this@MainActivity, SignInActivity::class.java))

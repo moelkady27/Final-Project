@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import androidx.lifecycle.Observer
 import com.example.finalproject.storage.AppReferences
+import com.example.finalproject.ui.CompleteSignUpActivity
 import com.example.finalproject.ui.ForgotPasswordActivity
 import com.example.finalproject.ui.MainActivity
 import com.example.finalproject.ui.register.viewModels.SignInViewModel
@@ -34,9 +35,18 @@ class SignInActivity : AppCompatActivity() {
 
                 AppReferences.setLoginState(this@SignInActivity, true)
 
-//                AppReferences.setUserId(this@SignInActivity, it.user._id)
+                AppReferences.setUserId(this@SignInActivity, it.user._id)
 
-                startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                Log.e("SignInActivity", "Login successful: userId - ${it.user._id}")
+
+                if (it.user.isVerified) {
+                    val intent = Intent(this@SignInActivity, CompleteSignUpActivity::class.java)//MainActivity
+                    startActivity(intent)
+                } else {
+                    val intent = Intent(this@SignInActivity, VerificationCodeSignUpActivity::class.java)
+                    startActivity(intent)
+                }
+
                 finish()
             }
         })

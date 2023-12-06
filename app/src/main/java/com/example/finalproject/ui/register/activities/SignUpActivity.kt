@@ -32,7 +32,7 @@ class SignUpActivity : AppCompatActivity() {
 
                 Log.e("SignUpActivity", "Response Message: $message")
 
-                startActivity(Intent(this@SignUpActivity, VerificationCodeActivity::class.java))
+                startActivity(Intent(this@SignUpActivity, SignInActivity::class.java))
                 finish()
             }
         })

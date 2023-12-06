@@ -1,5 +1,5 @@
 package com.example.finalproject.ui.register.request
 
-data class VerificationRequest(
+data class VerificationCodeSignUpRequest(
     val otp: Int
 )

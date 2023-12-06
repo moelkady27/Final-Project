@@ -61,7 +61,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.register.activities.VerificationCodeActivity"
+            android:name=".ui.register.activities.VerificationCodeSignUpActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
