@@ -59,30 +59,24 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
         if (verificationCodeString.isNotBlank()) {
             val verificationCode = verificationCodeString.toInt()
 
-            verificationCodeSignUpViewModel.verifyAccount(userId, verificationCode)
+            val token = AppReferences.getToken(this@VerificationCodeSignUpActivity)
+
+            verificationCodeSignUpViewModel.verifyAccount(token, userId, verificationCode)
 
             verificationCodeSignUpViewModel.verificationCodeSignUpResponseLiveData.observe(
                 this,
                 Observer { response ->
                     response?.let {
 
+                        AppReferences.setLoginState(this, true)
+
+                        val status = it.status
+
                         Log.e("VerificationCodeSignUpActivity", "Verification successful: Status - ${it.status}")
 
-                        Log.e("VerificationCodeSignUpActivity", "Message - ${it.status}")
+                        Toast.makeText(this, status, Toast.LENGTH_LONG).show()
 
-                        AppReferences.setLoginState(this, true)
-                        val token = it.token
-
-                        AppReferences.setToken(this@VerificationCodeSignUpActivity , token)
-
-
-                        val intent = Intent(this, CompleteSignUpActivity::class.java)
-                        intent.putExtra("TOKEN_EXTRA", token)
-
-                        Log.e("VerificationCodeSignUpActivity", "Token - ${it.token}")
-
-                        startActivity(intent)
-
+                        startActivity(Intent(this, CompleteSignUpActivity::class.java))
                     }
                 })
         }

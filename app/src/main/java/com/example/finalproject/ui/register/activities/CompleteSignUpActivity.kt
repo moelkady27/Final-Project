@@ -67,7 +67,7 @@ class CompleteSignUpActivity : AppCompatActivity() {
 
                 token = AppReferences.getToken(this@CompleteSignUpActivity)
 
-                Log.e("CompleteSignUpActivity", "Token: $token")
+                Log.e("CompleteSignUpActivity", "TokenSignUp: $token")
 
                 Toast.makeText(
                         this@CompleteSignUpActivity,

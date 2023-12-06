@@ -1,16 +1,13 @@
 package com.example.finalproject.ui.register.models
 
 data class UserSignUp(
-    val __v: Int,
     val _id: String,
-    val counter: Int,
     val createdAt: String,
     val email: String,
     val isVerified: Boolean,
-    val otp: Int,
-    val password: String,
     val role: String,
+    val tokens: List<TokenSignUp>,
     val updatedAt: String,
-    val userName: String,
+    val username: String,
     val wishlist: List<Any>
 )

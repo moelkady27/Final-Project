@@ -52,14 +52,14 @@ class SignUpActivity : AppCompatActivity() {
 
                 Log.e("SignUpActivity", "Response Message: $message")
 
-//                val userId = it.user._id
+                val userId = it.user._id
 
                 val token = it.token
 
-//                AppReferences.setUserId(this@SignUpActivity, userId)
+                AppReferences.setUserId(this@SignUpActivity, userId)
                 AppReferences.setToken(this@SignUpActivity, token)
 
-//                Log.e("SignUpActivity", "Sign Up successful: userId - $userId")
+                Log.e("SignUpActivity", "Sign Up successful: userId - $userId")
 
                 Log.e("SignUpActivity", "Sign Up successful: token - $token")
 
