@@ -1,10 +1,14 @@
 package com.example.finalproject.ui
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import kotlinx.android.synthetic.main.activity_upload_preview.btn_next_upload_preview
+import kotlinx.android.synthetic.main.activity_upload_preview.ib_upload_preview
 import kotlinx.android.synthetic.main.activity_upload_preview.toolbar_upload_preview
 
 class UploadPreviewActivity : AppCompatActivity() {
@@ -12,8 +16,15 @@ class UploadPreviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload_preview)
 
+        val imageUrl = intent.getStringExtra("imageUri")
+
+        Glide
+            .with(this)
+            .load(imageUrl)
+            .into(ib_upload_preview)
+
         btn_next_upload_preview.setOnClickListener {
-            startActivity(Intent(this@UploadPreviewActivity, SetLocationActivity::class.java))
+            Toast.makeText(this@UploadPreviewActivity , "imageUriString" , Toast.LENGTH_LONG).show()
         }
 
         setUpActionBar()
@@ -34,5 +45,4 @@ class UploadPreviewActivity : AppCompatActivity() {
             onBackPressed()
         }
     }
-
 }

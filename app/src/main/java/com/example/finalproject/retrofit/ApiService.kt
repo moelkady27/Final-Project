@@ -4,11 +4,13 @@ import com.example.finalproject.ui.register.models.CompleteSignUpResponse
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
 import com.example.finalproject.ui.register.models.SignUpResponse
+import com.example.finalproject.ui.register.models.UploadPhotoResponse
 import com.example.finalproject.ui.register.models.VerificationCodeSignUpResponse
 import com.example.finalproject.ui.register.request.CompleteSignUpRequest
 import com.example.finalproject.ui.register.request.SignInRequest
 import com.example.finalproject.ui.register.request.SignUpRequest
 import com.example.finalproject.ui.register.request.VerificationCodeSignUpRequest
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -16,6 +18,10 @@ import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
+
+import retrofit2.http.Multipart
+import retrofit2.http.Part
+
 
 interface ApiService {
 
@@ -48,4 +54,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body req: CompleteSignUpRequest
     ) : Call<CompleteSignUpResponse>
+
+    @Multipart
+    @POST("api/v1/auth/upload")
+    fun uploadImage(
+        @Header("Authorization") token: String,
+        @Part image: MultipartBody.Part
+    ): Call<UploadPhotoResponse>
 }
