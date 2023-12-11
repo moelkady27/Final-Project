@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.activity_complete_sign_up.et_gender
 import kotlinx.android.synthetic.main.activity_complete_sign_up.et_last_name
 import kotlinx.android.synthetic.main.activity_complete_sign_up.et_phone_number
 import kotlinx.android.synthetic.main.activity_complete_sign_up.toolbar_complete_sign_up
+import org.json.JSONException
+import org.json.JSONObject
 
 class CompleteSignUpActivity : AppCompatActivity() {
 
@@ -43,7 +45,15 @@ class CompleteSignUpActivity : AppCompatActivity() {
 
         completeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
             error?.let {
-                Toast.makeText(this@CompleteSignUpActivity, it, Toast.LENGTH_LONG).show()
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(this@CompleteSignUpActivity, errorMessage, Toast.LENGTH_LONG).show()
+
+                    Log.e("CompleteSignUpActivity", "Complete Error: $errorMessage")
+
+                } catch (e: JSONException) {
+                    Toast.makeText(this@CompleteSignUpActivity, error, Toast.LENGTH_LONG).show()
+                }
             }
         })
 

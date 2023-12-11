@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.activity_sign_up.et_email_sign_up
 import kotlinx.android.synthetic.main.activity_sign_up.et_password_sign_up
 import kotlinx.android.synthetic.main.activity_sign_up.et_username_sign_up
 import kotlinx.android.synthetic.main.activity_sign_up.tv_login
+import org.json.JSONException
+import org.json.JSONObject
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -51,7 +53,12 @@ class SignUpActivity : AppCompatActivity() {
 
         signUpViewModel.errorLiveData.observe(this@SignUpActivity, Observer { error ->
             error?.let {
-                Toast.makeText(this@SignUpActivity, it, Toast.LENGTH_LONG).show()
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(this@SignUpActivity, errorMessage, Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    Toast.makeText(this@SignUpActivity, error, Toast.LENGTH_LONG).show()
+                }
             }
         })
 

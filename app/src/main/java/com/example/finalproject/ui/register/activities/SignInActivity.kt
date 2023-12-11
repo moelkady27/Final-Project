@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.activity_sign_in.et_email_sign_in
 import kotlinx.android.synthetic.main.activity_sign_in.et_password_sign_in
 import kotlinx.android.synthetic.main.activity_sign_in.tv_forget_password
 import kotlinx.android.synthetic.main.activity_sign_in.tv_register_now
+import org.json.JSONException
+import org.json.JSONObject
 
 class SignInActivity : AppCompatActivity() {
 
@@ -48,8 +50,12 @@ class SignInActivity : AppCompatActivity() {
 
         signInViewModel.errorLiveData.observe(this, Observer { error ->
             error?.let {
-
-                Toast.makeText(this@SignInActivity, it, Toast.LENGTH_LONG).show()
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(this@SignInActivity, errorMessage, Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    Toast.makeText(this@SignInActivity, error, Toast.LENGTH_LONG).show()
+                }
             }
         })
 

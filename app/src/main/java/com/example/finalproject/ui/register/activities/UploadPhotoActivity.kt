@@ -27,6 +27,8 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import org.json.JSONException
+import org.json.JSONObject
 import java.io.File
 
 class UploadPhotoActivity : AppCompatActivity() {
@@ -82,8 +84,15 @@ class UploadPhotoActivity : AppCompatActivity() {
 
         uploadPhotoViewModel.errorLiveData.observe(this, Observer { error ->
             error?.let {
-                Toast.makeText(this@UploadPhotoActivity, it, Toast.LENGTH_LONG).show()
-                Log.e("error is " , error)
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(this@UploadPhotoActivity, errorMessage, Toast.LENGTH_LONG).show()
+
+                    Log.e("UploadImageSignUpActivity", "Upload Image Error: $errorMessage")
+
+                } catch (e: JSONException) {
+                    Toast.makeText(this@UploadPhotoActivity, error, Toast.LENGTH_LONG).show()
+                }
             }
         })
 

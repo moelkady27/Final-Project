@@ -14,6 +14,8 @@ import kotlinx.android.synthetic.main.activity_verification_code_sign_up.btn_ver
 import kotlinx.android.synthetic.main.activity_verification_code_sign_up.et_code_box
 import kotlinx.android.synthetic.main.activity_verification_code_sign_up.toolbar_validation
 import kotlinx.android.synthetic.main.activity_verification_code_sign_up.tv_Resend
+import org.json.JSONException
+import org.json.JSONObject
 
 class VerificationCodeSignUpActivity : AppCompatActivity() {
 
@@ -60,8 +62,15 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
 
         verificationCodeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
             error?.let {
-                Log.e("VerificationCodeSignUpActivity", "Resend Code Error: $error")
-                Toast.makeText(this@VerificationCodeSignUpActivity, it, Toast.LENGTH_LONG).show()
+                try {
+                    val errorMessage = JSONObject(error).getString("error")
+                    Toast.makeText(this@VerificationCodeSignUpActivity, errorMessage, Toast.LENGTH_LONG).show()
+
+                    Log.e("VerificationCodeSignUpActivity", "Resend Code Error: $errorMessage")
+
+                } catch (e: JSONException) {
+                    Toast.makeText(this@VerificationCodeSignUpActivity, error, Toast.LENGTH_LONG).show()
+                }
             }
         })
 

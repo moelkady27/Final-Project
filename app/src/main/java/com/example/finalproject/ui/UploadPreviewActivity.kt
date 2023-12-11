@@ -5,8 +5,10 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
+import com.example.finalproject.ui.register.activities.SignInActivity
 import kotlinx.android.synthetic.main.activity_upload_preview.btn_next_upload_preview
 import kotlinx.android.synthetic.main.activity_upload_preview.ib_upload_preview
 import kotlinx.android.synthetic.main.activity_upload_preview.toolbar_upload_preview
@@ -21,10 +23,11 @@ class UploadPreviewActivity : AppCompatActivity() {
         Glide
             .with(this)
             .load(imageUrl)
+            .centerCrop()
             .into(ib_upload_preview)
 
         btn_next_upload_preview.setOnClickListener {
-            Toast.makeText(this@UploadPreviewActivity , "imageUriString" , Toast.LENGTH_LONG).show()
+            startActivity(Intent(this@UploadPreviewActivity , SignInActivity::class.java))
         }
 
         setUpActionBar()
