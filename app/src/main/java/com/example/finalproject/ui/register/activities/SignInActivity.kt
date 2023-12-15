@@ -32,7 +32,11 @@ class SignInActivity : AppCompatActivity() {
         signInViewModel.signInResponseLiveData.observe(this, Observer { response ->
             response?.let {
 
+                val token = it.token
+
                 Log.e("SignInActivity", "Login successful: TokenSignUp - ${it.token}")
+
+                AppReferences.setToken(this@SignInActivity , token)
 
                 AppReferences.setLoginState(this@SignInActivity, true)
 

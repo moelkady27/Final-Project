@@ -1,6 +1,7 @@
 package com.example.finalproject.retrofit
 
 import com.example.finalproject.ui.register.models.CompleteSignUpResponse
+import com.example.finalproject.ui.register.models.LogOutResponse
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
 import com.example.finalproject.ui.register.models.SignUpResponse
@@ -61,4 +62,9 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Part image: MultipartBody.Part
     ): Call<UploadPhotoResponse>
+
+    @GET("api/v1/auth/logout")
+    fun logout(
+        @Header("Authorization") token: String,
+    ): Call<LogOutResponse>
 }
