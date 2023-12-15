@@ -1,11 +1,8 @@
-package com.example.finalproject.ui
+package com.example.finalproject.ui.complete_register.activities
 
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.ui.register.activities.SignInActivity

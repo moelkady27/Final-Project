@@ -49,17 +49,17 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.UploadPreviewActivity"
+            android:name=".ui.complete_register.activities.UploadPreviewActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.register.activities.UploadPhotoActivity"
+            android:name=".ui.complete_register.activities.UploadPhotoActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.register.activities.CompleteSignUpActivity"
+            android:name=".ui.complete_register.activities.CompleteSignUpActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

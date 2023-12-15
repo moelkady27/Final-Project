@@ -1,9 +1,9 @@
-package com.example.finalproject.ui.register.viewModels
+package com.example.finalproject.ui.complete_register.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finalproject.retrofit.RetrofitClient
-import com.example.finalproject.ui.register.models.UploadPhotoResponse
+import com.example.finalproject.ui.complete_register.models.UploadPhotoResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback

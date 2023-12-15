@@ -1,10 +1,10 @@
-package com.example.finalproject.ui.register.viewModels
+package com.example.finalproject.ui.complete_register.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finalproject.retrofit.RetrofitClient
-import com.example.finalproject.ui.register.models.CompleteSignUpResponse
-import com.example.finalproject.ui.register.request.CompleteSignUpRequest
+import com.example.finalproject.ui.complete_register.models.CompleteSignUpResponse
+import com.example.finalproject.ui.complete_register.request.CompleteSignUpRequest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

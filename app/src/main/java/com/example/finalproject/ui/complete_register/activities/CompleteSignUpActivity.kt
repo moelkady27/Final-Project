@@ -1,4 +1,4 @@
-package com.example.finalproject.ui.register.activities
+package com.example.finalproject.ui.complete_register.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
-import com.example.finalproject.ui.register.viewModels.CompleteSignUpViewModel
+import com.example.finalproject.ui.complete_register.viewModels.CompleteSignUpViewModel
 import kotlinx.android.synthetic.main.activity_complete_sign_up.btn_next_sign_up
 import kotlinx.android.synthetic.main.activity_complete_sign_up.et_first_name
 import kotlinx.android.synthetic.main.activity_complete_sign_up.et_gender

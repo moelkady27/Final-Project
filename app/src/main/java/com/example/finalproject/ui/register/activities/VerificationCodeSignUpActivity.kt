@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
+import com.example.finalproject.ui.complete_register.activities.CompleteSignUpActivity
 import com.example.finalproject.ui.register.viewModels.VerificationCodeSignUpViewModel
 import kotlinx.android.synthetic.main.activity_verification_code_sign_up.btn_verify_code
 import kotlinx.android.synthetic.main.activity_verification_code_sign_up.et_code_box

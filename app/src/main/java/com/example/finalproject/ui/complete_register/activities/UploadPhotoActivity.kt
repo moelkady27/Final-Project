@@ -1,4 +1,4 @@
-package com.example.finalproject.ui.register.activities
+package com.example.finalproject.ui.complete_register.activities
 
 import android.Manifest
 import android.app.Activity
@@ -17,15 +17,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
-import com.example.finalproject.ui.UploadPreviewActivity
-import com.example.finalproject.ui.register.viewModels.UploadPhotoViewModel
+import com.example.finalproject.ui.complete_register.viewModels.UploadPhotoViewModel
 import kotlinx.android.synthetic.main.activity_upload_photo.btn_next_upload_photo
 import kotlinx.android.synthetic.main.activity_upload_photo.fl_from_gallery
 import kotlinx.android.synthetic.main.activity_upload_photo.toolbar_upload_photo
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONException
 import org.json.JSONObject

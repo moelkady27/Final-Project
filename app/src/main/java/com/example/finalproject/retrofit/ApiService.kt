@@ -1,13 +1,13 @@
 package com.example.finalproject.retrofit
 
-import com.example.finalproject.ui.register.models.CompleteSignUpResponse
+import com.example.finalproject.ui.complete_register.models.CompleteSignUpResponse
 import com.example.finalproject.ui.register.models.LogOutResponse
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
 import com.example.finalproject.ui.register.models.SignUpResponse
-import com.example.finalproject.ui.register.models.UploadPhotoResponse
+import com.example.finalproject.ui.complete_register.models.UploadPhotoResponse
 import com.example.finalproject.ui.register.models.VerificationCodeSignUpResponse
-import com.example.finalproject.ui.register.request.CompleteSignUpRequest
+import com.example.finalproject.ui.complete_register.request.CompleteSignUpRequest
 import com.example.finalproject.ui.register.request.SignInRequest
 import com.example.finalproject.ui.register.request.SignUpRequest
 import com.example.finalproject.ui.register.request.VerificationCodeSignUpRequest
