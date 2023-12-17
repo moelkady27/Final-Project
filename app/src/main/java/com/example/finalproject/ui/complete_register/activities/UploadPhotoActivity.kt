@@ -100,9 +100,9 @@ class UploadPhotoActivity : AppCompatActivity() {
 
         fl_from_gallery.setOnClickListener {
             if (ContextCompat.checkSelfPermission(this@UploadPhotoActivity,
-                    Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this@UploadPhotoActivity,
-                    arrayOf(Manifest.permission.READ_MEDIA_IMAGES), REQUEST_CODE_GALLERY)
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_GALLERY)
                 return@setOnClickListener
             }
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

@@ -24,7 +24,7 @@ class UploadPreviewActivity : AppCompatActivity() {
             .into(ib_upload_preview)
 
         btn_next_upload_preview.setOnClickListener {
-            startActivity(Intent(this@UploadPreviewActivity , SignInActivity::class.java))
+            startActivity(Intent(this@UploadPreviewActivity , SetLocationActivity::class.java))
         }
 
         setUpActionBar()

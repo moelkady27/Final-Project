@@ -1,6 +1,7 @@
 package com.example.finalproject.retrofit
 
 import com.example.finalproject.ui.complete_register.models.CompleteSignUpResponse
+import com.example.finalproject.ui.complete_register.models.LocationResponse
 import com.example.finalproject.ui.register.models.LogOutResponse
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
@@ -14,15 +15,15 @@ import com.example.finalproject.ui.register.request.VerificationCodeSignUpReques
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
-
 import retrofit2.http.Multipart
 import retrofit2.http.Part
-
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -67,4 +68,11 @@ interface ApiService {
     fun logout(
         @Header("Authorization") token: String,
     ): Call<LogOutResponse>
+
+    @POST("api/v1/auth/location")
+    fun location(
+        @Header("Authorization") token: String,
+        @Query("longitude") longitude: Double,
+        @Query("latitude") latitude: Double
+    ) : Call<LocationResponse>
 }

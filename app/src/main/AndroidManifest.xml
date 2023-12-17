@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -21,10 +22,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.ResetPasswordSuccessActivity"
+            android:name=".ui.complete_register.activities.MapActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.ResetPasswordSuccessActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.ResetPasswordActivity"
             android:exported="false"
@@ -46,10 +52,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.SetLocationActivity"
+            android:name=".ui.complete_register.activities.SetLocationActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
             android:name=".ui.complete_register.activities.UploadPreviewActivity"
             android:exported="false"
@@ -103,6 +110,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>
