@@ -61,8 +61,6 @@ class SetLocationActivity : AppCompatActivity(){
             val latitude = data.getDoubleExtra("latitude", 0.0)
             val longitude = data.getDoubleExtra("longitude", 0.0)
 
-//            Toast.makeText(this, "Selected Location: $latitude, $longitude", Toast.LENGTH_SHORT).show()
-
             Log.e("Selected Location:" , "$latitude, $longitude")
         }
     }
