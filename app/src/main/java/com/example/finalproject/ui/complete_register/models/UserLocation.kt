@@ -1,6 +1,6 @@
 package com.example.finalproject.ui.complete_register.models
 
-data class User(
+data class UserLocation(
     val _id: String,
     val createdAt: String,
     val email: String,

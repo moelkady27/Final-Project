@@ -1,6 +1,6 @@
 package com.example.finalproject.ui.register.models
 
-data class User(
+data class UserSignIn(
     val __v: Int,
     val _id: String,
     val counter: Int,
