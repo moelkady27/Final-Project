@@ -63,5 +63,6 @@
     <string name="tv_password_reset_successful" translatable="false">Password Reset Successful</string>
     <string name="btn_back" translatable="false">Back</string>
     <string name="verify" translatable="false">Verify</string>
+    <string name="please_wait">Please Wait</string>
 
 </resources>
