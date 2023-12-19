@@ -49,56 +49,78 @@
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@id/et_username_sign_up"
+                app:layout_constraintBottom_toTopOf="@id/til_username_sign_up"
                 app:layout_constraintEnd_toEndOf="@+id/fl_header_image"
                 app:layout_constraintStart_toStartOf="@+id/fl_header_image"
                 app:layout_constraintTop_toBottomOf="@id/fl_header_image" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/et_username_sign_up"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_username_sign_up"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/custom_edit_text_rounded"
-                android:drawableStart="@drawable/ic_username"
+                android:layout_marginStart="16dp"
                 android:drawablePadding="16dp"
+                app:startIconDrawable="@drawable/ic_username"
+                app:startIconTint="@color/colorPrimary"
                 android:fontFamily="@font/poppins"
                 android:gravity="center_vertical"
                 android:hint="@string/user_name_hint"
                 android:inputType="text"
-                android:padding="16dp"
-                android:textColor="@color/colorPrimaryText"
                 android:textColorHint="@color/colorSecondaryText"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@id/et_email_sign_up"
+                android:background="@drawable/custom_edit_text_rounded"
+                app:boxBackgroundMode="outline"
+                app:layout_constraintBottom_toTopOf="@id/til_email_sign_up"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_sign_up_title"
-                tools:ignore="RtlSymmetry" />
+                app:layout_constraintTop_toBottomOf="@id/tv_sign_up_title" >
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/et_email_sign_up"
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_username_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_edit_text_rounded"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_email_sign_up"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/custom_edit_text_rounded"
-                android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="16dp"
+                app:startIconDrawable="@drawable/ic_email"
+                app:startIconTint="@color/colorPrimary"
                 android:fontFamily="@font/poppins"
                 android:gravity="center_vertical"
                 android:hint="@string/email_hint"
                 android:inputType="textEmailAddress"
-                android:padding="16dp"
-                android:textColor="@color/colorPrimaryText"
                 android:textColorHint="@color/colorSecondaryText"
                 android:textSize="16sp"
+                android:background="@drawable/custom_edit_text_rounded"
+                app:boxBackgroundMode="outline"
                 app:layout_constraintBottom_toTopOf="@id/til_password_sign_up"
-                app:layout_constraintEnd_toEndOf="@+id/et_username_sign_up"
-                app:layout_constraintStart_toStartOf="@+id/et_username_sign_up"
-                app:layout_constraintTop_toBottomOf="@id/et_username_sign_up"
-                tools:ignore="RtlSymmetry" />
+                app:layout_constraintEnd_toEndOf="@id/til_username_sign_up"
+                app:layout_constraintStart_toStartOf="@id/til_username_sign_up"
+                app:layout_constraintTop_toBottomOf="@id/til_username_sign_up" >
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_email_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_edit_text_rounded"
+                    android:inputType="textEmailAddress"
+                    android:padding="16dp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_password_sign_up"
@@ -119,9 +141,9 @@
                 app:passwordToggleTint="?attr/colorControlNormal"
                 app:boxBackgroundMode="outline"
                 app:layout_constraintBottom_toTopOf="@id/til_confirm_password_sign_up"
-                app:layout_constraintEnd_toEndOf="@+id/et_email_sign_up"
-                app:layout_constraintStart_toStartOf="@+id/et_email_sign_up"
-                app:layout_constraintTop_toBottomOf="@id/et_email_sign_up" >
+                app:layout_constraintEnd_toEndOf="@+id/til_email_sign_up"
+                app:layout_constraintStart_toStartOf="@+id/til_email_sign_up"
+                app:layout_constraintTop_toBottomOf="@id/til_email_sign_up" >
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_password_sign_up"
