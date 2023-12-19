@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import androidx.lifecycle.Observer
 import com.example.finalproject.storage.AppReferences
+import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.ForgotPasswordActivity
 import com.example.finalproject.ui.MainActivity
 import com.example.finalproject.ui.register.viewModels.SignInViewModel
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_sign_in.tv_register_now
 import org.json.JSONException
 import org.json.JSONObject
 
-class SignInActivity : AppCompatActivity() {
+class SignInActivity : BaseActivity() {
 
     private lateinit var signInViewModel: SignInViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,6 +82,7 @@ class SignInActivity : AppCompatActivity() {
         val email = et_email_sign_in.text.toString().trim()
         val password = et_password_sign_in.text.toString().trim()
 
+        showProgressDialog(this@SignInActivity , "Signing in...")
         signInViewModel.signIn(email, password)
     }
 }
