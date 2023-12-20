@@ -19,6 +19,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
+import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.complete_register.viewModels.UploadPhotoViewModel
 import kotlinx.android.synthetic.main.activity_upload_photo.btn_next_upload_photo
 import kotlinx.android.synthetic.main.activity_upload_photo.fl_from_gallery
@@ -30,7 +31,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
 
-class UploadPhotoActivity : AppCompatActivity() {
+class UploadPhotoActivity : BaseActivity() {
 
     private lateinit var selectedImage: String
     private lateinit var uploadPhotoViewModel: UploadPhotoViewModel
@@ -65,6 +66,7 @@ class UploadPhotoActivity : AppCompatActivity() {
         uploadPhotoViewModel = ViewModelProvider(this).get(UploadPhotoViewModel::class.java)
 
         uploadPhotoViewModel.uploadPhotoResponseLiveData.observe(this, Observer { response ->
+            hideProgressDialog()
             response?.let {
                 val status = it.status
                 Toast.makeText(this@UploadPhotoActivity, status, Toast.LENGTH_LONG).show()
@@ -83,6 +85,7 @@ class UploadPhotoActivity : AppCompatActivity() {
         })
 
         uploadPhotoViewModel.errorLiveData.observe(this, Observer { error ->
+            hideProgressDialog()
             error?.let {
                 try {
                     val errorMessage = JSONObject(error).getString("message")
@@ -116,6 +119,8 @@ class UploadPhotoActivity : AppCompatActivity() {
                 val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
 
                 val token = AppReferences.getToken(this@UploadPhotoActivity)
+
+                showProgressDialog(this@UploadPhotoActivity , "Uploading your image...")
 
                 uploadPhotoViewModel.uploadPhoto(token, body)
 

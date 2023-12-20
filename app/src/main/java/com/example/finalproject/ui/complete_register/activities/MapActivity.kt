@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
+import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.complete_register.viewModels.SetLocationViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -28,7 +29,7 @@ import kotlinx.android.synthetic.main.activity_map.btnSaveLocation
 import org.json.JSONException
 import org.json.JSONObject
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapActivity : BaseActivity(), OnMapReadyCallback {
 
     private var fusedLocationProviderClient: FusedLocationProviderClient? = null
     private val REQUEST_CODE = 101
@@ -118,8 +119,12 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun onSelectedLocation() {
         if (selectedLocation != null) {
             val token = AppReferences.getToken(this@MapActivity)
+
+            showProgressDialog(this@MapActivity , "Setting up your Location")
+
             setLocationViewModel.setLocation(token, selectedLocation!!.longitude, selectedLocation!!.latitude)
             setLocationViewModel.locationResponseLiveData.observe(this, Observer { response ->
+                hideProgressDialog()
                 response?.let {
                     val status = it.status
 
@@ -137,6 +142,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             })
 
             setLocationViewModel.errorLiveData.observe(this, Observer { error ->
+                hideProgressDialog()
                 error.let {
                     try {
                         val errorMessage = JSONObject(error).getString("message")
@@ -162,8 +168,12 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun onCurrentLocation() {
         if (currentLocation != null) {
             val token = AppReferences.getToken(this@MapActivity)
+
+            showProgressDialog(this@MapActivity , "Setting up your Location")
+
             setLocationViewModel.setLocation(token, currentLocation!!.longitude, currentLocation!!.latitude)
             setLocationViewModel.locationResponseLiveData.observe(this, Observer { response ->
+                hideProgressDialog()
                 response?.let {
                     val status = it.status
 
@@ -180,6 +190,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             })
 
             setLocationViewModel.errorLiveData.observe(this, Observer { error ->
+                hideProgressDialog()
                 error.let {
                     try {
                         val errorMessage = JSONObject(error).getString("message")

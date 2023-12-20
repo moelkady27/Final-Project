@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
+import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.complete_register.viewModels.CompleteSignUpViewModel
 import kotlinx.android.synthetic.main.activity_complete_sign_up.btn_next_sign_up
 import kotlinx.android.synthetic.main.activity_complete_sign_up.et_first_name
@@ -16,10 +17,13 @@ import kotlinx.android.synthetic.main.activity_complete_sign_up.et_gender
 import kotlinx.android.synthetic.main.activity_complete_sign_up.et_last_name
 import kotlinx.android.synthetic.main.activity_complete_sign_up.et_phone_number
 import kotlinx.android.synthetic.main.activity_complete_sign_up.toolbar_complete_sign_up
+import kotlinx.android.synthetic.main.activity_sign_in.et_email_sign_in
+import kotlinx.android.synthetic.main.activity_sign_in.et_password_sign_in
+import kotlinx.android.synthetic.main.activity_sign_up.et_username_sign_up
 import org.json.JSONException
 import org.json.JSONObject
 
-class CompleteSignUpActivity : AppCompatActivity() {
+class CompleteSignUpActivity : BaseActivity() {
 
     private lateinit var completeSignUpViewModel: CompleteSignUpViewModel
 
@@ -32,6 +36,7 @@ class CompleteSignUpActivity : AppCompatActivity() {
         completeSignUpViewModel = ViewModelProvider(this).get(CompleteSignUpViewModel::class.java)
 
         completeSignUpViewModel.completeSignUpResponseLiveData.observe(this, Observer { response ->
+            hideProgressDialog()
             response?.let {
                 val status = it.status
 
@@ -44,6 +49,7 @@ class CompleteSignUpActivity : AppCompatActivity() {
         })
 
         completeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
+            hideProgressDialog()
             error?.let {
                 try {
                     val errorMessage = JSONObject(error).getString("message")
@@ -86,8 +92,61 @@ class CompleteSignUpActivity : AppCompatActivity() {
 
         val token = AppReferences.getToken(this@CompleteSignUpActivity)
 
-        completeSignUpViewModel.completeSignUp(token, firstName, lastName, gender, phoneNumber)
+        if (isValidInput()) {
+            showProgressDialog(this@CompleteSignUpActivity , "completing registration...")
+            completeSignUpViewModel.completeSignUp(token, firstName, lastName, gender, phoneNumber)
+        }
+    }
 
+    private fun isValidInput(): Boolean {
+        val firstName = et_first_name.text.toString().trim()
+        val lastName = et_last_name.text.toString().trim()
+        val gender = et_gender.text.toString().trim()
+        val phoneNumber = et_phone_number.text.toString().trim()
 
+        if (firstName.isEmpty()) {
+            et_first_name.error = "firstName is not allowed to be empty."
+            return false
+        } else if (!isFirstNameValid(firstName)) {
+            et_first_name.error = "firstName length must be at least 2 characters long."
+            return false
+        }
+
+        if (lastName.isEmpty()) {
+            et_last_name.error = "lastName is not allowed to be empty."
+            return false
+        } else if (!isLastNameValid(lastName)) {
+            et_last_name.error = "lastName length must be at least 2 characters long."
+            return false
+        }
+
+        if (gender !in listOf("male", "female", "Male", "Female", "MALE", "FEMALE")) {
+            et_gender.error = "Invalid gender. Please enter 'male' or 'female'."
+            return false
+        }
+
+        if (phoneNumber.isEmpty()) {
+            et_phone_number.error = "phone is not allowed to be empty."
+            return false
+        } else if (!isPhoneNumberValid(phoneNumber)) {
+            et_phone_number.error = "Invalid phone number. Please enter a valid 11-digit number."
+            return false
+        }
+
+        return true
+    }
+
+    private fun isFirstNameValid(firstName: CharSequence): Boolean {
+        return firstName.length >= 2
+    }
+
+    private fun isLastNameValid(lastName: CharSequence): Boolean {
+        return lastName.length >= 2
+    }
+
+    private fun isPhoneNumberValid(phoneNumber: String): Boolean {
+        return phoneNumber.length == 11 && phoneNumber.all {
+            it.isDigit()
+        }
     }
 }

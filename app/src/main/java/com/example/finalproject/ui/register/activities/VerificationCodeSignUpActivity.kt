@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
+import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.complete_register.activities.CompleteSignUpActivity
 import com.example.finalproject.ui.register.viewModels.VerificationCodeSignUpViewModel
 import kotlinx.android.synthetic.main.activity_verification_code_sign_up.btn_verify_code
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_verification_code_sign_up.tv_Rese
 import org.json.JSONException
 import org.json.JSONObject
 
-class VerificationCodeSignUpActivity : AppCompatActivity() {
+class VerificationCodeSignUpActivity : BaseActivity() {
 
     private lateinit var verificationCodeSignUpViewModel: VerificationCodeSignUpViewModel
 
@@ -32,6 +33,7 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
         verificationCodeSignUpViewModel.verificationCodeSignUpResponseLiveData.observe(
             this,
             Observer { response ->
+                hideProgressDialog()
                 response?.let {
 
                     AppReferences.setLoginState(this, true)
@@ -52,6 +54,7 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
         verificationCodeSignUpViewModel.resendCodeResponseLiveData.observe(
             this,
             Observer { response ->
+                hideProgressDialog()
                 response?.let {
                     Toast.makeText(
                         this@VerificationCodeSignUpActivity,
@@ -62,9 +65,10 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
             })
 
         verificationCodeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
+            hideProgressDialog()
             error?.let {
                 try {
-                    val errorMessage = JSONObject(error).getString("error")
+                    val errorMessage = JSONObject(error).getString("message")
                     Toast.makeText(this@VerificationCodeSignUpActivity, errorMessage, Toast.LENGTH_LONG).show()
 
                     Log.e("VerificationCodeSignUpActivity", "Resend Code Error: $errorMessage")
@@ -110,6 +114,7 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
 
             val token = AppReferences.getToken(this@VerificationCodeSignUpActivity)
 
+            showProgressDialog(this@VerificationCodeSignUpActivity, "Verifying your self...")
             verificationCodeSignUpViewModel.verifyAccount(token, userId, verificationCode)
 
 
@@ -122,6 +127,7 @@ class VerificationCodeSignUpActivity : AppCompatActivity() {
         val userId = AppReferences.getUserId(this@VerificationCodeSignUpActivity)
         val token = AppReferences.getToken(this@VerificationCodeSignUpActivity)
 
+        showProgressDialog(this@VerificationCodeSignUpActivity, "resending verifying code...")
         verificationCodeSignUpViewModel.resendCode(token, userId)
 
 
