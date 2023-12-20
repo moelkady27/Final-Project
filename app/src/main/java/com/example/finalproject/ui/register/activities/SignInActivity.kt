@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import androidx.lifecycle.Observer
@@ -18,6 +20,10 @@ import kotlinx.android.synthetic.main.activity_sign_in.et_email_sign_in
 import kotlinx.android.synthetic.main.activity_sign_in.et_password_sign_in
 import kotlinx.android.synthetic.main.activity_sign_in.tv_forget_password
 import kotlinx.android.synthetic.main.activity_sign_in.tv_register_now
+import kotlinx.android.synthetic.main.activity_sign_up.et_confirm_password_sign_up
+import kotlinx.android.synthetic.main.activity_sign_up.et_email_sign_up
+import kotlinx.android.synthetic.main.activity_sign_up.et_password_sign_up
+import kotlinx.android.synthetic.main.activity_sign_up.et_username_sign_up
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -82,8 +88,36 @@ class SignInActivity : BaseActivity() {
         val email = et_email_sign_in.text.toString().trim()
         val password = et_password_sign_in.text.toString().trim()
 
-        showProgressDialog(this@SignInActivity , "Signing in...")
-        signInViewModel.signIn(email, password)
+        if (isValidInput()) {
+            showProgressDialog(this@SignInActivity, "Signing in...")
+            signInViewModel.signIn(email, password)
+        }
     }
+
+    private fun isValidInput(): Boolean {
+        val email = et_email_sign_in.text.toString().trim()
+        val password = et_password_sign_in.text.toString().trim()
+
+        if (email.isEmpty()) {
+            et_email_sign_in.error = "Email is not allowed to be empty."
+            return false
+        } else if (!isValidEmail(email)) {
+            et_email_sign_in.error = "Please enter a valid email address."
+            return false
+        }
+
+        if (password.isEmpty()) {
+            et_password_sign_in.error = "Password cannot be empty."
+            return false
+        }
+
+        return true
+    }
+
+    private fun isValidEmail(email: CharSequence?): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email!!).matches()
+    }
+
 }
+
 
