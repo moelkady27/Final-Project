@@ -5,12 +5,16 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.finalproject.R
+import com.example.finalproject.network.NetworkUtils
+import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.CongratsActivity
 import kotlinx.android.synthetic.main.activity_set_location.btn_next_set_location
 import kotlinx.android.synthetic.main.activity_set_location.btn_set_location
 import kotlinx.android.synthetic.main.activity_set_location.toolbar_set_location
 
-class SetLocationActivity : AppCompatActivity(){
+class SetLocationActivity : BaseActivity(){
+
+    private lateinit var networkUtils: NetworkUtils
 
     private val REQUEST_CODE_MAP = 102
 
@@ -20,9 +24,15 @@ class SetLocationActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_location)
 
+        networkUtils = NetworkUtils(this)
+
         btn_set_location.setOnClickListener {
-            val mapIntent = Intent(this@SetLocationActivity, MapActivity::class.java)
-            startActivityForResult(mapIntent, REQUEST_CODE_MAP)
+            if (networkUtils.isNetworkAvailable()) {
+                val mapIntent = Intent(this@SetLocationActivity, MapActivity::class.java)
+                startActivityForResult(mapIntent, REQUEST_CODE_MAP)
+            } else {
+                showErrorSnackBar("No internet connection", true)
+            }
         }
 
         btn_next_set_location.setOnClickListener {

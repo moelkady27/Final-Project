@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
+import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.complete_register.activities.CompleteSignUpActivity
@@ -21,11 +22,15 @@ import org.json.JSONObject
 
 class VerificationCodeSignUpActivity : BaseActivity() {
 
+    private lateinit var networkUtils: NetworkUtils
+
     private lateinit var verificationCodeSignUpViewModel: VerificationCodeSignUpViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verification_code_sign_up)
+
+        networkUtils = NetworkUtils(this)
 
         verificationCodeSignUpViewModel =
             ViewModelProvider(this).get(VerificationCodeSignUpViewModel::class.java)
@@ -80,11 +85,19 @@ class VerificationCodeSignUpActivity : BaseActivity() {
         })
 
         btn_verify_code.setOnClickListener {
-            verifyCode()
+            if (networkUtils.isNetworkAvailable()) {
+                verifyCode()
+            } else {
+                showErrorSnackBar("No internet connection", true)
+            }
         }
 
         tv_Resend.setOnClickListener {
-            resendCode()
+            if (networkUtils.isNetworkAvailable()) {
+                resendCode()
+            } else {
+                showErrorSnackBar("No internet connection", true)
+            }
         }
 
         setUpActionBar()

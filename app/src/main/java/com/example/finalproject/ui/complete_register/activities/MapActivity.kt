@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
+import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.complete_register.viewModels.SetLocationViewModel
@@ -31,6 +32,8 @@ import org.json.JSONObject
 
 class MapActivity : BaseActivity(), OnMapReadyCallback {
 
+    private lateinit var networkUtils: NetworkUtils
+
     private var fusedLocationProviderClient: FusedLocationProviderClient? = null
     private val REQUEST_CODE = 101
 
@@ -45,6 +48,8 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
 
+        networkUtils = NetworkUtils(this)
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         setLocationViewModel = ViewModelProvider(this).get(SetLocationViewModel::class.java)
@@ -55,10 +60,14 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         }
 
         btnSaveLocation.setOnClickListener {
-            if (locationSelected) {
-                onSelectedLocation()
+            if (networkUtils.isNetworkAvailable()) {
+                if (locationSelected) {
+                    onSelectedLocation()
+                } else {
+                    onCurrentLocation()
+                }
             } else {
-                onCurrentLocation()
+                showErrorSnackBar("No internet connection", true)
             }
         }
 

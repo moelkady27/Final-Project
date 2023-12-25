@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
+import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.complete_register.viewModels.CompleteSignUpViewModel
@@ -25,11 +26,15 @@ import org.json.JSONObject
 
 class CompleteSignUpActivity : BaseActivity() {
 
+    private lateinit var networkUtils: NetworkUtils
+
     private lateinit var completeSignUpViewModel: CompleteSignUpViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_complete_sign_up)
+
+        networkUtils = NetworkUtils(this)
 
         setUpActionBar()
 
@@ -64,7 +69,11 @@ class CompleteSignUpActivity : BaseActivity() {
         })
 
         btn_next_sign_up.setOnClickListener {
-            completeProfile()
+            if (networkUtils.isNetworkAvailable()) {
+                completeProfile()
+            } else {
+                showErrorSnackBar("No internet connection", true)
+            }
         }
 
     }

@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
+import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.complete_register.viewModels.UploadPhotoViewModel
@@ -32,6 +33,8 @@ import org.json.JSONObject
 import java.io.File
 
 class UploadPhotoActivity : BaseActivity() {
+
+    private lateinit var networkUtils: NetworkUtils
 
     private lateinit var selectedImage: String
     private lateinit var uploadPhotoViewModel: UploadPhotoViewModel
@@ -62,6 +65,8 @@ class UploadPhotoActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload_photo)
+
+        networkUtils = NetworkUtils(this)
 
         uploadPhotoViewModel = ViewModelProvider(this).get(UploadPhotoViewModel::class.java)
 
@@ -113,23 +118,10 @@ class UploadPhotoActivity : BaseActivity() {
         }
 
         btn_next_upload_photo.setOnClickListener {
-            if (selectedImage != null) {
-                val file = File(selectedImage)
-                val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
-                val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
-
-                val token = AppReferences.getToken(this@UploadPhotoActivity)
-
-                showProgressDialog(this@UploadPhotoActivity , "Uploading your image...")
-
-                uploadPhotoViewModel.uploadPhoto(token, body)
-
+            if (networkUtils.isNetworkAvailable()) {
+                uploadPhoto()
             } else {
-                Toast.makeText(
-                    this@UploadPhotoActivity,
-                    "Please select an image",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showErrorSnackBar("No internet connection", true)
             }
         }
     }
@@ -146,6 +138,27 @@ class UploadPhotoActivity : BaseActivity() {
 
         toolbar_upload_photo.setNavigationOnClickListener {
             onBackPressed()
+        }
+    }
+
+    private fun uploadPhoto() {
+        if (selectedImage != null) {
+            val file = File(selectedImage)
+            val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
+
+            val token = AppReferences.getToken(this@UploadPhotoActivity)
+
+            showProgressDialog(this@UploadPhotoActivity , "Uploading your image...")
+
+            uploadPhotoViewModel.uploadPhoto(token, body)
+
+        } else {
+            Toast.makeText(
+                this@UploadPhotoActivity,
+                "Please select an image",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
