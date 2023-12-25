@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.complete_register.activities
 import android.content.Intent
+import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,8 @@ import com.example.finalproject.ui.CongratsActivity
 import kotlinx.android.synthetic.main.activity_set_location.btn_next_set_location
 import kotlinx.android.synthetic.main.activity_set_location.btn_set_location
 import kotlinx.android.synthetic.main.activity_set_location.toolbar_set_location
+import kotlinx.android.synthetic.main.activity_set_location.tv_set_location_title_3
+import java.io.IOException
 
 class SetLocationActivity : BaseActivity(){
 
@@ -71,8 +74,27 @@ class SetLocationActivity : BaseActivity(){
             val latitude = data.getDoubleExtra("latitude", 0.0)
             val longitude = data.getDoubleExtra("longitude", 0.0)
 
+            updateCurrentLocationTextView(latitude, longitude)
+
             Log.e("Selected Location:" , "$latitude, $longitude")
         }
     }
 
+    private fun updateCurrentLocationTextView(latitude: Double, longitude: Double) {
+        val geocoder = Geocoder(this)
+
+        try {
+            val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+
+            if (addresses!!.isNotEmpty()) {
+                val address = addresses[0]
+                val locationName = address.getAddressLine(0)
+                tv_set_location_title_3.text = locationName
+            }
+
+        } catch (e: IOException) {
+            e.printStackTrace()
+            tv_set_location_title_3.text = "Current Location: $latitude, $longitude"
+        }
+    }
 }

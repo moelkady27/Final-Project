@@ -96,17 +96,20 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_set_location_title_3"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="10dp"
                         android:fontFamily="@font/poppins_medium"
                         android:text="@string/tv_set_location_title_3"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="@+id/iv_set_location_icon"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/iv_set_location_icon"
-                        app:layout_constraintTop_toTopOf="@+id/iv_set_location_icon" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_set_location"
