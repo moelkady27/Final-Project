@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
+import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.register.viewModels.SignUpViewModel
@@ -24,10 +25,14 @@ import org.json.JSONObject
 
 class SignUpActivity : BaseActivity() {
 
+    private lateinit var networkUtils: NetworkUtils
+
     private lateinit var signUpViewModel: SignUpViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+
+        networkUtils = NetworkUtils(this)
 
         signUpViewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
 
@@ -73,7 +78,11 @@ class SignUpActivity : BaseActivity() {
         }
 
         btn_next_sign_up.setOnClickListener {
-            register()
+            if (networkUtils.isNetworkAvailable()) {
+                register()
+            } else {
+                showErrorSnackBar("No internet connection", true)
+            }
         }
 
     }

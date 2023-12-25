@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import androidx.lifecycle.Observer
+import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.ForgotPasswordActivity
@@ -29,10 +30,14 @@ import org.json.JSONObject
 
 class SignInActivity : BaseActivity() {
 
+    private lateinit var networkUtils: NetworkUtils
+
     private lateinit var signInViewModel: SignInViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
+
+        networkUtils = NetworkUtils(this)
 
         signInViewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
 
@@ -79,7 +84,11 @@ class SignInActivity : BaseActivity() {
         }
 
         btn_sign_in.setOnClickListener {
-            signIn()
+            if (networkUtils.isNetworkAvailable()) {
+                signIn()
+            } else {
+                showErrorSnackBar("No internet connection", true)
+            }
         }
     }
 
