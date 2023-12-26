@@ -70,11 +70,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="27dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="30dp"
                 android:background="@drawable/custom_edit_text_background"
-                android:paddingBottom="20dp"
-                app:layout_constraintBottom_toTopOf="@id/fl_take_photo"
+                android:paddingBottom="40dp"
+                android:paddingTop="30dp"
+                app:layout_constraintBottom_toTopOf="@id/btn_next_upload_photo"
                 app:layout_constraintEnd_toEndOf="@id/tv_upload_photo_title_2"
                 app:layout_constraintStart_toStartOf="@id/tv_upload_photo_title_2"
                 app:layout_constraintTop_toBottomOf="@id/tv_upload_photo_title_2">
@@ -101,43 +102,6 @@
 
             </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/fl_take_photo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="27dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/custom_edit_text_background"
-                android:paddingBottom="20dp"
-                app:layout_constraintBottom_toTopOf="@id/btn_next_upload_photo"
-                app:layout_constraintEnd_toEndOf="@id/fl_from_gallery"
-                app:layout_constraintStart_toStartOf="@id/fl_from_gallery"
-                app:layout_constraintTop_toBottomOf="@id/fl_from_gallery">
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/ib_take_photo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@null"
-                    android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_camera" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="bottom"
-                    android:layout_marginTop="85dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:gravity="center"
-                    android:text="@string/take_photo"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp" />
-
-            </FrameLayout>
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_next_upload_photo"
                 android:layout_width="match_parent"
@@ -157,9 +121,9 @@
                 app:icon="@drawable/ic_arrow_next"
                 app:iconGravity="textEnd"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/fl_take_photo"
-                app:layout_constraintStart_toStartOf="@+id/fl_take_photo"
-                app:layout_constraintTop_toBottomOf="@id/fl_take_photo"
+                app:layout_constraintEnd_toEndOf="@+id/fl_from_gallery"
+                app:layout_constraintStart_toStartOf="@+id/fl_from_gallery"
+                app:layout_constraintTop_toBottomOf="@id/fl_from_gallery"
                 tools:ignore="RtlSymmetry" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

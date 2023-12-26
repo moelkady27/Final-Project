@@ -43,6 +43,7 @@ class SignInActivity : BaseActivity() {
 
         signInViewModel.signInResponseLiveData.observe(this, Observer { response ->
             hideProgressDialog()
+
             response?.let {
 
                 val token = it.token
@@ -67,6 +68,7 @@ class SignInActivity : BaseActivity() {
 
         signInViewModel.errorLiveData.observe(this, Observer { error ->
             hideProgressDialog()
+
             error?.let {
                 try {
                     val errorMessage = JSONObject(error).getString("message")
