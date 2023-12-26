@@ -1,7 +1,6 @@
 package com.example.finalproject.ui.complete_register.activities
 import android.content.Intent
 import android.location.Geocoder
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -74,13 +73,13 @@ class SetLocationActivity : BaseActivity(){
             val latitude = data.getDoubleExtra("latitude", 0.0)
             val longitude = data.getDoubleExtra("longitude", 0.0)
 
-            updateCurrentLocationTextView(latitude, longitude)
+            showCurrentLocationAsText(latitude, longitude)
 
             Log.e("Selected Location:" , "$latitude, $longitude")
         }
     }
 
-    private fun updateCurrentLocationTextView(latitude: Double, longitude: Double) {
+    private fun showCurrentLocationAsText(latitude: Double, longitude: Double) {
         val geocoder = Geocoder(this)
 
         try {
