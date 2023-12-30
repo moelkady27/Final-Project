@@ -1,16 +1,17 @@
 package com.example.finalproject.ui.register.models
 
 data class UserSignIn(
-    val __v: Int,
     val _id: String,
-    val counter: Int,
     val createdAt: String,
     val email: String,
+    val firstName: String,
+    val gender: String,
+    val image: ImageSignIn,
     val isVerified: Boolean,
-    val otp: Int,
-    val password: String,
+    val lastName: String,
+    val location: LocationSignIn,
+    val phone: String,
     val role: String,
     val updatedAt: String,
-    val userName: String,
-    val wishlist: List<Any>
+    val username: String
 )

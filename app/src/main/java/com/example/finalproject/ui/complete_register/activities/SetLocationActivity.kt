@@ -74,7 +74,7 @@ class SetLocationActivity : BaseActivity(){
 
             showCurrentLocationAsText(latitude, longitude)
 
-            Log.e("Selected Location:" , "$latitude, $longitude")
+            Log.e("Selected LocationSignIn:" , "$latitude, $longitude")
         }
     }
 
@@ -92,7 +92,7 @@ class SetLocationActivity : BaseActivity(){
 
         } catch (e: IOException) {
             e.printStackTrace()
-            tv_set_location_title_3.text = "Current Location: $latitude, $longitude"
+            tv_set_location_title_3.text = "Current LocationSignIn: $latitude, $longitude"
         }
     }
 }

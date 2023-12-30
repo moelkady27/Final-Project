@@ -129,7 +129,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         if (selectedLocation != null) {
             val token = AppReferences.getToken(this@MapActivity)
 
-            showProgressDialog(this@MapActivity , "Setting up your Location")
+            showProgressDialog(this@MapActivity , "Setting up your LocationSignIn")
 
             setLocationViewModel.setLocation(token, selectedLocation!!.longitude, selectedLocation!!.latitude)
             setLocationViewModel.locationResponseLiveData.observe(this, Observer { response ->
@@ -178,7 +178,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         if (currentLocation != null) {
             val token = AppReferences.getToken(this@MapActivity)
 
-            showProgressDialog(this@MapActivity , "Setting up your Location")
+            showProgressDialog(this@MapActivity , "Setting up your LocationSignIn")
 
             setLocationViewModel.setLocation(token, currentLocation!!.longitude, currentLocation!!.latitude)
             setLocationViewModel.locationResponseLiveData.observe(this, Observer { response ->
@@ -225,7 +225,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         if (selectedLocation != null) {
             val latLng = LatLng(selectedLocation!!.latitude, selectedLocation!!.longitude)
-            val markerOptions = MarkerOptions().position(latLng).title("Selected Location")
+            val markerOptions = MarkerOptions().position(latLng).title("Selected LocationSignIn")
             googleMap.clear()
             googleMap.addMarker(markerOptions)
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
@@ -233,7 +233,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
 
         googleMap.setOnMapClickListener { newLatLng ->
             googleMap.clear()
-            googleMap.addMarker(MarkerOptions().position(newLatLng).title("Selected Location"))
+            googleMap.addMarker(MarkerOptions().position(newLatLng).title("Selected LocationSignIn"))
             selectedLocation = newLatLng
             locationSelected = true
         }
@@ -254,7 +254,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
                 } else {
                     Snackbar.make(
                         findViewById(android.R.id.content),
-                        "Location permission denied. Cannot show current location.",
+                        "LocationSignIn permission denied. Cannot show current location.",
                         Snackbar.LENGTH_LONG
                     ).show()
                 }
