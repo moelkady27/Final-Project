@@ -5,13 +5,13 @@ data class UserLocation(
     val createdAt: String,
     val email: String,
     val firstName: String,
+    val gender: String,
     val image: ImageLocation,
     val isVerified: Boolean,
     val lastName: String,
-    val location: Location,
+    val location: LocationDetails,
     val phone: String,
     val role: String,
     val updatedAt: String,
-    val username: String,
-    val wishlist: List<Any>
+    val username: String
 )

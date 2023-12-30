@@ -16,12 +16,21 @@ class UploadPreviewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_upload_preview)
 
         val imageUrl = intent.getStringExtra("imageUri")
+        val imageDef = intent.getStringExtra("imageDef")
 
-        Glide
-            .with(this)
-            .load(imageUrl)
-            .centerCrop()
-            .into(ib_upload_preview)
+        if (!imageUrl.isNullOrBlank()) {
+            Glide
+                .with(this)
+                .load(imageUrl)
+                .centerCrop()
+                .into(ib_upload_preview)
+        } else {
+            Glide
+                .with(this)
+                .load(imageDef)
+                .centerCrop()
+                .into(ib_upload_preview)
+        }
 
         btn_next_upload_preview.setOnClickListener {
             startActivity(Intent(this@UploadPreviewActivity , SetLocationActivity::class.java))

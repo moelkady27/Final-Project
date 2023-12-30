@@ -4,10 +4,9 @@ data class UserSignUp(
     val _id: String,
     val createdAt: String,
     val email: String,
+    val image: ImageSignUp,
     val isVerified: Boolean,
     val role: String,
-    val tokens: List<TokenSignUp>,
     val updatedAt: String,
-    val username: String,
-    val wishlist: List<Any>
+    val username: String
 )

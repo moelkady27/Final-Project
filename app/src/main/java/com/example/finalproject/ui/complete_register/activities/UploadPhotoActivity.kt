@@ -24,6 +24,7 @@ import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.complete_register.viewModels.UploadPhotoViewModel
 import kotlinx.android.synthetic.main.activity_upload_photo.btn_next_upload_photo
 import kotlinx.android.synthetic.main.activity_upload_photo.fl_from_gallery
+import kotlinx.android.synthetic.main.activity_upload_photo.skip
 import kotlinx.android.synthetic.main.activity_upload_photo.toolbar_upload_photo
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -96,7 +97,7 @@ class UploadPhotoActivity : BaseActivity() {
                     val errorMessage = JSONObject(error).getString("message")
                     Toast.makeText(this@UploadPhotoActivity, errorMessage, Toast.LENGTH_LONG).show()
 
-                    Log.e("UploadImageSignUpActivity", "Upload Image Error: $errorMessage")
+                    Log.e("UploadImageSignUpActivity", "Upload ImageSignUp Error: $errorMessage")
 
                 } catch (e: JSONException) {
                     Toast.makeText(this@UploadPhotoActivity, error, Toast.LENGTH_LONG).show()
@@ -120,6 +121,21 @@ class UploadPhotoActivity : BaseActivity() {
         btn_next_upload_photo.setOnClickListener {
             if (networkUtils.isNetworkAvailable()) {
                 uploadPhoto()
+            } else {
+                showErrorSnackBar("No internet connection", true)
+            }
+        }
+
+        skip.setOnClickListener {
+            if (networkUtils.isNetworkAvailable()) {
+
+                val intent = Intent(this@UploadPhotoActivity , UploadPreviewActivity::class.java)
+                val imageDef = "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg"
+
+                intent.putExtra("imageDef", imageDef)
+
+                startActivity(intent)
+
             } else {
                 showErrorSnackBar("No internet connection", true)
             }

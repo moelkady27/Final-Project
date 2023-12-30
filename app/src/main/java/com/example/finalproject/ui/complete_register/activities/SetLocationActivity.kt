@@ -7,7 +7,6 @@ import android.widget.Toast
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.BaseActivity
-import com.example.finalproject.ui.CongratsActivity
 import kotlinx.android.synthetic.main.activity_set_location.btn_next_set_location
 import kotlinx.android.synthetic.main.activity_set_location.btn_set_location
 import kotlinx.android.synthetic.main.activity_set_location.toolbar_set_location

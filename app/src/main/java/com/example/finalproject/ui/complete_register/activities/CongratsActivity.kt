@@ -1,10 +1,11 @@
-package com.example.finalproject.ui
+package com.example.finalproject.ui.complete_register.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.finalproject.R
-import com.example.finalproject.ui.register.activities.SignInActivity
+import com.example.finalproject.storage.AppReferences
+import com.example.finalproject.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_congrats.btn_start_sign_up_success
 
 class CongratsActivity : AppCompatActivity() {
@@ -13,8 +14,13 @@ class CongratsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_congrats)
 
         btn_start_sign_up_success.setOnClickListener {
-            startActivity(Intent(this@CongratsActivity, SignInActivity::class.java))
-        }
+//            startActivity(Intent(this@CongratsActivity, SignInActivity::class.java))
 
+            AppReferences.setLoginState(this@CongratsActivity, true)
+
+            val intent = Intent(this@CongratsActivity, MainActivity::class.java)
+            startActivity(intent)
+
+        }
     }
 }

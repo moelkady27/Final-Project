@@ -64,5 +64,6 @@
     <string name="btn_back" translatable="false">Back</string>
     <string name="verify" translatable="false">Verify</string>
     <string name="please_wait" translatable="false">Please Wait</string>
+    <string name="skip_now">Skip now</string>
 
 </resources>

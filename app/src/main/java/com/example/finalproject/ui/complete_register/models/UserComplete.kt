@@ -5,13 +5,12 @@ data class UserComplete(
     val createdAt: String,
     val email: String,
     val firstName: String,
+    val gender: String,
+    val image: ImageComplete,
     val isVerified: Boolean,
     val lastName: String,
     val phone: String,
-    val gender: String,
     val role: String,
-    val tokens: List<TokenComplete>,
     val updatedAt: String,
-    val username: String,
-    val wishlist: List<Any>
+    val username: String
 )

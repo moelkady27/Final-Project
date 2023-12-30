@@ -3,19 +3,18 @@ package com.example.finalproject.retrofit
 import com.example.finalproject.ui.complete_register.models.CompleteSignUpResponse
 import com.example.finalproject.ui.complete_register.models.LocationResponse
 import com.example.finalproject.ui.register.models.LogOutResponse
-import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
-import com.example.finalproject.ui.register.models.SignUpResponse
 import com.example.finalproject.ui.complete_register.models.UploadPhotoResponse
-import com.example.finalproject.ui.register.models.VerificationCodeSignUpResponse
 import com.example.finalproject.ui.complete_register.request.CompleteSignUpRequest
+import com.example.finalproject.ui.register.models.ResendCodeResponse
+import com.example.finalproject.ui.register.models.SignUpResponse
+import com.example.finalproject.ui.register.models.VerificationCodeSignUpResponse
 import com.example.finalproject.ui.register.request.SignInRequest
 import com.example.finalproject.ui.register.request.SignUpRequest
 import com.example.finalproject.ui.register.request.VerificationCodeSignUpRequest
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
@@ -58,7 +57,7 @@ interface ApiService {
     ) : Call<CompleteSignUpResponse>
 
     @Multipart
-    @POST("api/v1/auth/upload")
+    @POST("api/v1/auth/upload-image")
     fun uploadImage(
         @Header("Authorization") token: String,
         @Part image: MultipartBody.Part
