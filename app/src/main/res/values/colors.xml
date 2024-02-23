@@ -13,6 +13,7 @@
     <color name="colorSecondaryText">#FFA39998</color>
 
     <color name="colorThemeGrey">#FFF1F0F0</color>
+    <color name="colorThemeDarkGrey">#FF53587A</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

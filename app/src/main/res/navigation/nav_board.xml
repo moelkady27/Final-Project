@@ -16,10 +16,10 @@
         android:label="fragment_location"
         tools:layout="@layout/fragment_location" />
     <fragment
-        android:id="@+id/favoriteFragment"
-        android:name="com.example.finalproject.FavoriteFragment"
-        android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        android:id="@+id/settingsFragment"
+        android:name="com.example.finalproject.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.finalproject.ProfileFragment"
