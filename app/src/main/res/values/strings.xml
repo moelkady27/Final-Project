@@ -71,5 +71,7 @@
     <string name="tv_delete_account_title_2" translatable="false">Enter your password to delete the account</string>
     <string name="til_your_password" translatable="false">Your Password</string>
     <string name="btn_delete" translatable="false">Delete</string>
+    <string name="tv_user_name" translatable="false">Ashfak Sayem</string>
+    <string name="tv_email_name" translatable="false">ashfaksayem@gmail.com</string>
 
 </resources>
