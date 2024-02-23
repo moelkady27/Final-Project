@@ -67,5 +67,9 @@
     <string name="skip_now" translatable="false">Skip now</string>
     <string name="profile_name" translatable="false">Mathew Adam</string>
     <string name="tv_profile_email" translatable="false">mathew@email.com</string>
+    <string name="tv_delete_account_title_1" translatable="false">Delete Account</string>
+    <string name="tv_delete_account_title_2" translatable="false">Enter your password to delete the account</string>
+    <string name="til_your_password" translatable="false">Your Password</string>
+    <string name="btn_delete" translatable="false">Delete</string>
 
 </resources>
