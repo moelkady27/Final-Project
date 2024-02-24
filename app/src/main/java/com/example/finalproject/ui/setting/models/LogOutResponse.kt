@@ -1,4 +1,4 @@
-package com.example.finalproject.ui.register.models
+package com.example.finalproject.ui.setting.models
 
 data class LogOutResponse(
     val status: String

@@ -2,7 +2,7 @@ package com.example.finalproject.retrofit
 
 import com.example.finalproject.ui.complete_register.models.CompleteSignUpResponse
 import com.example.finalproject.ui.complete_register.models.LocationResponse
-import com.example.finalproject.ui.register.models.LogOutResponse
+import com.example.finalproject.ui.setting.models.LogOutResponse
 import com.example.finalproject.ui.complete_register.models.UploadPhotoResponse
 import com.example.finalproject.ui.complete_register.request.CompleteSignUpRequest
 import com.example.finalproject.ui.register.models.ResendCodeResponse

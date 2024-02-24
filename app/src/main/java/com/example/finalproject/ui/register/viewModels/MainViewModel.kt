@@ -1,12 +1,6 @@
 package com.example.finalproject.ui.register.viewModels
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.finalproject.retrofit.RetrofitClient
-import com.example.finalproject.ui.register.models.LogOutResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainViewModel : ViewModel() {
 
