@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.finalproject.HomeFragment"
+        android:name="com.example.finalproject.ui.home.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_location" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.finalproject.SettingsFragment"
+        android:name="com.example.finalproject.ui.setting.fragment.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment

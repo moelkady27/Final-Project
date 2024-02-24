@@ -80,5 +80,11 @@
     <string name="tv_favourites" translatable="false">Favourites</string>
     <string name="tv_logout" translatable="false">Log out</string>
     <string name="btn_delete_account" translatable="false">Delete Account</string>
+    <string name="change_your_password_here">Change Your Password here</string>
+    <string name="select_which_contact_details_should_we_use_to_change_your_password">Select which contact details should we use to Change your password</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="update">Update</string>
 
 </resources>

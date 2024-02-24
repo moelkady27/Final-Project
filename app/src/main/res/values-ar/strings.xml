@@ -63,5 +63,7 @@
     <string name="tv_password_reset_successful" translatable="false">تمت إعادة تعيين كلمة المرور بنجاح</string>
     <string name="btn_back" translatable="false">تراجع</string>
     <string name="verify" translatable="false">تاكيد</string>
+    <string name="please_wait">برجاء الانتظار</string>
+    <string name="skip_now">"تخطي الآن "</string>
 
 </resources>

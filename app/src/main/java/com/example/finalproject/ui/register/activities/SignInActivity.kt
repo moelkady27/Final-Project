@@ -1,12 +1,10 @@
 package com.example.finalproject.ui.register.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import androidx.lifecycle.Observer
@@ -21,10 +19,6 @@ import kotlinx.android.synthetic.main.activity_sign_in.et_email_sign_in
 import kotlinx.android.synthetic.main.activity_sign_in.et_password_sign_in
 import kotlinx.android.synthetic.main.activity_sign_in.tv_forget_password
 import kotlinx.android.synthetic.main.activity_sign_in.tv_register_now
-import kotlinx.android.synthetic.main.activity_sign_up.et_confirm_password_sign_up
-import kotlinx.android.synthetic.main.activity_sign_up.et_email_sign_up
-import kotlinx.android.synthetic.main.activity_sign_up.et_password_sign_up
-import kotlinx.android.synthetic.main.activity_sign_up.et_username_sign_up
 import org.json.JSONException
 import org.json.JSONObject
 

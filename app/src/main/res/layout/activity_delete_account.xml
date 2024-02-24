@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.DeleteAccountActivity">
+    tools:context=".ui.setting.activities.DeleteAccountActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_delete_account"
@@ -58,8 +58,8 @@
                 android:gravity="center|start"
                 android:text="@string/tv_delete_account_title_2"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="15sp"
-                app:textAllCaps="true"
+                android:textSize="18sp"
+                app:textAllCaps="false"
                 app:layout_constraintBottom_toTopOf="@id/til_your_password"
                 app:layout_constraintEnd_toEndOf="@+id/tv_delete_account_title_1"
                 app:layout_constraintStart_toStartOf="@+id/tv_delete_account_title_1"
