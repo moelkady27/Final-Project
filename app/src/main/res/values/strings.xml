@@ -73,5 +73,12 @@
     <string name="btn_delete" translatable="false">Delete</string>
     <string name="tv_user_name" translatable="false">Ashfak Sayem</string>
     <string name="tv_email_name" translatable="false">ashfaksayem@gmail.com</string>
+    <string name="tv_edit_profile" translatable="false">Edit Profile</string>
+    <string name="tv_change_password" translatable="false">Change Password</string>
+    <string name="tv_notifications" translatable="false">Notifications</string>
+    <string name="tv_chats" translatable="false">Chats</string>
+    <string name="tv_favourites" translatable="false">Favourites</string>
+    <string name="tv_logout" translatable="false">Log out</string>
+    <string name="btn_delete_account" translatable="false">Delete Account</string>
 
 </resources>
