@@ -80,16 +80,16 @@
     <string name="tv_favourites" translatable="false">Favourites</string>
     <string name="tv_logout" translatable="false">Log out</string>
     <string name="btn_delete_account" translatable="false">Delete Account</string>
-    <string name="change_your_password_here">Change Your Password here</string>
-    <string name="select_which_contact_details_should_we_use_to_change_your_password">Select which contact details should we use to Change your password</string>
-    <string name="old_password">Old Password</string>
-    <string name="new_password">New Password</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="update">Update</string>
-    <string name="edit_profile">Edit Profile</string>
-    <string name="change_profile_picture">Change Profile Picture</string>
-    <string name="profile_info">Profile Info</string>
-    <string name="first_name">First Name</string>
-    <string name="last_name">Last Name</string>
+    <string name="change_your_password_here" translatable="false">Change Your Password here</string>
+    <string name="select_which_contact_details_should_we_use_to_change_your_password" translatable="false">Select which contact details should we use to Change your password</string>
+    <string name="old_password" translatable="false">Old Password</string>
+    <string name="new_password" translatable="false">New Password</string>
+    <string name="confirm_password" translatable="false">Confirm Password</string>
+    <string name="update" translatable="false">Update</string>
+    <string name="edit_profile" translatable="false">Edit Profile</string>
+    <string name="change_profile_picture" translatable="false">Change Profile Picture</string>
+    <string name="profile_info" translatable="false">Profile Info</string>
+    <string name="first_name" translatable="false">First Name</string>
+    <string name="last_name" translatable="false">Last Name</string>
 
 </resources>

@@ -21,6 +21,6 @@
     <color name="colorSnackBarError">#F72400</color>
     <color name="colorSnackBarSuccess">#8BC34A</color>
 
-    <color name="edit">#F2F7FF</color>
+    <color name="edit">#eef3fb</color>
     <color name="edit_text">#888888</color>
 </resources>
