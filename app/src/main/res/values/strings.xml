@@ -86,5 +86,10 @@
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="update">Update</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_profile_picture">Change Profile Picture</string>
+    <string name="profile_info">Profile Info</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
 
 </resources>

@@ -18,6 +18,7 @@ import com.example.finalproject.ui.register.activities.SignInActivity
 import com.example.finalproject.ui.register.activities.VerificationCodeSignUpActivity
 import com.example.finalproject.ui.setting.activities.ChangePasswordActivity
 import com.example.finalproject.ui.setting.activities.DeleteAccountActivity
+import com.example.finalproject.ui.setting.activities.EditProfileActivity
 import com.example.finalproject.ui.setting.viewModels.LogOutViewModels
 import kotlinx.android.synthetic.main.fragment_settings.btn_change_password
 import kotlinx.android.synthetic.main.fragment_settings.btn_delete_account
@@ -86,6 +87,9 @@ class SettingsFragment : Fragment() {
             btn_edit_profile.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             btn_edit_profile.setTextColor(resources.getColor(R.color.white))
             btn_edit_profile.setIconTintResource(R.color.white)
+
+            val intent = Intent(requireContext(), EditProfileActivity::class.java)
+            startActivity(intent)
         }
 
         btn_delete_account.setOnClickListener {

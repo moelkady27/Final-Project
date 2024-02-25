@@ -22,10 +22,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.setting.activities.ChangePasswordActivity"
+            android:name=".ui.setting.activities.EditProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.setting.activities.ChangePasswordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.setting.activities.DeleteAccountActivity"
             android:exported="false"
@@ -65,7 +70,7 @@
             android:name=".ui.complete_register.activities.SetLocationActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.complete_register.activities.UploadPreviewActivity"
             android:exported="false"
