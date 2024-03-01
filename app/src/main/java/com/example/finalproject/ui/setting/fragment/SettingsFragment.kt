@@ -15,8 +15,7 @@ import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.register.activities.SignInActivity
-import com.example.finalproject.ui.register.activities.VerificationCodeSignUpActivity
-import com.example.finalproject.ui.setting.activities.ChangePasswordActivity
+import com.example.finalproject.ui.password.activities.ChangePasswordActivity
 import com.example.finalproject.ui.setting.activities.DeleteAccountActivity
 import com.example.finalproject.ui.setting.activities.EditProfileActivity
 import com.example.finalproject.ui.setting.viewModels.LogOutViewModels

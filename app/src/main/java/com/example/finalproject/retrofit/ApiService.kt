@@ -5,6 +5,8 @@ import com.example.finalproject.ui.complete_register.models.LocationResponse
 import com.example.finalproject.ui.setting.models.LogOutResponse
 import com.example.finalproject.ui.complete_register.models.UploadPhotoResponse
 import com.example.finalproject.ui.complete_register.request.CompleteSignUpRequest
+import com.example.finalproject.ui.password.models.ChangePasswordResponse
+import com.example.finalproject.ui.password.request.ChangePasswordRequest
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
 import com.example.finalproject.ui.register.models.SignUpResponse
@@ -21,6 +23,7 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Multipart
+import retrofit2.http.PATCH
 import retrofit2.http.Part
 import retrofit2.http.Query
 
@@ -74,4 +77,10 @@ interface ApiService {
         @Query("longitude") longitude: Double,
         @Query("latitude") latitude: Double
     ) : Call<LocationResponse>
+
+    @PATCH("api/v1/auth/change-password")
+    fun changePass(
+        @Header("Authorization") token: String,
+        @Body req: ChangePasswordRequest
+    ) : Call<ChangePasswordResponse>
 }
