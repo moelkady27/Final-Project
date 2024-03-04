@@ -6,6 +6,7 @@ import com.example.finalproject.ui.setting.models.LogOutResponse
 import com.example.finalproject.ui.complete_register.models.UploadPhotoResponse
 import com.example.finalproject.ui.complete_register.request.CompleteSignUpRequest
 import com.example.finalproject.ui.password.models.ChangePasswordResponse
+import com.example.finalproject.ui.password.models.LogOutAllResponse
 import com.example.finalproject.ui.password.request.ChangePasswordRequest
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
@@ -70,6 +71,11 @@ interface ApiService {
     fun logout(
         @Header("Authorization") token: String,
     ): Call<LogOutResponse>
+
+    @GET("api/v1/auth/logout-all")
+    fun logoutAll(
+        @Header("Authorization") token: String,
+    ): Call<LogOutAllResponse>
 
     @POST("api/v1/auth/location")
     fun location(

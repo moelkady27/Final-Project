@@ -12,6 +12,7 @@ import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.password.viewModels.ChangePasswordViewModel
+import com.example.finalproject.ui.password.viewModels.LogoutAllViewModel
 import com.example.finalproject.ui.register.activities.SignInActivity
 import com.example.finalproject.ui.setting.viewModels.LogOutViewModels
 import kotlinx.android.synthetic.main.activity_change_password.btn_change_pass
@@ -29,7 +30,7 @@ class ChangePasswordActivity : BaseActivity() {
 
     private lateinit var changePasswordViewModel: ChangePasswordViewModel
 
-    private lateinit var logOutViewModel: LogOutViewModels
+    private lateinit var logOutAllViewModel: LogoutAllViewModel
 
     private lateinit var networkUtils: NetworkUtils
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +40,9 @@ class ChangePasswordActivity : BaseActivity() {
         networkUtils = NetworkUtils(this@ChangePasswordActivity)
 
         changePasswordViewModel = ViewModelProvider(this@ChangePasswordActivity).get(ChangePasswordViewModel::class.java)
+
+        logOutAllViewModel = ViewModelProvider(this@ChangePasswordActivity).get(LogoutAllViewModel::class.java)
+
 
         changePasswordViewModel.changePasswordLiveData.observe(this@ChangePasswordActivity , Observer { response->
             hideProgressDialog()
@@ -51,35 +55,37 @@ class ChangePasswordActivity : BaseActivity() {
 
                 val token = AppReferences.getToken(this@ChangePasswordActivity)
 
-                logOutViewModel.logout(token)
+                logOutAllViewModel.logoutAll(token)
 
                 startActivity(Intent(this@ChangePasswordActivity , SignInActivity::class.java))
             }
         })
 
-        changePasswordViewModel.errorLiveDate.observe(this@ChangePasswordActivity , Observer { error->
+        changePasswordViewModel.changePasswordLiveData.observe(this@ChangePasswordActivity , Observer { response->
             hideProgressDialog()
-            error.let {
-                try {
-                    val errorMessage = JSONObject(error).getString("message")
-                    Toast.makeText(this@ChangePasswordActivity , errorMessage , Toast.LENGTH_LONG).show()
-                }
-                catch (e:Exception){
-                    Toast.makeText(this@ChangePasswordActivity , "Error Server" , Toast.LENGTH_LONG).show()
+            response.let {
+                val status = response.status
+
+                Toast.makeText(this@ChangePasswordActivity , status , Toast.LENGTH_LONG).show()
+
+                if (status == "success") {
+                    val token = AppReferences.getToken(this@ChangePasswordActivity)
+                    logOutAllViewModel.logoutAll(token)
+                    AppReferences.setLoginState(this@ChangePasswordActivity , false)
+                    startActivity(Intent(this@ChangePasswordActivity , SignInActivity::class.java))
                 }
             }
         })
 
-        logOutViewModel = ViewModelProvider(this@ChangePasswordActivity).get(LogOutViewModels::class.java)
 
-        logOutViewModel.logOutResponseLiveData.observe(this@ChangePasswordActivity, Observer { response ->
+        logOutAllViewModel.logOutAllResponseLiveData.observe(this@ChangePasswordActivity, Observer { response ->
             hideProgressDialog()
             response?.let {
                 AppReferences.setLoginState(this@ChangePasswordActivity , false)
             }
         })
 
-        logOutViewModel.errorLiveData.observe(this@ChangePasswordActivity, Observer { error ->
+        logOutAllViewModel.errorLiveData.observe(this@ChangePasswordActivity, Observer { error ->
             hideProgressDialog()
             error?.let {
                 try {
