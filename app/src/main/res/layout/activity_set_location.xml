@@ -70,7 +70,6 @@
                 android:layout_height="170dp"
                 android:layout_marginStart="27dp"
                 android:layout_marginTop="27dp"
-
                 android:layout_marginEnd="27dp"
                 android:background="@drawable/upload_preview_background"
                 app:layout_constraintEnd_toEndOf="@id/tv_set_location_title_2"
