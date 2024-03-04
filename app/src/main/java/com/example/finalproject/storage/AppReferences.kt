@@ -48,4 +48,18 @@ object AppReferences {
         return sharedPreferences.getString("token", "")!!
     }
 
+    fun setUserEmail(context: Activity?, email: String) {
+        val sharedPreferences: SharedPreferences =
+            context!!.getSharedPreferences("user", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putString("userEmail", email)
+        editor.apply()
+    }
+
+    fun getUserEmail(context: Activity?): String {
+        val sharedPreferences: SharedPreferences =
+            context!!.getSharedPreferences("user", Context.MODE_PRIVATE)
+        return sharedPreferences.getString("userEmail", "")!!
+    }
+
 }

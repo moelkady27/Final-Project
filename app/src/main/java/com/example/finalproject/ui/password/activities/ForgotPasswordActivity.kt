@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
+import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.password.viewModels.ForgotPasswordViewModel
 import kotlinx.android.synthetic.main.activity_forgot_password.btn_send
@@ -21,6 +22,7 @@ class ForgotPasswordActivity : BaseActivity() {
     private lateinit var forgotPasswordViewModel: ForgotPasswordViewModel
 
     private lateinit var networkUtils: NetworkUtils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
@@ -33,6 +35,10 @@ class ForgotPasswordActivity : BaseActivity() {
             hideProgressDialog()
             response.let {
                 val message = response.message
+
+                val email = response.email
+
+                AppReferences.setUserEmail(this@ForgotPasswordActivity , email)
 
                 Toast.makeText(this@ForgotPasswordActivity , message , Toast.LENGTH_LONG).show()
 

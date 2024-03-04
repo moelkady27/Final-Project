@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.finalproject.R
+import com.example.finalproject.storage.AppReferences
 import kotlinx.android.synthetic.main.activity_check_your_mail.btn_ok
 import kotlinx.android.synthetic.main.activity_check_your_mail.toolbar_check
 
@@ -15,9 +16,8 @@ class CheckYourMailActivity : AppCompatActivity() {
 
         setUpActionBar()
 
-        val email = intent.getStringExtra("EMAIL")
-
-        Log.e("email" , email.toString())
+        val email = AppReferences.getUserEmail(this@CheckYourMailActivity)
+        Log.e("email check" , email)
 
         btn_ok.setOnClickListener {
             startActivity(Intent(this@CheckYourMailActivity, VerificationCodeForgetPasswordActivity::class.java))

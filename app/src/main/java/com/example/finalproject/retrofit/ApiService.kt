@@ -8,6 +8,7 @@ import com.example.finalproject.ui.complete_register.request.CompleteSignUpReque
 import com.example.finalproject.ui.password.models.ChangePasswordResponse
 import com.example.finalproject.ui.password.models.ForgotPasswordResponse
 import com.example.finalproject.ui.password.models.LogOutAllResponse
+import com.example.finalproject.ui.password.models.ResendCodeForgetResponse
 import com.example.finalproject.ui.password.models.VerificationCodeForgetPasswordResponse
 import com.example.finalproject.ui.password.request.ChangePasswordRequest
 import com.example.finalproject.ui.password.request.ForgotPasswordRequest
@@ -100,9 +101,14 @@ interface ApiService {
         @Body req: ForgotPasswordRequest
     ): Call<ForgotPasswordResponse>
 
-    @POST("api/v1/auth/verify-pass-otp/:email")
+    @POST("api/v1/auth/verify-pass-otp/{email}")
     fun verificationCodeForgetPass(
         @Body req: VerificationCodeForgetPasswordRequest,
-        @Query("email") email: String
+        @Path("email") email: String
     ): Call<VerificationCodeForgetPasswordResponse>
+
+    @POST("api/v1/auth/resend-pass-otp/{email}")
+    fun resendCodeForget(
+        @Path("email") email: String
+    ): Call<ResendCodeForgetResponse>
 }

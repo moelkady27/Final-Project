@@ -4,22 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
+import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.ResetPasswordActivity
-import com.example.finalproject.ui.complete_register.activities.CompleteSignUpActivity
 import com.example.finalproject.ui.password.viewModels.VerificationCodeForgetPasswordViewModel
 import kotlinx.android.synthetic.main.activity_verification_code_forget_password.btn_verify_code_forget
+import kotlinx.android.synthetic.main.activity_verification_code_forget_password.et_code_box_forget
 import kotlinx.android.synthetic.main.activity_verification_code_forget_password.toolbar_validation_forget
-import kotlinx.android.synthetic.main.activity_verification_code_sign_up.btn_verify_code
-import kotlinx.android.synthetic.main.activity_verification_code_sign_up.toolbar_validation
+import kotlinx.android.synthetic.main.activity_verification_code_forget_password.tv_Resend_forget
+import kotlinx.android.synthetic.main.activity_verification_code_sign_up.et_code_box
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -35,6 +33,10 @@ class VerificationCodeForgetPasswordActivity : BaseActivity() {
 
         networkUtils = NetworkUtils(this@VerificationCodeForgetPasswordActivity)
 
+        val email = AppReferences.getUserEmail(this@VerificationCodeForgetPasswordActivity)
+
+        Log.e("email verify" , email)
+
         verificationCodeForgetPasswordViewModel = ViewModelProvider(this).get(
             VerificationCodeForgetPasswordViewModel::class.java)
 
@@ -44,6 +46,10 @@ class VerificationCodeForgetPasswordActivity : BaseActivity() {
                 response.let {
                     val status = it.message
 
+                    val email = it.email
+
+                    AppReferences.setUserEmail(this@VerificationCodeForgetPasswordActivity , email)
+
                     Log.e(
                         "VerificationCodeForgetPassActivity",
                         "Verification successful: Status - ${it.status}"
@@ -52,6 +58,19 @@ class VerificationCodeForgetPasswordActivity : BaseActivity() {
                     Toast.makeText(this, status, Toast.LENGTH_LONG).show()
 
                     startActivity(Intent(this, ResetPasswordActivity::class.java))
+                }
+            })
+
+        verificationCodeForgetPasswordViewModel.resendCodeForgetResponseLiveData.observe(
+            this,
+            Observer { response ->
+                hideProgressDialog()
+                response?.let {
+                    Toast.makeText(
+                        this@VerificationCodeForgetPasswordActivity,
+                        "Resend Code Successful",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             })
 
@@ -80,10 +99,13 @@ class VerificationCodeForgetPasswordActivity : BaseActivity() {
             }
         }
 
-    }
-
-    private fun verifyCode() {
-
+        tv_Resend_forget.setOnClickListener {
+            if (networkUtils.isNetworkAvailable()) {
+                resendCode()
+            } else {
+                showErrorSnackBar("No internet connection", true)
+            }
+        }
     }
 
     private fun setUpActionBar() {
@@ -101,4 +123,26 @@ class VerificationCodeForgetPasswordActivity : BaseActivity() {
         }
     }
 
+    private fun verifyCode() {
+        val verificationCodeString = et_code_box_forget?.text?.toString()
+        val userEmail = AppReferences.getUserEmail(this@VerificationCodeForgetPasswordActivity)
+
+        if (!verificationCodeString.isNullOrBlank()) {
+            val verificationCode = verificationCodeString.toInt()
+
+            showProgressDialog(this@VerificationCodeForgetPasswordActivity, "Verifying OTP...")
+            verificationCodeForgetPasswordViewModel.verifyForget(verificationCode, userEmail)
+
+        } else {
+            Toast.makeText(this, "Verification code cannot be empty", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun resendCode() {
+        val email = AppReferences.getUserEmail(this@VerificationCodeForgetPasswordActivity)
+
+        showProgressDialog(this@VerificationCodeForgetPasswordActivity, "resending verifying code...")
+        verificationCodeForgetPasswordViewModel.resendCodeForget(email)
+
+    }
 }
