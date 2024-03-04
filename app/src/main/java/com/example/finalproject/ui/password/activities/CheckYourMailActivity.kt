@@ -1,11 +1,10 @@
-package com.example.finalproject.ui
+package com.example.finalproject.ui.password.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.finalproject.R
-import com.example.finalproject.ui.password.activities.VerificationCodeForgetPasswordActivity
-import com.example.finalproject.ui.register.activities.VerificationCodeSignUpActivity
 import kotlinx.android.synthetic.main.activity_check_your_mail.btn_ok
 import kotlinx.android.synthetic.main.activity_check_your_mail.toolbar_check
 
@@ -15,6 +14,10 @@ class CheckYourMailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_check_your_mail)
 
         setUpActionBar()
+
+        val email = intent.getStringExtra("EMAIL")
+
+        Log.e("email" , email.toString())
 
         btn_ok.setOnClickListener {
             startActivity(Intent(this@CheckYourMailActivity, VerificationCodeForgetPasswordActivity::class.java))

@@ -10,12 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.BaseActivity
-import com.example.finalproject.ui.CheckYourMailActivity
 import com.example.finalproject.ui.password.viewModels.ForgotPasswordViewModel
 import kotlinx.android.synthetic.main.activity_forgot_password.btn_send
 import kotlinx.android.synthetic.main.activity_forgot_password.et_email_forgot_password
 import kotlinx.android.synthetic.main.activity_forgot_password.toolbar_forget_password
-import kotlinx.android.synthetic.main.activity_sign_in.et_email_sign_in
 import org.json.JSONObject
 
 class ForgotPasswordActivity : BaseActivity() {

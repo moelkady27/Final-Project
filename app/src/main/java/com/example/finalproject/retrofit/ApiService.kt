@@ -8,8 +8,10 @@ import com.example.finalproject.ui.complete_register.request.CompleteSignUpReque
 import com.example.finalproject.ui.password.models.ChangePasswordResponse
 import com.example.finalproject.ui.password.models.ForgotPasswordResponse
 import com.example.finalproject.ui.password.models.LogOutAllResponse
+import com.example.finalproject.ui.password.models.VerificationCodeForgetPasswordResponse
 import com.example.finalproject.ui.password.request.ChangePasswordRequest
 import com.example.finalproject.ui.password.request.ForgotPasswordRequest
+import com.example.finalproject.ui.password.request.VerificationCodeForgetPasswordRequest
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
 import com.example.finalproject.ui.register.models.SignUpResponse
@@ -17,6 +19,7 @@ import com.example.finalproject.ui.register.models.VerificationCodeSignUpRespons
 import com.example.finalproject.ui.register.request.SignInRequest
 import com.example.finalproject.ui.register.request.SignUpRequest
 import com.example.finalproject.ui.register.request.VerificationCodeSignUpRequest
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable.Param
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
@@ -96,4 +99,10 @@ interface ApiService {
     fun forgotPassword(
         @Body req: ForgotPasswordRequest
     ): Call<ForgotPasswordResponse>
+
+    @POST("api/v1/auth/verify-pass-otp/:email")
+    fun verificationCodeForgetPass(
+        @Body req: VerificationCodeForgetPasswordRequest,
+        @Query("email") email: String
+    ): Call<VerificationCodeForgetPasswordResponse>
 }
