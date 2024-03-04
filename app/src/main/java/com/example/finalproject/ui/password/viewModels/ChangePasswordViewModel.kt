@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.ui.password.models.ChangePasswordResponse
+import com.example.finalproject.ui.password.models.LogOutAllResponse
 import com.example.finalproject.ui.password.request.ChangePasswordRequest
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,6 +37,22 @@ class ChangePasswordViewModel: ViewModel() {
                     errorLiveDate.value = t.message
                 }
 
+            })
+    }
+
+    fun logoutAllllll(token: String){
+        RetrofitClient.instance.logoutAll("Bearer $token")
+            .enqueue(object : Callback<LogOutAllResponse> {
+                override fun onResponse(
+                    call: Call<LogOutAllResponse>,
+                    response: Response<LogOutAllResponse>
+                ) {
+
+                }
+
+                override fun onFailure(call: Call<LogOutAllResponse>, t: Throwable) {
+
+                }
             })
     }
 }

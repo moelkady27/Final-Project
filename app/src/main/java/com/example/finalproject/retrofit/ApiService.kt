@@ -6,8 +6,10 @@ import com.example.finalproject.ui.setting.models.LogOutResponse
 import com.example.finalproject.ui.complete_register.models.UploadPhotoResponse
 import com.example.finalproject.ui.complete_register.request.CompleteSignUpRequest
 import com.example.finalproject.ui.password.models.ChangePasswordResponse
+import com.example.finalproject.ui.password.models.ForgotPasswordResponse
 import com.example.finalproject.ui.password.models.LogOutAllResponse
 import com.example.finalproject.ui.password.request.ChangePasswordRequest
+import com.example.finalproject.ui.password.request.ForgotPasswordRequest
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
 import com.example.finalproject.ui.register.models.SignUpResponse
@@ -89,4 +91,9 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body req: ChangePasswordRequest
     ) : Call<ChangePasswordResponse>
+
+    @POST("api/v1/auth/forgot-pass")
+    fun forgotPassword(
+        @Body req: ForgotPasswordRequest
+    ): Call<ForgotPasswordResponse>
 }

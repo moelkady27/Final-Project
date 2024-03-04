@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
-import com.example.finalproject.ui.ForgotPasswordActivity
+import com.example.finalproject.ui.password.activities.ForgotPasswordActivity
 import com.example.finalproject.ui.MainActivity
 import com.example.finalproject.ui.register.viewModels.SignInViewModel
 import kotlinx.android.synthetic.main.activity_sign_in.btn_sign_in

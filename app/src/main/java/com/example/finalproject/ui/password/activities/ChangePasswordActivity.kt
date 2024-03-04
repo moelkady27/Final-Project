@@ -41,9 +41,6 @@ class ChangePasswordActivity : BaseActivity() {
 
         changePasswordViewModel = ViewModelProvider(this@ChangePasswordActivity).get(ChangePasswordViewModel::class.java)
 
-        logOutAllViewModel = ViewModelProvider(this@ChangePasswordActivity).get(LogoutAllViewModel::class.java)
-
-
         changePasswordViewModel.changePasswordLiveData.observe(this@ChangePasswordActivity , Observer { response->
             hideProgressDialog()
             response.let {
@@ -55,28 +52,26 @@ class ChangePasswordActivity : BaseActivity() {
 
                 val token = AppReferences.getToken(this@ChangePasswordActivity)
 
-                logOutAllViewModel.logoutAll(token)
+                changePasswordViewModel.logoutAllllll(token)
 
                 startActivity(Intent(this@ChangePasswordActivity , SignInActivity::class.java))
             }
         })
 
-        changePasswordViewModel.changePasswordLiveData.observe(this@ChangePasswordActivity , Observer { response->
+        changePasswordViewModel.errorLiveDate.observe(this@ChangePasswordActivity , Observer { error->
             hideProgressDialog()
-            response.let {
-                val status = response.status
-
-                Toast.makeText(this@ChangePasswordActivity , status , Toast.LENGTH_LONG).show()
-
-                if (status == "success") {
-                    val token = AppReferences.getToken(this@ChangePasswordActivity)
-                    logOutAllViewModel.logoutAll(token)
-                    AppReferences.setLoginState(this@ChangePasswordActivity , false)
-                    startActivity(Intent(this@ChangePasswordActivity , SignInActivity::class.java))
+            error.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(this@ChangePasswordActivity , errorMessage , Toast.LENGTH_LONG).show()
+                }
+                catch (e:Exception){
+                    Toast.makeText(this@ChangePasswordActivity , "Error Server" , Toast.LENGTH_LONG).show()
                 }
             }
         })
 
+        logOutAllViewModel = ViewModelProvider(this@ChangePasswordActivity).get(LogoutAllViewModel::class.java)
 
         logOutAllViewModel.logOutAllResponseLiveData.observe(this@ChangePasswordActivity, Observer { response ->
             hideProgressDialog()
