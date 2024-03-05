@@ -9,9 +9,11 @@ import com.example.finalproject.ui.password.models.ChangePasswordResponse
 import com.example.finalproject.ui.password.models.ForgotPasswordResponse
 import com.example.finalproject.ui.password.models.LogOutAllResponse
 import com.example.finalproject.ui.password.models.ResendCodeForgetResponse
+import com.example.finalproject.ui.password.models.ResetPasswordResponse
 import com.example.finalproject.ui.password.models.VerificationCodeForgetPasswordResponse
 import com.example.finalproject.ui.password.request.ChangePasswordRequest
 import com.example.finalproject.ui.password.request.ForgotPasswordRequest
+import com.example.finalproject.ui.password.request.ResetPasswordRequest
 import com.example.finalproject.ui.password.request.VerificationCodeForgetPasswordRequest
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
@@ -111,4 +113,11 @@ interface ApiService {
     fun resendCodeForget(
         @Path("email") email: String
     ): Call<ResendCodeForgetResponse>
+
+    @PATCH("api/v1/auth/reset-pass/{email}")
+    fun resetPassword(
+        @Path("email") email: String,
+        @Body req: ResetPasswordRequest
+    ): Call<ResetPasswordResponse>
+
 }

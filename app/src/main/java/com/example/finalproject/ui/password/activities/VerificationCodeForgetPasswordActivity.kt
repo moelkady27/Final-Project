@@ -4,14 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
-import com.example.finalproject.ui.ResetPasswordActivity
 import com.example.finalproject.ui.password.viewModels.VerificationCodeForgetPasswordViewModel
 import kotlinx.android.synthetic.main.activity_verification_code_forget_password.btn_verify_code_forget
 import kotlinx.android.synthetic.main.activity_verification_code_forget_password.et_code_box_forget

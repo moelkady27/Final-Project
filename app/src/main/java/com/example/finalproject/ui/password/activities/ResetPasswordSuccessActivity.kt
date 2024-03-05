@@ -1,4 +1,4 @@
-package com.example.finalproject.ui
+package com.example.finalproject.ui.password.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

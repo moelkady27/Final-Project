@@ -47,12 +47,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.ResetPasswordSuccessActivity"
+            android:name=".ui.password.activities.ResetPasswordSuccessActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.ResetPasswordActivity"
+            android:name=".ui.password.activities.ResetPasswordActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
