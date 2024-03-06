@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
@@ -16,6 +17,7 @@ import com.example.finalproject.ui.WelcomeActivity
 import com.example.finalproject.ui.password.activities.ChangePasswordActivity
 import com.example.finalproject.ui.profile.fragment.ProfileFragment
 import com.example.finalproject.ui.profile.viewModels.EditProfileViewModel
+import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
 import kotlinx.android.synthetic.main.activity_complete_sign_up.et_first_name
 import kotlinx.android.synthetic.main.activity_complete_sign_up.et_gender
 import kotlinx.android.synthetic.main.activity_complete_sign_up.et_last_name
@@ -26,6 +28,7 @@ import kotlinx.android.synthetic.main.activity_edit_profile.edt_gender
 import kotlinx.android.synthetic.main.activity_edit_profile.edt_last_name
 import kotlinx.android.synthetic.main.activity_edit_profile.edt_phone_number
 import kotlinx.android.synthetic.main.activity_edit_profile.edt_user_name
+import kotlinx.android.synthetic.main.activity_edit_profile.ib_upload_preview
 import kotlinx.android.synthetic.main.activity_edit_profile.toolbar_edit_profile
 import org.json.JSONException
 import org.json.JSONObject
@@ -34,12 +37,61 @@ class EditProfileActivity : BaseActivity() {
 
     private lateinit var networkUtils: NetworkUtils
 
+    private lateinit var getUserInfoViewModel: GetUserInfoViewModel
+
     private lateinit var editProfileViewModel: EditProfileViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
 
         networkUtils = NetworkUtils(this@EditProfileActivity)
+
+        getUserInfoViewModel = ViewModelProvider(this@EditProfileActivity).get(GetUserInfoViewModel::class.java)
+
+        getUserInfoViewModel.getUserInfoResponseLiveData.observe(this@EditProfileActivity , Observer { response->
+            hideProgressDialog()
+            response.let {
+                val message = response.status
+
+                val firstName = response.user.firstName
+                val lastName = response.user.lastName
+                val gender = response.user.gender
+                val username = response.user.username
+                val phoneNumber = response.user.phone
+                val image = response.user.image.url
+
+                Log.e("message" , message)
+
+                edt_first_name.setText(firstName)
+                edt_gender.setText(gender)
+                edt_last_name.setText(lastName)
+                edt_user_name.setText(username)
+                edt_phone_number.setText(phoneNumber)
+
+                Glide
+                    .with(this@EditProfileActivity)
+                    .load(image)
+                    .centerCrop()
+                    .into(ib_upload_preview)
+            }
+        })
+
+        getUserInfoViewModel.errorLiveData.observe(this@EditProfileActivity , Observer { error->
+            hideProgressDialog()
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(this@EditProfileActivity, errorMessage, Toast.LENGTH_LONG).show()
+
+                    Log.e("EditProfileActivity", "Error Update: $errorMessage")
+
+                } catch (e: JSONException) {
+                    Toast.makeText(this@EditProfileActivity, error, Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+
+        getUserInfo()
 
         editProfileViewModel = ViewModelProvider(this@EditProfileActivity).get(EditProfileViewModel::class.java)
 
@@ -79,6 +131,11 @@ class EditProfileActivity : BaseActivity() {
         }
 
         setUpActionBar()
+    }
+
+    private fun getUserInfo() {
+        getUserInfoViewModel.getUserInfo(AppReferences.getToken(this@EditProfileActivity))
+
     }
 
     private fun updateProfile() {

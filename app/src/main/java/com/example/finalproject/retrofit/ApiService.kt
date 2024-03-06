@@ -16,6 +16,7 @@ import com.example.finalproject.ui.password.request.ForgotPasswordRequest
 import com.example.finalproject.ui.password.request.ResetPasswordRequest
 import com.example.finalproject.ui.password.request.VerificationCodeForgetPasswordRequest
 import com.example.finalproject.ui.profile.models.EditProfileResponse
+import com.example.finalproject.ui.profile.models.GetUserResponse
 import com.example.finalproject.ui.profile.request.EditProfileRequest
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
@@ -26,11 +27,9 @@ import com.example.finalproject.ui.register.request.SignUpRequest
 import com.example.finalproject.ui.register.request.VerificationCodeSignUpRequest
 import com.example.finalproject.ui.setting.models.DeleteAccountResponse
 import com.example.finalproject.ui.setting.request.DeleteAccountRequest
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable.Param
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.HTTP
 import retrofit2.http.Header
@@ -138,4 +137,8 @@ interface ApiService {
         @Body req: EditProfileRequest
     ): Call<EditProfileResponse>
 
+    @GET("api/v1/auth/get-user")
+    fun getProfile(
+        @Header("Authorization") token: String,
+    ): Call<GetUserResponse>
 }
