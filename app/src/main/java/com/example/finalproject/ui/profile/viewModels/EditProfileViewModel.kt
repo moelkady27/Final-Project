@@ -5,9 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.ui.complete_register.models.CompleteSignUpResponse
+import com.example.finalproject.ui.complete_register.models.UploadPhotoResponse
+import com.example.finalproject.ui.profile.models.ChangeProfileImageResponse
 import com.example.finalproject.ui.profile.models.DeleteProfileImageResponse
 import com.example.finalproject.ui.profile.models.EditProfileResponse
 import com.example.finalproject.ui.profile.request.EditProfileRequest
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -66,5 +69,25 @@ class EditProfileViewModel: ViewModel() {
             })
     }
 
+    val changeProfileImageResponseLiveData: MutableLiveData<ChangeProfileImageResponse> = MutableLiveData()
 
+    fun changeImage(token: String, image: MultipartBody.Part) {
+        RetrofitClient.instance.changeImage("Bearer $token", image)
+            .enqueue(object : Callback<ChangeProfileImageResponse> {
+                override fun onResponse(
+                    call: Call<ChangeProfileImageResponse>,
+                    response: Response<ChangeProfileImageResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        changeProfileImageResponseLiveData.value = response.body()
+                    } else {
+                        errorLiveData.value = response.errorBody()?.string()
+                    }
+                }
+
+                override fun onFailure(call: Call<ChangeProfileImageResponse>, t: Throwable) {
+                    errorLiveData.value = t.message
+                }
+            })
+    }
 }

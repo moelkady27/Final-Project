@@ -15,6 +15,7 @@ import com.example.finalproject.ui.password.request.ChangePasswordRequest
 import com.example.finalproject.ui.password.request.ForgotPasswordRequest
 import com.example.finalproject.ui.password.request.ResetPasswordRequest
 import com.example.finalproject.ui.password.request.VerificationCodeForgetPasswordRequest
+import com.example.finalproject.ui.profile.models.ChangeProfileImageResponse
 import com.example.finalproject.ui.profile.models.DeleteProfileImageResponse
 import com.example.finalproject.ui.profile.models.EditProfileResponse
 import com.example.finalproject.ui.profile.models.GetUserResponse
@@ -149,5 +150,11 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Call<DeleteProfileImageResponse>
 
+    @Multipart
+    @POST("api/v1/auth/upload-image")
+    fun changeImage(
+        @Header("Authorization") token: String,
+        @Part image: MultipartBody.Part
+    ): Call<ChangeProfileImageResponse>
 
 }

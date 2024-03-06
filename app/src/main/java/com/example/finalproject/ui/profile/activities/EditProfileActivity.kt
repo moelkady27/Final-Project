@@ -1,11 +1,19 @@
 package com.example.finalproject.ui.profile.activities
 
+import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -32,8 +40,13 @@ import kotlinx.android.synthetic.main.activity_edit_profile.edt_user_name
 import kotlinx.android.synthetic.main.activity_edit_profile.floatingActionButton_delete
 import kotlinx.android.synthetic.main.activity_edit_profile.ib_upload_preview
 import kotlinx.android.synthetic.main.activity_edit_profile.toolbar_edit_profile
+import kotlinx.android.synthetic.main.activity_edit_profile.tv_change_profile_picture
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.File
 
 class EditProfileActivity : BaseActivity() {
 
@@ -42,6 +55,36 @@ class EditProfileActivity : BaseActivity() {
     private lateinit var getUserInfoViewModel: GetUserInfoViewModel
 
     private lateinit var editProfileViewModel: EditProfileViewModel
+
+    private lateinit var selectedImage: String
+
+    private var REQUEST_CODE_GALLERY = 0
+
+    private val pickImageFromGallery =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let { uri ->
+                    selectedImage = getPathFromUri(uri)
+                    Log.e("image", selectedImage)
+
+                    Glide.with(this@EditProfileActivity)
+                        .load(selectedImage)
+                        .centerCrop()
+                        .into(ib_upload_preview)
+                }
+            }
+        }
+
+    private fun getPathFromUri(uri: Uri): String {
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = contentResolver.query(uri, projection, null, null, null)
+        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor?.moveToFirst()
+        val path = columnIndex?.let { cursor.getString(it) } ?: ""
+        cursor?.close()
+        return path
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
@@ -142,8 +185,20 @@ class EditProfileActivity : BaseActivity() {
                 }
             })
 
+        editProfileViewModel.changeProfileImageResponseLiveData.observe(
+            this@EditProfileActivity , Observer { response->
+                hideProgressDialog()
+                response.let {
+                    val imageUrl = response.image.url
+
+                    Log.e("image url" , selectedImage)
+                }
+            }
+        )
+
         btn_update_edit.setOnClickListener {
             if (networkUtils.isNetworkAvailable()){
+                changePhoto()
                 updateProfile()
             }
             else{
@@ -167,6 +222,17 @@ class EditProfileActivity : BaseActivity() {
             }
         }
 
+        tv_change_profile_picture.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(this@EditProfileActivity,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this@EditProfileActivity,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_GALLERY)
+                return@setOnClickListener
+            }
+            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            pickImageFromGallery.launch(galleryIntent)
+        }
+
         setUpActionBar()
     }
 
@@ -177,6 +243,37 @@ class EditProfileActivity : BaseActivity() {
     private fun getUserInfo() {
         getUserInfoViewModel.getUserInfo(AppReferences.getToken(this@EditProfileActivity))
 
+    }
+
+    private fun changePhoto() {
+        if (selectedImage != null) {
+            val file = File(selectedImage)
+            val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
+
+            val token = AppReferences.getToken(this@EditProfileActivity)
+
+            editProfileViewModel.changeImage(token, body)
+
+        } else {
+            Toast.makeText(
+                this@EditProfileActivity,
+                "Please select an image",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_GALLERY) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                pickImageFromGallery.launch(galleryIntent)
+            } else {
+                Toast.makeText(this@EditProfileActivity, "Storage permission is required to access gallery", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun updateProfile() {
