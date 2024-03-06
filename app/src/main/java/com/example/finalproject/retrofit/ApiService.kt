@@ -15,6 +15,7 @@ import com.example.finalproject.ui.password.request.ChangePasswordRequest
 import com.example.finalproject.ui.password.request.ForgotPasswordRequest
 import com.example.finalproject.ui.password.request.ResetPasswordRequest
 import com.example.finalproject.ui.password.request.VerificationCodeForgetPasswordRequest
+import com.example.finalproject.ui.profile.models.DeleteProfileImageResponse
 import com.example.finalproject.ui.profile.models.EditProfileResponse
 import com.example.finalproject.ui.profile.models.GetUserResponse
 import com.example.finalproject.ui.profile.request.EditProfileRequest
@@ -30,6 +31,7 @@ import com.example.finalproject.ui.setting.request.DeleteAccountRequest
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.HTTP
 import retrofit2.http.Header
@@ -141,4 +143,11 @@ interface ApiService {
     fun getProfile(
         @Header("Authorization") token: String,
     ): Call<GetUserResponse>
+
+    @DELETE("api/v1/auth/delete-profile-picture")
+    fun deleteProfileImage(
+        @Header("Authorization") token: String
+    ): Call<DeleteProfileImageResponse>
+
+
 }

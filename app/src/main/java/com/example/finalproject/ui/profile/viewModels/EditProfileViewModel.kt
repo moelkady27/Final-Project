@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.ui.complete_register.models.CompleteSignUpResponse
+import com.example.finalproject.ui.profile.models.DeleteProfileImageResponse
 import com.example.finalproject.ui.profile.models.EditProfileResponse
 import com.example.finalproject.ui.profile.request.EditProfileRequest
 import retrofit2.Call
@@ -39,4 +40,31 @@ class EditProfileViewModel: ViewModel() {
 
             })
     }
+
+    val deleteProfileImageResponseLiveData: MutableLiveData<DeleteProfileImageResponse> = MutableLiveData()
+
+    fun deleteProfileImage(token: String){
+
+        RetrofitClient.instance.deleteProfileImage("Bearer $token")
+            .enqueue(object : Callback<DeleteProfileImageResponse>{
+                override fun onResponse(
+                    call: Call<DeleteProfileImageResponse>,
+                    response: Response<DeleteProfileImageResponse>
+                ) {
+                    if (response.isSuccessful){
+                        deleteProfileImageResponseLiveData.value = response.body()
+                    }
+                    else{
+                        errorLiveData.value = response.errorBody()?.string()
+                    }
+                }
+
+                override fun onFailure(call: Call<DeleteProfileImageResponse>, t: Throwable) {
+                    errorLiveData.value = t.message
+                }
+
+            })
+    }
+
+
 }

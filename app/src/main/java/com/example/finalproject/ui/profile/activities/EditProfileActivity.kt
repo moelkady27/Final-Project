@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -28,6 +29,7 @@ import kotlinx.android.synthetic.main.activity_edit_profile.edt_gender
 import kotlinx.android.synthetic.main.activity_edit_profile.edt_last_name
 import kotlinx.android.synthetic.main.activity_edit_profile.edt_phone_number
 import kotlinx.android.synthetic.main.activity_edit_profile.edt_user_name
+import kotlinx.android.synthetic.main.activity_edit_profile.floatingActionButton_delete
 import kotlinx.android.synthetic.main.activity_edit_profile.ib_upload_preview
 import kotlinx.android.synthetic.main.activity_edit_profile.toolbar_edit_profile
 import org.json.JSONException
@@ -73,6 +75,15 @@ class EditProfileActivity : BaseActivity() {
                     .load(image)
                     .centerCrop()
                     .into(ib_upload_preview)
+
+                val defaultImage = "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg"
+
+                if (image == defaultImage){
+                    floatingActionButton_delete.visibility = View.GONE
+                }
+                else{
+                    floatingActionButton_delete.visibility = View.VISIBLE
+                }
             }
         })
 
@@ -121,6 +132,16 @@ class EditProfileActivity : BaseActivity() {
             }
         })
 
+        editProfileViewModel.deleteProfileImageResponseLiveData.observe(
+            this@EditProfileActivity, Observer { response ->
+                hideProgressDialog()
+                response.let {
+                    val status = response.status
+
+                    Log.e("Delete Profile Image", status)
+                }
+            })
+
         btn_update_edit.setOnClickListener {
             if (networkUtils.isNetworkAvailable()){
                 updateProfile()
@@ -130,7 +151,27 @@ class EditProfileActivity : BaseActivity() {
             }
         }
 
+        floatingActionButton_delete.setOnClickListener {
+            if (networkUtils.isNetworkAvailable()){
+                deleteProfileImage()
+                val defaultImage = "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg"
+                Glide
+                    .with(this@EditProfileActivity)
+                    .load(defaultImage)
+                    .centerCrop()
+                    .into(ib_upload_preview)
+                floatingActionButton_delete.visibility = View.GONE
+            }
+            else{
+                showErrorSnackBar("No internet connection", true)
+            }
+        }
+
         setUpActionBar()
+    }
+
+    private fun deleteProfileImage() {
+        editProfileViewModel.deleteProfileImage(AppReferences.getToken(this@EditProfileActivity))
     }
 
     private fun getUserInfo() {

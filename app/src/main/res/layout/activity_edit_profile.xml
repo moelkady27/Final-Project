@@ -57,7 +57,7 @@
             </de.hdodenhof.circleimageview.CircleImageView>
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/floatingActionButton"
+                android:id="@+id/floatingActionButton_delete"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
