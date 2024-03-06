@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.finalproject.ProfileFragment"
+        android:name="com.example.finalproject.ui.profile.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

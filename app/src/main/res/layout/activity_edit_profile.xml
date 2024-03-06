@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.setting.activities.EditProfileActivity">
+    tools:context=".ui.profile.activities.EditProfileActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -149,12 +149,13 @@
                         android:fontFamily="@font/poppins_bold"
                         android:padding="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="Mohamed"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="16sp"
+                        android:inputType="text"
                         app:layout_constraintEnd_toEndOf="@+id/tv_first_name"
                         app:layout_constraintStart_toStartOf="@+id/tv_first_name"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_first_name" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_first_name"
+                        tools:text="Mohamed" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -189,7 +190,8 @@
                         android:fontFamily="@font/poppins_bold"
                         android:padding="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="Elkady"
+                        tools:text="Elkady"
+                        android:inputType="text"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/tv_last_name"
@@ -223,7 +225,8 @@
                 android:background="@drawable/button_background_edit"
                 android:fontFamily="@font/poppins_bold"
                 android:padding="20dp"
-                android:text="moElkady"
+                tools:text="moElkady"
+                android:inputType="text"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/linear_layout_1"
@@ -253,9 +256,10 @@
                 android:background="@drawable/button_background_edit"
                 android:fontFamily="@font/poppins_bold"
                 android:padding="20dp"
-                android:text="( +1 ) 443-829-0458"
+                tools:text="( +1 ) 443-829-0458"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="16sp"
+                android:inputType="phone"
                 app:layout_constraintEnd_toEndOf="@+id/linear_layout_1"
                 app:layout_constraintStart_toStartOf="@+id/linear_layout_1"
                 app:layout_constraintTop_toBottomOf="@+id/tv_phone_number" />
@@ -283,7 +287,8 @@
                 android:background="@drawable/button_background_edit"
                 android:fontFamily="@font/poppins_bold"
                 android:padding="20dp"
-                android:text="Male"
+                tools:text="Male"
+                android:inputType="text"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/linear_layout_1"

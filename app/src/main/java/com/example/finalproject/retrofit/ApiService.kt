@@ -15,6 +15,8 @@ import com.example.finalproject.ui.password.request.ChangePasswordRequest
 import com.example.finalproject.ui.password.request.ForgotPasswordRequest
 import com.example.finalproject.ui.password.request.ResetPasswordRequest
 import com.example.finalproject.ui.password.request.VerificationCodeForgetPasswordRequest
+import com.example.finalproject.ui.profile.models.EditProfileResponse
+import com.example.finalproject.ui.profile.request.EditProfileRequest
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
 import com.example.finalproject.ui.register.models.SignUpResponse
@@ -129,5 +131,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body req: DeleteAccountRequest
     ): Call<DeleteAccountResponse>
+
+    @PATCH("api/v1/auth/update-user")
+    fun editProfile(
+        @Header("Authorization") token: String,
+        @Body req: EditProfileRequest
+    ): Call<EditProfileResponse>
 
 }

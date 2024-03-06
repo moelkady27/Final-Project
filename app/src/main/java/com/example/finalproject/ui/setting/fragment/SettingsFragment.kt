@@ -17,7 +17,7 @@ import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.register.activities.SignInActivity
 import com.example.finalproject.ui.password.activities.ChangePasswordActivity
 import com.example.finalproject.ui.setting.activities.DeleteAccountActivity
-import com.example.finalproject.ui.setting.activities.EditProfileActivity
+import com.example.finalproject.ui.profile.activities.EditProfileActivity
 import com.example.finalproject.ui.setting.viewModels.LogOutViewModels
 import kotlinx.android.synthetic.main.fragment_settings.btn_change_password
 import kotlinx.android.synthetic.main.fragment_settings.btn_delete_account
