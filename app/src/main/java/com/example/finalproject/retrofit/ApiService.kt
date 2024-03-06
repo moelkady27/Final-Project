@@ -22,11 +22,15 @@ import com.example.finalproject.ui.register.models.VerificationCodeSignUpRespons
 import com.example.finalproject.ui.register.request.SignInRequest
 import com.example.finalproject.ui.register.request.SignUpRequest
 import com.example.finalproject.ui.register.request.VerificationCodeSignUpRequest
+import com.example.finalproject.ui.setting.models.DeleteAccountResponse
+import com.example.finalproject.ui.setting.request.DeleteAccountRequest
 import com.google.android.gms.common.internal.safeparcel.SafeParcelable.Param
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.HTTP
 import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
@@ -119,5 +123,11 @@ interface ApiService {
         @Path("email") email: String,
         @Body req: ResetPasswordRequest
     ): Call<ResetPasswordResponse>
+
+    @HTTP(method = "DELETE", path = "api/v1/auth/delete-user", hasBody = true)
+    fun deleteAccount(
+        @Header("Authorization") token: String,
+        @Body req: DeleteAccountRequest
+    ): Call<DeleteAccountResponse>
 
 }
