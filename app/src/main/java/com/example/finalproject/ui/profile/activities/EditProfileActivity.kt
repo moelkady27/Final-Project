@@ -71,6 +71,9 @@ class EditProfileActivity : BaseActivity() {
                         .load(selectedImage)
                         .centerCrop()
                         .into(ib_upload_preview)
+
+                    floatingActionButton_delete.visibility = View.VISIBLE
+
                 }
             }
         }
@@ -191,7 +194,7 @@ class EditProfileActivity : BaseActivity() {
                 response.let {
                     val imageUrl = response.image.url
 
-                    Log.e("image url" , selectedImage)
+                    Log.e("image url" , imageUrl)
                 }
             }
         )
@@ -246,7 +249,7 @@ class EditProfileActivity : BaseActivity() {
     }
 
     private fun changePhoto() {
-        if (selectedImage != null) {
+        if (::selectedImage.isInitialized && selectedImage.isNotEmpty()) {
             val file = File(selectedImage)
             val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
             val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
@@ -254,13 +257,6 @@ class EditProfileActivity : BaseActivity() {
             val token = AppReferences.getToken(this@EditProfileActivity)
 
             editProfileViewModel.changeImage(token, body)
-
-        } else {
-            Toast.makeText(
-                this@EditProfileActivity,
-                "Please select an image",
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 

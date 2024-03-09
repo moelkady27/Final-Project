@@ -14,15 +14,19 @@ import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.chat.activities.ChatListActivity
+import com.example.finalproject.ui.notification.activity.NotificationActivity
 import com.example.finalproject.ui.register.activities.SignInActivity
 import com.example.finalproject.ui.password.activities.ChangePasswordActivity
 import com.example.finalproject.ui.setting.activities.DeleteAccountActivity
 import com.example.finalproject.ui.profile.activities.EditProfileActivity
 import com.example.finalproject.ui.setting.viewModels.LogOutViewModels
 import kotlinx.android.synthetic.main.fragment_settings.btn_change_password
+import kotlinx.android.synthetic.main.fragment_settings.btn_chats
 import kotlinx.android.synthetic.main.fragment_settings.btn_delete_account
 import kotlinx.android.synthetic.main.fragment_settings.btn_edit_profile
 import kotlinx.android.synthetic.main.fragment_settings.btn_logout
+import kotlinx.android.synthetic.main.fragment_settings.btn_notification
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -120,6 +124,24 @@ class SettingsFragment : Fragment() {
             } else {
                 baseActivity.showErrorSnackBar("No internet connection", true)
             }
+        }
+
+        btn_notification.setOnClickListener {
+            btn_notification.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            btn_notification.setTextColor(resources.getColor(R.color.white))
+            btn_notification.setIconTintResource(R.color.white)
+
+            val intent = Intent(requireContext(), NotificationActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_chats.setOnClickListener {
+            btn_chats.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            btn_chats.setTextColor(resources.getColor(R.color.white))
+            btn_chats.setIconTintResource(R.color.white)
+
+            val intent = Intent(requireContext(), ChatListActivity::class.java)
+            startActivity(intent)
         }
     }
 }
