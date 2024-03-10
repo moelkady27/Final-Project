@@ -91,7 +91,9 @@
     <string name="profile_info" translatable="false">Profile Info</string>
     <string name="first_name" translatable="false">First Name</string>
     <string name="last_name" translatable="false">Last Name</string>
-    <string name="notification">Notification</string>
-    <string name="messages">Messages</string>
+    <string name="notification" translatable="false">Notification</string>
+    <string name="messages" translatable="false">Messages</string>
+    <string name="tv_user_name_chat" translatable="false">Antonio P. Nielson</string>
+    <string name="type_a_messages" translatable="false">Type a Messages</string>
 
 </resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingTop="8dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtOtherUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Ahmed Sommat"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtOtherMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/other_message_bubble"
+        android:elevation="5dp"
+        android:fontFamily="@font/poppins"
+        android:maxWidth="240dp"
+        android:padding="15dp"
+        android:text="Hi, Ahmed's message"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/txtOtherUser"
+        app:layout_constraintTop_toBottomOf="@+id/txtOtherUser" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtOtherMessageTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="12:00 PM"
+        android:textSize="11sp"
+        android:fontFamily="@font/poppins_semibold"
+        app:layout_constraintStart_toEndOf="@+id/txtOtherMessage"
+        app:layout_constraintBottom_toBottomOf="@+id/txtOtherMessage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
