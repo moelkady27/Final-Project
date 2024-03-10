@@ -57,17 +57,15 @@ interface ApiService {
         @Body req: SignInRequest
     ) : Call<SignInResponse>
 
-    @POST("api/v1/auth/verification/{id}")
+    @POST("api/v1/auth/verification")
     fun verifyAccount(
         @Header("Authorization") token: String,
-        @Path("id") userId: String,
         @Body request: VerificationCodeSignUpRequest
     ): Call<VerificationCodeSignUpResponse>
 
-    @GET("/api/v1/auth/resend-code/{id}")
+    @GET("/api/v1/auth/resend-code")
     fun resendCode(
-        @Header("Authorization") token: String,
-        @Path("id") userId: String
+        @Header("Authorization") token: String
     ): Call<ResendCodeResponse>
 
     @POST("api/v1/auth/complete-signup")
@@ -77,7 +75,7 @@ interface ApiService {
     ) : Call<CompleteSignUpResponse>
 
     @Multipart
-    @POST("api/v1/auth/upload-image")
+    @POST("api/v1/user/upload-image")
     fun uploadImage(
         @Header("Authorization") token: String,
         @Part image: MultipartBody.Part
@@ -93,14 +91,14 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): Call<LogOutAllResponse>
 
-    @POST("api/v1/auth/location")
+    @POST("api/v1/user/location")
     fun location(
         @Header("Authorization") token: String,
         @Query("longitude") longitude: Double,
         @Query("latitude") latitude: Double
     ) : Call<LocationResponse>
 
-    @PATCH("api/v1/auth/change-password")
+    @PATCH("api/v1/user/change-password")
     fun changePass(
         @Header("Authorization") token: String,
         @Body req: ChangePasswordRequest
@@ -128,30 +126,30 @@ interface ApiService {
         @Body req: ResetPasswordRequest
     ): Call<ResetPasswordResponse>
 
-    @HTTP(method = "DELETE", path = "api/v1/auth/delete-user", hasBody = true)
+    @HTTP(method = "DELETE", path = "api/v1/user/delete-user", hasBody = true)
     fun deleteAccount(
         @Header("Authorization") token: String,
         @Body req: DeleteAccountRequest
     ): Call<DeleteAccountResponse>
 
-    @PATCH("api/v1/auth/update-user")
+    @PATCH("api/v1/user/update-user")
     fun editProfile(
         @Header("Authorization") token: String,
         @Body req: EditProfileRequest
     ): Call<EditProfileResponse>
 
-    @GET("api/v1/auth/get-user")
+    @GET("api/v1/user/get-user")
     fun getProfile(
         @Header("Authorization") token: String,
     ): Call<GetUserResponse>
 
-    @DELETE("api/v1/auth/delete-profile-picture")
+    @DELETE("api/v1/user/delete-profile-picture")
     fun deleteProfileImage(
         @Header("Authorization") token: String
     ): Call<DeleteProfileImageResponse>
 
     @Multipart
-    @POST("api/v1/auth/upload-image")
+    @POST("api/v1/user/upload-image")
     fun changeImage(
         @Header("Authorization") token: String,
         @Part image: MultipartBody.Part

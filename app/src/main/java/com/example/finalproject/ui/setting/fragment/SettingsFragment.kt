@@ -71,6 +71,8 @@ class SettingsFragment : Fragment() {
 
                 AppReferences.setLoginState(requireActivity() , false)
                 startActivity(Intent(requireContext(), SignInActivity::class.java))
+
+                activity?.finish()
             }
         })
 

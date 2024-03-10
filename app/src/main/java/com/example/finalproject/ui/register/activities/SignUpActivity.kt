@@ -1,7 +1,6 @@
 package com.example.finalproject.ui.register.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -44,14 +43,9 @@ class SignUpActivity : BaseActivity() {
 
                 Log.e("SignUpActivity", "Response Message: $message")
 
-                val userId = it.user._id
-
                 val token = it.token
 
-                AppReferences.setUserId(this@SignUpActivity, userId)
                 AppReferences.setToken(this@SignUpActivity, token)
-
-                Log.e("SignUpActivity", "Sign Up successful: userId - $userId")
 
                 Log.e("SignUpActivity", "Sign Up successful: token - $token")
 

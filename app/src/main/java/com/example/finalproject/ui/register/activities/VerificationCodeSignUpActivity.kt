@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
@@ -119,7 +118,6 @@ class VerificationCodeSignUpActivity : BaseActivity() {
     }
 
     private fun verifyCode() {
-        val userId = AppReferences.getUserId(this@VerificationCodeSignUpActivity)
         val verificationCodeString = et_code_box.text.toString()
 
         if (verificationCodeString.isNotBlank()) {
@@ -128,7 +126,7 @@ class VerificationCodeSignUpActivity : BaseActivity() {
             val token = AppReferences.getToken(this@VerificationCodeSignUpActivity)
 
             showProgressDialog(this@VerificationCodeSignUpActivity, "Verifying your self...")
-            verificationCodeSignUpViewModel.verifyAccount(token, userId, verificationCode)
+            verificationCodeSignUpViewModel.verifyAccount(token, verificationCode)
 
 
         } else {
@@ -137,11 +135,10 @@ class VerificationCodeSignUpActivity : BaseActivity() {
     }
 
     private fun resendCode() {
-        val userId = AppReferences.getUserId(this@VerificationCodeSignUpActivity)
         val token = AppReferences.getToken(this@VerificationCodeSignUpActivity)
 
         showProgressDialog(this@VerificationCodeSignUpActivity, "resending verifying code...")
-        verificationCodeSignUpViewModel.resendCode(token, userId)
+        verificationCodeSignUpViewModel.resendCode(token)
 
 
     }

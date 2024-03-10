@@ -4,6 +4,7 @@ data class UserEdit(
     val _id: String,
     val createdAt: String,
     val email: String,
+    val fullName: String,
     val firstName: String,
     val gender: String,
     val image: ImageEdit,

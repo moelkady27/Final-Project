@@ -17,10 +17,10 @@ class VerificationCodeSignUpViewModel : ViewModel() {
 
     val resendCodeResponseLiveData: MutableLiveData<ResendCodeResponse> = MutableLiveData()
 
-    fun verifyAccount(token: String, userId: String, otp: Int) {
+    fun verifyAccount(token: String, otp: Int) {
         val data = VerificationCodeSignUpRequest(otp)
 
-        RetrofitClient.instance.verifyAccount("Bearer $token", userId, data)
+        RetrofitClient.instance.verifyAccount("Bearer $token", data)
             .enqueue(object : Callback<VerificationCodeSignUpResponse> {
                 override fun onResponse(
                     call: Call<VerificationCodeSignUpResponse>,
@@ -39,8 +39,8 @@ class VerificationCodeSignUpViewModel : ViewModel() {
             })
     }
 
-    fun resendCode(token: String, userId: String) {
-        RetrofitClient.instance.resendCode("Bearer $token", userId)
+    fun resendCode(token: String) {
+        RetrofitClient.instance.resendCode("Bearer $token")
             .enqueue(object : Callback<ResendCodeResponse> {
                 override fun onResponse(
                     call: Call<ResendCodeResponse>,
