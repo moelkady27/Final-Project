@@ -44,10 +44,6 @@ class VerificationCodeForgetPasswordActivity : BaseActivity() {
                 response.let {
                     val status = it.message
 
-                    val email = it.email
-
-                    AppReferences.setUserEmail(this@VerificationCodeForgetPasswordActivity , email)
-
                     Log.e(
                         "VerificationCodeForgetPassActivity",
                         "Verification successful: Status - ${it.status}"

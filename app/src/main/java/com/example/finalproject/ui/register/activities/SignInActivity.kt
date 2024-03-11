@@ -48,15 +48,17 @@ class SignInActivity : BaseActivity() {
 
                 AppReferences.setLoginState(this@SignInActivity, true)
 
-//                if (it.user.isVerified) {
-//                    val intent = Intent(this@SignInActivity, MainActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
-//                } else {
+                if (it.isVerified) {
+                    val intent = Intent(this@SignInActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
                     val intent = Intent(this@SignInActivity, VerificationCodeSignUpActivity::class.java)
                     startActivity(intent)
                     finish()
-//                }
+                }
+
+                startActivity(Intent(this@SignInActivity , MainActivity::class.java))
 
             }
         })
