@@ -24,8 +24,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_map.btnConfirmLocation
 import kotlinx.android.synthetic.main.activity_map.btnCurrentLocation
-import kotlinx.android.synthetic.main.activity_map.btnSaveLocation
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -58,7 +58,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
             locationSelected = false
         }
 
-        btnSaveLocation.setOnClickListener {
+        btnConfirmLocation.setOnClickListener {
             if (networkUtils.isNetworkAvailable()) {
                 if (locationSelected) {
                     onSelectedLocation()
