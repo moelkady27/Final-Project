@@ -1,5 +1,6 @@
 package com.example.finalproject.retrofit
 
+import com.example.finalproject.ui.chat.models.ChatListUsersResponse
 import com.example.finalproject.ui.complete_register.models.CompleteSignUpResponse
 import com.example.finalproject.ui.complete_register.models.LocationResponse
 import com.example.finalproject.ui.setting.models.LogOutResponse
@@ -155,4 +156,8 @@ interface ApiService {
         @Part image: MultipartBody.Part
     ): Call<ChangeProfileImageResponse>
 
+    @GET("api/v1/chat/get-conversations")
+    fun getChatUsers(
+        @Header("Authorization") token: String,
+        ): Call<ChatListUsersResponse>
 }

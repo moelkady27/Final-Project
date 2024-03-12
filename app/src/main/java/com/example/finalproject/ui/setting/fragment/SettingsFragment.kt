@@ -15,7 +15,7 @@ import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
-import com.example.finalproject.ui.chat.activities.ChatListActivity
+import com.example.finalproject.ui.chat.activities.ChatListUsersActivity
 import com.example.finalproject.ui.notification.activity.NotificationActivity
 import com.example.finalproject.ui.register.activities.SignInActivity
 import com.example.finalproject.ui.password.activities.ChangePasswordActivity
@@ -23,7 +23,6 @@ import com.example.finalproject.ui.setting.activities.DeleteAccountActivity
 import com.example.finalproject.ui.profile.activities.EditProfileActivity
 import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
 import com.example.finalproject.ui.setting.viewModels.LogOutViewModels
-import kotlinx.android.synthetic.main.activity_complete_sign_up.et_first_name
 import kotlinx.android.synthetic.main.fragment_settings.btn_change_password
 import kotlinx.android.synthetic.main.fragment_settings.btn_chats
 import kotlinx.android.synthetic.main.fragment_settings.btn_delete_account
@@ -191,7 +190,7 @@ class SettingsFragment : Fragment() {
             btn_chats.setTextColor(resources.getColor(R.color.white))
             btn_chats.setIconTintResource(R.color.white)
 
-            val intent = Intent(requireContext(), ChatListActivity::class.java)
+            val intent = Intent(requireContext(), ChatListUsersActivity::class.java)
             startActivity(intent)
         }
     }
