@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
@@ -20,13 +21,18 @@ import com.example.finalproject.ui.register.activities.SignInActivity
 import com.example.finalproject.ui.password.activities.ChangePasswordActivity
 import com.example.finalproject.ui.setting.activities.DeleteAccountActivity
 import com.example.finalproject.ui.profile.activities.EditProfileActivity
+import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
 import com.example.finalproject.ui.setting.viewModels.LogOutViewModels
+import kotlinx.android.synthetic.main.activity_complete_sign_up.et_first_name
 import kotlinx.android.synthetic.main.fragment_settings.btn_change_password
 import kotlinx.android.synthetic.main.fragment_settings.btn_chats
 import kotlinx.android.synthetic.main.fragment_settings.btn_delete_account
 import kotlinx.android.synthetic.main.fragment_settings.btn_edit_profile
 import kotlinx.android.synthetic.main.fragment_settings.btn_logout
 import kotlinx.android.synthetic.main.fragment_settings.btn_notification
+import kotlinx.android.synthetic.main.fragment_settings.iv_user_settings
+import kotlinx.android.synthetic.main.fragment_settings.tv_email_name
+import kotlinx.android.synthetic.main.fragment_settings.tv_user_name
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -37,6 +43,8 @@ class SettingsFragment : Fragment() {
     private lateinit var networkUtils: NetworkUtils
 
     private lateinit var logOutViewModel: LogOutViewModels
+
+    private lateinit var getUserInfoViewModel: GetUserInfoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +67,7 @@ class SettingsFragment : Fragment() {
 
         networkUtils = NetworkUtils(requireContext())
 
+//        logout
         logOutViewModel = ViewModelProvider(this@SettingsFragment).get(LogOutViewModels::class.java)
 
         logOutViewModel.logOutResponseLiveData.observe(requireActivity(), Observer { response ->
@@ -87,6 +96,46 @@ class SettingsFragment : Fragment() {
                 }
             }
         })
+
+//        Get-User
+
+        getUserInfoViewModel =ViewModelProvider(this@SettingsFragment).get(GetUserInfoViewModel::class.java)
+
+        getUserInfoViewModel.getUserInfoResponseLiveData.observe(requireActivity(), Observer { response ->
+            BaseActivity().hideProgressDialog()
+            response.let {
+                val status = response.status
+
+                Log.e("GetUser", status)
+
+                val fullName = response.user.fullName
+                val email = response.user.email
+                val photo = response.user.image.url
+
+                tv_user_name.text = fullName
+                tv_email_name.text = email
+
+                Glide
+                    .with(requireActivity())
+                    .load(photo)
+                    .into(iv_user_settings)
+
+            }
+        })
+
+        getUserInfoViewModel.errorLiveData.observe(requireActivity(), Observer { error ->
+            BaseActivity().hideProgressDialog()
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+
+        getUserInfoViewModel.getUserInfo(AppReferences.getToken(requireContext()))
 
         btn_edit_profile.setOnClickListener {
             btn_edit_profile.setBackgroundColor(resources.getColor(R.color.colorPrimary))
