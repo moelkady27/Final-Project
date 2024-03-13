@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.chat.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -51,7 +52,12 @@ class ChatListUsersActivity : BaseActivity() {
 
     private fun getRecycleView() {
         recyclerView = findViewById(R.id.recycle_messages)
-        adapter = ChatListAdapter()
+        adapter = ChatListAdapter{user ->
+            val intent = Intent(this@ChatListUsersActivity , ChatActivity::class.java)
+            intent.putExtra("ChatUserFullName" , user.fullName)
+            intent.putExtra("ChatUserImage" , user.image.url)
+            startActivity(intent)
+        }
         recyclerView.layoutManager = LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false)
         recyclerView.adapter = adapter
     }

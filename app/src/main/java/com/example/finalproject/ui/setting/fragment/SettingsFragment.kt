@@ -37,7 +37,7 @@ import org.json.JSONObject
 
 class SettingsFragment : Fragment() {
 
-    private val baseActivity = BaseActivity()
+    private lateinit var baseActivity: BaseActivity
 
     private lateinit var networkUtils: NetworkUtils
 
@@ -47,7 +47,9 @@ class SettingsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        baseActivity = BaseActivity()
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,6 +70,7 @@ class SettingsFragment : Fragment() {
 
 //        logout
         logOutViewModel = ViewModelProvider(this@SettingsFragment).get(LogOutViewModels::class.java)
+        getUserInfoViewModel =ViewModelProvider(this@SettingsFragment).get(GetUserInfoViewModel::class.java)
 
         logOutViewModel.logOutResponseLiveData.observe(requireActivity(), Observer { response ->
             baseActivity.hideProgressDialog()
@@ -98,10 +101,9 @@ class SettingsFragment : Fragment() {
 
 //        Get-User
 
-        getUserInfoViewModel =ViewModelProvider(this@SettingsFragment).get(GetUserInfoViewModel::class.java)
 
         getUserInfoViewModel.getUserInfoResponseLiveData.observe(requireActivity(), Observer { response ->
-            BaseActivity().hideProgressDialog()
+            baseActivity.hideProgressDialog()
             response.let {
                 val status = response.status
 
@@ -123,7 +125,7 @@ class SettingsFragment : Fragment() {
         })
 
         getUserInfoViewModel.errorLiveData.observe(requireActivity(), Observer { error ->
-            BaseActivity().hideProgressDialog()
+            baseActivity.hideProgressDialog()
             error?.let {
                 try {
                     val errorMessage = JSONObject(error).getString("message")

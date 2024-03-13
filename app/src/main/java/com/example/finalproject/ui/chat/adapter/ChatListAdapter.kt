@@ -16,7 +16,7 @@ import java.util.Locale
 import java.util.TimeZone
 
 class ChatListAdapter(
-
+    private val onItemClick: (ChatUser) -> Unit
 ): RecyclerView.Adapter<ChatListAdapter.MyViewHolder>() {
 
     private var list : List<ChatUser> = ArrayList()
@@ -58,6 +58,10 @@ class ChatListAdapter(
             .with(holder.itemView)
             .load(x.image.url)
             .into(holder.itemView.image_chat_list)
+
+        holder.itemView.setOnClickListener {
+            onItemClick(x)
+        }
     }
 
 }
