@@ -2,7 +2,6 @@ package com.example.finalproject.ui.chat.activities
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,7 +10,6 @@ import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.chat.adapter.ChatListAdapter
-import com.example.finalproject.ui.chat.models.ChatUser
 import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModel
 import kotlinx.android.synthetic.main.activity_chat_list.toolbar_message
 
@@ -56,6 +54,8 @@ class ChatListUsersActivity : BaseActivity() {
             val intent = Intent(this@ChatListUsersActivity , ChatActivity::class.java)
             intent.putExtra("ChatUserFullName" , user.fullName)
             intent.putExtra("ChatUserImage" , user.image.url)
+            intent.putExtra("ReceiverId" , user.lastMessage.receiverId)
+            intent.putExtra("SenderId" , user.lastMessage.senderId)
             startActivity(intent)
         }
         recyclerView.layoutManager = LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false)
