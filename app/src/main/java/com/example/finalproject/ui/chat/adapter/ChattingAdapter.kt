@@ -1,22 +1,23 @@
 package com.example.finalproject.ui.chat.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
 import com.example.finalproject.ui.chat.models.MessageChatting
-import kotlinx.android.synthetic.main.my_message.view.txtMyMessage
-import kotlinx.android.synthetic.main.my_message.view.txtMyMessageTime
-import kotlinx.android.synthetic.main.other_message.view.txtOtherMessage
-import kotlinx.android.synthetic.main.other_message.view.txtOtherMessageTime
+import com.example.finalproject.ui.chat.models.lol.Message
+import kotlinx.android.synthetic.main.my_message.view.*
+import kotlinx.android.synthetic.main.other_message.view.*
 import java.text.SimpleDateFormat
-import java.util.Locale
-import java.util.TimeZone
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ChattingAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var list: List<MessageChatting> = ArrayList()
+    private var messagesList: List<Message> = ArrayList()
+    private var messageChattingList: List<MessageChatting> = ArrayList()
 
     companion object {
         private const val VIEW_TYPE_MY_MESSAGE = 0
@@ -26,8 +27,15 @@ class ChattingAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
     inner class OtherViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    fun setMessageList(messageList: List<MessageChatting>) {
-        this.list = messageList
+    @SuppressLint("NotifyDataSetChanged")
+    fun setMessagesList(messagesList: List<Message>) {
+        this.messagesList = messagesList
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setMessageChattingList(messageChattingList: List<MessageChatting>) {
+        this.messageChattingList = messageChattingList
         notifyDataSetChanged()
     }
 
@@ -54,45 +62,67 @@ class ChattingAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return messagesList.size + messageChattingList.size
     }
 
     override fun getItemViewType(position: Int): Int {
-        val message = list[position]
-        return if (message.senderId == "currentUserId") {
-            VIEW_TYPE_MY_MESSAGE
+        return if (position < messagesList.size) {
+            if (messagesList[position].senderId == "currentUserId") {
+                VIEW_TYPE_MY_MESSAGE
+            } else {
+                VIEW_TYPE_OTHER_MESSAGE
+            }
         } else {
-            VIEW_TYPE_OTHER_MESSAGE
+            if (messageChattingList[position - messagesList.size].senderId == "currentUserId") {
+                VIEW_TYPE_MY_MESSAGE
+            } else {
+                VIEW_TYPE_OTHER_MESSAGE
+            }
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val x = list[position]
-        when (holder.itemViewType) {
-            VIEW_TYPE_MY_MESSAGE -> {
-                holder.itemView.txtMyMessage.text = x.message.text
-
-                val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-                inputFormat.timeZone = TimeZone.getTimeZone("UTC")
-                val outputFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
-                outputFormat.timeZone = TimeZone.getTimeZone("Africa/Cairo")
-                val date = inputFormat.parse(x.createdAt)
-                val formattedTime = outputFormat.format(date!!)
-
-                holder.itemView.txtMyMessageTime.text = formattedTime
+        if (position < messagesList.size) {
+            val message = messagesList[position]
+            when (holder.itemViewType) {
+                VIEW_TYPE_MY_MESSAGE -> {
+                    holder.itemView.apply {
+                        txtMyMessage.text = message.message.text
+                        txtMyMessageTime.text = formatTime(message.createdAt)
+                    }
+                }
+                VIEW_TYPE_OTHER_MESSAGE -> {
+                    holder.itemView.apply {
+                        txtOtherMessage.text = message.message.text
+                        txtOtherMessageTime.text = formatTime(message.createdAt)
+                    }
+                }
             }
-            VIEW_TYPE_OTHER_MESSAGE -> {
-                holder.itemView.txtOtherMessage.text = x.message.text
-
-                val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-                inputFormat.timeZone = TimeZone.getTimeZone("UTC")
-                val outputFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
-                outputFormat.timeZone = TimeZone.getTimeZone("Africa/Cairo")
-                val date = inputFormat.parse(x.createdAt)
-                val formattedTime = outputFormat.format(date!!)
-
-                holder.itemView.txtOtherMessageTime.text = formattedTime
+        } else {
+            val message = messageChattingList[position - messagesList.size]
+            when (holder.itemViewType) {
+                VIEW_TYPE_MY_MESSAGE -> {
+                    holder.itemView.apply {
+                        txtMyMessage.text = message.message.text
+                        txtMyMessageTime.text = formatTime(message.createdAt)
+                    }
+                }
+                VIEW_TYPE_OTHER_MESSAGE -> {
+                    holder.itemView.apply {
+                        txtOtherMessage.text = message.message.text
+                        txtOtherMessageTime.text = formatTime(message.createdAt)
+                    }
+                }
             }
         }
+    }
+
+    private fun formatTime(time: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+        inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+        val outputFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
+        outputFormat.timeZone = TimeZone.getTimeZone("Africa/Cairo")
+        val date = inputFormat.parse(time)
+        return outputFormat.format(date!!)
     }
 }

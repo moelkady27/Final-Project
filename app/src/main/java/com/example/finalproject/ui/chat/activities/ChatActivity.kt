@@ -23,9 +23,11 @@ import kotlinx.android.synthetic.main.activity_chat.tv_user_name_chat
 class ChatActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
+
     private lateinit var adapter: ChattingAdapter
 
     private lateinit var chatViewModel: ChattingViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,14 +38,15 @@ class ChatActivity : AppCompatActivity() {
         val token = AppReferences.getToken(this@ChatActivity)
 
         setUpRecyclerView()
+
         observeChatMessages()
 
         val userFullName = intent.getStringExtra("ChatUserFullName")
         val userImage = intent.getStringExtra("ChatUserImage")
         val receiverId = intent.getStringExtra("ReceiverId").toString()
         val senderId = intent.getStringExtra("SenderId").toString()
-        Log.e("ReceiverId is " , receiverId)
-        Log.e("SenderId is " , senderId)
+        Log.e("ReceiverId is ", receiverId)
+        Log.e("SenderId is ", senderId)
 
         tv_user_name_chat.text = userFullName
 
@@ -51,6 +54,10 @@ class ChatActivity : AppCompatActivity() {
             .with(this@ChatActivity)
             .load(userImage)
             .into(iv_user_chat)
+
+        chatViewModel.getConversation(token, receiverId)
+
+        observeGetConversation()
 
         iv_send.setOnClickListener {
             val messageContent = et_type_a_messages.text.toString().trim()
@@ -89,8 +96,16 @@ class ChatActivity : AppCompatActivity() {
 
     private fun observeChatMessages() {
         chatViewModel.observeChattingLiveData().observe(this, Observer { messages ->
-            adapter.setMessageList(messages)
+            adapter.setMessageChattingList(messages)
             rv_chat.scrollToPosition(messages.size - 1)
         })
     }
+
+    private fun observeGetConversation() {
+        chatViewModel.observeGetConversationLiveData().observe(this, Observer { messages ->
+            adapter.setMessagesList(messages)
+            rv_chat.scrollToPosition(messages.size - 1)
+        })
+    }
+
 }

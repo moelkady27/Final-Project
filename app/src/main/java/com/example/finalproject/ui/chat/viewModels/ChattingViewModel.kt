@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.ui.chat.models.ChattingResponse
 import com.example.finalproject.ui.chat.models.MessageChatting
+import com.example.finalproject.ui.chat.models.lol.GetConversationResponse
+import com.example.finalproject.ui.chat.models.lol.Message
+import com.example.finalproject.ui.chat.models.lol.Messages
 import com.example.finalproject.ui.chat.request.SendMessageRequest
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,6 +18,9 @@ class ChattingViewModel: ViewModel() {
 
     private val chattingResponseLiveData = MutableLiveData<List<MessageChatting>>()
     private val errorLiveData = MutableLiveData<String>()
+
+    private val getConversationResponseLiveData = MutableLiveData<List<Message>>()
+
 
     fun sendMessage(token: String, receiverId: String, messageContent: String) {
         val data = SendMessageRequest(messageContent)
@@ -41,7 +47,32 @@ class ChattingViewModel: ViewModel() {
             })
     }
 
+    fun getConversation(token: String, receiverId: String) {
+        RetrofitClient.instance.getConversation("Bearer $token", receiverId)
+            .enqueue(object : Callback<GetConversationResponse> {
+                override fun onResponse(
+                    call: Call<GetConversationResponse>,
+                    response: Response<GetConversationResponse>
+                ) {
+                    if (response.isSuccessful){
+                        val messages = response.body()?.messages?.messages
+                        messages?.let {
+                            getConversationResponseLiveData.value = it
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<GetConversationResponse>, t: Throwable) {
+                    errorLiveData.value = t.message
+                }
+            })
+    }
+
     fun observeChattingLiveData(): LiveData<List<MessageChatting>> {
         return chattingResponseLiveData
+    }
+
+    fun observeGetConversationLiveData(): LiveData<List<Message>> {
+        return getConversationResponseLiveData
     }
 }
