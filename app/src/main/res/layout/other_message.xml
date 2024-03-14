@@ -8,18 +8,6 @@
     android:paddingTop="8dp">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtOtherUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:text="Ahmed Sommat"
-        android:textSize="12sp"
-        android:fontFamily="@font/poppins_bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtOtherMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,8 +20,8 @@
         android:text="Hi, Ahmed's message"
         android:textSize="14sp"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/txtOtherUser"
-        app:layout_constraintTop_toBottomOf="@+id/txtOtherUser" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtOtherMessageTime"

@@ -1,22 +1,27 @@
 package com.example.finalproject.ui.chat.adapter
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
+import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.ui.chat.models.MessageChatting
-import com.example.finalproject.ui.chat.models.lol.Message
+import com.example.finalproject.ui.chat.models.MessageConversation
 import kotlinx.android.synthetic.main.my_message.view.*
 import kotlinx.android.synthetic.main.other_message.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ChattingAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChattingAdapter(
+    private val context: Context
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var messagesList: List<Message> = ArrayList()
+    private var messagesList: List<MessageConversation> = ArrayList()
     private var messageChattingList: List<MessageChatting> = ArrayList()
 
     companion object {
@@ -28,7 +33,7 @@ class ChattingAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class OtherViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setMessagesList(messagesList: List<Message>) {
+    fun setMessagesList(messagesList: List<MessageConversation>) {
         this.messagesList = messagesList
         notifyDataSetChanged()
     }
@@ -67,13 +72,13 @@ class ChattingAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return if (position < messagesList.size) {
-            if (messagesList[position].senderId == "currentUserId") {
+            if (messagesList[position].senderId == AppReferences.getUserId(context as Activity)) {
                 VIEW_TYPE_MY_MESSAGE
             } else {
                 VIEW_TYPE_OTHER_MESSAGE
             }
         } else {
-            if (messageChattingList[position - messagesList.size].senderId == "currentUserId") {
+            if (messageChattingList[position - messagesList.size].senderId == AppReferences.getUserId(context as Activity)) {
                 VIEW_TYPE_MY_MESSAGE
             } else {
                 VIEW_TYPE_OTHER_MESSAGE

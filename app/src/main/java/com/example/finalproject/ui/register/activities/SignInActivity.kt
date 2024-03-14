@@ -41,12 +41,17 @@ class SignInActivity : BaseActivity() {
             response?.let {
 
                 val token = it.token
+                val userId = it.userId
 
                 Log.e("SignInActivity", "Login successful: TokenSignUp - ${it.token}")
 
                 AppReferences.setToken(this@SignInActivity , token)
 
                 AppReferences.setLoginState(this@SignInActivity, true)
+
+                AppReferences.setUserId(this@SignInActivity , userId)
+
+                Log.e("userId" , userId)
 
                 if (it.isVerified) {
                     val intent = Intent(this@SignInActivity, MainActivity::class.java)

@@ -6,9 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.ui.chat.models.ChattingResponse
 import com.example.finalproject.ui.chat.models.MessageChatting
-import com.example.finalproject.ui.chat.models.lol.GetConversationResponse
-import com.example.finalproject.ui.chat.models.lol.Message
-import com.example.finalproject.ui.chat.models.lol.Messages
+import com.example.finalproject.ui.chat.models.GetConversationResponse
+import com.example.finalproject.ui.chat.models.MessageConversation
 import com.example.finalproject.ui.chat.request.SendMessageRequest
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,7 +18,7 @@ class ChattingViewModel: ViewModel() {
     private val chattingResponseLiveData = MutableLiveData<List<MessageChatting>>()
     private val errorLiveData = MutableLiveData<String>()
 
-    private val getConversationResponseLiveData = MutableLiveData<List<Message>>()
+    private val getConversationResponseLiveData = MutableLiveData<List<MessageConversation>>()
 
 
     fun sendMessage(token: String, receiverId: String, messageContent: String) {
@@ -72,7 +71,7 @@ class ChattingViewModel: ViewModel() {
         return chattingResponseLiveData
     }
 
-    fun observeGetConversationLiveData(): LiveData<List<Message>> {
+    fun observeGetConversationLiveData(): LiveData<List<MessageConversation>> {
         return getConversationResponseLiveData
     }
 }

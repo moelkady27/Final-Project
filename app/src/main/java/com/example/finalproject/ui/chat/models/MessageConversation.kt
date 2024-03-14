@@ -1,10 +1,10 @@
-package com.example.finalproject.ui.chat.models.lol
+package com.example.finalproject.ui.chat.models
 
-data class Message(
+data class MessageConversation(
     val __v: Int,
     val _id: String,
     val createdAt: String,
-    val message: MessageX,
+    val message: Message,
     val receiverId: String,
     val senderId: String,
     val updatedAt: String

@@ -89,7 +89,7 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView() {
-        adapter = ChattingAdapter()
+        adapter = ChattingAdapter(this@ChatActivity)
         rv_chat.layoutManager = LinearLayoutManager(this)
         rv_chat.adapter = adapter
     }
