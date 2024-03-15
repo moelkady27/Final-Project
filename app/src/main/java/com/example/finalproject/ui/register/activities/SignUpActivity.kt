@@ -39,6 +39,7 @@ class SignUpActivity : BaseActivity() {
             hideProgressDialog()
             response?.let {
                 val message = it.message
+                val userId = it.userId
                 Toast.makeText(baseContext, message, Toast.LENGTH_LONG).show()
 
                 Log.e("SignUpActivity", "Response Message: $message")
@@ -46,6 +47,8 @@ class SignUpActivity : BaseActivity() {
                 val token = it.token
 
                 AppReferences.setToken(this@SignUpActivity, token)
+
+                AppReferences.setUserId(this@SignUpActivity , userId)
 
                 Log.e("SignUpActivity", "Sign Up successful: token - $token")
 

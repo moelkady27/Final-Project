@@ -54,7 +54,7 @@ class ChatListUsersActivity : BaseActivity() {
             val intent = Intent(this@ChatListUsersActivity , ChatActivity::class.java)
             intent.putExtra("ChatUserFullName" , user.fullName)
             intent.putExtra("ChatUserImage" , user.image.url)
-            intent.putExtra("ReceiverId" , user.lastMessage.receiverId)
+            intent.putExtra("ReceiverId" , user._id)
             intent.putExtra("SenderId" , user.lastMessage.senderId)
             startActivity(intent)
         }

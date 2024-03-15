@@ -89,22 +89,25 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView() {
+        recyclerView = findViewById(R.id.rv_chat)
         adapter = ChattingAdapter(this@ChatActivity)
-        rv_chat.layoutManager = LinearLayoutManager(this)
-        rv_chat.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
     }
 
     private fun observeChatMessages() {
+        recyclerView = findViewById(R.id.rv_chat)
         chatViewModel.observeChattingLiveData().observe(this, Observer { messages ->
             adapter.setMessageChattingList(messages)
-            rv_chat.scrollToPosition(messages.size - 1)
+            recyclerView.scrollToPosition(messages.size - 1)
         })
     }
 
     private fun observeGetConversation() {
+        recyclerView = findViewById(R.id.rv_chat)
         chatViewModel.observeGetConversationLiveData().observe(this, Observer { messages ->
             adapter.setMessagesList(messages)
-            rv_chat.scrollToPosition(messages.size - 1)
+            recyclerView.scrollToPosition(messages.size - 1)
         })
     }
 

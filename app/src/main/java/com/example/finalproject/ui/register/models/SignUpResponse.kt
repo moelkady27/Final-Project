@@ -4,4 +4,5 @@ data class SignUpResponse(
     val message: String,
     val status: String,
     val token: String,
+    val userId: String
 )
