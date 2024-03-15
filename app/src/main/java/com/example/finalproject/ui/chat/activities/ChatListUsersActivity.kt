@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.chat.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_chat_list.toolbar_message
 class ChatListUsersActivity : BaseActivity() {
 
     private lateinit var recyclerView: RecyclerView
+
     private lateinit var adapter: ChatListAdapter
 
     private lateinit var chatListUsersViewModel: ChatListUsersViewModel
@@ -28,7 +30,9 @@ class ChatListUsersActivity : BaseActivity() {
         chatListUsersViewModel = ViewModelProvider(this@ChatListUsersActivity).get(ChatListUsersViewModel::class.java)
 
         chatListUsersViewModel.getChatUsers(AppReferences.getToken(this@ChatListUsersActivity))
+
         observeChatUsers()
+
         getRecycleView()
 
         setupActionBar()
@@ -62,6 +66,7 @@ class ChatListUsersActivity : BaseActivity() {
         recyclerView.adapter = adapter
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun observeChatUsers() {
         chatListUsersViewModel.observeChatUsersLiveData().observe(this@ChatListUsersActivity , Observer { chatList->
             adapter.setChatUserList(chatList)

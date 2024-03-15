@@ -40,7 +40,7 @@ class ChattingAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun setMessageChattingList(messageChattingList: List<MessageChatting>) {
-        this.messageChattingList = messageChattingList
+        this.messageChattingList += messageChattingList
         notifyDataSetChanged()
     }
 

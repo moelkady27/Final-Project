@@ -13,12 +13,7 @@ import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.ui.chat.adapter.ChattingAdapter
 import com.example.finalproject.ui.chat.viewModels.ChattingViewModel
-import kotlinx.android.synthetic.main.activity_chat.et_type_a_messages
-import kotlinx.android.synthetic.main.activity_chat.iv_send
-import kotlinx.android.synthetic.main.activity_chat.iv_user_chat
-import kotlinx.android.synthetic.main.activity_chat.rv_chat
-import kotlinx.android.synthetic.main.activity_chat.toolbar_chat
-import kotlinx.android.synthetic.main.activity_chat.tv_user_name_chat
+import kotlinx.android.synthetic.main.activity_chat.*
 
 class ChatActivity : AppCompatActivity() {
 
@@ -27,7 +22,6 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var adapter: ChattingAdapter
 
     private lateinit var chatViewModel: ChattingViewModel
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +64,6 @@ class ChatActivity : AppCompatActivity() {
         }
 
         setUpActionBar()
-
     }
 
     private fun setUpActionBar() {
@@ -99,7 +92,7 @@ class ChatActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.rv_chat)
         chatViewModel.observeChattingLiveData().observe(this, Observer { messages ->
             adapter.setMessageChattingList(messages)
-            recyclerView.scrollToPosition(messages.size - 1)
+            recyclerView.scrollToPosition(adapter.itemCount - 1)
         })
     }
 
@@ -107,8 +100,7 @@ class ChatActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.rv_chat)
         chatViewModel.observeGetConversationLiveData().observe(this, Observer { messages ->
             adapter.setMessagesList(messages)
-            recyclerView.scrollToPosition(messages.size - 1)
+            recyclerView.scrollToPosition(adapter.itemCount - 1)
         })
     }
-
 }

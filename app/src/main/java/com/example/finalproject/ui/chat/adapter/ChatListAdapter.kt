@@ -40,28 +40,31 @@ class ChatListAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val x = list[position]
+        val chatUser = list[position]
 
-        holder.itemView.message_list_name.text = x.fullName
-        holder.itemView.message_list_content.text = x.lastMessage.message.text
+        holder.itemView.message_list_name.text = chatUser.fullName
+        holder.itemView.message_list_content.text = chatUser.lastMessage.message.text
 
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-        inputFormat.timeZone = TimeZone.getTimeZone("UTC")
-        val outputFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
-        outputFormat.timeZone = TimeZone.getTimeZone("Africa/Cairo")
-        val date = inputFormat.parse(x.lastMessage.createdAt)
-        val formattedTime = outputFormat.format(date!!)
-
+        val formattedTime = formatTime(chatUser.lastMessage.createdAt)
         holder.itemView.message_list_time.text = formattedTime
 
         Glide
             .with(holder.itemView)
-            .load(x.image.url)
+            .load(chatUser.image.url)
             .into(holder.itemView.image_chat_list)
 
         holder.itemView.setOnClickListener {
-            onItemClick(x)
+            onItemClick(chatUser)
         }
+    }
+
+    private fun formatTime(createdAt: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+        inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+        val outputFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
+        outputFormat.timeZone = TimeZone.getTimeZone("Africa/Cairo")
+        val date = inputFormat.parse(createdAt)
+        return outputFormat.format(date!!)
     }
 
 }
