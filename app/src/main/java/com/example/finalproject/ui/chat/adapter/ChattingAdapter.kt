@@ -22,7 +22,7 @@ class ChattingAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var messagesList: List<MessageConversation> = ArrayList()
-    private var messageChattingList: MutableList<MessageChatting> = ArrayList()
+    private var messageChattingList: List<MessageChatting> = ArrayList()
 
     companion object {
         private const val VIEW_TYPE_MY_MESSAGE = 0
@@ -40,14 +40,18 @@ class ChattingAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun setMessageChattingList(messageChattingList: List<MessageChatting>) {
-        this.messageChattingList = messageChattingList.toMutableList()
+        this.messageChattingList += messageChattingList
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addReceivedMessage(message: MessageChatting) {
-        messageChattingList.add(message)
-        notifyItemInserted(messageChattingList.size - 1)
+        messageChattingList = messageChattingList.toMutableList().apply {
+            add(message)
+        }
+        notifyDataSetChanged()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {

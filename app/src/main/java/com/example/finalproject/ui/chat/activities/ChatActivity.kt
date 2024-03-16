@@ -152,7 +152,7 @@ class ChatActivity : AppCompatActivity() {
     private fun observeGetConversation() {
         recyclerView = findViewById(R.id.rv_chat)
         chatViewModel.observeGetConversationLiveData().observe(this, Observer { messages ->
-            messages?.let { adapter.setMessagesList(it) }
+            adapter.setMessagesList(messages)
             recyclerView.scrollToPosition(adapter.itemCount - 1)
         })
     }
