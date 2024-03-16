@@ -68,11 +68,12 @@ class SettingsFragment : Fragment() {
 
         networkUtils = NetworkUtils(requireContext())
 
-//        logout
+//        Logout
+
         logOutViewModel = ViewModelProvider(this@SettingsFragment).get(LogOutViewModels::class.java)
         getUserInfoViewModel =ViewModelProvider(this@SettingsFragment).get(GetUserInfoViewModel::class.java)
 
-        logOutViewModel.logOutResponseLiveData.observe(requireActivity(), Observer { response ->
+        logOutViewModel.logOutResponseLiveData.observe(viewLifecycleOwner, Observer { response ->
             baseActivity.hideProgressDialog()
             response?.let {
                 val message = it.status
@@ -87,7 +88,7 @@ class SettingsFragment : Fragment() {
             }
         })
 
-        logOutViewModel.errorLiveData.observe(requireActivity(), Observer { error ->
+        logOutViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error ->
             baseActivity.hideProgressDialog()
             error?.let {
                 try {
@@ -102,7 +103,7 @@ class SettingsFragment : Fragment() {
 //        Get-User
 
 
-        getUserInfoViewModel.getUserInfoResponseLiveData.observe(requireActivity(), Observer { response ->
+        getUserInfoViewModel.getUserInfoResponseLiveData.observe(viewLifecycleOwner, Observer { response ->
             baseActivity.hideProgressDialog()
             response.let {
                 val status = response.status
@@ -124,7 +125,7 @@ class SettingsFragment : Fragment() {
             }
         })
 
-        getUserInfoViewModel.errorLiveData.observe(requireActivity(), Observer { error ->
+        getUserInfoViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error ->
             baseActivity.hideProgressDialog()
             error?.let {
                 try {

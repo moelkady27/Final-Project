@@ -52,7 +52,7 @@ class ProfileFragment : Fragment() {
 
         getUserInfoViewModel = ViewModelProvider(this@ProfileFragment).get(GetUserInfoViewModel::class.java)
 
-        getUserInfoViewModel.getUserInfoResponseLiveData.observe(requireActivity(), Observer { response ->
+        getUserInfoViewModel.getUserInfoResponseLiveData.observe(viewLifecycleOwner, Observer { response ->
             BaseActivity().hideProgressDialog()
             response.let {
                 val status = response.status
@@ -74,7 +74,7 @@ class ProfileFragment : Fragment() {
             }
         })
 
-        getUserInfoViewModel.errorLiveData.observe(requireActivity(), Observer { error ->
+        getUserInfoViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error ->
             BaseActivity().hideProgressDialog()
             error?.let {
                 try {

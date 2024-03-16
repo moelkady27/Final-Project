@@ -103,6 +103,7 @@ class ChatActivity : AppCompatActivity() {
 
                     runOnUiThread {
                         adapter.addReceivedMessage(messageChatting)
+                        recyclerView.scrollToPosition(adapter.itemCount - 1)
                     }
                 }
             } else {
