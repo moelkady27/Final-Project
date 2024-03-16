@@ -20,8 +20,10 @@
         android:text="Hi, my message"
         android:textColor="@color/white"
         android:textSize="14sp"
+        android:layout_marginBottom="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtMyMessageTime"

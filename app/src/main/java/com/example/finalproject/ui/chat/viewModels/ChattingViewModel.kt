@@ -18,7 +18,7 @@ class ChattingViewModel: ViewModel() {
     private val chattingResponseLiveData = MutableLiveData<List<MessageChatting>>()
     private val errorLiveData = MutableLiveData<String>()
 
-    private val getConversationResponseLiveData = MutableLiveData<List<MessageConversation>>()
+    private val getConversationResponseLiveData = MutableLiveData<List<MessageConversation>?>()
 
 
     fun sendMessage(token: String, receiverId: String, messageContent: String) {
@@ -56,7 +56,7 @@ class ChattingViewModel: ViewModel() {
                     if (response.isSuccessful){
                         val messages = response.body()?.messages?.messages
                         messages?.let {
-                            getConversationResponseLiveData.value = it
+                            getConversationResponseLiveData.value = messages
                         }
                     }
                 }
@@ -71,7 +71,7 @@ class ChattingViewModel: ViewModel() {
         return chattingResponseLiveData
     }
 
-    fun observeGetConversationLiveData(): LiveData<List<MessageConversation>> {
+    fun observeGetConversationLiveData(): MutableLiveData<List<MessageConversation>?> {
         return getConversationResponseLiveData
     }
 }

@@ -10,10 +10,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
+import com.example.finalproject.socket.SocketHandler
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.ui.chat.adapter.ChattingAdapter
+import com.example.finalproject.ui.chat.models.MessageChatting
+import com.example.finalproject.ui.chat.models.Messages
 import com.example.finalproject.ui.chat.viewModels.ChattingViewModel
-import kotlinx.android.synthetic.main.activity_chat.*
+import kotlinx.android.synthetic.main.activity_chat.et_type_a_messages
+import kotlinx.android.synthetic.main.activity_chat.iv_send
+import kotlinx.android.synthetic.main.activity_chat.iv_user_chat
+import kotlinx.android.synthetic.main.activity_chat.toolbar_chat
+import kotlinx.android.synthetic.main.activity_chat.tv_user_name_chat
+import org.json.JSONObject
 
 class ChatActivity : AppCompatActivity() {
 
@@ -23,11 +31,15 @@ class ChatActivity : AppCompatActivity() {
 
     private lateinit var chatViewModel: ChattingViewModel
 
+    private lateinit var socketHandler: SocketHandler
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
         chatViewModel = ViewModelProvider(this@ChatActivity).get(ChattingViewModel::class.java)
+
+        socketHandler = SocketHandler(this@ChatActivity)
 
         val token = AppReferences.getToken(this@ChatActivity)
 
@@ -58,12 +70,53 @@ class ChatActivity : AppCompatActivity() {
             if (messageContent.isNotEmpty()) {
                 chatViewModel.sendMessage(token, receiverId, messageContent)
                 et_type_a_messages.text?.clear()
+
+                // Send message with socket
+                socketHandler.sendMessage(receiverId, messageContent)
+
             } else {
                 Toast.makeText(this, "Please enter a message", Toast.LENGTH_SHORT).show()
             }
         }
 
+        socketHandler.connect { isConnected ->
+            if (isConnected) {
+                Log.e("Socket", "Socket connected")
+
+                socketHandler.on("newMessage") { args ->
+                    val data = args["newMessage"] as JSONObject
+                    Log.e("New Message Received", data.toString())
+
+                    val messageChatting = MessageChatting(
+                        __v = data.optInt("__v"),
+                        _id = data.optString("_id"),
+                        createdAt = data.optString("createdAt"),
+                        message = Messages(
+                            text = data.optJSONObject("message")!!.optString("text"),
+                            media = emptyList()
+
+                        ),
+                        receiverId = data.optString("receiverId"),
+                        senderId = data.optString("senderId"),
+                        updatedAt = data.optString("updatedAt")
+                    )
+
+                    runOnUiThread {
+                        adapter.addReceivedMessage(messageChatting)
+                    }
+                }
+            } else {
+                Log.e("Socket", "Socket connection failed")
+            }
+        }
+
         setUpActionBar()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        socketHandler.disconnect()
     }
 
     private fun setUpActionBar() {
@@ -99,8 +152,9 @@ class ChatActivity : AppCompatActivity() {
     private fun observeGetConversation() {
         recyclerView = findViewById(R.id.rv_chat)
         chatViewModel.observeGetConversationLiveData().observe(this, Observer { messages ->
-            adapter.setMessagesList(messages)
+            messages?.let { adapter.setMessagesList(it) }
             recyclerView.scrollToPosition(adapter.itemCount - 1)
         })
     }
+
 }

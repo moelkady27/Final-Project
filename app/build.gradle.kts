@@ -67,4 +67,8 @@ dependencies {
 
     implementation ("com.google.android.gms:play-services-maps:18.2.0")
     implementation ("com.google.android.gms:play-services-location:21.0.1")
+
+    //Socket
+    implementation ("io.socket:socket.io-client:2.0.0")
+
 }
