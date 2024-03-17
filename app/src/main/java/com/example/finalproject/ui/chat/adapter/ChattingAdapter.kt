@@ -177,7 +177,9 @@ class ChattingAdapter(
         val position = messagesList.indexOfFirst { it._id == messageId }
         if (position != -1) {
             (messagesList as MutableList).removeAt(position)
-            notifyItemRemoved(position)
+            (context as Activity).runOnUiThread {
+                notifyItemRemoved(position)
+            }
         }
     }
 }

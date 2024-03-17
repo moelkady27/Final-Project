@@ -79,16 +79,6 @@ class ChatActivity : AppCompatActivity() {
             }
         }
 
-        socketHandler.on("messageDeleted") {args ->
-            val data = args["messageDeleted"] as JSONObject
-
-            val messageId = data.getString("messageId")
-
-            runOnUiThread {
-                adapter.removeMessageById(messageId)
-            }
-        }
-
         socketHandler.connect { isConnected ->
             if (isConnected) {
                 Log.e("Socket", "Socket connected")
@@ -116,6 +106,12 @@ class ChatActivity : AppCompatActivity() {
                         recyclerView.scrollToPosition(adapter.itemCount - 1)
                     }
                 }
+
+                socketHandler.on("messageDeleted") { args ->
+                    val messageId = args.getString("_id")
+                    adapter.removeMessageById(messageId)
+                }
+                
             } else {
                 Log.e("Socket", "Socket connection failed")
             }
