@@ -79,6 +79,16 @@ class ChatActivity : AppCompatActivity() {
             }
         }
 
+        socketHandler.on("messageDeleted") {args ->
+            val data = args["messageDeleted"] as JSONObject
+
+            val messageId = data.getString("messageId")
+
+            runOnUiThread {
+                adapter.removeMessageById(messageId)
+            }
+        }
+
         socketHandler.connect { isConnected ->
             if (isConnected) {
                 Log.e("Socket", "Socket connected")
@@ -137,7 +147,7 @@ class ChatActivity : AppCompatActivity() {
 
     private fun setUpRecyclerView() {
         recyclerView = findViewById(R.id.rv_chat)
-        adapter = ChattingAdapter(this@ChatActivity)
+        adapter = ChattingAdapter(this@ChatActivity , chatViewModel)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
     }

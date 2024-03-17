@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.ui.chat.models.ChattingResponse
+import com.example.finalproject.ui.chat.models.DeleteMessageResponse
 import com.example.finalproject.ui.chat.models.MessageChatting
 import com.example.finalproject.ui.chat.models.GetConversationResponse
 import com.example.finalproject.ui.chat.models.MessageConversation
@@ -20,6 +21,7 @@ class ChattingViewModel: ViewModel() {
 
     private val getConversationResponseLiveData = MutableLiveData<List<MessageConversation>>()
 
+    private val deleteMessageResponseLiveData: MutableLiveData<DeleteMessageResponse> = MutableLiveData()
 
     fun sendMessage(token: String, receiverId: String, messageContent: String) {
         val data = SendMessageRequest(messageContent)
@@ -62,6 +64,26 @@ class ChattingViewModel: ViewModel() {
                 }
 
                 override fun onFailure(call: Call<GetConversationResponse>, t: Throwable) {
+                    errorLiveData.value = t.message
+                }
+            })
+    }
+
+    fun deleteMessage(token: String, messageId: String) {
+        RetrofitClient.instance.deleteMessage("Bearer $token", messageId)
+            .enqueue(object : Callback<DeleteMessageResponse> {
+                override fun onResponse(
+                    call: Call<DeleteMessageResponse>,
+                    response: Response<DeleteMessageResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        deleteMessageResponseLiveData.value = response.body()
+                    } else {
+                        errorLiveData.value = response.errorBody()?.string()
+                    }
+                }
+
+                override fun onFailure(call: Call<DeleteMessageResponse>, t: Throwable) {
                     errorLiveData.value = t.message
                 }
             })

@@ -2,23 +2,33 @@ package com.example.finalproject.ui.chat.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
+import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
+import com.example.finalproject.ui.chat.models.DeleteMessageResponse
 import com.example.finalproject.ui.chat.models.MessageChatting
 import com.example.finalproject.ui.chat.models.MessageConversation
+import com.example.finalproject.ui.chat.viewModels.ChattingViewModel
 import kotlinx.android.synthetic.main.my_message.view.*
 import kotlinx.android.synthetic.main.other_message.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class ChattingAdapter(
-    private val context: Context
+    private val context: Context,
+    private val viewModel: ChattingViewModel
+
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var messagesList: List<MessageConversation> = ArrayList()
@@ -104,6 +114,9 @@ class ChattingAdapter(
                         txtMyMessage.text = message.message.text
                         txtMyMessageTime.text = formatTime(message.createdAt)
                     }
+                    holder.itemView.setOnClickListener {
+                        showDeleteMessageDialog(message)
+                    }
                 }
                 VIEW_TYPE_OTHER_MESSAGE -> {
                     holder.itemView.apply {
@@ -138,5 +151,33 @@ class ChattingAdapter(
         outputFormat.timeZone = TimeZone.getTimeZone("Africa/Cairo")
         val date = inputFormat.parse(time)
         return outputFormat.format(date!!)
+    }
+
+    private fun showDeleteMessageDialog(message: MessageConversation) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Delete Message")
+            .setMessage("Are you sure you want to delete this message?")
+            .setPositiveButton("Delete") { _, _ ->
+
+                val token = AppReferences.getToken(context)
+                val messageId = message._id
+                viewModel.deleteMessage(token , messageId)
+
+                removeMessageById(messageId)
+
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    fun removeMessageById(messageId: String) {
+        val position = messagesList.indexOfFirst { it._id == messageId }
+        if (position != -1) {
+            (messagesList as MutableList).removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
 }

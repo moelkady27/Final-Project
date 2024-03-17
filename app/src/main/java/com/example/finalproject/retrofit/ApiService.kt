@@ -2,6 +2,7 @@ package com.example.finalproject.retrofit
 
 import com.example.finalproject.ui.chat.models.ChatListUsersResponse
 import com.example.finalproject.ui.chat.models.ChattingResponse
+import com.example.finalproject.ui.chat.models.DeleteMessageResponse
 import com.example.finalproject.ui.chat.models.GetConversationResponse
 import com.example.finalproject.ui.chat.request.SendMessageRequest
 import com.example.finalproject.ui.complete_register.models.CompleteSignUpResponse
@@ -176,4 +177,10 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("receiverId") receiverId: String,
     ): Call<GetConversationResponse>
+
+    @DELETE("api/v1/chat/delete-message/{messageId}")
+    fun deleteMessage(
+        @Header("Authorization") token: String,
+        @Path("messageId") messageId: String
+    ): Call<DeleteMessageResponse>
 }
