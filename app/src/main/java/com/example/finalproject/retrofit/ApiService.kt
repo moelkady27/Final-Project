@@ -3,7 +3,9 @@ package com.example.finalproject.retrofit
 import com.example.finalproject.ui.chat.models.ChatListUsersResponse
 import com.example.finalproject.ui.chat.models.ChattingResponse
 import com.example.finalproject.ui.chat.models.DeleteMessageResponse
+import com.example.finalproject.ui.chat.models.EditMessageResponse
 import com.example.finalproject.ui.chat.models.GetConversationResponse
+import com.example.finalproject.ui.chat.request.EditMessageRequest
 import com.example.finalproject.ui.chat.request.SendMessageRequest
 import com.example.finalproject.ui.complete_register.models.CompleteSignUpResponse
 import com.example.finalproject.ui.complete_register.models.LocationResponse
@@ -183,4 +185,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("messageId") messageId: String
     ): Call<DeleteMessageResponse>
+
+    @PATCH("api/v1/chat/edit-message/{messageId}")
+    fun editMessage(
+        @Header("Authorization") token: String,
+        @Path("messageId") messageId: String,
+        @Body req: EditMessageRequest
+    ): Call<EditMessageResponse>
 }

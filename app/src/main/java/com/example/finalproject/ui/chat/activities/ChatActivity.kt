@@ -111,7 +111,7 @@ class ChatActivity : AppCompatActivity() {
                     val messageId = args.getString("_id")
                     adapter.removeMessageById(messageId)
                 }
-                
+
             } else {
                 Log.e("Socket", "Socket connection failed")
             }
