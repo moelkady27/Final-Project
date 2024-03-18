@@ -223,10 +223,19 @@ class ChattingAdapter(
     fun editMessageById(messageId: String, editedMessage: String) {
         val position = messagesList.indexOfFirst { it._id == messageId }
         if (position != -1) {
+            messagesList[position].message.text = editedMessage
             val token = AppReferences.getToken(context)
             viewModel.editMessage(token, messageId, editedMessage)
+            notifyItemChanged(position)
+        } else {
+            val chatMessagePosition = messageChattingList.indexOfFirst { it._id == messageId }
+            if (chatMessagePosition != -1) {
+                messageChattingList[chatMessagePosition].message.text = editedMessage
+                val token = AppReferences.getToken(context)
+                viewModel.editMessage(token, messageId, editedMessage)
+                notifyItemChanged(messagesList.size + chatMessagePosition)
+            }
         }
     }
-
 
 }

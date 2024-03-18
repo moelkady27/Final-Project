@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_chat.iv_send
 import kotlinx.android.synthetic.main.activity_chat.iv_user_chat
 import kotlinx.android.synthetic.main.activity_chat.toolbar_chat
 import kotlinx.android.synthetic.main.activity_chat.tv_user_name_chat
+import org.json.JSONException
 import org.json.JSONObject
 
 class ChatActivity : AppCompatActivity() {
@@ -110,6 +111,19 @@ class ChatActivity : AppCompatActivity() {
                 socketHandler.on("messageDeleted") { args ->
                     val messageId = args.getString("_id")
                     adapter.removeMessageById(messageId)
+                }
+
+                socketHandler.on("messageEdited") { args ->
+                    try {
+                        val messageId = args.getString("_id")
+                        val editedMessage = args.getJSONObject("message").optString("text", "")
+
+                        runOnUiThread {
+                            adapter.editMessageById(messageId, editedMessage)
+                        }
+                    } catch (e: JSONException) {
+                        Log.e("Socket", "JSONException: ${e.message}")
+                    }
                 }
 
             } else {
