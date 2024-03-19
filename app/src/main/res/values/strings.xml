@@ -95,5 +95,13 @@
     <string name="messages" translatable="false">Messages</string>
     <string name="tv_user_name_chat" translatable="false">Antonio P. Nielson</string>
     <string name="type_a_messages" translatable="false">Type a Messages</string>
+    <string name="tv_delete_message_1" translatable="false">Delete Message</string>
+    <string name="tv_delete_message_2" translatable="false">Are you sure you want to delete this message?</string>
+    <string name="cancel" translatable="false">Cancel</string>
+    <string name="delete" translatable="false">Delete</string>
+    <string name="tv_edit_message" translatable="false">Edit Message</string>
+    <string name="edit" translatable="false">Edit</string>
+    <string name="edit_message_hint" translatable="false">Edit Message</string>
+    <string name="message_options" translatable="false">Message Options</string>
 
 </resources>

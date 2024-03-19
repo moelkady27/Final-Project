@@ -16,6 +16,12 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="BottomSheetDialog">
+        <item name="background">@drawable/message_options_dialog_background</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>

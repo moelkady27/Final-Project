@@ -7,14 +7,21 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.ui.chat.models.MessageChatting
 import com.example.finalproject.ui.chat.models.MessageConversation
 import com.example.finalproject.ui.chat.viewModels.ChattingViewModel
-import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.android.synthetic.main.delete_message_dialog.view.btn_cancel_message
+import kotlinx.android.synthetic.main.delete_message_dialog.view.btn_delete_message
+import kotlinx.android.synthetic.main.edit_message_dialog.view.btn_cancel_edit_message
+import kotlinx.android.synthetic.main.edit_message_dialog.view.btn_edit_message
+import kotlinx.android.synthetic.main.edit_message_dialog.view.et_edit_message
+import kotlinx.android.synthetic.main.message_options_dialog.view.ll_delete_message_option
+import kotlinx.android.synthetic.main.message_options_dialog.view.ll_edit_message_option
 import kotlinx.android.synthetic.main.my_message.view.*
 import kotlinx.android.synthetic.main.other_message.view.*
 import java.text.SimpleDateFormat
@@ -110,8 +117,9 @@ class ChattingAdapter(
                         txtMyMessage.text = message.message.text
                         txtMyMessageTime.text = formatTime(message.createdAt)
                     }
-                    holder.itemView.setOnClickListener {
+                    holder.itemView.setOnLongClickListener {
                         showMessageOptionsDialog(message)
+                        true
                     }
                 }
                 VIEW_TYPE_OTHER_MESSAGE -> {
@@ -129,8 +137,9 @@ class ChattingAdapter(
                         txtMyMessage.text = message.message.text
                         txtMyMessageTime.text = formatTime(message.createdAt)
                     }
-                    holder.itemView.setOnClickListener {
+                    holder.itemView.setOnLongClickListener {
                         showMessageOptionsDialog(message)
+                        true
                     }
                 }
                 VIEW_TYPE_OTHER_MESSAGE -> {
@@ -153,59 +162,89 @@ class ChattingAdapter(
     }
 
     private fun showMessageOptionsDialog(message: Any) {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle("Message Options")
-            .setItems(arrayOf("Delete", "Edit")) { _, which ->
-                when (which) {
-                    0 -> showDeleteMessageDialog(message)
-                    1 -> showEditMessageDialog(message)
-                }
-            }
-            .setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .create()
-            .show()
+        val bottomSheetDialog = BottomSheetDialog(context, R.style.BottomSheetDialog)
+
+        val messageDialogView =
+            LayoutInflater.from(context).inflate(R.layout.message_options_dialog, null)
+
+        messageDialogView.background =
+            ContextCompat.getDrawable(context, R.drawable.message_options_dialog_background)
+
+        val editMessageOption = messageDialogView.ll_edit_message_option
+        val deleteMessageOption = messageDialogView.ll_delete_message_option
+
+        editMessageOption.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            showEditMessageDialog(message)
+        }
+
+        deleteMessageOption.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            showDeleteMessageDialog(message)
+        }
+
+        bottomSheetDialog.setContentView(messageDialogView)
+        bottomSheetDialog.show()
     }
 
     private fun showDeleteMessageDialog(message: Any) {
-         val builder = AlertDialog.Builder(context)
-            builder.setTitle("Delete Message")
-                .setMessage("Are you sure you want to delete this message?")
-                .setPositiveButton("Delete") { _, _ ->
-                    val token = AppReferences.getToken(context)
+        val builder = AlertDialog.Builder(context)
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.delete_message_dialog, null)
 
-                    val messageId = when (message) {
-                        is MessageConversation -> message._id
-                        is MessageChatting -> message._id
-                        else -> null
-                    }
+        builder.setView(dialogView)
+        val alertDialog = builder.create()
 
-                    messageId?.let {
-                        viewModel.deleteMessage(token, it)
-                        removeMessageById(it)
-                    }
-                }
-                .setNegativeButton("Cancel") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .create()
-                .show()
+        val btnDelete = dialogView.btn_delete_message
+        val btnCancel = dialogView.btn_cancel_message
+
+        btnDelete.setOnClickListener {
+            val token = AppReferences.getToken(context)
+
+            val messageId = when (message) {
+                is MessageConversation -> message._id
+                is MessageChatting -> message._id
+                else -> null
+            }
+
+            messageId?.let {
+                viewModel.deleteMessage(token, it)
+                removeMessageById(it)
+            }
+
+            alertDialog.dismiss()
+        }
+
+        btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
     }
 
     fun removeMessageById(messageId: String) {
-        val position = messagesList.indexOfFirst { it._id == messageId }
-        if (position != -1) {
-            (messagesList as MutableList).removeAt(position)
+        val conversationPosition = messagesList.indexOfFirst { it._id == messageId }
+        if (conversationPosition != -1) {
+            (messagesList as MutableList).removeAt(conversationPosition)
             (context as Activity).runOnUiThread {
-                notifyItemRemoved(position)
+                notifyItemRemoved(conversationPosition)
+            }
+        } else {
+            val chattingPosition = messageChattingList.indexOfFirst { it._id == messageId }
+            if (chattingPosition != -1) {
+                (messageChattingList as MutableList).removeAt(chattingPosition)
+                (context as Activity).runOnUiThread {
+                    notifyItemRemoved(messagesList.size + chattingPosition)
+                }
             }
         }
     }
 
+
     private fun showEditMessageDialog(message: Any) {
         val builder = AlertDialog.Builder(context)
-        val editMessage = TextInputEditText(context)
+        val editDialogView =
+            LayoutInflater.from(context).inflate(R.layout.edit_message_dialog, null)
+        val editMessage = editDialogView.et_edit_message
 
         when (message) {
             is MessageConversation -> editMessage.setText(message.message.text)
@@ -213,32 +252,40 @@ class ChattingAdapter(
             else -> return
         }
 
-        builder.setTitle("Edit Message")
-            .setView(editMessage)
-            .setPositiveButton("Save") { _, _ ->
-                val editedMessage = editMessage.text.toString().trim()
-                if (editedMessage.isNotEmpty()) {
-                    val token = AppReferences.getToken(context)
+        builder.setView(editDialogView)
+        val alertDialog = builder.create()
 
-                    val messageId = when (message) {
-                        is MessageConversation -> message._id
-                        is MessageChatting -> message._id
-                        else -> null
-                    }
+        val btnEdit = editDialogView.btn_edit_message
+        val btnCancel = editDialogView.btn_cancel_edit_message
 
-                    messageId?.let {
-                        viewModel.editMessage(token, it, editedMessage)
-                        editMessageById(it, editedMessage)
-                    }
-                } else {
-                    Toast.makeText(context, "Message cannot be empty", Toast.LENGTH_SHORT).show()
+        btnEdit.setOnClickListener {
+            val editedMessage = editMessage.text.toString().trim()
+            if (editedMessage.isNotEmpty()) {
+                val token = AppReferences.getToken(context)
+
+                val messageId = when (message) {
+                    is MessageConversation -> message._id
+                    is MessageChatting -> message._id
+                    else -> null
                 }
+
+                messageId?.let {
+                    viewModel.editMessage(token, it, editedMessage)
+                    editMessageById(it, editedMessage)
+                }
+            } else {
+                editMessage.error = "Edit Message cannot be empty"
+                return@setOnClickListener
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .create()
-            .show()
+
+            alertDialog.dismiss()
+        }
+
+        btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
     }
 
     fun editMessageById(messageId: String, editedMessage: String) {
