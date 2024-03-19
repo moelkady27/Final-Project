@@ -25,6 +25,23 @@
 
     </androidx.cardview.widget.CardView>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/floatingActionButtonOnline"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="-8dp"
+        android:layout_marginTop="-5dp"
+        android:background="@null"
+        android:contentDescription="@string/content_description"
+        android:focusable="true"
+        android:src="@color/online"
+        app:civ_border_color="@color/online"
+        app:civ_border_width="2dp"
+        app:civ_circle_background_color="@color/online"
+        app:layout_constraintStart_toEndOf="@+id/cv_image_chat_list"
+        app:layout_constraintTop_toTopOf="@+id/cv_image_chat_list" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/con"
         android:layout_width="0dp"

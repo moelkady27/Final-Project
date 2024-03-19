@@ -3,16 +3,23 @@ package com.example.finalproject.ui.chat.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
+import com.example.finalproject.socket.SocketHandler
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.chat.adapter.ChatListAdapter
+import com.example.finalproject.ui.chat.models.MessageChatting
+import com.example.finalproject.ui.chat.models.Messages
 import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModel
 import kotlinx.android.synthetic.main.activity_chat_list.toolbar_message
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 
 class ChatListUsersActivity : BaseActivity() {
 
@@ -21,6 +28,8 @@ class ChatListUsersActivity : BaseActivity() {
     private lateinit var adapter: ChatListAdapter
 
     private lateinit var chatListUsersViewModel: ChatListUsersViewModel
+
+    private lateinit var socketHandler: SocketHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +45,81 @@ class ChatListUsersActivity : BaseActivity() {
         getRecycleView()
 
         setupActionBar()
+
+        socketHandler = SocketHandler(this@ChatListUsersActivity)
+
+        socketHandler.connect { isConnected ->
+            if (isConnected) {
+                Log.e("Socket", "Socket connected successfully")
+
+
+
+
+//                socketHandler.onOnline("getOnlineUsers") { data ->
+//                    try {
+//                        val userId = data.toString()
+//
+//                        Log.e("userId", userId)
+//
+//
+//                    } catch (e: Exception) {
+//                        Log.e("TAG", "Error handling event data: $e")
+//                    }
+//                }
+
+
+
+
+//                socketHandler.onOnline("getOnlineUsers") { data ->
+//                    try {
+//                        if (data is JSONArray) {
+//                            val userIds = HashSet<String>()
+//                            for (i in 0 until data.length()) {
+//                                val userId = data.getString(i)
+//                                userIds.add(userId)
+//                            }
+//                            updateOnlineUsers(userIds)
+//
+//                        } else {
+//                            Log.e("Socket", "Received data is not JSONArray")
+//                        }
+//                    } catch (e: JSONException) {
+//                        Log.e("Socket", "Error handling event data: $e")
+//                    }
+//                }
+
+//                handleSocketDisconnect()
+//
+//
+                socketHandler.onOnline("getOnlineUsers") { data ->
+                    try {
+                        val onlineUserIds = HashSet<String>()
+                        if (data is JSONArray) {
+                            for (i in 0 until data.length()) {
+                                val userId = data.getString(i)
+                                onlineUserIds.add(userId)
+                            }
+                            runOnUiThread {
+                                adapter.updateOnlineUsers(onlineUserIds)
+                            }
+                        } else {
+                            Log.e("Socket", "Received data is not JSONArray")
+                        }
+                    } catch (e: JSONException) {
+                        Log.e("Socket", "Error handling event data: $e")
+                    }
+                }
+
+                socketHandler.setDisconnectCallback {
+                    runOnUiThread {
+                        adapter.removeOfflineUsers(adapter.onlineUsers)
+                    }
+                }
+
+            } else {
+                Log.e("Socket", "Socket connection failed")
+            }
+        }
     }
 
     private fun setupActionBar() {
@@ -73,5 +157,14 @@ class ChatListUsersActivity : BaseActivity() {
             adapter.notifyDataSetChanged()
         })
     }
+
+//    private fun handleSocketDisconnect() {
+//        socketHandler.setDisconnectCallback {
+//            // Perform the necessary cleanup, like removing offline users
+//            runOnUiThread {
+//                adapter.removeOfflineUsers(adapter.onlineUsers)
+//            }
+//        }
+//    }
 
 }

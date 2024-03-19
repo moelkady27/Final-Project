@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.ui.chat.models.ChatUser
+import kotlinx.android.synthetic.main.each_row_chat_list.view.floatingActionButtonOnline
 import kotlinx.android.synthetic.main.each_row_chat_list.view.image_chat_list
 import kotlinx.android.synthetic.main.each_row_chat_list.view.message_list_content
 import kotlinx.android.synthetic.main.each_row_chat_list.view.message_list_name
@@ -20,10 +21,24 @@ class ChatListAdapter(
 ): RecyclerView.Adapter<ChatListAdapter.MyViewHolder>() {
 
     private var list : List<ChatUser> = ArrayList()
+
+    var onlineUsers: Set<String> = HashSet()
+    private var activeChatUserIds: Set<String> = HashSet()
+
     class MyViewHolder(view : View) : RecyclerView.ViewHolder(view)
 
     fun setChatUserList(chatUserList: List<ChatUser>){
         this.list = chatUserList
+    }
+
+    fun updateOnlineUsers(userIds: Set<String>) {
+        onlineUsers = userIds
+        notifyDataSetChanged()
+    }
+
+    fun removeOfflineUsers(userIds: Set<String>) {
+        onlineUsers = onlineUsers.minus(userIds)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -42,6 +57,9 @@ class ChatListAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val chatUser = list[position]
 
+        val isOnline = onlineUsers.contains(chatUser._id)
+        val isActiveChat = activeChatUserIds.contains(chatUser._id)
+
         holder.itemView.message_list_name.text = chatUser.fullName
         holder.itemView.message_list_content.text = chatUser.lastMessage.message.text
 
@@ -52,6 +70,12 @@ class ChatListAdapter(
             .with(holder.itemView)
             .load(chatUser.image.url)
             .into(holder.itemView.image_chat_list)
+
+        if (isOnline || isActiveChat) {
+            holder.itemView.floatingActionButtonOnline.visibility = View.VISIBLE
+        } else {
+            holder.itemView.floatingActionButtonOnline.visibility = View.GONE
+        }
 
         holder.itemView.setOnClickListener {
             onItemClick(chatUser)

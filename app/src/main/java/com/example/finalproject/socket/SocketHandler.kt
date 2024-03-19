@@ -21,6 +21,8 @@ class SocketHandler(
 
     private var socket: Socket? = null
 
+    private var disconnectCallback: (() -> Unit)? = null // Callback for disconnection event
+
     init {
         try {
             val options = IO.Options().apply {
@@ -43,6 +45,7 @@ class SocketHandler(
 
     fun disconnect() {
         socket?.disconnect()
+        disconnectCallback?.invoke() // Invoke disconnect callback
     }
 
     fun sendMessage(receiverId: String, messageContent: String) {
@@ -71,4 +74,20 @@ class SocketHandler(
         }
     }
 
+    fun onOnline(eventName: String, handler: (Any) -> Unit) {
+        try {
+            socket?.on(eventName) { args ->
+                if (args.isNotEmpty()) {
+                    val data = args[0]
+                    handler(data)
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error listening to event: $eventName ----- $e")
+        }
+    }
+
+    fun setDisconnectCallback(callback: () -> Unit) {
+        disconnectCallback = callback
+    }
 }
