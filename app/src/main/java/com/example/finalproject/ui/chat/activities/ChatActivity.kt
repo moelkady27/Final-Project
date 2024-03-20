@@ -135,10 +135,10 @@ class ChatActivity : AppCompatActivity() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        socketHandler.disconnect()
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        socketHandler.disconnect()
+//    }
 
     private fun setUpActionBar() {
         setSupportActionBar(toolbar_chat)

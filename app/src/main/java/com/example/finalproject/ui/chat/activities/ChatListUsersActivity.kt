@@ -52,45 +52,6 @@ class ChatListUsersActivity : BaseActivity() {
             if (isConnected) {
                 Log.e("Socket", "Socket connected successfully")
 
-
-
-
-//                socketHandler.onOnline("getOnlineUsers") { data ->
-//                    try {
-//                        val userId = data.toString()
-//
-//                        Log.e("userId", userId)
-//
-//
-//                    } catch (e: Exception) {
-//                        Log.e("TAG", "Error handling event data: $e")
-//                    }
-//                }
-
-
-
-
-//                socketHandler.onOnline("getOnlineUsers") { data ->
-//                    try {
-//                        if (data is JSONArray) {
-//                            val userIds = HashSet<String>()
-//                            for (i in 0 until data.length()) {
-//                                val userId = data.getString(i)
-//                                userIds.add(userId)
-//                            }
-//                            updateOnlineUsers(userIds)
-//
-//                        } else {
-//                            Log.e("Socket", "Received data is not JSONArray")
-//                        }
-//                    } catch (e: JSONException) {
-//                        Log.e("Socket", "Error handling event data: $e")
-//                    }
-//                }
-
-//                handleSocketDisconnect()
-//
-//
                 socketHandler.onOnline("getOnlineUsers") { data ->
                     try {
                         val onlineUserIds = HashSet<String>()
@@ -157,14 +118,5 @@ class ChatListUsersActivity : BaseActivity() {
             adapter.notifyDataSetChanged()
         })
     }
-
-//    private fun handleSocketDisconnect() {
-//        socketHandler.setDisconnectCallback {
-//            // Perform the necessary cleanup, like removing offline users
-//            runOnUiThread {
-//                adapter.removeOfflineUsers(adapter.onlineUsers)
-//            }
-//        }
-//    }
 
 }
