@@ -2,6 +2,7 @@ package com.example.finalproject.ui.chat.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -17,10 +18,12 @@ import com.example.finalproject.ui.chat.models.MessageChatting
 import com.example.finalproject.ui.chat.models.Messages
 import com.example.finalproject.ui.chat.viewModels.ChattingViewModel
 import kotlinx.android.synthetic.main.activity_chat.et_type_a_messages
+import kotlinx.android.synthetic.main.activity_chat.floatingActionButtonOnlineOnChat
 import kotlinx.android.synthetic.main.activity_chat.iv_send
 import kotlinx.android.synthetic.main.activity_chat.iv_user_chat
 import kotlinx.android.synthetic.main.activity_chat.toolbar_chat
 import kotlinx.android.synthetic.main.activity_chat.tv_user_name_chat
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -125,6 +128,30 @@ class ChatActivity : AppCompatActivity() {
                         Log.e("Socket", "JSONException: ${e.message}")
                     }
                 }
+
+                socketHandler.onOnline("getOnlineUsers") { data ->
+                    try {
+                        val onlineUserIds = HashSet<String>()
+                        if (data is JSONArray) {
+                            for (i in 0 until data.length()) {
+                                val userId = data.getString(i)
+                                onlineUserIds.add(userId)
+                            }
+                            runOnUiThread {
+                                if (onlineUserIds.contains(receiverId)) {
+                                    floatingActionButtonOnlineOnChat.visibility = View.VISIBLE
+                                } else {
+                                    floatingActionButtonOnlineOnChat.visibility = View.GONE
+                                }
+                            }
+                        } else {
+                            Log.e("Socket", "Received data is not JSONArray")
+                        }
+                    } catch (e: JSONException) {
+                        Log.e("Socket", "Error handling event data: $e")
+                    }
+                }
+
 
             } else {
                 Log.e("Socket", "Socket connection failed")
