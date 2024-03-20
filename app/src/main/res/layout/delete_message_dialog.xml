@@ -14,13 +14,14 @@
         android:fontFamily="@font/poppins_bold"
         android:text="@string/tv_delete_message_1"
         android:textColor="@color/colorPrimaryText"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_delete_message_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/poppins"
         android:text="@string/tv_delete_message_2"
         android:textColor="@color/colorPrimaryText"
@@ -29,34 +30,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/btn_cancel_message"
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimary"
             android:gravity="center"
             android:fontFamily="@font/poppins_semibold"
             android:text="@string/cancel"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textAllCaps="true"/>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/btn_delete_message"
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimary"
             android:gravity="center"
             android:fontFamily="@font/poppins_semibold"
             android:text="@string/delete"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textAllCaps="true"/>
 
     </LinearLayout>
 

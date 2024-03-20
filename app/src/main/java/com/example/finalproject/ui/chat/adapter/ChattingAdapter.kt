@@ -17,9 +17,9 @@ import com.example.finalproject.ui.chat.viewModels.ChattingViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.delete_message_dialog.view.btn_cancel_message
 import kotlinx.android.synthetic.main.delete_message_dialog.view.btn_delete_message
-import kotlinx.android.synthetic.main.edit_message_dialog.view.btn_cancel_edit_message
-import kotlinx.android.synthetic.main.edit_message_dialog.view.btn_edit_message
-import kotlinx.android.synthetic.main.edit_message_dialog.view.et_edit_message
+import kotlinx.android.synthetic.main.edit_message_dialog.view.btn_cancel_message_edit
+import kotlinx.android.synthetic.main.edit_message_dialog.view.et_type_a_messages_edit
+import kotlinx.android.synthetic.main.edit_message_dialog.view.iv_send_edit
 import kotlinx.android.synthetic.main.message_options_dialog.view.ll_delete_message_option
 import kotlinx.android.synthetic.main.message_options_dialog.view.ll_edit_message_option
 import kotlinx.android.synthetic.main.my_message.view.*
@@ -188,11 +188,14 @@ class ChattingAdapter(
     }
 
     private fun showDeleteMessageDialog(message: Any) {
-        val builder = AlertDialog.Builder(context)
+        val builder = AlertDialog.Builder(context, R.style.DeleteMessageDialog)
         val dialogView = LayoutInflater.from(context).inflate(R.layout.delete_message_dialog, null)
+        dialogView.background =
+            ContextCompat.getDrawable(context, R.drawable.delete_message_dialog_background)
 
         builder.setView(dialogView)
         val alertDialog = builder.create()
+        alertDialog.setCancelable(false)
 
         val btnDelete = dialogView.btn_delete_message
         val btnCancel = dialogView.btn_cancel_message
@@ -241,10 +244,13 @@ class ChattingAdapter(
 
 
     private fun showEditMessageDialog(message: Any) {
-        val builder = AlertDialog.Builder(context)
+        val bottomSheetDialog = BottomSheetDialog(context, R.style.BottomSheetDialog)
         val editDialogView =
             LayoutInflater.from(context).inflate(R.layout.edit_message_dialog, null)
-        val editMessage = editDialogView.et_edit_message
+        val editMessage = editDialogView.et_type_a_messages_edit
+
+        editDialogView.background =
+            ContextCompat.getDrawable(context, R.drawable.message_options_dialog_background)
 
         when (message) {
             is MessageConversation -> editMessage.setText(message.message.text)
@@ -252,13 +258,12 @@ class ChattingAdapter(
             else -> return
         }
 
-        builder.setView(editDialogView)
-        val alertDialog = builder.create()
+        bottomSheetDialog.setContentView(editDialogView)
 
-        val btnEdit = editDialogView.btn_edit_message
-        val btnCancel = editDialogView.btn_cancel_edit_message
+        val btnSendEdit = editDialogView.iv_send_edit
+        val btnCancelMessageEdit = editDialogView.btn_cancel_message_edit
 
-        btnEdit.setOnClickListener {
+        btnSendEdit.setOnClickListener {
             val editedMessage = editMessage.text.toString().trim()
             if (editedMessage.isNotEmpty()) {
                 val token = AppReferences.getToken(context)
@@ -278,14 +283,14 @@ class ChattingAdapter(
                 return@setOnClickListener
             }
 
-            alertDialog.dismiss()
+            bottomSheetDialog.dismiss()
         }
 
-        btnCancel.setOnClickListener {
-            alertDialog.dismiss()
+        btnCancelMessageEdit.setOnClickListener {
+            bottomSheetDialog.dismiss()
         }
 
-        alertDialog.show()
+        bottomSheetDialog.show()
     }
 
     fun editMessageById(messageId: String, editedMessage: String) {

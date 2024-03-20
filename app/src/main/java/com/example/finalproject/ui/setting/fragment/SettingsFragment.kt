@@ -23,10 +23,12 @@ import com.example.finalproject.ui.setting.activities.DeleteAccountActivity
 import com.example.finalproject.ui.profile.activities.EditProfileActivity
 import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
 import com.example.finalproject.ui.setting.viewModels.LogOutViewModels
+import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.fragment_settings.btn_change_password
 import kotlinx.android.synthetic.main.fragment_settings.btn_chats
 import kotlinx.android.synthetic.main.fragment_settings.btn_delete_account
 import kotlinx.android.synthetic.main.fragment_settings.btn_edit_profile
+import kotlinx.android.synthetic.main.fragment_settings.btn_favourites
 import kotlinx.android.synthetic.main.fragment_settings.btn_logout
 import kotlinx.android.synthetic.main.fragment_settings.btn_notification
 import kotlinx.android.synthetic.main.fragment_settings.iv_user_settings
@@ -146,6 +148,7 @@ class SettingsFragment : Fragment() {
 
             val intent = Intent(requireContext(), EditProfileActivity::class.java)
             startActivity(intent)
+            resetButtonColor(btn_edit_profile)
         }
 
         btn_delete_account.setOnClickListener {
@@ -155,6 +158,7 @@ class SettingsFragment : Fragment() {
 
             val intent = Intent(requireContext(), DeleteAccountActivity::class.java)
             startActivity(intent)
+            resetButtonColor(btn_delete_account)
         }
 
         btn_change_password.setOnClickListener {
@@ -164,12 +168,15 @@ class SettingsFragment : Fragment() {
 
             val intent = Intent(requireContext(), ChangePasswordActivity::class.java)
             startActivity(intent)
+            resetButtonColor(btn_change_password)
         }
 
         btn_logout.setOnClickListener {
             btn_logout.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             btn_logout.setTextColor(resources.getColor(R.color.white))
             btn_logout.setIconTintResource(R.color.white)
+
+            resetButtonColor(btn_logout)
 
             if (networkUtils.isNetworkAvailable()) {
                 baseActivity.showProgressDialog(requireContext(), "Logging Out...")
@@ -186,6 +193,7 @@ class SettingsFragment : Fragment() {
 
             val intent = Intent(requireContext(), NotificationActivity::class.java)
             startActivity(intent)
+            resetButtonColor(btn_notification)
         }
 
         btn_chats.setOnClickListener {
@@ -195,6 +203,26 @@ class SettingsFragment : Fragment() {
 
             val intent = Intent(requireContext(), ChatListUsersActivity::class.java)
             startActivity(intent)
+            resetButtonColor(btn_chats)
+        }
+
+        btn_favourites.setOnClickListener {
+            btn_favourites.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            btn_favourites.setTextColor(resources.getColor(R.color.white))
+            btn_favourites.setIconTintResource(R.color.white)
+
+            // TODO START ACTIVITY HERE WHEN I CREATE IT
+
+            resetButtonColor(btn_chats)
         }
     }
+
+    private fun resetButtonColor(button: MaterialButton) {
+        button.postDelayed({
+            button.setBackgroundColor(resources.getColor(R.color.white))
+            button.setTextColor(resources.getColor(R.color.colorPrimaryText))
+            button.setIconTintResource(R.color.colorPrimaryText)
+        }, 100)
+    }
+
 }
