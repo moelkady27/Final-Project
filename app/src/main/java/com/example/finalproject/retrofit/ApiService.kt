@@ -5,6 +5,7 @@ import com.example.finalproject.ui.chat.models.ChattingResponse
 import com.example.finalproject.ui.chat.models.DeleteMessageResponse
 import com.example.finalproject.ui.chat.models.EditMessageResponse
 import com.example.finalproject.ui.chat.models.GetConversationResponse
+import com.example.finalproject.ui.chat.models.SearchUsersResponse
 import com.example.finalproject.ui.chat.request.EditMessageRequest
 import com.example.finalproject.ui.chat.request.SendMessageRequest
 import com.example.finalproject.ui.complete_register.models.CompleteSignUpResponse
@@ -192,4 +193,10 @@ interface ApiService {
         @Path("messageId") messageId: String,
         @Body req: EditMessageRequest
     ): Call<EditMessageResponse>
+
+    @GET("api/v1/chat/search-users")
+    fun searchUsers(
+        @Header("Authorization") token: String,
+        @Query("search") search: String
+    ): Call<SearchUsersResponse>
 }

@@ -28,23 +28,36 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <SearchView
-        android:id="@+id/search_bar"
-        android:layout_width="46dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar_message"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar_message" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_user_chat_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintStart_toStartOf="@id/toolbar_message"
+        app:layout_constraintEnd_toEndOf="@id/toolbar_message"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_message">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/sv_user_chat_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            app:queryBackground="@android:color/transparent" />
+
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_messages"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_message" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_user_chat_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

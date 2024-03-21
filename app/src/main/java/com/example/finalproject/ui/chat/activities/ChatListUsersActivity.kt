@@ -13,13 +13,10 @@ import com.example.finalproject.socket.SocketHandler
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.chat.adapter.ChatListAdapter
-import com.example.finalproject.ui.chat.models.MessageChatting
-import com.example.finalproject.ui.chat.models.Messages
 import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModel
 import kotlinx.android.synthetic.main.activity_chat_list.toolbar_message
 import org.json.JSONArray
 import org.json.JSONException
-import org.json.JSONObject
 
 class ChatListUsersActivity : BaseActivity() {
 
