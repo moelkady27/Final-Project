@@ -15,6 +15,7 @@ import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.complete_register.viewModels.SetLocationViewModel
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -23,6 +24,11 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteFragment
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_map.btnConfirmLocation
 import kotlinx.android.synthetic.main.activity_map.btnCurrentLocation
@@ -43,9 +49,32 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
 
     private lateinit var setLocationViewModel: SetLocationViewModel
 
+    private var mGoogleMap: GoogleMap?= null
+
+    private lateinit var autocompleteFragment: AutocompleteSupportFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
+
+        Places.initialize(applicationContext, getString(R.string.apiKey))
+
+        autocompleteFragment = supportFragmentManager.findFragmentById(R.id.search)
+                as AutocompleteSupportFragment
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID , Place.Field.ADDRESS , Place.Field.LAT_LNG))
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener{
+            override fun onError(p0: Status) {
+                Toast.makeText(this@MapActivity , "There is Error on Search" , Toast.LENGTH_LONG).show()
+            }
+
+            override fun onPlaceSelected(place: Place) {
+                val latLng = place.latLng
+                addMarkerToMap(latLng, place.address ?: "")
+                zoomOnMap(latLng!!)
+            }
+        })
+
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
 
         networkUtils = NetworkUtils(this)
 
@@ -71,6 +100,26 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         }
 
         fetchLocation()
+    }
+
+    private fun zoomOnMap(latlng: LatLng) {
+        val newLatLangZoom = CameraUpdateFactory.newLatLngZoom(latlng , 12f)
+        mGoogleMap?.animateCamera(newLatLangZoom)
+    }
+
+    private fun addMarkerToMap(latLng: LatLng?, address: String) {
+        latLng?.let {
+            mGoogleMap?.clear()
+            mGoogleMap?.addMarker(MarkerOptions().position(it).title(address))
+
+            Log.e("address", address)
+
+            val intent = Intent()
+            intent.putExtra("address", address)
+            setResult(RESULT_OK, intent)
+//            finish()
+
+        }
     }
 
     private fun fetchLocation() {
@@ -222,6 +271,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+        mGoogleMap = googleMap
         if (selectedLocation != null) {
             val latLng = LatLng(selectedLocation!!.latitude, selectedLocation!!.longitude)
             val markerOptions = MarkerOptions().position(latLng).title("Selected LocationSignIn")

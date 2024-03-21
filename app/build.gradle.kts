@@ -71,4 +71,6 @@ dependencies {
     //Socket
     implementation ("io.socket:socket.io-client:2.0.0")
 
+    implementation ("com.google.android.libraries.places:places:2.5.0")
+
 }

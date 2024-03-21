@@ -68,12 +68,18 @@ class SetLocationActivity : BaseActivity(){
 
         if (requestCode == REQUEST_CODE_MAP && resultCode == RESULT_OK && data != null) {
 
-            isLocationSelected = true
+            val address = data.getStringExtra("address")
 
             val latitude = data.getDoubleExtra("latitude", 0.0)
             val longitude = data.getDoubleExtra("longitude", 0.0)
+            isLocationSelected = true
 
-            showCurrentLocationAsText(latitude, longitude)
+            if (!address.isNullOrEmpty()) {
+                isLocationSelected = true
+                tv_set_location_title_3.text = address
+            } else {
+                showCurrentLocationAsText(latitude, longitude)
+            }
 
             Log.e("Selected LocationSignIn:" , "$latitude, $longitude")
         }
