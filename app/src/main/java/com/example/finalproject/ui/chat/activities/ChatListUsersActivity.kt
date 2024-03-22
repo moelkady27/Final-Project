@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,10 +14,16 @@ import com.example.finalproject.socket.SocketHandler
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.chat.adapter.ChatListAdapter
+import com.example.finalproject.ui.chat.models.ChatUser
+import com.example.finalproject.ui.chat.models.Image
+import com.example.finalproject.ui.chat.models.LastMessage
+import com.example.finalproject.ui.chat.models.Message
 import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModel
+import kotlinx.android.synthetic.main.activity_chat_list.sv_user_chat_list
 import kotlinx.android.synthetic.main.activity_chat_list.toolbar_message
 import org.json.JSONArray
 import org.json.JSONException
+import org.json.JSONObject
 
 class ChatListUsersActivity : BaseActivity() {
 
@@ -74,10 +81,57 @@ class ChatListUsersActivity : BaseActivity() {
                     }
                 }
 
+                socketHandler.on("newMessage") { args ->
+                    val data = args["newMessage"] as JSONObject
+                    Log.e("New Message Received", data.toString())
+
+                    val chatUser = ChatUser(
+                        _id = data.optString("_id"),
+                        fullName = data.optString("fullName"),
+                        image = Image(
+                            public_id = data.optString("public_id"),
+                            url = data.optString("url")
+                        ),
+                        lastMessage = LastMessage(
+                            __v = data.optInt("__v"),
+                            _id = data.optString("_id"),
+                            createdAt = data.optString("createdAt"),
+                            message = Message(
+                                text = data.optJSONObject("message")!!.optString("text"),
+                                media = emptyList()
+                            ),
+                            receiverId = data.optString("receiverId"),
+                            senderId = data.optString("senderId"),
+                            updatedAt = data.optString("updatedAt")
+                        ),
+                        username = data.optString("username")
+                    )
+
+                    runOnUiThread {
+
+                    }
+                }
+
             } else {
                 Log.e("Socket", "Socket connection failed")
             }
         }
+
+        sv_user_chat_list.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    searchForUsers(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                searchForUsers(newText.orEmpty())
+                return true
+            }
+        })
+
+
     }
 
     private fun setupActionBar() {
@@ -115,5 +169,14 @@ class ChatListUsersActivity : BaseActivity() {
             adapter.notifyDataSetChanged()
         })
     }
+
+    private fun searchForUsers(query: String) {
+        if (query.isEmpty()) {
+            observeChatUsers()
+        } else {
+            adapter.filterList(query)
+        }
+    }
+
 
 }

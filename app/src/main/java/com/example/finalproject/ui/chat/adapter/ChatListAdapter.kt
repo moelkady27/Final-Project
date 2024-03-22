@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.chat.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,8 @@ class ChatListAdapter(
 ): RecyclerView.Adapter<ChatListAdapter.MyViewHolder>() {
 
     private var list : List<ChatUser> = ArrayList()
+    private var filteredList: List<ChatUser> = ArrayList()
+
 
     var onlineUsers: Set<String> = HashSet()
     private var activeChatUserIds: Set<String> = HashSet()
@@ -29,15 +32,31 @@ class ChatListAdapter(
 
     fun setChatUserList(chatUserList: List<ChatUser>){
         this.list = chatUserList
+        filterList("")
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateOnlineUsers(userIds: Set<String>) {
         onlineUsers = userIds
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun removeOfflineUsers(userIds: Set<String>) {
         onlineUsers = onlineUsers.minus(userIds)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun filterList(query: String) {
+        filteredList = if (query.trim().isBlank()) {
+            list
+        } else {
+            list.filter { chatUser ->
+                chatUser.fullName.toLowerCase(Locale.ROOT)
+                    .contains(query.trim().toLowerCase(Locale.ROOT))
+            }
+        }
         notifyDataSetChanged()
     }
 
@@ -51,11 +70,11 @@ class ChatListAdapter(
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return filteredList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val chatUser = list[position]
+        val chatUser = filteredList[position]
 
         val isOnline = onlineUsers.contains(chatUser._id)
         val isActiveChat = activeChatUserIds.contains(chatUser._id)

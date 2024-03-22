@@ -101,7 +101,7 @@ class EditProfileActivity : BaseActivity() {
             response.let {
                 val message = response.status
 
-                val firstName = response.user.firstName
+                val firstName = response.user.fullName
                 val lastName = response.user.lastName
                 val gender = response.user.gender
                 val username = response.user.username

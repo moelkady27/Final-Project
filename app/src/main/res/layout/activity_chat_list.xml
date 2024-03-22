@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
+        app:cardElevation="5dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintStart_toStartOf="@id/toolbar_message"
         app:layout_constraintEnd_toEndOf="@id/toolbar_message"
@@ -44,6 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:iconifiedByDefault="false"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             app:queryBackground="@android:color/transparent" />
 
     </com.google.android.material.card.MaterialCardView>
