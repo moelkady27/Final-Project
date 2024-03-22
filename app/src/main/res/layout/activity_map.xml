@@ -59,20 +59,6 @@
 
     </androidx.cardview.widget.CardView>
 
-<!--    <SearchView-->
-<!--        android:id="@+id/searchView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="70dp"-->
-<!--        android:layout_marginStart="24dp"-->
-<!--        android:layout_marginTop="24dp"-->
-<!--        android:layout_marginEnd="24dp"-->
-<!--        android:background="@drawable/button_background_edit"-->
-<!--        android:iconifiedByDefault="false"-->
-<!--        android:queryHint="Enter your location"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/btnConfirmLocation"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
         android:layout_width="0dp"

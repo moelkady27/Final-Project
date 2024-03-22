@@ -26,9 +26,13 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.widget.AutocompleteFragment
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+//import com.google.android.libraries.places.api.Places
+//import com.google.android.libraries.places.api.model.Place
+//import com.google.android.libraries.places.widget.AutocompleteFragment
+//import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+//import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_map.btnConfirmLocation
 import kotlinx.android.synthetic.main.activity_map.btnCurrentLocation
@@ -61,7 +65,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         autocompleteFragment = supportFragmentManager.findFragmentById(R.id.search)
                 as AutocompleteSupportFragment
         autocompleteFragment.setPlaceFields(listOf(Place.Field.ID , Place.Field.ADDRESS , Place.Field.LAT_LNG))
-        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener{
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onError(p0: Status) {
                 Toast.makeText(this@MapActivity , "There is Error on Search" , Toast.LENGTH_LONG).show()
             }
@@ -70,6 +74,9 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
                 val latLng = place.latLng
                 addMarkerToMap(latLng, place.address ?: "")
                 zoomOnMap(latLng!!)
+
+                selectedLocation = latLng
+                locationSelected = true
             }
         })
 
