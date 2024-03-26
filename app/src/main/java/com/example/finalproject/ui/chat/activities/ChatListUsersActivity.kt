@@ -14,11 +14,16 @@ import com.example.finalproject.socket.SocketHandler
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.chat.adapter.ChatListAdapter
+import com.example.finalproject.ui.chat.db.ChatUsersDatabase
+import com.example.finalproject.ui.chat.db.MessageConversationDatabase
 import com.example.finalproject.ui.chat.models.ChatUser
 import com.example.finalproject.ui.chat.models.Image
 import com.example.finalproject.ui.chat.models.LastMessage
 import com.example.finalproject.ui.chat.models.Message
 import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModel
+import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModelFactory
+import com.example.finalproject.ui.chat.viewModels.ChattingViewModel
+import com.example.finalproject.ui.chat.viewModels.MessageConversationViewModeFactory
 import kotlinx.android.synthetic.main.activity_chat_list.sv_user_chat_list
 import kotlinx.android.synthetic.main.activity_chat_list.toolbar_message
 import org.json.JSONArray
@@ -35,16 +40,40 @@ class ChatListUsersActivity : BaseActivity() {
 
     private lateinit var socketHandler: SocketHandler
 
+    private lateinit var chatUsersDatabase: ChatUsersDatabase
+
+
+//    private lateinit var chattingViewModel: ChattingViewModel
+//
+//    private lateinit var messageConversationDatabase: MessageConversationDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_chat_list)
 
-        chatListUsersViewModel = ViewModelProvider(this@ChatListUsersActivity).get(ChatListUsersViewModel::class.java)
+//        chatListUsersViewModel = ViewModelProvider(this@ChatListUsersActivity).get(ChatListUsersViewModel::class.java)
+
+        chatUsersDatabase = ChatUsersDatabase.getInstance(this)
+
+        val factory = ChatListUsersViewModelFactory(chatUsersDatabase)
+        chatListUsersViewModel = ViewModelProvider(this, factory).get(ChatListUsersViewModel::class.java)
+
+        chatListUsersViewModel.getChatUsers(AppReferences.getToken(this@ChatListUsersActivity))
+
+//        messageConversationDatabase = MessageConversationDatabase.getInstance(this)
+//
+//        chattingViewModel = ViewModelProvider(this, MessageConversationViewModeFactory(messageConversationDatabase)).get(ChattingViewModel::class.java)
 
         chatListUsersViewModel.getChatUsers(AppReferences.getToken(this@ChatListUsersActivity))
 
         observeChatUsers()
+
+        chatListUsersViewModel.observeChatUsersLiveData().observe(this@ChatListUsersActivity, Observer { chatList ->
+            if (chatList.isNotEmpty()) {
+                chatListUsersViewModel.cacheChatUsers(chatList)
+            }
+        })
 
         getRecycleView()
 
@@ -156,6 +185,9 @@ class ChatListUsersActivity : BaseActivity() {
             intent.putExtra("ChatUserImage" , user.image.url)
             intent.putExtra("ReceiverId" , user._id)
             intent.putExtra("SenderId" , user.lastMessage.senderId)
+
+//            chattingViewModel.getCachedConversation(user.lastMessage.senderId, user._id)
+
             startActivity(intent)
         }
         recyclerView.layoutManager = LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false)
@@ -169,6 +201,15 @@ class ChatListUsersActivity : BaseActivity() {
             adapter.notifyDataSetChanged()
         })
     }
+//    private fun observeChatUsers() {
+//        chatListUsersViewModel.observeChatUsersLiveData().observe(this@ChatListUsersActivity, Observer { chatList ->
+//            if (chatList.isNotEmpty()) {
+//                adapter.setChatUserList(chatList)
+//                adapter.notifyDataSetChanged()
+////                chatListUsersViewModel.cacheChatUsers(chatList)
+//            }
+//        })
+//    }
 
     private fun searchForUsers(query: String) {
         if (query.isEmpty()) {
