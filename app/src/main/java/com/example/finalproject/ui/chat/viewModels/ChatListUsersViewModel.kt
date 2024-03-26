@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.ui.chat.db.ChatUsersDatabase
-import com.example.finalproject.ui.chat.db.MessageConversationDatabase
 import com.example.finalproject.ui.chat.models.ChatListUsersResponse
 import com.example.finalproject.ui.chat.models.ChatUser
 import kotlinx.coroutines.CoroutineScope

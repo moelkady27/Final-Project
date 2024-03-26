@@ -106,7 +106,7 @@ class ChatActivity : AppCompatActivity() {
                     )
 
                     runOnUiThread {
-                        adapter.addReceivedMessage(messageChatting)
+                        adapter.addReceivedMessage(messageChatting, receiverId)
                         recyclerView.scrollToPosition(adapter.itemCount - 1)
                     }
                 }

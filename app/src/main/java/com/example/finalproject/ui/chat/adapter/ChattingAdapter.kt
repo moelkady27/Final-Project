@@ -58,11 +58,13 @@ class ChattingAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addReceivedMessage(message: MessageChatting) {
-        messageChattingList = messageChattingList.toMutableList().apply {
-            add(message)
+    fun addReceivedMessage(message: MessageChatting, currentReceiverId: String) {
+        if (message.senderId == currentReceiverId) {
+            messageChattingList = messageChattingList.toMutableList().apply {
+                add(message)
+            }
+            notifyDataSetChanged()
         }
-        notifyDataSetChanged()
     }
 
 

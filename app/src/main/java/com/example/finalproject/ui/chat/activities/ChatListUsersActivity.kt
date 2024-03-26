@@ -15,7 +15,7 @@ import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.chat.adapter.ChatListAdapter
 import com.example.finalproject.ui.chat.db.ChatUsersDatabase
-import com.example.finalproject.ui.chat.db.MessageConversationDatabase
+//import com.example.finalproject.ui.chat.db.MessageConversationDatabase
 import com.example.finalproject.ui.chat.models.ChatUser
 import com.example.finalproject.ui.chat.models.Image
 import com.example.finalproject.ui.chat.models.LastMessage
@@ -23,12 +23,14 @@ import com.example.finalproject.ui.chat.models.Message
 import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModel
 import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModelFactory
 import com.example.finalproject.ui.chat.viewModels.ChattingViewModel
-import com.example.finalproject.ui.chat.viewModels.MessageConversationViewModeFactory
+//import com.example.finalproject.ui.chat.viewModels.MessageConversationViewModeFactory
 import kotlinx.android.synthetic.main.activity_chat_list.sv_user_chat_list
 import kotlinx.android.synthetic.main.activity_chat_list.toolbar_message
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.util.Timer
+import java.util.TimerTask
 
 class ChatListUsersActivity : BaseActivity() {
 
@@ -46,6 +48,9 @@ class ChatListUsersActivity : BaseActivity() {
 //    private lateinit var chattingViewModel: ChattingViewModel
 //
 //    private lateinit var messageConversationDatabase: MessageConversationDatabase
+
+    private lateinit var timer: Timer
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,8 +70,6 @@ class ChatListUsersActivity : BaseActivity() {
 //
 //        chattingViewModel = ViewModelProvider(this, MessageConversationViewModeFactory(messageConversationDatabase)).get(ChattingViewModel::class.java)
 
-        chatListUsersViewModel.getChatUsers(AppReferences.getToken(this@ChatListUsersActivity))
-
         observeChatUsers()
 
         chatListUsersViewModel.observeChatUsersLiveData().observe(this@ChatListUsersActivity, Observer { chatList ->
@@ -78,6 +81,8 @@ class ChatListUsersActivity : BaseActivity() {
         getRecycleView()
 
         setupActionBar()
+
+        startTimer()
 
         socketHandler = SocketHandler(this@ChatListUsersActivity)
 
@@ -112,7 +117,6 @@ class ChatListUsersActivity : BaseActivity() {
 
                 socketHandler.on("newMessage") { args ->
                     val data = args["newMessage"] as JSONObject
-                    Log.e("New Message Received", data.toString())
 
                     val chatUser = ChatUser(
                         _id = data.optString("_id"),
@@ -137,7 +141,9 @@ class ChatListUsersActivity : BaseActivity() {
                     )
 
                     runOnUiThread {
-
+                        adapter.updateLastMessage(
+                            chatUser.lastMessage.senderId,
+                            chatUser.lastMessage.message.text)
                     }
                 }
 
@@ -160,7 +166,11 @@ class ChatListUsersActivity : BaseActivity() {
             }
         })
 
+    }
 
+    override fun onResume() {
+        super.onResume()
+        chatListUsersViewModel.getChatUsers(AppReferences.getToken(this@ChatListUsersActivity))
     }
 
     private fun setupActionBar() {
@@ -177,6 +187,15 @@ class ChatListUsersActivity : BaseActivity() {
         }
     }
 
+    private fun startTimer() {
+        timer = Timer()
+        timer.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                chatListUsersViewModel.getChatUsers(AppReferences.getToken(this@ChatListUsersActivity))
+            }
+        }, DELAY, INTERVAL)
+    }
+
     private fun getRecycleView() {
         recyclerView = findViewById(R.id.recycle_messages)
         adapter = ChatListAdapter{user ->
@@ -184,7 +203,11 @@ class ChatListUsersActivity : BaseActivity() {
             intent.putExtra("ChatUserFullName" , user.fullName)
             intent.putExtra("ChatUserImage" , user.image.url)
             intent.putExtra("ReceiverId" , user._id)
-            intent.putExtra("SenderId" , user.lastMessage.senderId)
+            intent.putExtra("SenderId" , AppReferences.getUserId(this))
+
+            Log.e("ReceiverId", user._id)
+            Log.e("SenderId", AppReferences.getUserId(this))
+
 
 //            chattingViewModel.getCachedConversation(user.lastMessage.senderId, user._id)
 
@@ -198,7 +221,6 @@ class ChatListUsersActivity : BaseActivity() {
     private fun observeChatUsers() {
         chatListUsersViewModel.observeChatUsersLiveData().observe(this@ChatListUsersActivity , Observer { chatList->
             adapter.setChatUserList(chatList)
-            adapter.notifyDataSetChanged()
         })
     }
 //    private fun observeChatUsers() {
@@ -219,5 +241,8 @@ class ChatListUsersActivity : BaseActivity() {
         }
     }
 
-
+    companion object {
+        private const val DELAY: Long = 0
+        private const val INTERVAL: Long = 500
+    }
 }

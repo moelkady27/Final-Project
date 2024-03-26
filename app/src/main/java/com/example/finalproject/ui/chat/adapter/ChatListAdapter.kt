@@ -1,6 +1,7 @@
 package com.example.finalproject.ui.chat.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,6 +59,16 @@ class ChatListAdapter(
             }
         }
         notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateLastMessage(userId: String, lastMessage: String) {
+        Log.e("ChatListAdapter", "Updating last message for user: $userId, message: $lastMessage")
+        val chatUser = filteredList.find { it._id == userId }
+        chatUser?.let {
+            it.lastMessage.message.text = lastMessage
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
