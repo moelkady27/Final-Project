@@ -22,6 +22,7 @@ import com.example.finalproject.ui.password.activities.ChangePasswordActivity
 import com.example.finalproject.ui.setting.activities.DeleteAccountActivity
 import com.example.finalproject.ui.profile.activities.EditProfileActivity
 import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
+import com.example.finalproject.ui.search.SearchUsersActivity
 import com.example.finalproject.ui.setting.viewModels.LogOutViewModels
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.fragment_settings.btn_change_password
@@ -32,6 +33,7 @@ import kotlinx.android.synthetic.main.fragment_settings.btn_favourites
 import kotlinx.android.synthetic.main.fragment_settings.btn_logout
 import kotlinx.android.synthetic.main.fragment_settings.btn_notification
 import kotlinx.android.synthetic.main.fragment_settings.iv_user_settings
+import kotlinx.android.synthetic.main.fragment_settings.search_for_user
 import kotlinx.android.synthetic.main.fragment_settings.tv_email_name
 import kotlinx.android.synthetic.main.fragment_settings.tv_user_name
 import org.json.JSONException
@@ -213,6 +215,12 @@ class SettingsFragment : Fragment() {
 
             // TODO START ACTIVITY HERE WHEN I CREATE IT
 
+            resetButtonColor(btn_chats)
+        }
+
+        search_for_user.setOnClickListener {
+            val intent = Intent(requireContext(), SearchUsersActivity::class.java)
+            startActivity(intent)
             resetButtonColor(btn_chats)
         }
     }

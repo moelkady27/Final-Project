@@ -34,6 +34,7 @@ import com.example.finalproject.ui.register.models.VerificationCodeSignUpRespons
 import com.example.finalproject.ui.register.request.SignInRequest
 import com.example.finalproject.ui.register.request.SignUpRequest
 import com.example.finalproject.ui.register.request.VerificationCodeSignUpRequest
+import com.example.finalproject.ui.search.SearchResponse
 import com.example.finalproject.ui.setting.models.DeleteAccountResponse
 import com.example.finalproject.ui.setting.request.DeleteAccountRequest
 import okhttp3.MultipartBody
@@ -192,4 +193,11 @@ interface ApiService {
         @Path("messageId") messageId: String,
         @Body req: EditMessageRequest
     ): Call<EditMessageResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("api/v1/chat/search-users")
+    fun search(
+        @Header("Authorization") token: String,
+        @Query("search") search: String,
+    ) : Call<SearchResponse>
 }
