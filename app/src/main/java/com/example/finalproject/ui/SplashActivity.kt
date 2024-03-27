@@ -10,7 +10,6 @@ import com.example.finalproject.R
 import com.example.finalproject.socket.SocketHandler
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.ui.chat.models.MessageChatting
-import com.example.finalproject.ui.chat.models.Messages
 import org.json.JSONException
 import org.json.JSONObject
 

@@ -14,9 +14,10 @@ import com.example.finalproject.R
 import com.example.finalproject.socket.SocketHandler
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.ui.chat.adapter.ChattingAdapter
+import com.example.finalproject.ui.chat.db.ChatDatabase
 import com.example.finalproject.ui.chat.models.MessageChatting
-import com.example.finalproject.ui.chat.models.Messages
 import com.example.finalproject.ui.chat.viewModels.ChattingViewModel
+import com.example.finalproject.ui.chat.viewModels.ChattingViewModelFactory
 import kotlinx.android.synthetic.main.activity_chat.et_type_a_messages
 import kotlinx.android.synthetic.main.activity_chat.floatingActionButtonOnlineOnChat
 import kotlinx.android.synthetic.main.activity_chat.iv_send
@@ -37,11 +38,16 @@ class ChatActivity : AppCompatActivity() {
 
     private lateinit var socketHandler: SocketHandler
 
+    private lateinit var chatDatabase: ChatDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
-        chatViewModel = ViewModelProvider(this@ChatActivity).get(ChattingViewModel::class.java)
+        chatDatabase = ChatDatabase.getInstance(this)
+
+        val factory = ChattingViewModelFactory(chatDatabase)
+        chatViewModel = ViewModelProvider(this, factory).get(ChattingViewModel::class.java)
 
         socketHandler = SocketHandler(this@ChatActivity)
 
@@ -85,49 +91,44 @@ class ChatActivity : AppCompatActivity() {
 
         socketHandler.connect { isConnected ->
             if (isConnected) {
-                Log.e("Socket", "Socket connected")
-
                 socketHandler.on("newMessage") { args ->
-                    val data = args["newMessage"] as JSONObject
-                    Log.e("New Message Received", data.toString())
+                    val data = args["newMessage"] as? JSONObject
+                    Log.d("Data object", data.toString())
 
-                    val messageChatting = MessageChatting(
-                        __v = data.optInt("__v"),
-                        _id = data.optString("_id"),
-                        createdAt = data.optString("createdAt"),
-                        message = Messages(
-                            text = data.optJSONObject("message")!!.optString("text"),
-                            media = emptyList()
-
-                        ),
-                        receiverId = data.optString("receiverId"),
-                        senderId = data.optString("senderId"),
-                        updatedAt = data.optString("updatedAt")
-                    )
-
-                    runOnUiThread {
-                        adapter.addReceivedMessage(messageChatting, receiverId)
-                        recyclerView.scrollToPosition(adapter.itemCount - 1)
-                    }
-                }
-
-                socketHandler.on("messageDeleted") { args ->
-                    val messageId = args.getString("_id")
-                    adapter.removeMessageById(messageId)
-                }
-
-                socketHandler.on("messageEdited") { args ->
-                    try {
-                        val messageId = args.getString("_id")
-                        val editedMessage = args.getJSONObject("message").optString("text", "")
-
+                    data?.let {
+                        val messageChatting = MessageChatting(
+                            _id = it.optString("_id"),
+                            createdAt = it.optString("createdAt"),
+                            media = emptyList(),
+                            messageContent = it.optString("messageContent", ""),
+                            receiverId = it.optString("receiverId"),
+                            senderId = it.optString("senderId"),
+                            updatedAt = it.optString("updatedAt")
+                        )
                         runOnUiThread {
-                            adapter.editMessageById(messageId, editedMessage)
+                            adapter.addReceivedMessage(messageChatting, receiverId)
+                            recyclerView.scrollToPosition(adapter.itemCount - 1)
                         }
-                    } catch (e: JSONException) {
-                        Log.e("Socket", "JSONException: ${e.message}")
                     }
                 }
+
+//                socketHandler.on("messageDeleted") { args ->
+//                    val messageId = args.getString("_id")
+//                    adapter.removeMessageById(messageId)
+//                }
+//
+//                socketHandler.on("messageEdited") { args ->
+//                    try {
+//                        val messageId = args.getString("_id")
+//                        val editedMessage = args.getJSONObject("message").optString("text", "")
+//
+//                        runOnUiThread {
+//                            adapter.editMessageById(messageId, editedMessage)
+//                        }
+//                    } catch (e: JSONException) {
+//                        Log.e("Socket", "JSONException: ${e.message}")
+//                    }
+//                }
 
                 socketHandler.onOnline("getOnlineUsers") { data ->
                     try {
@@ -184,7 +185,7 @@ class ChatActivity : AppCompatActivity() {
 
     private fun setUpRecyclerView() {
         recyclerView = findViewById(R.id.rv_chat)
-        adapter = ChattingAdapter(this@ChatActivity , chatViewModel)
+        adapter = ChattingAdapter(this@ChatActivity, chatViewModel)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
     }

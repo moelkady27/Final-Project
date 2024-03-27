@@ -1,10 +1,10 @@
 package com.example.finalproject.retrofit
 
 import com.example.finalproject.ui.chat.models.ChatListUsersResponse
-import com.example.finalproject.ui.chat.models.ChattingResponse
 import com.example.finalproject.ui.chat.models.DeleteMessageResponse
 import com.example.finalproject.ui.chat.models.EditMessageResponse
 import com.example.finalproject.ui.chat.models.GetConversationResponse
+import com.example.finalproject.ui.chat.models.SendMessageResponse
 import com.example.finalproject.ui.chat.request.EditMessageRequest
 import com.example.finalproject.ui.chat.request.SendMessageRequest
 import com.example.finalproject.ui.complete_register.models.CompleteSignUpResponse
@@ -173,7 +173,7 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("receiverId") receiverId: String,
         @Body req: SendMessageRequest
-    ): Call<ChattingResponse>
+    ): Call<SendMessageResponse>
 
     @GET("api/v1/chat/get-conversation/{receiverId}")
     fun getConversation(

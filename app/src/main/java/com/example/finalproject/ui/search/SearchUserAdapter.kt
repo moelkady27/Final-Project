@@ -1,14 +1,11 @@
 package com.example.finalproject.ui.search
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
-import com.example.finalproject.ui.chat.models.ChatUser
-import kotlinx.android.synthetic.main.each_row_chat_list.view.image_chat_list
 import kotlinx.android.synthetic.main.each_row_search.view.image_chat_list_search
 import kotlinx.android.synthetic.main.each_row_search.view.message_list_name_search
 import java.util.Locale

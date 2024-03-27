@@ -66,7 +66,7 @@ class ChatListAdapter(
         Log.e("ChatListAdapter", "Updating last message for user: $userId, message: $lastMessage")
         val chatUser = filteredList.find { it._id == userId }
         chatUser?.let {
-            it.lastMessage.message.text = lastMessage
+            it.lastMessage.messageContent = lastMessage
             notifyDataSetChanged()
         }
     }
@@ -91,7 +91,7 @@ class ChatListAdapter(
         val isActiveChat = activeChatUserIds.contains(chatUser._id)
 
         holder.itemView.message_list_name.text = chatUser.fullName
-        holder.itemView.message_list_content.text = chatUser.lastMessage.message.text
+        holder.itemView.message_list_content.text = chatUser.lastMessage.messageContent
 
         val formattedTime = formatTime(chatUser.lastMessage.createdAt)
         holder.itemView.message_list_time.text = formattedTime

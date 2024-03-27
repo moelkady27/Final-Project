@@ -15,11 +15,10 @@ import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.chat.adapter.ChatListAdapter
 import com.example.finalproject.ui.chat.db.ChatUsersDatabase
-//import com.example.finalproject.ui.chat.db.MessageConversationDatabase
 import com.example.finalproject.ui.chat.models.ChatUser
+//import com.example.finalproject.ui.chat.db.MessageConversationDatabase
 import com.example.finalproject.ui.chat.models.Image
 import com.example.finalproject.ui.chat.models.LastMessage
-import com.example.finalproject.ui.chat.models.Message
 import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModel
 import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModelFactory
 import com.example.finalproject.ui.chat.viewModels.ChattingViewModel
@@ -44,11 +43,6 @@ class ChatListUsersActivity : BaseActivity() {
 
     private lateinit var chatUsersDatabase: ChatUsersDatabase
 
-
-//    private lateinit var chattingViewModel: ChattingViewModel
-//
-//    private lateinit var messageConversationDatabase: MessageConversationDatabase
-
     private lateinit var timer: Timer
 
 
@@ -57,18 +51,12 @@ class ChatListUsersActivity : BaseActivity() {
 
         setContentView(R.layout.activity_chat_list)
 
-//        chatListUsersViewModel = ViewModelProvider(this@ChatListUsersActivity).get(ChatListUsersViewModel::class.java)
-
         chatUsersDatabase = ChatUsersDatabase.getInstance(this)
 
         val factory = ChatListUsersViewModelFactory(chatUsersDatabase)
         chatListUsersViewModel = ViewModelProvider(this, factory).get(ChatListUsersViewModel::class.java)
 
         chatListUsersViewModel.getChatUsers(AppReferences.getToken(this@ChatListUsersActivity))
-
-//        messageConversationDatabase = MessageConversationDatabase.getInstance(this)
-//
-//        chattingViewModel = ViewModelProvider(this, MessageConversationViewModeFactory(messageConversationDatabase)).get(ChattingViewModel::class.java)
 
         observeChatUsers()
 
@@ -118,33 +106,45 @@ class ChatListUsersActivity : BaseActivity() {
                 socketHandler.on("newMessage") { args ->
                     val data = args["newMessage"] as JSONObject
 
-                    val chatUser = ChatUser(
-                        _id = data.optString("_id"),
-                        fullName = data.optString("fullName"),
-                        image = Image(
-                            public_id = data.optString("public_id"),
-                            url = data.optString("url")
-                        ),
-                        lastMessage = LastMessage(
-                            __v = data.optInt("__v"),
-                            _id = data.optString("_id"),
-                            createdAt = data.optString("createdAt"),
-                            message = Message(
-                                text = data.optJSONObject("message")!!.optString("text"),
-                                media = emptyList()
-                            ),
-                            receiverId = data.optString("receiverId"),
-                            senderId = data.optString("senderId"),
-                            updatedAt = data.optString("updatedAt")
-                        ),
-                        username = data.optString("username")
+                    val chatUserId = data.optString("_id")
+                    val fullName = data.optString("fullName")
+                    val imageUrl = data.optString("url")
+                    val messageText = data.optString("text")
+                    val createdAt = data.optString("createdAt")
+                    val senderId = data.optString("senderId")
+
+                    val image = Image(public_id = "", url = imageUrl)
+
+                    val lastMessage = LastMessage(
+                        _id = "",
+                        createdAt = createdAt,
+                        media = emptyList(),
+                        messageContent = messageText,
+                        receiverId = "",
+                        senderId = senderId,
+                        updatedAt = ""
                     )
 
+                    val chatUser = ChatUser(
+                        _id = chatUserId,
+                        fullName = fullName,
+                        image = image,
+                        lastMessage = lastMessage,
+                        username = ""
+                    )
+
+//                    runOnUiThread {
+//                        adapter.updateLastMessage(senderId, messageText)
+//                    }
+
                     runOnUiThread {
-                        adapter.updateLastMessage(
-                            chatUser.lastMessage.senderId,
-                            chatUser.lastMessage.message.text)
+                        chatUser?.lastMessage?.let { lastMessage ->
+                            adapter.updateLastMessage(
+                                lastMessage.senderId ?: "",
+                                lastMessage.messageContent ?: "")
+                        }
                     }
+
                 }
 
             } else {

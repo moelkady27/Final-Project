@@ -9,7 +9,6 @@ import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.ui.chat.db.ChatUsersDatabase
 import com.example.finalproject.ui.chat.models.ChatListUsersResponse
 import com.example.finalproject.ui.chat.models.ChatUser
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -26,8 +25,6 @@ class ChatListUsersViewModel(
     fun getChatUsers(token: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val chatUsers = chatUsersDatabase.chatUsersDao().getChatUsers()
-
-            Log.e("CachedMessages", "Retrieved ${chatUsers.size} chatUsers from cache")
 
             if (chatUsers.isNotEmpty()) {
                 chatUsersLiveData.postValue(chatUsers)
