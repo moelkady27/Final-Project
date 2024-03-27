@@ -17,6 +17,9 @@ import com.example.finalproject.ui.chat.viewModels.ChattingViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.delete_message_dialog.view.btn_cancel_message
 import kotlinx.android.synthetic.main.delete_message_dialog.view.btn_delete_message
+import kotlinx.android.synthetic.main.edit_message_dialog.view.btn_cancel_message_edit
+import kotlinx.android.synthetic.main.edit_message_dialog.view.et_type_a_messages_edit
+import kotlinx.android.synthetic.main.edit_message_dialog.view.iv_send_edit
 import kotlinx.android.synthetic.main.message_options_dialog.view.ll_delete_message_option
 import kotlinx.android.synthetic.main.message_options_dialog.view.ll_edit_message_option
 import kotlinx.android.synthetic.main.my_message.view.*
@@ -113,7 +116,6 @@ class ChattingAdapter(
             when (holder.itemViewType) {
                 VIEW_TYPE_MY_MESSAGE -> {
                     holder.itemView.apply {
-//                        txtMyMessage.text = message.message.text
                         txtMyMessage.text = message.messageContent
                         txtMyMessageTime.text = formatTime(message.createdAt)
                     }
@@ -124,7 +126,6 @@ class ChattingAdapter(
                 }
                 VIEW_TYPE_OTHER_MESSAGE -> {
                     holder.itemView.apply {
-//                        txtOtherMessage.text = message.message.text
                         txtOtherMessage.text = message.messageContent
                         txtOtherMessageTime.text = formatTime(message.createdAt)
                     }
@@ -135,7 +136,6 @@ class ChattingAdapter(
             when (holder.itemViewType) {
                 VIEW_TYPE_MY_MESSAGE -> {
                     holder.itemView.apply {
-//                        txtMyMessage.text = message.message.text
                         txtMyMessage.text = message.messageContent
                         txtMyMessageTime.text = formatTime(message.createdAt)
                     }
@@ -146,7 +146,6 @@ class ChattingAdapter(
                 }
                 VIEW_TYPE_OTHER_MESSAGE -> {
                     holder.itemView.apply {
-//                        txtOtherMessage.text = message.message.text
                         txtOtherMessage.text = message.messageContent
                         txtOtherMessageTime.text = formatTime(message.createdAt)
                     }
@@ -178,7 +177,7 @@ class ChattingAdapter(
 
         editMessageOption.setOnClickListener {
             bottomSheetDialog.dismiss()
-//            showEditMessageDialog(message)
+            showEditMessageDialog(message)
         }
 
         deleteMessageOption.setOnClickListener {
@@ -246,72 +245,74 @@ class ChattingAdapter(
     }
 
 
-//    private fun showEditMessageDialog(message: Any) {
-//        val bottomSheetDialog = BottomSheetDialog(context, R.style.BottomSheetDialog)
-//        val editDialogView =
-//            LayoutInflater.from(context).inflate(R.layout.edit_message_dialog, null)
-//        val editMessage = editDialogView.et_type_a_messages_edit
-//
-//        editDialogView.background =
-//            ContextCompat.getDrawable(context, R.drawable.message_options_dialog_background)
-//
-//        when (message) {
-//            is MessageConversation -> editMessage.setText(message.message.text)
-//            is MessageChatting -> editMessage.setText(message.message.text)
-//            else -> return
-//        }
-//
-//        bottomSheetDialog.setContentView(editDialogView)
-//
-//        val btnSendEdit = editDialogView.iv_send_edit
-//        val btnCancelMessageEdit = editDialogView.btn_cancel_message_edit
-//
-//        btnSendEdit.setOnClickListener {
-//            val editedMessage = editMessage.text.toString().trim()
-//            if (editedMessage.isNotEmpty()) {
-//                val token = AppReferences.getToken(context)
-//
-//                val messageId = when (message) {
-//                    is MessageConversation -> message._id
-//                    is MessageChatting -> message._id
-//                    else -> null
-//                }
-//
-//                messageId?.let {
-//                    viewModel.editMessage(token, it, editedMessage)
-//                    editMessageById(it, editedMessage)
-//                }
-//            } else {
-//                editMessage.error = "Edit Message cannot be empty"
-//                return@setOnClickListener
-//            }
-//
-//            bottomSheetDialog.dismiss()
-//        }
-//
-//        btnCancelMessageEdit.setOnClickListener {
-//            bottomSheetDialog.dismiss()
-//        }
-//
-//        bottomSheetDialog.show()
-//    }
-//
-//    fun editMessageById(messageId: String, editedMessage: String) {
-//        val position = messagesList.indexOfFirst { it._id == messageId }
-//        if (position != -1) {
+    private fun showEditMessageDialog(message: Any) {
+        val bottomSheetDialog = BottomSheetDialog(context, R.style.BottomSheetDialog)
+        val editDialogView =
+            LayoutInflater.from(context).inflate(R.layout.edit_message_dialog, null)
+        val editMessage = editDialogView.et_type_a_messages_edit
+
+        editDialogView.background =
+            ContextCompat.getDrawable(context, R.drawable.message_options_dialog_background)
+
+        when (message) {
+            is MessageConversation -> editMessage.setText(message.messageContent)
+            is MessageChatting -> editMessage.setText(message.messageContent)
+            else -> return
+        }
+
+        bottomSheetDialog.setContentView(editDialogView)
+
+        val btnSendEdit = editDialogView.iv_send_edit
+        val btnCancelMessageEdit = editDialogView.btn_cancel_message_edit
+
+        btnSendEdit.setOnClickListener {
+            val editedMessage = editMessage.text.toString().trim()
+            if (editedMessage.isNotEmpty()) {
+                val token = AppReferences.getToken(context)
+
+                val messageId = when (message) {
+                    is MessageConversation -> message._id
+                    is MessageChatting -> message._id
+                    else -> null
+                }
+
+                messageId?.let {
+                    viewModel.editMessage(token, it, editedMessage)
+                    editMessageById(it, editedMessage)
+                }
+            } else {
+                editMessage.error = "Edit Message cannot be empty"
+                return@setOnClickListener
+            }
+
+            bottomSheetDialog.dismiss()
+        }
+
+        btnCancelMessageEdit.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+
+        bottomSheetDialog.show()
+    }
+
+    fun editMessageById(messageId: String, editedMessage: String) {
+        val position = messagesList.indexOfFirst { it._id == messageId }
+        if (position != -1) {
 //            messagesList[position].message.text = editedMessage
-//            val token = AppReferences.getToken(context)
-//            viewModel.editMessage(token, messageId, editedMessage)
-//            notifyItemChanged(position)
-//        } else {
-//            val chatMessagePosition = messageChattingList.indexOfFirst { it._id == messageId }
-//            if (chatMessagePosition != -1) {
+            messagesList[position].messageContent = editedMessage
+            val token = AppReferences.getToken(context)
+            viewModel.editMessage(token, messageId, editedMessage)
+            notifyItemChanged(position)
+        } else {
+            val chatMessagePosition = messageChattingList.indexOfFirst { it._id == messageId }
+            if (chatMessagePosition != -1) {
 //                messageChattingList[chatMessagePosition].message.text = editedMessage
-//                val token = AppReferences.getToken(context)
-//                viewModel.editMessage(token, messageId, editedMessage)
-//                notifyItemChanged(messagesList.size + chatMessagePosition)
-//            }
-//        }
-//    }
+                messageChattingList[chatMessagePosition].messageContent = editedMessage
+                val token = AppReferences.getToken(context)
+                viewModel.editMessage(token, messageId, editedMessage)
+                notifyItemChanged(messagesList.size + chatMessagePosition)
+            }
+        }
+    }
 
 }

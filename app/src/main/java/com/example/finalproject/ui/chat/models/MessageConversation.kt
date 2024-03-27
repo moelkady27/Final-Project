@@ -12,7 +12,7 @@ data class MessageConversation(
 //    val media: List<Any>,
     val media: List<MediaBrowser.MediaItem>, // Update the type to MediaBrowser.MediaItem
 
-    val messageContent: String,
+    var messageContent: String,
     val receiverId: String,
     val senderId: String,
     val updatedAt: String

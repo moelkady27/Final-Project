@@ -8,10 +8,13 @@ import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.ui.chat.db.ChatDatabase
 import com.example.finalproject.ui.chat.models.Chat
 import com.example.finalproject.ui.chat.models.DeleteMessageResponse
+import com.example.finalproject.ui.chat.models.EditMessageResponse
 import com.example.finalproject.ui.chat.models.GetConversationResponse
 import com.example.finalproject.ui.chat.models.MessageChatting
 import com.example.finalproject.ui.chat.models.MessageConversation
 import com.example.finalproject.ui.chat.models.SendMessageResponse
+import com.example.finalproject.ui.chat.models.UpdatedMessage
+import com.example.finalproject.ui.chat.request.EditMessageRequest
 import com.example.finalproject.ui.chat.request.SendMessageRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +32,7 @@ class ChattingViewModel(
 
     private val deleteMessageResponseLiveData: MutableLiveData<DeleteMessageResponse> = MutableLiveData()
 
-//    private val editMessageResponseLiveData = MutableLiveData<List<UpdatedMessage>>()
+    private val editMessageResponseLiveData = MutableLiveData<List<UpdatedMessage>>()
 
     private val errorLiveData = MutableLiveData<String>()
 
@@ -115,32 +118,32 @@ class ChattingViewModel(
             })
     }
 
-//    fun editMessage(token: String, messageId: String, messageContent: String){
-//        val data = EditMessageRequest(messageContent)
-//
-//        RetrofitClient.instance.editMessage("Bearer $token", messageId, data)
-//            .enqueue(object : Callback<EditMessageResponse>{
-//                override fun onResponse(
-//                    call: Call<EditMessageResponse>,
-//                    response: Response<EditMessageResponse>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        val updatedMessage = response.body()?.updatedMessage
-//                        updatedMessage?.let {
-//                            editMessageResponseLiveData.value = listOf(it)
-//                        }
-//                    } else {
-//                        errorLiveData.value = response.errorBody()?.string()
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<EditMessageResponse>, t: Throwable) {
-//                    errorLiveData.value = t.message
-//                }
-//
-//            })
-//
-//    }
+    fun editMessage(token: String, messageId: String, messageContent: String){
+        val data = EditMessageRequest(messageContent)
+
+        RetrofitClient.instance.editMessage("Bearer $token", messageId, data)
+            .enqueue(object : Callback<EditMessageResponse>{
+                override fun onResponse(
+                    call: Call<EditMessageResponse>,
+                    response: Response<EditMessageResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val updatedMessage = response.body()?.updatedMessage
+                        updatedMessage?.let {
+                            editMessageResponseLiveData.value = listOf(it)
+                        }
+                    } else {
+                        errorLiveData.value = response.errorBody()?.string()
+                    }
+                }
+
+                override fun onFailure(call: Call<EditMessageResponse>, t: Throwable) {
+                    errorLiveData.value = t.message
+                }
+
+            })
+
+    }
 
     fun observeChattingLiveData(): LiveData<List<MessageChatting>> {
         return chattingResponseLiveData
@@ -150,8 +153,8 @@ class ChattingViewModel(
         return getConversationResponseLiveData
     }
 
-//    fun observeEditMessageLiveData(): LiveData<List<UpdatedMessage>> {
-//        return editMessageResponseLiveData
-//    }
+    fun observeEditMessageLiveData(): LiveData<List<UpdatedMessage>> {
+        return editMessageResponseLiveData
+    }
 
 }

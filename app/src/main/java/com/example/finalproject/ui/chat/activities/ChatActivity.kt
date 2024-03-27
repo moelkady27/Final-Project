@@ -112,23 +112,24 @@ class ChatActivity : AppCompatActivity() {
                     }
                 }
 
-//                socketHandler.on("messageDeleted") { args ->
-//                    val messageId = args.getString("_id")
-//                    adapter.removeMessageById(messageId)
-//                }
-//
-//                socketHandler.on("messageEdited") { args ->
-//                    try {
-//                        val messageId = args.getString("_id")
-//                        val editedMessage = args.getJSONObject("message").optString("text", "")
-//
-//                        runOnUiThread {
-//                            adapter.editMessageById(messageId, editedMessage)
-//                        }
-//                    } catch (e: JSONException) {
-//                        Log.e("Socket", "JSONException: ${e.message}")
-//                    }
-//                }
+                socketHandler.on("messageDeleted") { args ->
+                    val messageId = args.getString("_id")
+                    adapter.removeMessageById(messageId)
+                }
+
+                socketHandler.on("messageEdited") { args ->
+                    Log.e("args" , args.toString())
+                    try {
+                        val messageId = args.getString("_id")
+                        val editedMessage = args.optString("messageContent" , "")
+
+                        runOnUiThread {
+                            adapter.editMessageById(messageId, editedMessage)
+                        }
+                    } catch (e: JSONException) {
+                        Log.e("Socket", "JSONException: ${e.message}")
+                    }
+                }
 
                 socketHandler.onOnline("getOnlineUsers") { data ->
                     try {
