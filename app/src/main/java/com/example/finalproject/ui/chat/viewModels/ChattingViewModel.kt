@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.chat.viewModels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,6 +19,7 @@ import com.example.finalproject.ui.chat.request.EditMessageRequest
 import com.example.finalproject.ui.chat.request.SendMessageRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,6 +65,29 @@ class ChattingViewModel(
             })
     }
 
+    fun sendImage(token: String, receiverId: String, images: List<MultipartBody.Part>) {
+        RetrofitClient.instance.sendImage("Bearer $token", receiverId, images)
+            .enqueue(object : Callback<SendMessageResponse> {
+                override fun onResponse(
+                    call: Call<SendMessageResponse>,
+                    response: Response<SendMessageResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val message = response.body()?.message
+                        message?.let {
+                            chattingResponseLiveData.value = listOf(it)
+                        }
+                    } else {
+                        errorLiveData.value = response.errorBody()?.string()
+                    }
+                }
+
+                override fun onFailure(call: Call<SendMessageResponse>, t: Throwable) {
+                    errorLiveData.value = t.message
+                }
+            })
+    }
+
     fun getConversation(token: String, receiverId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val cachedMessages = chatDatabase.chatDao().getChatById(receiverId)
@@ -79,6 +104,12 @@ class ChattingViewModel(
                         if (response.isSuccessful) {
                             val messages = response.body()?.chat?.messages
                             messages?.let {
+
+                                Log.e("ChattingViewModel", "Messages from response:")
+                                it.forEach { message ->
+                                    Log.e("ChattingViewModel", "Message: ${message}")
+                                    // Add more information if needed
+                                }
 
                                 val chat = Chat(_id = receiverId, messages = it)
                                 viewModelScope.launch(Dispatchers.IO) {

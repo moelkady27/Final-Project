@@ -200,4 +200,12 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("search") search: String,
     ) : Call<SearchResponse>
+
+    @Multipart
+    @POST("api/v1/chat/send/{receiverId}")
+    fun sendImage(
+        @Header("Authorization") token: String,
+        @Path("receiverId") receiverId: String,
+        @Part images: List<MultipartBody.Part>
+    ): Call<SendMessageResponse>
 }

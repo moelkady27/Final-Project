@@ -1,10 +1,19 @@
 package com.example.finalproject.ui.chat.activities
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,13 +29,19 @@ import com.example.finalproject.ui.chat.viewModels.ChattingViewModel
 import com.example.finalproject.ui.chat.viewModels.ChattingViewModelFactory
 import kotlinx.android.synthetic.main.activity_chat.et_type_a_messages
 import kotlinx.android.synthetic.main.activity_chat.floatingActionButtonOnlineOnChat
+import kotlinx.android.synthetic.main.activity_chat.iv_gallery_chat
 import kotlinx.android.synthetic.main.activity_chat.iv_send
 import kotlinx.android.synthetic.main.activity_chat.iv_user_chat
 import kotlinx.android.synthetic.main.activity_chat.toolbar_chat
 import kotlinx.android.synthetic.main.activity_chat.tv_user_name_chat
+import kotlinx.android.synthetic.main.activity_upload_photo.fl_from_gallery
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.File
 
 class ChatActivity : AppCompatActivity() {
 
@@ -39,6 +54,21 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var socketHandler: SocketHandler
 
     private lateinit var chatDatabase: ChatDatabase
+
+    private lateinit var selectedImage: String
+
+    private var REQUEST_CODE_GALLERY = 1
+
+    private val pickImageFromGallery =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let { uri ->
+                    selectedImage = getPathFromUri(uri)
+                    Log.e("image", selectedImage)
+
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,6 +117,17 @@ class ChatActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Please enter a message", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        iv_gallery_chat.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(this@ChatActivity,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this@ChatActivity,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_GALLERY)
+                return@setOnClickListener
+            }
+            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            pickImageFromGallery.launch(galleryIntent)
         }
 
         socketHandler.connect { isConnected ->
@@ -205,6 +246,28 @@ class ChatActivity : AppCompatActivity() {
             adapter.setMessagesList(messages)
             recyclerView.scrollToPosition(adapter.itemCount - 1)
         })
+    }
+
+    private fun getPathFromUri(uri: Uri): String {
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = contentResolver.query(uri, projection, null, null, null)
+        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor?.moveToFirst()
+        val path = columnIndex?.let { cursor.getString(it) } ?: ""
+        cursor?.close()
+        return path
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_GALLERY) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                pickImageFromGallery.launch(galleryIntent)
+            } else {
+                Toast.makeText(this@ChatActivity, "Storage permission is required to access gallery", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 }

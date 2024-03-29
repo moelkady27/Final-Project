@@ -9,8 +9,8 @@ data class MessageConversation(
     @PrimaryKey
     val _id: String,
     val createdAt: String,
-//    val media: List<Any>,
-    val media: List<MediaBrowser.MediaItem>, // Update the type to MediaBrowser.MediaItem
+    val media: List<Any>,
+//    val media: List<MediaBrowser.MediaItem>,
 
     var messageContent: String,
     val receiverId: String,

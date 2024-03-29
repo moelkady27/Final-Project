@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.ui.chat.models.MessageChatting
@@ -24,6 +25,7 @@ import kotlinx.android.synthetic.main.message_options_dialog.view.ll_delete_mess
 import kotlinx.android.synthetic.main.message_options_dialog.view.ll_edit_message_option
 import kotlinx.android.synthetic.main.my_message.view.*
 import kotlinx.android.synthetic.main.other_message.view.*
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -66,6 +68,15 @@ class ChattingAdapter(
             notifyDataSetChanged()
         }
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun addImageMessage(message: MessageChatting) {
+        messageChattingList = messageChattingList.toMutableList().apply {
+            add(message)
+        }
+        notifyDataSetChanged()
+    }
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -118,6 +129,16 @@ class ChattingAdapter(
                     holder.itemView.apply {
                         txtMyMessage.text = message.messageContent
                         txtMyMessageTime.text = formatTime(message.createdAt)
+                        if (message.media.isNotEmpty()) {
+                            txtMyMessage.visibility = View.GONE
+                            myImageMessage.visibility = View.VISIBLE
+                            Glide.with(context)
+                                .load(message.media[0].toString())
+                                .into(myImageMessage)
+                        } else {
+                            txtMyMessage.visibility = View.VISIBLE
+                            myImageMessage.visibility = View.GONE
+                        }
                     }
                     holder.itemView.setOnLongClickListener {
                         showMessageOptionsDialog(message)
@@ -128,6 +149,16 @@ class ChattingAdapter(
                     holder.itemView.apply {
                         txtOtherMessage.text = message.messageContent
                         txtOtherMessageTime.text = formatTime(message.createdAt)
+                        if (message.media.isNotEmpty()) {
+                            txtOtherMessage.visibility = View.GONE
+                            otherImageMessage.visibility = View.VISIBLE
+                            Glide.with(context)
+                                .load(message.media[0].toString())
+                                .into(otherImageMessage)
+                        } else {
+                            txtOtherMessage.visibility = View.VISIBLE
+                            otherImageMessage.visibility = View.GONE
+                        }
                     }
                 }
             }
@@ -154,13 +185,32 @@ class ChattingAdapter(
         }
     }
 
+//    private fun formatTime(time: String): String {
+//        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+//        inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+//        val outputFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
+//        outputFormat.timeZone = TimeZone.getTimeZone("Africa/Cairo")
+//        val date = inputFormat.parse(time)
+//        return outputFormat.format(date!!)
+//    }
+
     private fun formatTime(time: String): String {
+        if (time.isEmpty()) {
+            return "" // Return an empty string if the time is empty
+        }
+
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
         inputFormat.timeZone = TimeZone.getTimeZone("UTC")
         val outputFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
         outputFormat.timeZone = TimeZone.getTimeZone("Africa/Cairo")
-        val date = inputFormat.parse(time)
-        return outputFormat.format(date!!)
+
+        try {
+            val date = inputFormat.parse(time)
+            return outputFormat.format(date!!)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+            return "" // Return an empty string if parsing fails
+        }
     }
 
     private fun showMessageOptionsDialog(message: Any) {
