@@ -103,5 +103,8 @@
     <string name="edit" translatable="false">Edit</string>
     <string name="edit_message_hint" translatable="false">Edit Message</string>
     <string name="message_options" translatable="false">Message Options</string>
+    <string name="photo_chat" translatable="false">Photo</string>
+    <string name="save" translatable="false">Save</string>
+
 
 </resources>

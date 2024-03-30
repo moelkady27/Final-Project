@@ -27,8 +27,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/myImageMessage"
-        android:layout_width="320dp"
-        android:layout_height="320dp"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/my_message_bubble"
         android:maxWidth="240dp"
@@ -42,6 +42,18 @@
         android:visibility="gone" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/myImageMessageTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="12:00 PM"
+        android:textSize="11sp"
+        android:fontFamily="@font/poppins_semibold"
+        app:layout_constraintBottom_toBottomOf="@+id/myImageMessage"
+        app:layout_constraintEnd_toStartOf="@+id/myImageMessage"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtMyMessageTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,6 +62,7 @@
         android:textSize="11sp"
         android:fontFamily="@font/poppins_semibold"
         app:layout_constraintBottom_toBottomOf="@+id/txtMyMessage"
-        app:layout_constraintEnd_toStartOf="@+id/txtMyMessage" />
+        app:layout_constraintEnd_toStartOf="@+id/txtMyMessage"
+        android:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

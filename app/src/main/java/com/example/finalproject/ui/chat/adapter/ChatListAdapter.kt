@@ -12,6 +12,7 @@ import com.example.finalproject.ui.chat.models.ChatUser
 import kotlinx.android.synthetic.main.each_row_chat_list.view.floatingActionButtonOnline
 import kotlinx.android.synthetic.main.each_row_chat_list.view.image_chat_list
 import kotlinx.android.synthetic.main.each_row_chat_list.view.message_list_content
+import kotlinx.android.synthetic.main.each_row_chat_list.view.message_list_icon
 import kotlinx.android.synthetic.main.each_row_chat_list.view.message_list_name
 import kotlinx.android.synthetic.main.each_row_chat_list.view.message_list_time
 import java.text.SimpleDateFormat
@@ -91,7 +92,14 @@ class ChatListAdapter(
         val isActiveChat = activeChatUserIds.contains(chatUser._id)
 
         holder.itemView.message_list_name.text = chatUser.fullName
-        holder.itemView.message_list_content.text = chatUser.lastMessage.messageContent
+
+        if (chatUser.lastMessage.media.isNotEmpty()) {
+            holder.itemView.message_list_content.setText(R.string.photo_chat)
+            holder.itemView.message_list_icon.visibility = View.VISIBLE
+        } else {
+            holder.itemView.message_list_content.text = chatUser.lastMessage.messageContent
+            holder.itemView.message_list_icon.visibility = View.GONE
+        }
 
         val formattedTime = formatTime(chatUser.lastMessage.createdAt)
         holder.itemView.message_list_time.text = formattedTime

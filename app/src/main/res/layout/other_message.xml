@@ -24,12 +24,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/otherImageMessage"
-        android:layout_width="320dp"
-        android:layout_height="320dp"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/other_message_bubble"
         android:elevation="5dp"
@@ -40,7 +40,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone" />
+        android:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/otherImageMessageTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="12:00 PM"
+        android:textSize="11sp"
+        android:fontFamily="@font/poppins_semibold"
+        app:layout_constraintStart_toEndOf="@+id/otherImageMessage"
+        app:layout_constraintBottom_toBottomOf="@+id/otherImageMessage"
+        android:visibility="visible"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtOtherMessageTime"
@@ -51,6 +63,7 @@
         android:textSize="11sp"
         android:fontFamily="@font/poppins_semibold"
         app:layout_constraintStart_toEndOf="@+id/txtOtherMessage"
-        app:layout_constraintBottom_toBottomOf="@+id/txtOtherMessage" />
+        app:layout_constraintBottom_toBottomOf="@+id/txtOtherMessage"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

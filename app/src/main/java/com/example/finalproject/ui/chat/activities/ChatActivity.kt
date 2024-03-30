@@ -57,7 +57,9 @@ class ChatActivity : AppCompatActivity() {
 
     private lateinit var selectedImage: String
 
-    private var REQUEST_CODE_GALLERY = 1
+    companion object {
+        private var REQUEST_CODE_GALLERY = 1
+    }
 
     private val pickImageFromGallery =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -65,7 +67,7 @@ class ChatActivity : AppCompatActivity() {
                 result.data?.data?.let { uri ->
                     selectedImage = getPathFromUri(uri)
                     Log.e("image", selectedImage)
-
+                    sendImage()
                 }
             }
         }
@@ -82,6 +84,8 @@ class ChatActivity : AppCompatActivity() {
         socketHandler = SocketHandler(this@ChatActivity)
 
         val token = AppReferences.getToken(this@ChatActivity)
+
+        setUpActionBar()
 
         setUpRecyclerView()
 
@@ -111,7 +115,6 @@ class ChatActivity : AppCompatActivity() {
                 chatViewModel.sendMessage(token, receiverId, messageContent)
                 et_type_a_messages.text?.clear()
 
-                // Send message with socket
                 socketHandler.sendMessage(receiverId, messageContent)
 
             } else {
@@ -137,10 +140,22 @@ class ChatActivity : AppCompatActivity() {
                     Log.d("Data object", data.toString())
 
                     data?.let {
+
+                        val mediaList = mutableListOf<String>()
+                        val mediaArray = it.optJSONArray("media")
+                        mediaArray?.let { array ->
+                            for (i in 0 until array.length()) {
+                                val imageUrl = array.optString(i)
+                                imageUrl?.let { url ->
+                                    mediaList.add(url)
+                                }
+                            }
+                        }
+
                         val messageChatting = MessageChatting(
                             _id = it.optString("_id"),
                             createdAt = it.optString("createdAt"),
-                            media = emptyList(),
+                            media = mediaList,
                             messageContent = it.optString("messageContent", ""),
                             receiverId = it.optString("receiverId"),
                             senderId = it.optString("senderId"),
@@ -195,20 +210,12 @@ class ChatActivity : AppCompatActivity() {
                     }
                 }
 
-
             } else {
                 Log.e("Socket", "Socket connection failed")
             }
         }
 
-        setUpActionBar()
-
     }
-
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        socketHandler.disconnect()
-//    }
 
     private fun setUpActionBar() {
         setSupportActionBar(toolbar_chat)
@@ -268,6 +275,15 @@ class ChatActivity : AppCompatActivity() {
                 Toast.makeText(this@ChatActivity, "Storage permission is required to access gallery", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun sendImage() {
+        val token = AppReferences.getToken(this@ChatActivity)
+        val receiverId = intent.getStringExtra("ReceiverId").toString()
+            val file = File(selectedImage)
+            val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            val body = MultipartBody.Part.createFormData("images", file.name, requestFile)
+            chatViewModel.sendImage(token, receiverId, listOf(body))
     }
 
 }

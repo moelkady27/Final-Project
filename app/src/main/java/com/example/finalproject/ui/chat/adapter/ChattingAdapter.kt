@@ -69,16 +69,6 @@ class ChattingAdapter(
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun addImageMessage(message: MessageChatting) {
-        messageChattingList = messageChattingList.toMutableList().apply {
-            add(message)
-        }
-        notifyDataSetChanged()
-    }
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             VIEW_TYPE_MY_MESSAGE -> {
@@ -129,14 +119,22 @@ class ChattingAdapter(
                     holder.itemView.apply {
                         txtMyMessage.text = message.messageContent
                         txtMyMessageTime.text = formatTime(message.createdAt)
+
                         if (message.media.isNotEmpty()) {
                             txtMyMessage.visibility = View.GONE
+                            txtMyMessageTime.visibility = View.GONE
+                            myImageMessageTime.visibility = View.VISIBLE
                             myImageMessage.visibility = View.VISIBLE
+
                             Glide.with(context)
                                 .load(message.media[0].toString())
                                 .into(myImageMessage)
+                            myImageMessageTime.text = formatTime(message.createdAt)
+
                         } else {
                             txtMyMessage.visibility = View.VISIBLE
+                            txtMyMessageTime.visibility = View.VISIBLE
+                            myImageMessageTime.visibility = View.GONE
                             myImageMessage.visibility = View.GONE
                         }
                     }
@@ -149,14 +147,22 @@ class ChattingAdapter(
                     holder.itemView.apply {
                         txtOtherMessage.text = message.messageContent
                         txtOtherMessageTime.text = formatTime(message.createdAt)
+
                         if (message.media.isNotEmpty()) {
                             txtOtherMessage.visibility = View.GONE
+                            txtOtherMessageTime.visibility = View.GONE
+                            otherImageMessageTime.visibility = View.VISIBLE
                             otherImageMessage.visibility = View.VISIBLE
+
                             Glide.with(context)
                                 .load(message.media[0].toString())
                                 .into(otherImageMessage)
+                            otherImageMessageTime.text = formatTime(message.createdAt)
+
                         } else {
                             txtOtherMessage.visibility = View.VISIBLE
+                            txtOtherMessageTime.visibility = View.VISIBLE
+                            otherImageMessageTime.visibility = View.GONE
                             otherImageMessage.visibility = View.GONE
                         }
                     }
@@ -169,6 +175,24 @@ class ChattingAdapter(
                     holder.itemView.apply {
                         txtMyMessage.text = message.messageContent
                         txtMyMessageTime.text = formatTime(message.createdAt)
+
+                        if (message.media.isNotEmpty()) {
+                            txtMyMessage.visibility = View.GONE
+                            txtMyMessageTime.visibility = View.GONE
+                            myImageMessageTime.visibility = View.VISIBLE
+                            myImageMessage.visibility = View.VISIBLE
+
+                            Glide.with(context)
+                                .load(message.media[0].toString())
+                                .into(myImageMessage)
+                            myImageMessageTime.text = formatTime(message.createdAt)
+
+                        } else {
+                            txtMyMessage.visibility = View.VISIBLE
+                            txtMyMessageTime.visibility = View.VISIBLE
+                            myImageMessageTime.visibility = View.GONE
+                            myImageMessage.visibility = View.GONE
+                        }
                     }
                     holder.itemView.setOnLongClickListener {
                         showMessageOptionsDialog(message)
@@ -179,38 +203,37 @@ class ChattingAdapter(
                     holder.itemView.apply {
                         txtOtherMessage.text = message.messageContent
                         txtOtherMessageTime.text = formatTime(message.createdAt)
+
+                        if (message.media.isNotEmpty()) {
+                            txtOtherMessage.visibility = View.GONE
+                            txtOtherMessageTime.visibility = View.GONE
+                            otherImageMessageTime.visibility = View.VISIBLE
+                            otherImageMessage.visibility = View.VISIBLE
+
+                            Glide.with(context)
+                                .load(message.media[0].toString())
+                                .into(otherImageMessage)
+                            otherImageMessageTime.text = formatTime(message.createdAt)
+
+                        } else {
+                            txtOtherMessage.visibility = View.VISIBLE
+                            txtOtherMessageTime.visibility = View.VISIBLE
+                            otherImageMessageTime.visibility = View.GONE
+                            otherImageMessage.visibility = View.GONE
+                        }
                     }
                 }
             }
         }
     }
 
-//    private fun formatTime(time: String): String {
-//        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-//        inputFormat.timeZone = TimeZone.getTimeZone("UTC")
-//        val outputFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
-//        outputFormat.timeZone = TimeZone.getTimeZone("Africa/Cairo")
-//        val date = inputFormat.parse(time)
-//        return outputFormat.format(date!!)
-//    }
-
     private fun formatTime(time: String): String {
-        if (time.isEmpty()) {
-            return "" // Return an empty string if the time is empty
-        }
-
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
         inputFormat.timeZone = TimeZone.getTimeZone("UTC")
         val outputFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
         outputFormat.timeZone = TimeZone.getTimeZone("Africa/Cairo")
-
-        try {
-            val date = inputFormat.parse(time)
-            return outputFormat.format(date!!)
-        } catch (e: ParseException) {
-            e.printStackTrace()
-            return "" // Return an empty string if parsing fails
-        }
+        val date = inputFormat.parse(time)
+        return outputFormat.format(date!!)
     }
 
     private fun showMessageOptionsDialog(message: Any) {
@@ -224,6 +247,20 @@ class ChattingAdapter(
 
         val editMessageOption = messageDialogView.ll_edit_message_option
         val deleteMessageOption = messageDialogView.ll_delete_message_option
+
+        val isImageMessage = when (message) {
+            is MessageConversation -> message.media.isNotEmpty()
+            is MessageChatting -> message.media.isNotEmpty()
+            else -> false
+        }
+
+        if (isImageMessage) {
+            editMessageOption.visibility = View.GONE
+            deleteMessageOption.visibility = View.VISIBLE
+        } else {
+            editMessageOption.visibility = View.VISIBLE
+            deleteMessageOption.visibility = View.VISIBLE
+        }
 
         editMessageOption.setOnClickListener {
             bottomSheetDialog.dismiss()
@@ -348,7 +385,6 @@ class ChattingAdapter(
     fun editMessageById(messageId: String, editedMessage: String) {
         val position = messagesList.indexOfFirst { it._id == messageId }
         if (position != -1) {
-//            messagesList[position].message.text = editedMessage
             messagesList[position].messageContent = editedMessage
             val token = AppReferences.getToken(context)
             viewModel.editMessage(token, messageId, editedMessage)
@@ -356,7 +392,6 @@ class ChattingAdapter(
         } else {
             val chatMessagePosition = messageChattingList.indexOfFirst { it._id == messageId }
             if (chatMessagePosition != -1) {
-//                messageChattingList[chatMessagePosition].message.text = editedMessage
                 messageChattingList[chatMessagePosition].messageContent = editedMessage
                 val token = AppReferences.getToken(context)
                 viewModel.editMessage(token, messageId, editedMessage)
