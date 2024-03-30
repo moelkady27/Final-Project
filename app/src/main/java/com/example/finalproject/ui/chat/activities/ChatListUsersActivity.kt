@@ -133,15 +133,15 @@ class ChatListUsersActivity : BaseActivity() {
                         username = ""
                     )
 
-//                    runOnUiThread {
-//                        adapter.updateLastMessage(senderId, messageText)
-//                    }
-
                     runOnUiThread {
-                        chatUser?.lastMessage?.let { lastMessage ->
+                        chatUser.lastMessage.let { lastMessage ->
                             adapter.updateLastMessage(
                                 lastMessage.senderId ?: "",
-                                lastMessage.messageContent ?: "")
+                                lastMessage.messageContent ?: "",
+                                lastMessage.media ?: emptyList()
+                            )
+
+
                         }
                     }
 
@@ -156,6 +156,7 @@ class ChatListUsersActivity : BaseActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     searchForUsers(query)
+                    timer.cancel()
                 }
                 return true
             }
@@ -166,11 +167,6 @@ class ChatListUsersActivity : BaseActivity() {
             }
         })
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        chatListUsersViewModel.getChatUsers(AppReferences.getToken(this@ChatListUsersActivity))
     }
 
     private fun setupActionBar() {
@@ -208,9 +204,6 @@ class ChatListUsersActivity : BaseActivity() {
             Log.e("ReceiverId", user._id)
             Log.e("SenderId", AppReferences.getUserId(this))
 
-
-//            chattingViewModel.getCachedConversation(user.lastMessage.senderId, user._id)
-
             startActivity(intent)
         }
         recyclerView.layoutManager = LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false)
@@ -223,15 +216,6 @@ class ChatListUsersActivity : BaseActivity() {
             adapter.setChatUserList(chatList)
         })
     }
-//    private fun observeChatUsers() {
-//        chatListUsersViewModel.observeChatUsersLiveData().observe(this@ChatListUsersActivity, Observer { chatList ->
-//            if (chatList.isNotEmpty()) {
-//                adapter.setChatUserList(chatList)
-//                adapter.notifyDataSetChanged()
-////                chatListUsersViewModel.cacheChatUsers(chatList)
-//            }
-//        })
-//    }
 
     private fun searchForUsers(query: String) {
         if (query.isEmpty()) {

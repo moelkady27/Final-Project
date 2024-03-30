@@ -63,11 +63,12 @@ class ChatListAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateLastMessage(userId: String, lastMessage: String) {
+    fun updateLastMessage(userId: String, lastMessage: String, media: List<Any>) {
         Log.e("ChatListAdapter", "Updating last message for user: $userId, message: $lastMessage")
         val chatUser = filteredList.find { it._id == userId }
         chatUser?.let {
             it.lastMessage.messageContent = lastMessage
+            it.lastMessage.media = media
             notifyDataSetChanged()
         }
     }
