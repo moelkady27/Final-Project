@@ -23,6 +23,7 @@ import com.example.finalproject.ui.setting.activities.DeleteAccountActivity
 import com.example.finalproject.ui.profile.activities.EditProfileActivity
 import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
 import com.example.finalproject.ui.search.SearchUsersActivity
+import com.example.finalproject.ui.setting.activities.FavouritesActivity
 import com.example.finalproject.ui.setting.viewModels.LogOutViewModels
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.fragment_settings.btn_change_password
@@ -213,9 +214,9 @@ class SettingsFragment : Fragment() {
             btn_favourites.setTextColor(resources.getColor(R.color.white))
             btn_favourites.setIconTintResource(R.color.white)
 
-            // TODO START ACTIVITY HERE WHEN I CREATE IT
-
-            resetButtonColor(btn_chats)
+            val intent = Intent(requireContext(), FavouritesActivity::class.java)
+            startActivity(intent)
+            resetButtonColor(btn_favourites)
         }
 
         search_for_user.setOnClickListener {

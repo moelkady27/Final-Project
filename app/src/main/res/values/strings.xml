@@ -105,6 +105,9 @@
     <string name="message_options" translatable="false">Message Options</string>
     <string name="photo_chat" translatable="false">Photo</string>
     <string name="save" translatable="false">Save</string>
+    <string name="favourites">Favourites</string>
+    <string name="estates">estates</string>
+    <string name="apartment">Apartment</string>
 
 
 </resources>
