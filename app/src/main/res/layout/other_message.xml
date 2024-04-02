@@ -37,6 +37,7 @@
         android:maxWidth="240dp"
         android:padding="15dp"
         android:src="@drawable/iv_logo"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"

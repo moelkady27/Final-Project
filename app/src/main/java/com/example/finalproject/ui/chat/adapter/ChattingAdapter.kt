@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.ui.chat.models.MessageChatting
@@ -128,6 +130,7 @@ class ChattingAdapter(
 
                             Glide.with(context)
                                 .load(message.media[0].toString())
+                                .apply(RequestOptions().transform(RoundedCorners(40)))
                                 .into(myImageMessage)
                             myImageMessageTime.text = formatTime(message.createdAt)
 
@@ -156,6 +159,7 @@ class ChattingAdapter(
 
                             Glide.with(context)
                                 .load(message.media[0].toString())
+                                .apply(RequestOptions().transform(RoundedCorners(40)))
                                 .into(otherImageMessage)
                             otherImageMessageTime.text = formatTime(message.createdAt)
 
@@ -184,6 +188,7 @@ class ChattingAdapter(
 
                             Glide.with(context)
                                 .load(message.media[0].toString())
+                                .apply(RequestOptions().transform(RoundedCorners(40)))
                                 .into(myImageMessage)
                             myImageMessageTime.text = formatTime(message.createdAt)
 
@@ -212,6 +217,7 @@ class ChattingAdapter(
 
                             Glide.with(context)
                                 .load(message.media[0].toString())
+                                .apply(RequestOptions().transform(RoundedCorners(40)))
                                 .into(otherImageMessage)
                             otherImageMessageTime.text = formatTime(message.createdAt)
 
