@@ -105,9 +105,12 @@
     <string name="message_options" translatable="false">Message Options</string>
     <string name="photo_chat" translatable="false">Photo</string>
     <string name="save" translatable="false">Save</string>
-    <string name="favourites">Favourites</string>
-    <string name="estates">estates</string>
-    <string name="apartment">Apartment</string>
+    <string name="favourites" translatable="false">Favourites</string>
+    <string name="estates" translatable="false">estates</string>
+    <string name="apartment" translatable="false">Apartment</string>
+    <string name="location_home" translatable="false">Location</string>
+    <string name="tv_home_title_1" translatable="false">Discover\nFind your\nBest Living Places.</string>
+    <string name="view_all" translatable="false">View All</string>
 
 
 </resources>

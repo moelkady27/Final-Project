@@ -24,9 +24,13 @@
     <color name="edit">#eef3fb</color>
     <color name="edit_text">#888888</color>
 
-    <color name="shape">#DADCDD</color>
+    <color name="shape">#F4F6F9</color>
 
     <color name="online">#25d366</color>
 
     <color name="favourite">#415770</color>
+
+    <color name="home_title">#FF0C243E</color>
+    <color name="home_search">#FFF5F4F8</color>
+    <color name="home_popular">#FFB9B9B9</color>
 </resources>
