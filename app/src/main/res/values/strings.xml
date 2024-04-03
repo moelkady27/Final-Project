@@ -111,6 +111,8 @@
     <string name="location_home" translatable="false">Location</string>
     <string name="tv_home_title_1" translatable="false">Discover\nFind your\nBest Living Places.</string>
     <string name="view_all" translatable="false">View All</string>
+    <string name="popular_nearest_you" translatable="false">Popular Nearest You</string>
+    <string name="featured_estates" translatable="false">Featured Estates</string>
 
 
 </resources>

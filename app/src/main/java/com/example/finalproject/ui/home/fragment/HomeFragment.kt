@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.home.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,8 +9,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
+import com.example.finalproject.ui.home.activities.FeaturedEstatesActivity
+import com.example.finalproject.ui.home.activities.PopularNearestYouActivity
 import com.example.finalproject.ui.home.adapter.HomeFeaturedAdapter
 import com.example.finalproject.ui.home.adapter.HomePopularAdapter
+import com.example.finalproject.ui.profile.activities.EditProfileActivity
+import kotlinx.android.synthetic.main.fragment_home.tv_home_title_3
+import kotlinx.android.synthetic.main.fragment_home.tv_home_title_5
 
 class HomeFragment : Fragment() {
 
@@ -50,5 +56,14 @@ class HomeFragment : Fragment() {
             LinearLayoutManager.VERTICAL , false)
         recyclerView.adapter = homeFeaturedAdapter
 
+        tv_home_title_3.setOnClickListener {
+            val intent = Intent(requireContext() , PopularNearestYouActivity::class.java)
+            startActivity(intent)
+        }
+
+        tv_home_title_5.setOnClickListener {
+            val intent = Intent(requireContext() , FeaturedEstatesActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

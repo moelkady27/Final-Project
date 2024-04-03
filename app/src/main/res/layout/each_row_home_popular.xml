@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingEnd="20dp"
@@ -8,7 +9,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_image_home_popular"
-        android:layout_width="225dp"
+        android:layout_width="wrap_content"
         android:layout_height="160dp"
         app:cardCornerRadius="15dp"
         android:layout_gravity="center"
@@ -44,12 +45,12 @@
         android:id="@+id/home_popular_title_2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="1dp"
+        android:fontFamily="@font/poppins_medium"
         android:gravity="center"
         android:text="$"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
-        android:fontFamily="@font/poppins_medium"
         app:layout_constraintStart_toStartOf="@+id/home_popular_title_1"
         app:layout_constraintTop_toBottomOf="@+id/home_popular_title_1" />
 
@@ -97,32 +98,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="-5dp"
-        app:srcCompat="@drawable/baseline_location_on_24"
-        app:tint="@color/home_popular"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/home_popular_title_2"
-        app:layout_constraintTop_toBottomOf="@+id/home_popular_title_2" />
+        app:layout_constraintTop_toBottomOf="@+id/home_popular_title_3"
+        app:srcCompat="@drawable/baseline_location_on_24"
+        app:tint="@color/home_popular" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_home_popular_location"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:layout_marginStart="5dp"
-        android:text="Avenue, West Side"
-        android:textSize="12sp"
-        android:textColor="@color/home_popular"
+        android:layout_height="match_parent"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="10dp"
         android:fontFamily="@font/poppins_medium"
-        app:layout_constraintEnd_toEndOf="@+id/cv_image_home_popular"
+        android:text="Avenue, West Side"
+        android:textColor="@color/home_popular"
+        android:textSize="12sp"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_home_popular_location"
+        app:layout_constraintEnd_toStartOf="@+id/iv_home_popular_favourite"
         app:layout_constraintStart_toEndOf="@+id/iv_home_popular_location"
-        app:layout_constraintTop_toBottomOf="@+id/home_popular_title_2" />
+        app:layout_constraintTop_toTopOf="@+id/iv_home_popular_location" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_home_popular_favourite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/favourites"
         app:layout_constraintBottom_toBottomOf="@+id/tv_home_popular_location"
         app:layout_constraintEnd_toEndOf="@+id/cv_image_home_popular"
-        app:layout_constraintTop_toTopOf="@+id/tv_home_popular_location" />
+        app:layout_constraintTop_toTopOf="@+id/tv_home_popular_location"
+        app:srcCompat="@drawable/favourites" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
