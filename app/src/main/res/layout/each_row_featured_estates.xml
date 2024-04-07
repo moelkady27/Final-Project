@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_image_featured_estates"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:cardCornerRadius="10dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/favourite_image" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/shape"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/number_star_featured_estates"
+        app:layout_constraintEnd_toEndOf="@+id/apartment_name_featured_estates"
+        app:layout_constraintTop_toTopOf="@+id/number_star_featured_estates">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="@string/apartment"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/star_featured_estates"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/baseline_star_24"
+        app:layout_constraintStart_toEndOf="@+id/cv_image_featured_estates"
+        app:layout_constraintTop_toTopOf="@+id/cv_image_featured_estates" />
+
+    <TextView
+        android:id="@+id/number_star_featured_estates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:text="5"
+        android:textSize="16sp"
+        android:textColor="@color/edit_text"
+        android:fontFamily="@font/poppins_medium"
+        app:layout_constraintBottom_toBottomOf="@+id/star_featured_estates"
+        app:layout_constraintStart_toEndOf="@+id/star_featured_estates"
+        app:layout_constraintTop_toTopOf="@+id/star_featured_estates" />
+
+    <TextView
+        android:id="@+id/apartment_name_featured_estates"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="Woodland Apartment"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/star_featured_estates"
+        app:layout_constraintTop_toBottomOf="@+id/star_featured_estates" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_location_featured_estates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-5dp"
+        app:layout_constraintStart_toStartOf="@+id/apartment_name_featured_estates"
+        app:layout_constraintTop_toBottomOf="@+id/apartment_name_featured_estates"
+        app:srcCompat="@drawable/baseline_location_on_24"
+        app:tint="@color/favourite" />
+
+    <TextView
+        android:id="@+id/apartment_location_featured_estates"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="1012 Ocean avanue, New yourk, USA"
+        android:textSize="12sp"
+        android:textColor="@color/favourite"
+        android:fontFamily="@font/poppins_medium"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_location_featured_estates"
+        app:layout_constraintEnd_toEndOf="@+id/apartment_name_featured_estates"
+        app:layout_constraintStart_toEndOf="@+id/iv_location_featured_estates"
+        app:layout_constraintTop_toTopOf="@+id/iv_location_featured_estates" />
+
+    <TextView
+        android:id="@+id/tv_featured_estates_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text="$"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_semibold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/iv_location_featured_estates"
+        app:layout_constraintStart_toStartOf="@+id/apartment_name_featured_estates"
+        app:layout_constraintTop_toBottomOf="@+id/apartment_location_featured_estates" />
+
+    <TextView
+        android:id="@+id/apartment_price_featured_estates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="340"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_semibold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_featured_estates_1"
+        app:layout_constraintStart_toEndOf="@+id/tv_featured_estates_1"
+        app:layout_constraintTop_toTopOf="@+id/tv_featured_estates_1" />
+
+    <TextView
+        android:id="@+id/tv_featured_estates_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        android:layout_marginStart="3dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_semibold"
+        app:layout_constraintBottom_toBottomOf="@+id/apartment_price_featured_estates"
+        app:layout_constraintStart_toEndOf="@+id/apartment_price_featured_estates"
+        app:layout_constraintTop_toTopOf="@+id/apartment_price_featured_estates" />
+
+    <TextView
+        android:id="@+id/tv_featured_estates_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="month"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_semibold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_featured_estates_2"
+        app:layout_constraintStart_toEndOf="@+id/tv_featured_estates_2"
+        app:layout_constraintTop_toTopOf="@+id/tv_featured_estates_2" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_featured_estates_fav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_featured_estates_3"
+        app:layout_constraintEnd_toEndOf="@+id/apartment_location_featured_estates"
+        app:layout_constraintTop_toTopOf="@+id/tv_featured_estates_3"
+        app:srcCompat="@drawable/favourites" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

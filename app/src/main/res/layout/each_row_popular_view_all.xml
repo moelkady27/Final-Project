@@ -8,7 +8,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_image_home_popular"
+        android:id="@+id/cv_image_popular_view_all"
         android:layout_width="wrap_content"
         android:layout_height="160dp"
         app:cardCornerRadius="15dp"
@@ -27,7 +27,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/home_popular_title_1"
+        android:id="@+id/popular_view_all_title_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -39,12 +39,12 @@
         android:textSize="18sp"
         android:maxLines="1"
         android:ellipsize="marquee"
-        app:layout_constraintEnd_toEndOf="@+id/cv_image_home_popular"
-        app:layout_constraintStart_toStartOf="@+id/cv_image_home_popular"
-        app:layout_constraintTop_toBottomOf="@+id/cv_image_home_popular" />
+        app:layout_constraintEnd_toEndOf="@+id/cv_image_popular_view_all"
+        app:layout_constraintStart_toStartOf="@+id/cv_image_popular_view_all"
+        app:layout_constraintTop_toBottomOf="@+id/cv_image_popular_view_all" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/home_popular_title_2"
+        android:id="@+id/popular_view_all_title_2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
@@ -53,11 +53,11 @@
         android:text="$"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/home_popular_title_1"
-        app:layout_constraintTop_toBottomOf="@+id/home_popular_title_1" />
+        app:layout_constraintStart_toStartOf="@+id/popular_view_all_title_1"
+        app:layout_constraintTop_toBottomOf="@+id/popular_view_all_title_1" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/home_popular_title_3"
+        android:id="@+id/popular_view_all_title_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
@@ -65,12 +65,12 @@
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
         android:fontFamily="@font/poppins_medium"
-        app:layout_constraintBottom_toBottomOf="@+id/home_popular_title_2"
-        app:layout_constraintStart_toEndOf="@+id/home_popular_title_2"
-        app:layout_constraintTop_toTopOf="@+id/home_popular_title_2" />
+        app:layout_constraintBottom_toBottomOf="@+id/popular_view_all_title_2"
+        app:layout_constraintStart_toEndOf="@+id/popular_view_all_title_2"
+        app:layout_constraintTop_toTopOf="@+id/popular_view_all_title_2" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/home_popular_title_4"
+        android:id="@+id/popular_view_all_title_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="/"
@@ -78,12 +78,12 @@
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
         android:fontFamily="@font/poppins_medium"
-        app:layout_constraintBottom_toBottomOf="@+id/home_popular_title_3"
-        app:layout_constraintStart_toEndOf="@+id/home_popular_title_3"
-        app:layout_constraintTop_toTopOf="@+id/home_popular_title_3" />
+        app:layout_constraintBottom_toBottomOf="@+id/popular_view_all_title_3"
+        app:layout_constraintStart_toEndOf="@+id/popular_view_all_title_3"
+        app:layout_constraintTop_toTopOf="@+id/popular_view_all_title_3" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/home_popular_title_5"
+        android:id="@+id/popular_view_all_title_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
@@ -91,25 +91,25 @@
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
         android:fontFamily="@font/poppins_medium"
-        app:layout_constraintBottom_toBottomOf="@+id/home_popular_title_4"
-        app:layout_constraintStart_toEndOf="@+id/home_popular_title_4"
-        app:layout_constraintTop_toTopOf="@+id/home_popular_title_4" />
+        app:layout_constraintBottom_toBottomOf="@+id/popular_view_all_title_4"
+        app:layout_constraintStart_toEndOf="@+id/popular_view_all_title_4"
+        app:layout_constraintTop_toTopOf="@+id/popular_view_all_title_4" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_home_popular_location"
+        android:id="@+id/iv_popular_view_all_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="-5dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/home_popular_title_2"
-        app:layout_constraintTop_toBottomOf="@+id/home_popular_title_3"
+        app:layout_constraintStart_toStartOf="@+id/popular_view_all_title_2"
+        app:layout_constraintTop_toBottomOf="@+id/popular_view_all_title_3"
         app:srcCompat="@drawable/baseline_location_on_24"
         app:tint="@color/home_popular" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_home_popular_location"
+        android:id="@+id/tv_popular_view_all_location"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginStart="2dp"
@@ -120,18 +120,18 @@
         android:textSize="12sp"
         android:maxLines="1"
         android:ellipsize="marquee"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_home_popular_location"
-        app:layout_constraintEnd_toStartOf="@+id/iv_home_popular_favourite"
-        app:layout_constraintStart_toEndOf="@+id/iv_home_popular_location"
-        app:layout_constraintTop_toTopOf="@+id/iv_home_popular_location" />
+        app:layout_constraintBottom_toBottomOf="@+id/iv_popular_view_all_location"
+        app:layout_constraintEnd_toStartOf="@+id/iv_popular_view_all_favourite"
+        app:layout_constraintStart_toEndOf="@+id/iv_popular_view_all_location"
+        app:layout_constraintTop_toTopOf="@+id/iv_popular_view_all_location" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_home_popular_favourite"
+        android:id="@+id/iv_popular_view_all_favourite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_home_popular_location"
-        app:layout_constraintEnd_toEndOf="@+id/cv_image_home_popular"
-        app:layout_constraintTop_toTopOf="@+id/tv_home_popular_location"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_popular_view_all_location"
+        app:layout_constraintEnd_toEndOf="@+id/cv_image_popular_view_all"
+        app:layout_constraintTop_toTopOf="@+id/tv_popular_view_all_location"
         app:srcCompat="@drawable/favourites" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,32 +5,32 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
-import com.example.finalproject.ui.home.adapter.PopularViewAllAdapter
-import kotlinx.android.synthetic.main.activity_popular_nearest_you.toolbar_popular
+import com.example.finalproject.ui.home.adapter.FeaturedViewAllAdapter
+import kotlinx.android.synthetic.main.activity_featured_estates.toolbar_featured_estates
 
-class PopularNearestYouActivity : AppCompatActivity() {
+class FeaturedEstatesActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
 
-    private lateinit var popularViewAllAdapter: PopularViewAllAdapter
+    private lateinit var featuredViewAllAdapter: FeaturedViewAllAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_popular_nearest_you)
+        setContentView(R.layout.activity_featured_estates)
 
-        recyclerView = findViewById(R.id.recycle_favourites_popular)
+        recyclerView = findViewById(R.id.recycle_featured_estates)
 
-        popularViewAllAdapter = PopularViewAllAdapter()
+        featuredViewAllAdapter = FeaturedViewAllAdapter()
 
-        recyclerView.layoutManager = GridLayoutManager(this@PopularNearestYouActivity , 2)
+        recyclerView.layoutManager = GridLayoutManager(this@FeaturedEstatesActivity , 2)
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = popularViewAllAdapter
+        recyclerView.adapter = featuredViewAllAdapter
 
         setUpActionBar()
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(toolbar_popular)
+        setSupportActionBar(toolbar_featured_estates)
 
         val actionBar = supportActionBar
         if (actionBar != null) {
@@ -39,7 +39,7 @@ class PopularNearestYouActivity : AppCompatActivity() {
             actionBar.title = ""
         }
 
-        toolbar_popular.setNavigationOnClickListener {
+        toolbar_featured_estates.setNavigationOnClickListener {
             onBackPressed()
         }
     }

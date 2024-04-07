@@ -13,7 +13,6 @@ import com.example.finalproject.ui.home.activities.FeaturedEstatesActivity
 import com.example.finalproject.ui.home.activities.PopularNearestYouActivity
 import com.example.finalproject.ui.home.adapter.HomeFeaturedAdapter
 import com.example.finalproject.ui.home.adapter.HomePopularAdapter
-import com.example.finalproject.ui.profile.activities.EditProfileActivity
 import kotlinx.android.synthetic.main.fragment_home.tv_home_title_3
 import kotlinx.android.synthetic.main.fragment_home.tv_home_title_5
 
