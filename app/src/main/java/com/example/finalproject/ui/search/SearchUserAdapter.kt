@@ -28,7 +28,7 @@ class SearchUserAdapter(
             list
         } else {
             list.filter { user ->
-                user.fullName.toLowerCase(Locale.ROOT).contains(query.trim().toLowerCase(Locale.ROOT))
+                user.fullName.lowercase(Locale.ROOT).contains(query.trim().lowercase(Locale.ROOT))
             }
         }
         notifyDataSetChanged()

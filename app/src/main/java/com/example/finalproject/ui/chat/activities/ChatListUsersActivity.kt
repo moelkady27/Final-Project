@@ -16,13 +16,10 @@ import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.chat.adapter.ChatListAdapter
 import com.example.finalproject.ui.chat.db.ChatUsersDatabase
 import com.example.finalproject.ui.chat.models.ChatUser
-//import com.example.finalproject.ui.chat.db.MessageConversationDatabase
 import com.example.finalproject.ui.chat.models.Image
 import com.example.finalproject.ui.chat.models.LastMessage
 import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModel
 import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModelFactory
-import com.example.finalproject.ui.chat.viewModels.ChattingViewModel
-//import com.example.finalproject.ui.chat.viewModels.MessageConversationViewModeFactory
 import kotlinx.android.synthetic.main.activity_chat_list.sv_user_chat_list
 import kotlinx.android.synthetic.main.activity_chat_list.toolbar_message
 import org.json.JSONArray
@@ -136,9 +133,9 @@ class ChatListUsersActivity : BaseActivity() {
                     runOnUiThread {
                         chatUser.lastMessage.let { lastMessage ->
                             adapter.updateLastMessage(
-                                lastMessage.senderId ?: "",
-                                lastMessage.messageContent ?: "",
-                                lastMessage.media ?: emptyList()
+                                lastMessage.senderId,
+                                lastMessage.messageContent,
+                                lastMessage.media
                             )
 
 
@@ -162,7 +159,10 @@ class ChatListUsersActivity : BaseActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                searchForUsers(newText.orEmpty())
+                if (newText != null) {
+                    searchForUsers(newText)
+                    timer.cancel()
+                }
                 return true
             }
         })

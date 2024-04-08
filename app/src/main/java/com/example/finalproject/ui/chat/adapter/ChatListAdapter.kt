@@ -55,8 +55,8 @@ class ChatListAdapter(
             list
         } else {
             list.filter { chatUser ->
-                chatUser.fullName.toLowerCase(Locale.ROOT)
-                    .contains(query.trim().toLowerCase(Locale.ROOT))
+                chatUser.fullName.lowercase(Locale.ROOT)
+                    .contains(query.trim().lowercase(Locale.ROOT))
             }
         }
         notifyDataSetChanged()

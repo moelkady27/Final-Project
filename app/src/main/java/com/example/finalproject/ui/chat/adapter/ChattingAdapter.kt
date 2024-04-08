@@ -27,7 +27,6 @@ import kotlinx.android.synthetic.main.message_options_dialog.view.ll_delete_mess
 import kotlinx.android.synthetic.main.message_options_dialog.view.ll_edit_message_option
 import kotlinx.android.synthetic.main.my_message.view.*
 import kotlinx.android.synthetic.main.other_message.view.*
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -49,18 +48,21 @@ class ChattingAdapter(
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
     inner class OtherViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
+//                    *** get all messages in conversation ***
     @SuppressLint("NotifyDataSetChanged")
     fun setMessagesList(messagesList: List<MessageConversation>) {
         this.messagesList = messagesList
         notifyDataSetChanged()
     }
 
+//                    *** adding message in conversation ***
     @SuppressLint("NotifyDataSetChanged")
     fun setMessageChattingList(messageChattingList: List<MessageChatting>) {
         this.messageChattingList += messageChattingList
         notifyDataSetChanged()
     }
 
+//                    *** received the new message ***
     @SuppressLint("NotifyDataSetChanged")
     fun addReceivedMessage(message: MessageChatting, currentReceiverId: String) {
         if (message.senderId == currentReceiverId) {

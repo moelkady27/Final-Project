@@ -11,7 +11,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -20,8 +19,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
+import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.socket.SocketHandler
 import com.example.finalproject.storage.AppReferences
+import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.chat.adapter.ChattingAdapter
 import com.example.finalproject.ui.chat.db.ChatDatabase
 import com.example.finalproject.ui.chat.models.MessageChatting
@@ -34,7 +35,6 @@ import kotlinx.android.synthetic.main.activity_chat.iv_send
 import kotlinx.android.synthetic.main.activity_chat.iv_user_chat
 import kotlinx.android.synthetic.main.activity_chat.toolbar_chat
 import kotlinx.android.synthetic.main.activity_chat.tv_user_name_chat
-import kotlinx.android.synthetic.main.activity_upload_photo.fl_from_gallery
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -43,7 +43,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
 
-class ChatActivity : AppCompatActivity() {
+class ChatActivity : BaseActivity() {
 
     private lateinit var recyclerView: RecyclerView
 
@@ -56,6 +56,8 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var chatDatabase: ChatDatabase
 
     private lateinit var selectedImage: String
+
+    private lateinit var networkUtils: NetworkUtils
 
     companion object {
         private var REQUEST_CODE_GALLERY = 1
@@ -75,6 +77,8 @@ class ChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+
+        networkUtils = NetworkUtils(this)
 
         chatDatabase = ChatDatabase.getInstance(this)
 
@@ -110,15 +114,20 @@ class ChatActivity : AppCompatActivity() {
         observeGetConversation()
 
         iv_send.setOnClickListener {
-            val messageContent = et_type_a_messages.text.toString().trim()
-            if (messageContent.isNotEmpty()) {
-                chatViewModel.sendMessage(token, receiverId, messageContent)
-                et_type_a_messages.text?.clear()
+            if (networkUtils.isNetworkAvailable()){
+                val messageContent = et_type_a_messages.text.toString().trim()
+                if (messageContent.isNotEmpty()) {
+                    chatViewModel.sendMessage(token, receiverId, messageContent)
+                    et_type_a_messages.text?.clear()
 
-                socketHandler.sendMessage(receiverId, messageContent)
+                    socketHandler.sendMessage(receiverId, messageContent)
 
-            } else {
-                Toast.makeText(this, "Please enter a message", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Please enter a message", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else{
+                showErrorSnackBar("No internet connection", true)
             }
         }
 
@@ -239,6 +248,7 @@ class ChatActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
     }
 
+//                    *** adding new message to list ***
     private fun observeChatMessages() {
         recyclerView = findViewById(R.id.rv_chat)
         chatViewModel.observeChattingLiveData().observe(this, Observer { messages ->
@@ -247,6 +257,7 @@ class ChatActivity : AppCompatActivity() {
         })
     }
 
+//                    *** get all messages in conversation ***
     private fun observeGetConversation() {
         recyclerView = findViewById(R.id.rv_chat)
         chatViewModel.observeGetConversationLiveData().observe(this, Observer { messages ->
