@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
@@ -26,29 +27,20 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_apartment_view_all"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:backgroundTint="@color/shape"
-        app:cardCornerRadius="5dp"
+        android:background="@drawable/search_border"
+        android:fontFamily="@font/poppins_medium"
+        android:padding="5dp"
+        android:text="@string/apartment"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/number_star_featured_estates"
         app:layout_constraintEnd_toEndOf="@+id/apartment_name_featured_estates"
-        app:layout_constraintTop_toTopOf="@+id/number_star_featured_estates">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/poppins_medium"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:text="@string/apartment"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toTopOf="@+id/number_star_featured_estates" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/star_featured_estates"

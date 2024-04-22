@@ -113,6 +113,7 @@
     <string name="view_all" translatable="false">View All</string>
     <string name="popular_nearest_you" translatable="false">Popular Nearest You</string>
     <string name="featured_estates" translatable="false">Featured Estates</string>
+    <string name="et_search_popular" translatable="false">Search House, Apartment, etc</string>
 
 
 </resources>

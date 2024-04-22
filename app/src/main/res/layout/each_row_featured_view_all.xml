@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:paddingEnd="10dp"
     android:paddingStart="10dp"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.card.MaterialCardView
@@ -26,30 +27,20 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_apartment_view_all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_apartment_view_all"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:backgroundTint="@color/shape"
-        app:cardCornerRadius="5dp"
+        android:padding="5dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/apartment"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:background="@drawable/search_border"
         app:layout_constraintStart_toStartOf="@+id/cv_image_featured_view_all"
-        app:layout_constraintTop_toBottomOf="@+id/cv_image_featured_view_all">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/poppins_medium"
-            android:paddingStart="5dp"
-            android:paddingTop="2dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="2dp"
-            android:text="@string/apartment"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toBottomOf="@+id/cv_image_featured_view_all"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/star_featured_view_all"
@@ -57,9 +48,9 @@
         android:layout_height="25dp"
         android:layout_marginEnd="5dp"
         android:src="@drawable/baseline_star_24"
-        app:layout_constraintBottom_toBottomOf="@+id/cv_apartment_view_all"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_apartment_view_all"
         app:layout_constraintEnd_toStartOf="@+id/number_star_featured_estates"
-        app:layout_constraintTop_toTopOf="@+id/cv_apartment_view_all" />
+        app:layout_constraintTop_toTopOf="@+id/tv_apartment_view_all" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/number_star_featured_estates"
@@ -86,8 +77,8 @@
         android:maxLines="1"
         android:ellipsize="marquee"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/cv_apartment_view_all"
-        app:layout_constraintTop_toBottomOf="@+id/cv_apartment_view_all" />
+        app:layout_constraintStart_toStartOf="@+id/tv_apartment_view_all"
+        app:layout_constraintTop_toBottomOf="@+id/tv_apartment_view_all" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_location_featured_view_all"
