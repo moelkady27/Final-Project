@@ -65,6 +65,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         autocompleteFragment = supportFragmentManager.findFragmentById(R.id.search)
                 as AutocompleteSupportFragment
         autocompleteFragment.setPlaceFields(listOf(Place.Field.ID , Place.Field.ADDRESS , Place.Field.LAT_LNG))
+        autocompleteFragment.setHint("Search for location")
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onError(p0: Status) {
                 Toast.makeText(this@MapActivity , "There is Error on Search" , Toast.LENGTH_LONG).show()
