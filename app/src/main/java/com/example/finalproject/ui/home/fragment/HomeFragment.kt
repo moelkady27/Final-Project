@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
+import com.example.finalproject.ui.add_listing.activities.FormDetailActivity
 import com.example.finalproject.ui.home.activities.FeaturedEstatesActivity
 import com.example.finalproject.ui.home.activities.PopularNearestYouActivity
 import com.example.finalproject.ui.home.adapter.HomeFeaturedAdapter
 import com.example.finalproject.ui.home.adapter.HomePopularAdapter
+import kotlinx.android.synthetic.main.fragment_home.iv_add_list_home
 import kotlinx.android.synthetic.main.fragment_home.tv_home_title_3
 import kotlinx.android.synthetic.main.fragment_home.tv_home_title_5
 
@@ -64,5 +66,11 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext() , FeaturedEstatesActivity::class.java)
             startActivity(intent)
         }
+
+        iv_add_list_home.setOnClickListener {
+            val intent = Intent(requireContext() , FormDetailActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

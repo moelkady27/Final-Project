@@ -114,6 +114,21 @@
     <string name="popular_nearest_you" translatable="false">Popular Nearest You</string>
     <string name="featured_estates" translatable="false">Featured Estates</string>
     <string name="et_search_popular" translatable="false">Search House, Apartment, etc</string>
+    <string name="add_listing" translatable="false">Add Listing</string>
+    <string name="tv_form_detail_title_1" translatable="false">Fill detail of your <b>real estate</b></string>
+    <string name="et_home_name_add_listing" translatable="false">Name of House, Apartment, etc</string>
+    <string name="tv_form_detail_title_2" translatable="false">Listing type</string>
+    <string name="sell" translatable="false">Sell</string>
+    <string name="rent" translatable="false">Rent</string>
+    <string name="tv_form_detail_title_3" translatable="false">Property category</string>
+    <string name="chip_cottage" translatable="false">Cottage</string>
+    <string name="chip_villa" translatable="false">Villa</string>
+    <string name="chip_hotel" translatable="false">Hotel</string>
+    <string name="chip_apartment" translatable="false">Apartment</string>
+    <string name="chip_house" translatable="false">House</string>
+    <string name="tv_add_listing_location_title_1" translatable="false">Where is the <b>location</b>?</string>
+    <string name="select_on_the_map" translatable="false">Select on the map</string>
+    <string name="confirm" translatable="false">Confirm</string>
 
 
 </resources>

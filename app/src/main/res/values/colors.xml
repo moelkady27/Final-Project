@@ -33,4 +33,5 @@
     <color name="home_title">#FF0C243E</color>
     <color name="home_search">#FFF5F4F8</color>
     <color name="home_popular">#FFB9B9B9</color>
+    <color name="location_add_listing">#FFD9D9D9</color>
 </resources>

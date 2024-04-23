@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.add_listing.activities.FormDetailActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_form_detail"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/add_listing"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="22sp" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_form_detail_title_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center|start"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/tv_form_detail_title_1"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="@+id/toolbar_form_detail"
+                app:layout_constraintStart_toStartOf="@+id/toolbar_form_detail"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_form_detail" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_home_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/search_border"
+                app:layout_constraintTop_toBottomOf="@id/tv_form_detail_title_1"
+                app:layout_constraintEnd_toEndOf="@id/tv_form_detail_title_1"
+                app:layout_constraintStart_toStartOf="@id/tv_form_detail_title_1">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_home"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/ic_home"
+                    android:backgroundTint="@color/colorPrimaryText"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/search_border"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_home"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_home_name_add_listing"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/search_border"
+                        android:fontFamily="@font/poppins_medium"
+                        android:hint="@string/et_home_name_add_listing"
+                        android:inputType="text"
+                        android:paddingStart="25dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="0dp"
+                        android:paddingBottom="10dp"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textColorHint="@color/home_popular"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_form_detail_title_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/tv_form_detail_title_2"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="@id/constraint_home_name"
+                app:layout_constraintStart_toStartOf="@id/constraint_home_name"
+                app:layout_constraintTop_toBottomOf="@id/constraint_home_name"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_listing_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/tv_form_detail_title_2"
+                app:layout_constraintTop_toBottomOf="@id/tv_form_detail_title_2">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_rent"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rent"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_sell"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sell"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_form_detail_title_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/tv_form_detail_title_3"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/cg_listing_type"
+                app:layout_constraintTop_toBottomOf="@id/cg_listing_type"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_property_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:chipSpacing="15dp"
+                app:layout_constraintStart_toStartOf="@id/tv_form_detail_title_3"
+                app:layout_constraintTop_toBottomOf="@id/tv_form_detail_title_3">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_house"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_house"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_apartment"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_apartment"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_hotel"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_hotel"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_villa"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_villa"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_cottage"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_cottage"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_next_form_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginEnd="100dp"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/cg_property_category"
+                app:layout_constraintStart_toStartOf="@+id/cg_property_category"
+                app:layout_constraintTop_toBottomOf="@id/cg_property_category" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
