@@ -678,142 +678,200 @@
                 app:layout_constraintStart_toStartOf="@+id/horizontal_scroll_view_total_rooms"
                 app:layout_constraintTop_toBottomOf="@+id/horizontal_scroll_view_total_rooms" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/cg_environment_facilities"
-                android:layout_width="wrap_content"
+            <HorizontalScrollView
+                android:id="@+id/horizontal_scroll_view_environment_facilities"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                app:chipSpacing="15dp"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
                 app:layout_constraintStart_toStartOf="@id/textView19"
-                app:layout_constraintTop_toBottomOf="@id/textView19">
+                app:layout_constraintTop_toBottomOf="@id/textView19"
+                app:layout_constraintEnd_toEndOf="@id/textView19">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_parking_lot"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cg_environment_facilities"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/parking_lot"
-                    android:textAppearance="@style/ChipTextStyle"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp"
-                    app:chipBackgroundColor="@color/home_search"
-                    app:chipCornerRadius="15dp"
-                    app:chipEndPadding="25dp"
-                    app:chipMinHeight="70dp"
-                    app:chipStartPadding="25dp" />
+                    android:layout_marginTop="14dp"
+                    app:chipSpacing="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_pet_allowed"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_parking_lot"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="@string/parking_lot"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_pet_allowed"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="@string/pet_allowed"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:id="@+id/horizontal_scroll_view_environment_facilities_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintStart_toStartOf="@id/textView19"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_scroll_view_environment_facilities"
+                app:layout_constraintEnd_toEndOf="@id/textView19">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cg_environment_facilities_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/pet_allowed"
-                    android:textAppearance="@style/ChipTextStyle"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp"
-                    app:chipBackgroundColor="@color/home_search"
-                    app:chipCornerRadius="15dp"
-                    app:chipEndPadding="25dp"
-                    app:chipMinHeight="70dp"
-                    app:chipStartPadding="25dp" />
+                    android:layout_marginTop="14dp"
+                    app:chipSpacing="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_garden"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_garden"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="@string/garden"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_gym"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="@string/gym"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_park"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="@string/park"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:id="@+id/horizontal_scroll_view_environment_facilities_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintStart_toStartOf="@id/textView19"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_scroll_view_environment_facilities_2"
+                app:layout_constraintEnd_toEndOf="@id/textView19">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cg_environment_facilities_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/garden"
-                    android:textAppearance="@style/ChipTextStyle"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp"
-                    app:chipBackgroundColor="@color/home_search"
-                    app:chipCornerRadius="15dp"
-                    app:chipEndPadding="25dp"
-                    app:chipMinHeight="70dp"
-                    app:chipStartPadding="25dp" />
+                    android:layout_marginTop="14dp"
+                    app:chipSpacing="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_gym"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/gym"
-                    android:textAppearance="@style/ChipTextStyle"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp"
-                    app:chipBackgroundColor="@color/home_search"
-                    app:chipCornerRadius="15dp"
-                    app:chipEndPadding="25dp"
-                    app:chipMinHeight="70dp"
-                    app:chipStartPadding="25dp" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_home_theatre"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="@string/home_theatre"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_park"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/park"
-                    android:textAppearance="@style/ChipTextStyle"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp"
-                    app:chipBackgroundColor="@color/home_search"
-                    app:chipCornerRadius="15dp"
-                    app:chipEndPadding="25dp"
-                    app:chipMinHeight="70dp"
-                    app:chipStartPadding="25dp" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_kid_s_friendly"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="@string/kid_s_friendly"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_home_theatre"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/home_theatre"
-                    android:textAppearance="@style/ChipTextStyle"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp"
-                    app:chipBackgroundColor="@color/home_search"
-                    app:chipCornerRadius="15dp"
-                    app:chipEndPadding="25dp"
-                    app:chipMinHeight="70dp"
-                    app:chipStartPadding="25dp" />
+                </com.google.android.material.chip.ChipGroup>
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_kid_s_friendly"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/kid_s_friendly"
-                    android:textAppearance="@style/ChipTextStyle"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp"
-                    app:chipBackgroundColor="@color/home_search"
-                    app:chipCornerRadius="15dp"
-                    app:chipEndPadding="25dp"
-                    app:chipMinHeight="70dp"
-                    app:chipStartPadding="25dp" />
-
-            </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
 
             <Button
                 android:id="@+id/btn_submit"
@@ -830,9 +888,9 @@
                 android:textAllCaps="false"
                 android:fontFamily="@font/poppins_bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/cg_environment_facilities"
-                app:layout_constraintStart_toStartOf="@+id/cg_environment_facilities"
-                app:layout_constraintTop_toBottomOf="@+id/cg_environment_facilities" />
+                app:layout_constraintEnd_toEndOf="@+id/horizontal_scroll_view_environment_facilities_3"
+                app:layout_constraintStart_toStartOf="@+id/horizontal_scroll_view_environment_facilities_3"
+                app:layout_constraintTop_toBottomOf="@+id/horizontal_scroll_view_environment_facilities_3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
