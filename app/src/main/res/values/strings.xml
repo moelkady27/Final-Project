@@ -130,30 +130,30 @@
     <string name="select_on_the_map" translatable="false">Select on the map</string>
     <string name="confirm" translatable="false">Confirm</string>
     <string name="almost_finish_complete" translatable="false"><b>Almost finish, </b> complete</string>
-    <string name="the_listing">the listing</string>
-    <string name="sell_price">Sell Price</string>
-    <string name="enter_your_sell_price">Enter your Sell Price</string>
-    <string name="enter_your_rent_price">Enter your Rent Price</string>
-    <string name="rent_price">Rent Price</string>
-    <string name="dollar">$</string>
-    <string name="monthly">Monthly</string>
-    <string name="yearly">Yearly</string>
-    <string name="property_features">Property Features</string>
-    <string name="bedroom">Bedroom</string>
-    <string name="add">+</string>
-    <string name="minus">-</string>
-    <string name="bathroom">Bathroom</string>
-    <string name="balcony">Balcony</string>
-    <string name="total_rooms">Total Rooms</string>
-    <string name="environment_facilities">Environment / Facilities</string>
-    <string name="parking_lot">Parking Lot</string>
-    <string name="pet_allowed">Pet Allowed</string>
-    <string name="garden">Garden</string>
-    <string name="gym">Gym</string>
-    <string name="park">Park</string>
-    <string name="home_theatre">Home theatre</string>
-    <string name="kid_s_friendly">Kid’s Friendly</string>
-    <string name="submit">submit</string>
+    <string name="the_listing" translatable="false">the listing</string>
+    <string name="sell_price" translatable="false">Sell Price</string>
+    <string name="enter_your_sell_price" translatable="false">Enter your Sell Price</string>
+    <string name="enter_your_rent_price" translatable="false">Enter your Rent Price</string>
+    <string name="rent_price" translatable="false">Rent Price</string>
+    <string name="dollar" translatable="false">$</string>
+    <string name="monthly" translatable="false">Monthly</string>
+    <string name="yearly" translatable="false">Yearly</string>
+    <string name="property_features" translatable="false">Property Features</string>
+    <string name="bedroom" translatable="false">Bedroom</string>
+    <string name="add" translatable="false">+</string>
+    <string name="minus" translatable="false">-</string>
+    <string name="bathroom" translatable="false">Bathroom</string>
+    <string name="balcony" translatable="false">Balcony</string>
+    <string name="total_rooms" translatable="false">Total Rooms</string>
+    <string name="environment_facilities" translatable="false">Environment / Facilities</string>
+    <string name="parking_lot" translatable="false">Parking Lot</string>
+    <string name="pet_allowed" translatable="false">Pet Allowed</string>
+    <string name="garden" translatable="false">Garden</string>
+    <string name="gym" translatable="false">Gym</string>
+    <string name="park" translatable="false">Park</string>
+    <string name="home_theatre" translatable="false">Home theatre</string>
+    <string name="kid_s_friendly" translatable="false">Kid’s Friendly</string>
+    <string name="submit" translatable="false">submit</string>
 
 
 </resources>
