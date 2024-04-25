@@ -12,11 +12,14 @@ import com.example.finalproject.R
 import com.example.finalproject.ui.add_listing.activities.FormDetailActivity
 import com.example.finalproject.ui.home.activities.FeaturedEstatesActivity
 import com.example.finalproject.ui.home.activities.PopularNearestYouActivity
+import com.example.finalproject.ui.home.activities.SearchResultsActivity
 import com.example.finalproject.ui.home.adapter.HomeFeaturedAdapter
 import com.example.finalproject.ui.home.adapter.HomePopularAdapter
 import kotlinx.android.synthetic.main.fragment_home.iv_add_list_home
+import kotlinx.android.synthetic.main.fragment_home.iv_search_home
 import kotlinx.android.synthetic.main.fragment_home.tv_home_title_3
 import kotlinx.android.synthetic.main.fragment_home.tv_home_title_5
+import kotlinx.android.synthetic.main.fragment_home.tv_search_home
 
 class HomeFragment : Fragment() {
 
@@ -69,6 +72,16 @@ class HomeFragment : Fragment() {
 
         iv_add_list_home.setOnClickListener {
             val intent = Intent(requireContext() , FormDetailActivity::class.java)
+            startActivity(intent)
+        }
+
+        tv_search_home.setOnClickListener {
+            val intent = Intent(requireContext(), SearchResultsActivity::class.java)
+            startActivity(intent)
+        }
+
+        iv_search_home.setOnClickListener {
+            val intent = Intent(requireContext(), SearchResultsActivity::class.java)
             startActivity(intent)
         }
 
