@@ -159,5 +159,9 @@
     <string name="found" translatable="false">Found</string>
     <string name="search_not_found" translatable="false">Search <b>not found</b></string>
     <string name="tv_search_result_title_7" translatable="false">Sorry, we can’t find the real estates you are looking for. Maybe, a little spelling mistake?</string>
+    <string name="your_listing_is_now" translatable="false">Your listing is now</string>
+    <string name="published" translatable="false">published</string>
+    <string name="add_more" translatable="false">Add More</string>
+    <string name="finish" translatable="false">Finish</string>
 
 </resources>
