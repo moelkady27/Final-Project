@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".AddReviewActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_add_review"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/add_review"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="22sp" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_add_review_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_add_review">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/add_review_image" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_add_review_agent"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user"
+                app:cardCornerRadius="75dp"
+                app:layout_constraintEnd_toEndOf="@+id/cv_add_review_image"
+                app:layout_constraintStart_toStartOf="@+id/cv_add_review_image"
+                app:layout_constraintTop_toBottomOf="@+id/cv_add_review_image"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_add_review_title_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Raj Kumar"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/civ_add_review_agent"
+                app:layout_constraintStart_toStartOf="@+id/civ_add_review_agent"
+                app:layout_constraintTop_toBottomOf="@+id/civ_add_review_agent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_add_review_title_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center"
+                android:fontFamily="@font/poppins_light"
+                android:text="Agent"
+                android:textColor="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_add_review_title_1"
+                app:layout_constraintStart_toStartOf="@+id/tv_add_review_title_1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_review_title_1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_add_review_title_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center"
+                android:fontFamily="@font/poppins_medium"
+                android:text="How was your experience with Raj?"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/tv_add_review_title_2"
+                app:layout_constraintStart_toStartOf="@+id/tv_add_review_title_2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_review_title_2"/>
+
+            <View
+                android:id="@+id/view_add_review"
+                android:layout_width="0dp"
+                android:layout_height="1.5dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:layout_weight="2"
+                android:alpha="0.3"
+                android:background="@color/home_popular"
+                app:layout_constraintStart_toStartOf="@id/tv_add_review_title_3"
+                app:layout_constraintEnd_toEndOf="@id/tv_add_review_title_3"
+                app:layout_constraintTop_toBottomOf="@id/tv_add_review_title_3"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_add_review_title_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center"
+                android:fontFamily="@font/poppins"
+                android:text="@string/your_overall_rating"
+                android:textColor="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/view_add_review"
+                app:layout_constraintStart_toStartOf="@+id/view_add_review"
+                app:layout_constraintTop_toBottomOf="@+id/view_add_review" />
+
+            <RatingBar
+                android:id="@+id/rb_add_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:progressTint="@color/starColor"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:rating="1"
+                app:layout_constraintStart_toStartOf="@id/tv_add_review_title_4"
+                app:layout_constraintEnd_toEndOf="@id/tv_add_review_title_4"
+                app:layout_constraintTop_toBottomOf="@id/tv_add_review_title_4"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_add_review_title_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="start"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/add_detailed_review"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/rb_add_review"
+                app:layout_constraintStart_toStartOf="@+id/rb_add_review"
+                app:layout_constraintTop_toBottomOf="@+id/rb_add_review"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_add_review_detailed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="start"
+                android:hint="@string/enter_here"
+                android:inputType="textMultiLine"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="75dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/edit_text"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_add_review_title_5"
+                app:layout_constraintStart_toStartOf="@+id/tv_add_review_title_5"
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_review_title_5" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_submit_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="35dp"
+                android:layout_marginEnd="45dp"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/submit"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/et_add_review_detailed"
+                app:layout_constraintStart_toStartOf="@+id/et_add_review_detailed"
+                app:layout_constraintTop_toBottomOf="@id/et_add_review_detailed" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

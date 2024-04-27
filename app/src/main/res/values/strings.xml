@@ -163,5 +163,12 @@
     <string name="published" translatable="false">published</string>
     <string name="add_more" translatable="false">Add More</string>
     <string name="finish" translatable="false">Finish</string>
+    <string name="tv_empty_favourites_title_2" translatable="false">Your favorite page is</string>
+    <string name="tv_empty_favourites_title_3" translatable="false">empty</string>
+    <string name="tv_empty_favourites_title_4" translatable="false">Click add button above to start exploring and choose your favorite estates.</string>
+    <string name="add_review" translatable="false">Add Review</string>
+    <string name="your_overall_rating" translatable="false">Your overall rating</string>
+    <string name="add_detailed_review" translatable="false">Add detailed review</string>
+    <string name="enter_here" translatable="false">Enter Here</string>
 
 </resources>
