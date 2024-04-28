@@ -12,7 +12,7 @@ class AddListingMapActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_listing_map)
 
         btn_add_listing_confirm_location.setOnClickListener {
-            startActivity(Intent(this, ExtraInformationActivity::class.java))
+            startActivity(Intent(this, AddListingPhotosActivity::class.java))
         }
     }
 }

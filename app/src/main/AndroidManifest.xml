@@ -31,6 +31,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name=".ui.add_listing.activities.AddListingPhotosActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".ui.home.activities.SearchResultsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
@@ -39,7 +44,7 @@
             android:name=".ui.add_listing.activities.ExtraInformationActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.add_listing.activities.AddListingMapActivity"
             android:exported="false"

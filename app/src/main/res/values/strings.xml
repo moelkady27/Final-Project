@@ -170,5 +170,7 @@
     <string name="your_overall_rating" translatable="false">Your overall rating</string>
     <string name="add_detailed_review" translatable="false">Add detailed review</string>
     <string name="enter_here" translatable="false">Enter Here</string>
+    <string name="add_photos_to_your" translatable="false">Add <b>photos</b> to your</string>
+    <string name="listing" translatable="false">listing</string>
 
 </resources>
