@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -14,23 +13,20 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
+import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.MainActivity
-import com.example.finalproject.ui.WelcomeActivity
-import com.example.finalproject.ui.password.activities.ChangePasswordActivity
-import com.example.finalproject.ui.profile.fragment.ProfileFragment
+import com.example.finalproject.ui.profile.factory.EditProfileFactory
+import com.example.finalproject.ui.profile.factory.GetUserInfoFactory
+import com.example.finalproject.ui.profile.repository.EditProfileRepository
+import com.example.finalproject.ui.profile.repository.GetUserInfoRepository
 import com.example.finalproject.ui.profile.viewModels.EditProfileViewModel
 import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
-import kotlinx.android.synthetic.main.activity_complete_sign_up.et_first_name
-import kotlinx.android.synthetic.main.activity_complete_sign_up.et_gender
-import kotlinx.android.synthetic.main.activity_complete_sign_up.et_last_name
-import kotlinx.android.synthetic.main.activity_complete_sign_up.et_phone_number
 import kotlinx.android.synthetic.main.activity_edit_profile.btn_update_edit
 import kotlinx.android.synthetic.main.activity_edit_profile.edt_first_name
 import kotlinx.android.synthetic.main.activity_edit_profile.edt_gender
@@ -78,92 +74,70 @@ class EditProfileActivity : BaseActivity() {
             }
         }
 
-    private fun getPathFromUri(uri: Uri): String {
-        val projection = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = contentResolver.query(uri, projection, null, null, null)
-        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-        cursor?.moveToFirst()
-        val path = columnIndex?.let { cursor.getString(it) } ?: ""
-        cursor?.close()
-        return path
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
 
         networkUtils = NetworkUtils(this@EditProfileActivity)
 
-        getUserInfoViewModel = ViewModelProvider(this@EditProfileActivity).get(GetUserInfoViewModel::class.java)
+        initView()
 
-        getUserInfoViewModel.getUserInfoResponseLiveData.observe(this@EditProfileActivity , Observer { response->
-            hideProgressDialog()
-            response.let {
-                val message = response.status
+        setUpActionBar()
+    }
 
-                val firstName = response.user.firstName
-                val lastName = response.user.lastName
-                val gender = response.user.gender
-                val username = response.user.username
-                val phoneNumber = response.user.phone
-                val image = response.user.image.url
+    private fun initView(){
+                                    /* Get-User-Info */
 
-                Log.e("message" , message)
-
-                edt_first_name.setText(firstName)
-                edt_gender.setText(gender)
-                edt_last_name.setText(lastName)
-                edt_user_name.setText(username)
-                edt_phone_number.setText(phoneNumber)
-
-                Glide
-                    .with(this@EditProfileActivity)
-                    .load(image)
-                    .centerCrop()
-                    .into(ib_upload_preview)
-
-                val defaultImage = "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg"
-
-                if (image == defaultImage){
-                    floatingActionButton_delete.visibility = View.GONE
-                }
-                else{
-                    floatingActionButton_delete.visibility = View.VISIBLE
-                }
-            }
-        })
-
-        getUserInfoViewModel.errorLiveData.observe(this@EditProfileActivity , Observer { error->
-            hideProgressDialog()
-            error?.let {
-                try {
-                    val errorMessage = JSONObject(error).getString("message")
-                    Toast.makeText(this@EditProfileActivity, errorMessage, Toast.LENGTH_LONG).show()
-
-                    Log.e("EditProfileActivity", "Error Update: $errorMessage")
-
-                } catch (e: JSONException) {
-                    Toast.makeText(this@EditProfileActivity, error, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
+        val getUserInfoRepository = GetUserInfoRepository(RetrofitClient.instance)
+        val factoryGetUser = GetUserInfoFactory(getUserInfoRepository)
+        getUserInfoViewModel = ViewModelProvider(
+            this@EditProfileActivity, factoryGetUser)[GetUserInfoViewModel::class.java]
 
         getUserInfo()
 
-        editProfileViewModel = ViewModelProvider(this@EditProfileActivity).get(EditProfileViewModel::class.java)
-
-        editProfileViewModel.editProfileResponseLiveData.observe(this@EditProfileActivity , Observer { response->
+        getUserInfoViewModel.getUserInfoResponseLiveData.observe(this@EditProfileActivity
+        ) { response ->
             hideProgressDialog()
-            response.let {
-                val message = response.message
+            response?.let {
+                val message = response.status
 
-                Toast.makeText(this@EditProfileActivity , message ,Toast.LENGTH_LONG).show()
+                response.user?.let { user ->
+                    val firstName = user.firstName
+                    val lastName = user.lastName
+                    val gender = user.gender
+                    val username = user.username
+                    val phoneNumber = user.phone
+                    val image = user.image?.url
 
-                startActivity(Intent(this@EditProfileActivity , MainActivity::class.java))
+                    Log.e("message", message)
+
+                    edt_first_name.setText(firstName)
+                    edt_gender.setText(gender)
+                    edt_last_name.setText(lastName)
+                    edt_user_name.setText(username)
+                    edt_phone_number.setText(phoneNumber)
+
+                    image?.let {
+                        Glide
+                            .with(this@EditProfileActivity)
+                            .load(it)
+                            .centerCrop()
+                            .into(ib_upload_preview)
+                    }
+
+                    val defaultImage =
+                        "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg"
+
+                    if (image == defaultImage) {
+                        floatingActionButton_delete.visibility = View.GONE
+                    } else {
+                        floatingActionButton_delete.visibility = View.VISIBLE
+                    }
+                }
             }
-        })
+        }
 
-        editProfileViewModel.errorLiveData.observe(this@EditProfileActivity , Observer { error->
+        getUserInfoViewModel.errorLiveData.observe(this@EditProfileActivity) { error ->
             hideProgressDialog()
             error?.let {
                 try {
@@ -176,28 +150,14 @@ class EditProfileActivity : BaseActivity() {
                     Toast.makeText(this@EditProfileActivity, error, Toast.LENGTH_LONG).show()
                 }
             }
-        })
+        }
 
-        editProfileViewModel.deleteProfileImageResponseLiveData.observe(
-            this@EditProfileActivity, Observer { response ->
-                hideProgressDialog()
-                response.let {
-                    val status = response.status
+                                    /* Edit-Profile */
 
-                    Log.e("Delete Profile Image", status)
-                }
-            })
-
-        editProfileViewModel.changeProfileImageResponseLiveData.observe(
-            this@EditProfileActivity , Observer { response->
-                hideProgressDialog()
-                response.let {
-                    val imageUrl = response.image.url
-
-                    Log.e("image url" , imageUrl)
-                }
-            }
-        )
+        val editProfileRepository = EditProfileRepository(RetrofitClient.instance)
+        val factoryEditProfile = EditProfileFactory(editProfileRepository)
+        editProfileViewModel = ViewModelProvider(
+            this@EditProfileActivity, factoryEditProfile)[EditProfileViewModel::class.java]
 
         btn_update_edit.setOnClickListener {
             if (networkUtils.isNetworkAvailable()){
@@ -208,6 +168,8 @@ class EditProfileActivity : BaseActivity() {
                 showErrorSnackBar("No internet connection", true)
             }
         }
+
+                                /* Delete-Profile-Image */
 
         floatingActionButton_delete.setOnClickListener {
             if (networkUtils.isNetworkAvailable()){
@@ -224,6 +186,7 @@ class EditProfileActivity : BaseActivity() {
                 showErrorSnackBar("No internet connection", true)
             }
         }
+                                /* Change-Profile-Image */
 
         tv_change_profile_picture.setOnClickListener {
             if (ContextCompat.checkSelfPermission(this@EditProfileActivity,
@@ -236,16 +199,26 @@ class EditProfileActivity : BaseActivity() {
             pickImageFromGallery.launch(galleryIntent)
         }
 
-        setUpActionBar()
     }
 
     private fun deleteProfileImage() {
         editProfileViewModel.deleteProfileImage(AppReferences.getToken(this@EditProfileActivity))
+
+        editProfileViewModel.deleteProfileImageResponseLiveData.observe(
+            this@EditProfileActivity
+        ) { response ->
+            hideProgressDialog()
+            response.let {
+                val status = response.status
+
+                Log.e("Delete Profile Image", status)
+            }
+        }
+
     }
 
     private fun getUserInfo() {
         getUserInfoViewModel.getUserInfo(AppReferences.getToken(this@EditProfileActivity))
-
     }
 
     private fun changePhoto() {
@@ -257,6 +230,17 @@ class EditProfileActivity : BaseActivity() {
             val token = AppReferences.getToken(this@EditProfileActivity)
 
             editProfileViewModel.changeImage(token, body)
+
+            editProfileViewModel.changeProfileImageResponseLiveData.observe(
+                this@EditProfileActivity
+            ) { response ->
+                hideProgressDialog()
+                response.let {
+                    val imageUrl = response.image.url
+
+                    Log.e("image url", imageUrl)
+                }
+            }
         }
     }
 
@@ -272,6 +256,16 @@ class EditProfileActivity : BaseActivity() {
         }
     }
 
+    private fun getPathFromUri(uri: Uri): String {
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = contentResolver.query(uri, projection, null, null, null)
+        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor?.moveToFirst()
+        val path = columnIndex?.let { cursor.getString(it) } ?: ""
+        cursor?.close()
+        return path
+    }
+
     private fun updateProfile() {
         val token = AppReferences.getToken(this@EditProfileActivity)
         val firstName = edt_first_name.text.toString().trim()
@@ -280,9 +274,38 @@ class EditProfileActivity : BaseActivity() {
         val lastName = edt_last_name.text.toString().trim()
         val phone = edt_phone_number.text.toString().trim()
 
-        if (isValidInput()){
-            showProgressDialog(this@EditProfileActivity , "Updating Profile..")
+        if (isValidInput()) {
+            showProgressDialog(this@EditProfileActivity, "Updating Profile..")
             editProfileViewModel.editProfile(token, firstName, gender, username, lastName, phone)
+
+            editProfileViewModel.editProfileResponseLiveData.observe(
+                this@EditProfileActivity
+            ) { response ->
+                hideProgressDialog()
+                response.let {
+                    val message = response.message
+
+                    Toast.makeText(this@EditProfileActivity, message, Toast.LENGTH_LONG).show()
+
+                    startActivity(Intent(this@EditProfileActivity, MainActivity::class.java))
+                }
+            }
+
+            editProfileViewModel.errorLiveData.observe(this@EditProfileActivity) { error ->
+                hideProgressDialog()
+                error?.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(this@EditProfileActivity, errorMessage, Toast.LENGTH_LONG)
+                            .show()
+
+                        Log.e("EditProfileActivity", "Error Update: $errorMessage")
+
+                    } catch (e: JSONException) {
+                        Toast.makeText(this@EditProfileActivity, error, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
     }
 

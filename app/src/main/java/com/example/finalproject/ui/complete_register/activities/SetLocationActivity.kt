@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.complete_register.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.location.Geocoder
 import android.os.Bundle
@@ -28,6 +29,12 @@ class SetLocationActivity : BaseActivity(){
 
         networkUtils = NetworkUtils(this)
 
+        initView()
+
+        setUpActionBar()
+    }
+
+    private fun initView(){
         btn_set_location.setOnClickListener {
             if (networkUtils.isNetworkAvailable()) {
                 val mapIntent = Intent(this@SetLocationActivity, MapActivity::class.java)
@@ -44,8 +51,25 @@ class SetLocationActivity : BaseActivity(){
                 Toast.makeText(this, "Please select a location", Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
-        setUpActionBar()
+    @SuppressLint("SetTextI18n")
+    private fun showCurrentLocationAsText(latitude: Double, longitude: Double) {
+        val geocoder = Geocoder(this)
+
+        try {
+            val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+
+            if (addresses!!.isNotEmpty()) {
+                val address = addresses[0]
+                val locationName = address.getAddressLine(0)
+                tv_set_location_title_3.text = locationName
+            }
+
+        } catch (e: IOException) {
+            e.printStackTrace()
+            tv_set_location_title_3.text = "Current LocationSignIn: $latitude, $longitude"
+        }
     }
 
     private fun setUpActionBar() {
@@ -63,6 +87,7 @@ class SetLocationActivity : BaseActivity(){
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -76,24 +101,6 @@ class SetLocationActivity : BaseActivity(){
             showCurrentLocationAsText(latitude, longitude)
 
             Log.e("Selected LocationSignIn:" , "$latitude, $longitude")
-        }
-    }
-
-    private fun showCurrentLocationAsText(latitude: Double, longitude: Double) {
-        val geocoder = Geocoder(this)
-
-        try {
-            val addresses = geocoder.getFromLocation(latitude, longitude, 1)
-
-            if (addresses!!.isNotEmpty()) {
-                val address = addresses[0]
-                val locationName = address.getAddressLine(0)
-                tv_set_location_title_3.text = locationName
-            }
-
-        } catch (e: IOException) {
-            e.printStackTrace()
-            tv_set_location_title_3.text = "Current LocationSignIn: $latitude, $longitude"
         }
     }
 }

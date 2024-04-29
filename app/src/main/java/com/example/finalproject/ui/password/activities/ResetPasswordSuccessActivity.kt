@@ -12,9 +12,12 @@ class ResetPasswordSuccessActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reset_password_success)
 
+        initView()
+    }
+
+    private fun initView() {
         btn_back_reset_password_success.setOnClickListener {
             startActivity(Intent(this@ResetPasswordSuccessActivity, SignInActivity::class.java))
         }
-
     }
 }

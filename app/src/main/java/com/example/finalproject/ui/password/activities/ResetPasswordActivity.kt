@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
+import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.password.factory.ResetPasswordFactory
+import com.example.finalproject.ui.password.repository.ResetPasswordRepository
 import com.example.finalproject.ui.password.viewModels.ResetPasswordViewModel
 import kotlinx.android.synthetic.main.activity_reset_password.btn_next_reset_password
 import kotlinx.android.synthetic.main.activity_reset_password.et_confirm_password
@@ -30,34 +32,16 @@ class ResetPasswordActivity : BaseActivity() {
 
         networkUtils = NetworkUtils(this@ResetPasswordActivity)
 
-        restPasswordViewModel = ViewModelProvider(this@ResetPasswordActivity).get(ResetPasswordViewModel::class.java)
+        initView()
 
-        restPasswordViewModel.resetPasswordResponseLiveData.observe(
-            this@ResetPasswordActivity, Observer { response ->
-                hideProgressDialog()
-                response.let {
-                    val message = response.message
+        setUpActionBar()
 
-                    Toast.makeText(this@ResetPasswordActivity, message, Toast.LENGTH_LONG).show()
+    }
 
-                    startActivity(Intent(this@ResetPasswordActivity, ResetPasswordSuccessActivity::class.java))
-                }
-        })
-
-        restPasswordViewModel.errorLiveData.observe(this@ResetPasswordActivity, Observer { error ->
-            hideProgressDialog()
-            error?.let {
-                try {
-                    val errorMessage = JSONObject(error).getString("message")
-                    Toast.makeText(this@ResetPasswordActivity, errorMessage, Toast.LENGTH_LONG).show()
-
-                    Log.e("RestPasswordActivity", errorMessage)
-
-                } catch (e: JSONException) {
-                    Toast.makeText(this@ResetPasswordActivity, error, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
+    private fun initView() {
+        val resetPasswordRepository = ResetPasswordRepository(RetrofitClient.instance)
+        val factory = ResetPasswordFactory(resetPasswordRepository)
+        restPasswordViewModel = ViewModelProvider(this, factory)[ResetPasswordViewModel::class.java]
 
         btn_next_reset_password.setOnClickListener {
             if (networkUtils.isNetworkAvailable()) {
@@ -66,8 +50,6 @@ class ResetPasswordActivity : BaseActivity() {
                 showErrorSnackBar("No internet connection", true)
             }
         }
-
-        setUpActionBar()
 
     }
 
@@ -80,6 +62,41 @@ class ResetPasswordActivity : BaseActivity() {
         if (isValidInput()) {
             showProgressDialog(this@ResetPasswordActivity, "Resting Password...")
             restPasswordViewModel.resetPassword(email, password, confirmPass)
+
+            restPasswordViewModel.resetPasswordResponseLiveData.observe(
+                this@ResetPasswordActivity
+            ) { response ->
+                hideProgressDialog()
+                response.let {
+                    val message = response.message
+
+                    Toast.makeText(this@ResetPasswordActivity, message, Toast.LENGTH_LONG).show()
+
+                    startActivity(
+                        Intent(
+                            this@ResetPasswordActivity,
+                            ResetPasswordSuccessActivity::class.java
+                        )
+                    )
+                }
+            }
+
+            restPasswordViewModel.errorLiveData.observe(this@ResetPasswordActivity) { error ->
+                hideProgressDialog()
+                error?.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(this@ResetPasswordActivity, errorMessage, Toast.LENGTH_LONG)
+                            .show()
+
+                        Log.e("RestPasswordActivity", errorMessage)
+
+                    } catch (e: JSONException) {
+                        Toast.makeText(this@ResetPasswordActivity, error, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
         }
 
     }

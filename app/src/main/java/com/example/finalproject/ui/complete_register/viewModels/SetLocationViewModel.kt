@@ -2,19 +2,21 @@ package com.example.finalproject.ui.complete_register.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.ui.complete_register.models.LocationResponse
+import com.example.finalproject.ui.complete_register.repository.SetLocationRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SetLocationViewModel : ViewModel() {
+class SetLocationViewModel(
+    private val setLocationRepository: SetLocationRepository
+) : ViewModel() {
 
     val locationResponseLiveData: MutableLiveData<LocationResponse> = MutableLiveData()
     val errorLiveData: MutableLiveData<String> = MutableLiveData()
 
     fun setLocation(token: String, longitude: Double, latitude: Double) {
-        RetrofitClient.instance.location("Bearer $token", longitude, latitude)
+        setLocationRepository.setLocation("Bearer $token", longitude, latitude)
             .enqueue(object : Callback<LocationResponse> {
                 override fun onResponse(
                     call: Call<LocationResponse>,

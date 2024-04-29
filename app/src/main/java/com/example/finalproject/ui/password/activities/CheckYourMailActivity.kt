@@ -14,15 +14,18 @@ class CheckYourMailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check_your_mail)
 
-        setUpActionBar()
+        initView()
 
+        setUpActionBar()
+    }
+
+    private fun initView() {
         val email = AppReferences.getUserEmail(this@CheckYourMailActivity)
         Log.e("email check" , email)
 
         btn_ok.setOnClickListener {
             startActivity(Intent(this@CheckYourMailActivity, VerificationCodeForgetPasswordActivity::class.java))
         }
-
     }
 
     private fun setUpActionBar() {

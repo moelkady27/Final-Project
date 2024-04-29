@@ -8,12 +8,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
+import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.complete_register.factory.SetLocationFactory
+import com.example.finalproject.ui.complete_register.repository.SetLocationRepository
 import com.example.finalproject.ui.complete_register.viewModels.SetLocationViewModel
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -44,9 +46,11 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
     private lateinit var networkUtils: NetworkUtils
 
     private var fusedLocationProviderClient: FusedLocationProviderClient? = null
+
     private val REQUEST_CODE = 101
 
     private var currentLocation: Location? = null
+
     private var selectedLocation: LatLng? = null
 
     private var locationSelected: Boolean = false
@@ -56,9 +60,29 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
     private var mGoogleMap: GoogleMap?= null
 
     private lateinit var autocompleteFragment: AutocompleteSupportFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
+
+        networkUtils = NetworkUtils(this)
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+
+        initView()
+
+    }
+
+    private fun initView() {
+        val setLocationRepository = SetLocationRepository(RetrofitClient.instance)
+        val factorySetLocation = SetLocationFactory(setLocationRepository)
+        setLocationViewModel = ViewModelProvider(
+            this@MapActivity, factorySetLocation
+        )[SetLocationViewModel::class.java]
+
+        fetchLocation()
+
+//        search
 
         Places.initialize(applicationContext, getString(R.string.apiKey))
 
@@ -84,16 +108,14 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
-        networkUtils = NetworkUtils(this)
-
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-
-        setLocationViewModel = ViewModelProvider(this).get(SetLocationViewModel::class.java)
+//       current location
 
         btnCurrentLocation.setOnClickListener {
             fetchCurrentLocation()
             locationSelected = false
         }
+
+//        select location
 
         btnConfirmLocation.setOnClickListener {
             if (networkUtils.isNetworkAvailable()) {
@@ -106,8 +128,6 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
                 showErrorSnackBar("No internet connection", true)
             }
         }
-
-        fetchLocation()
     }
 
     private fun zoomOnMap(latlng: LatLng) {
@@ -130,6 +150,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         }
     }
 
+//    getting location by permissions
     private fun fetchLocation() {
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -188,7 +209,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
             showProgressDialog(this@MapActivity , "Setting up your LocationSignIn")
 
             setLocationViewModel.setLocation(token, selectedLocation!!.longitude, selectedLocation!!.latitude)
-            setLocationViewModel.locationResponseLiveData.observe(this, Observer { response ->
+            setLocationViewModel.locationResponseLiveData.observe(this) { response ->
                 hideProgressDialog()
                 response?.let {
                     val status = it.status
@@ -204,9 +225,9 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
                     setResult(RESULT_OK, intent)
                     finish()
                 }
-            })
+            }
 
-            setLocationViewModel.errorLiveData.observe(this, Observer { error ->
+            setLocationViewModel.errorLiveData.observe(this) { error ->
                 hideProgressDialog()
                 error.let {
                     try {
@@ -219,7 +240,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
                         Toast.makeText(this@MapActivity, error, Toast.LENGTH_LONG).show()
                     }
                 }
-            })
+            }
 
         } else {
             Snackbar.make(
@@ -237,7 +258,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
             showProgressDialog(this@MapActivity , "Setting up your LocationSignIn")
 
             setLocationViewModel.setLocation(token, currentLocation!!.longitude, currentLocation!!.latitude)
-            setLocationViewModel.locationResponseLiveData.observe(this, Observer { response ->
+            setLocationViewModel.locationResponseLiveData.observe(this) { response ->
                 hideProgressDialog()
                 response?.let {
                     val status = it.status
@@ -252,9 +273,9 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
                     setResult(RESULT_OK, intent)
                     finish()
                 }
-            })
+            }
 
-            setLocationViewModel.errorLiveData.observe(this, Observer { error ->
+            setLocationViewModel.errorLiveData.observe(this) { error ->
                 hideProgressDialog()
                 error.let {
                     try {
@@ -267,7 +288,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
                         Toast.makeText(this@MapActivity, error, Toast.LENGTH_LONG).show()
                     }
                 }
-            })
+            }
 
         } else {
             Snackbar.make(

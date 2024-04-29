@@ -5,22 +5,22 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
+import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.complete_register.factory.UploadPhotoFactory
+import com.example.finalproject.ui.complete_register.repository.UploadPhotoRepository
 import com.example.finalproject.ui.complete_register.viewModels.UploadPhotoViewModel
 import kotlinx.android.synthetic.main.activity_upload_photo.btn_next_upload_photo
 import kotlinx.android.synthetic.main.activity_upload_photo.fl_from_gallery
@@ -38,6 +38,7 @@ class UploadPhotoActivity : BaseActivity() {
     private lateinit var networkUtils: NetworkUtils
 
     private lateinit var selectedImage: String
+
     private lateinit var uploadPhotoViewModel: UploadPhotoViewModel
 
     private var REQUEST_CODE_GALLERY = 0
@@ -52,60 +53,34 @@ class UploadPhotoActivity : BaseActivity() {
             }
         }
 
-    private fun getPathFromUri(uri: Uri): String {
-        val projection = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = contentResolver.query(uri, projection, null, null, null)
-        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-        cursor?.moveToFirst()
-        val path = columnIndex?.let { cursor.getString(it) } ?: ""
-        cursor?.close()
-        return path
-    }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload_photo)
 
         networkUtils = NetworkUtils(this)
 
-        uploadPhotoViewModel = ViewModelProvider(this).get(UploadPhotoViewModel::class.java)
-
-        uploadPhotoViewModel.uploadPhotoResponseLiveData.observe(this, Observer { response ->
-            hideProgressDialog()
-            response?.let {
-                val status = it.status
-                Toast.makeText(this@UploadPhotoActivity, status, Toast.LENGTH_LONG).show()
-
-                Log.e("status" , status)
-
-                val intent = Intent(this@UploadPhotoActivity, UploadPreviewActivity::class.java)
-
-                intent.putExtra("imageUri", selectedImage)
-
-                Log.e("image is " , selectedImage)
-
-                startActivity(intent)
-
-            }
-        })
-
-        uploadPhotoViewModel.errorLiveData.observe(this, Observer { error ->
-            hideProgressDialog()
-            error?.let {
-                try {
-                    val errorMessage = JSONObject(error).getString("message")
-                    Toast.makeText(this@UploadPhotoActivity, errorMessage, Toast.LENGTH_LONG).show()
-
-                    Log.e("UploadImageSignUpActivity", "Upload ImageSignUp Error: $errorMessage")
-
-                } catch (e: JSONException) {
-                    Toast.makeText(this@UploadPhotoActivity, error, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
+        initView()
 
         setUpActionBar()
+    }
+
+    private fun initView(){
+                                    /* Upload-Photo */
+
+        val uploadPhotoRepository = UploadPhotoRepository(RetrofitClient.instance)
+        val factoryUploadPhoto = UploadPhotoFactory(uploadPhotoRepository)
+        uploadPhotoViewModel = ViewModelProvider(
+            this@UploadPhotoActivity, factoryUploadPhoto)[UploadPhotoViewModel::class.java]
+
+        btn_next_upload_photo.setOnClickListener {
+            if (networkUtils.isNetworkAvailable()) {
+                uploadPhoto()
+            } else {
+                showErrorSnackBar("No internet connection", true)
+            }
+        }
+
+                                    /* Gallery-Button */
 
         fl_from_gallery.setOnClickListener {
             if (ContextCompat.checkSelfPermission(this@UploadPhotoActivity,
@@ -118,13 +93,7 @@ class UploadPhotoActivity : BaseActivity() {
             pickImageFromGallery.launch(galleryIntent)
         }
 
-        btn_next_upload_photo.setOnClickListener {
-            if (networkUtils.isNetworkAvailable()) {
-                uploadPhoto()
-            } else {
-                showErrorSnackBar("No internet connection", true)
-            }
-        }
+                                    /* Skip-Upload-Photo-Button */
 
         skip.setOnClickListener {
             if (networkUtils.isNetworkAvailable()) {
@@ -140,6 +109,7 @@ class UploadPhotoActivity : BaseActivity() {
                 showErrorSnackBar("No internet connection", true)
             }
         }
+
     }
 
     private fun setUpActionBar() {
@@ -169,6 +139,39 @@ class UploadPhotoActivity : BaseActivity() {
 
             uploadPhotoViewModel.uploadPhoto(token, body)
 
+            uploadPhotoViewModel.uploadPhotoResponseLiveData.observe(this, Observer { response ->
+                hideProgressDialog()
+                response?.let {
+                    val status = it.status
+                    Toast.makeText(this@UploadPhotoActivity, status, Toast.LENGTH_LONG).show()
+
+                    Log.e("status" , status)
+
+                    val intent = Intent(this@UploadPhotoActivity, UploadPreviewActivity::class.java)
+
+                    intent.putExtra("imageUri", selectedImage)
+
+                    Log.e("image is " , selectedImage)
+
+                    startActivity(intent)
+
+                }
+            })
+
+            uploadPhotoViewModel.errorLiveData.observe(this, Observer { error ->
+                hideProgressDialog()
+                error?.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(this@UploadPhotoActivity, errorMessage, Toast.LENGTH_LONG).show()
+
+                        Log.e("UploadImageSignUpActivity", "Upload ImageSignUp Error: $errorMessage")
+
+                    } catch (e: JSONException) {
+                        Toast.makeText(this@UploadPhotoActivity, error, Toast.LENGTH_LONG).show()
+                    }
+                }
+            })
         } else {
             Toast.makeText(
                 this@UploadPhotoActivity,
@@ -189,4 +192,15 @@ class UploadPhotoActivity : BaseActivity() {
             }
         }
     }
+
+    private fun getPathFromUri(uri: Uri): String {
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = contentResolver.query(uri, projection, null, null, null)
+        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor?.moveToFirst()
+        val path = columnIndex?.let { cursor.getString(it) } ?: ""
+        cursor?.close()
+        return path
+    }
+
 }

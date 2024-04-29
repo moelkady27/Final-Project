@@ -1,29 +1,27 @@
 package com.example.finalproject.ui.profile.viewModels
 
-import android.media.session.MediaSession.Token
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.finalproject.retrofit.RetrofitClient
-import com.example.finalproject.ui.complete_register.models.CompleteSignUpResponse
-import com.example.finalproject.ui.complete_register.models.UploadPhotoResponse
 import com.example.finalproject.ui.profile.models.ChangeProfileImageResponse
 import com.example.finalproject.ui.profile.models.DeleteProfileImageResponse
 import com.example.finalproject.ui.profile.models.EditProfileResponse
-import com.example.finalproject.ui.profile.request.EditProfileRequest
+import com.example.finalproject.ui.profile.repository.EditProfileRepository
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class EditProfileViewModel: ViewModel() {
+class EditProfileViewModel(
+    private val editProfileRepository: EditProfileRepository
+): ViewModel() {
 
     val editProfileResponseLiveData: MutableLiveData<EditProfileResponse> = MutableLiveData()
+    val deleteProfileImageResponseLiveData: MutableLiveData<DeleteProfileImageResponse> = MutableLiveData()
+    val changeProfileImageResponseLiveData: MutableLiveData<ChangeProfileImageResponse> = MutableLiveData()
     val errorLiveData: MutableLiveData<String> = MutableLiveData()
 
     fun editProfile(token: String , firstName: String , gender: String , username: String , lastName: String, phone: String){
-        val data = EditProfileRequest(firstName, gender, username, lastName, phone)
-
-        RetrofitClient.instance.editProfile("Bearer $token" , data)
+        editProfileRepository.editProfile("Bearer $token" , firstName, gender, username, lastName, phone)
             .enqueue(object : Callback<EditProfileResponse>{
                 override fun onResponse(
                     call: Call<EditProfileResponse>,
@@ -44,11 +42,8 @@ class EditProfileViewModel: ViewModel() {
             })
     }
 
-    val deleteProfileImageResponseLiveData: MutableLiveData<DeleteProfileImageResponse> = MutableLiveData()
-
     fun deleteProfileImage(token: String){
-
-        RetrofitClient.instance.deleteProfileImage("Bearer $token")
+        editProfileRepository.deleteProfileImage("Bearer $token")
             .enqueue(object : Callback<DeleteProfileImageResponse>{
                 override fun onResponse(
                     call: Call<DeleteProfileImageResponse>,
@@ -69,10 +64,8 @@ class EditProfileViewModel: ViewModel() {
             })
     }
 
-    val changeProfileImageResponseLiveData: MutableLiveData<ChangeProfileImageResponse> = MutableLiveData()
-
     fun changeImage(token: String, image: MultipartBody.Part) {
-        RetrofitClient.instance.changeImage("Bearer $token", image)
+        editProfileRepository.changeImage("Bearer $token", image)
             .enqueue(object : Callback<ChangeProfileImageResponse> {
                 override fun onResponse(
                     call: Call<ChangeProfileImageResponse>,

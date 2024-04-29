@@ -8,11 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
+import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.chat.activities.ChatListUsersActivity
@@ -21,10 +21,14 @@ import com.example.finalproject.ui.register.activities.SignInActivity
 import com.example.finalproject.ui.password.activities.ChangePasswordActivity
 import com.example.finalproject.ui.setting.activities.DeleteAccountActivity
 import com.example.finalproject.ui.profile.activities.EditProfileActivity
+import com.example.finalproject.ui.profile.factory.GetUserInfoFactory
+import com.example.finalproject.ui.profile.repository.GetUserInfoRepository
 import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
 import com.example.finalproject.ui.search.SearchUsersActivity
 import com.example.finalproject.ui.setting.activities.FavouritesActivity
-import com.example.finalproject.ui.setting.viewModels.LogOutViewModels
+import com.example.finalproject.ui.setting.factory.LogOutFactory
+import com.example.finalproject.ui.setting.repository.LogOutRepository
+import com.example.finalproject.ui.setting.viewModels.LogOutViewModel
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.fragment_settings.btn_change_password
 import kotlinx.android.synthetic.main.fragment_settings.btn_chats
@@ -46,7 +50,7 @@ class SettingsFragment : Fragment() {
 
     private lateinit var networkUtils: NetworkUtils
 
-    private lateinit var logOutViewModel: LogOutViewModels
+    private lateinit var logOutViewModel: LogOutViewModel
 
     private lateinit var getUserInfoViewModel: GetUserInfoViewModel
 
@@ -54,7 +58,6 @@ class SettingsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         baseActivity = BaseActivity()
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,42 +76,45 @@ class SettingsFragment : Fragment() {
 
         networkUtils = NetworkUtils(requireContext())
 
-//        Logout
+        initView()
+    }
 
-        logOutViewModel = ViewModelProvider(this@SettingsFragment).get(LogOutViewModels::class.java)
-        getUserInfoViewModel =ViewModelProvider(this@SettingsFragment).get(GetUserInfoViewModel::class.java)
+    private fun initView(){
+                                        /* Logout */
 
-        logOutViewModel.logOutResponseLiveData.observe(viewLifecycleOwner, Observer { response ->
-            baseActivity.hideProgressDialog()
-            response?.let {
-                val message = it.status
-                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+        val logOutRepository = LogOutRepository(RetrofitClient.instance)
+        val factory = LogOutFactory(logOutRepository)
+        logOutViewModel = ViewModelProvider(
+            this@SettingsFragment, factory)[LogOutViewModel::class.java]
 
-                Log.e("SignUpActivity", "Response Message: $message")
+        btn_logout.setOnClickListener {
+            btn_logout.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            btn_logout.setTextColor(resources.getColor(R.color.white))
+            btn_logout.setIconTintResource(R.color.white)
 
-                AppReferences.setLoginState(requireActivity() , false)
-                startActivity(Intent(requireContext(), SignInActivity::class.java))
+            resetButtonColor(btn_logout)
 
-                activity?.finish()
+            if (networkUtils.isNetworkAvailable()) {
+                baseActivity.showProgressDialog(requireContext(), "Logging Out...")
+                logOutViewModel.logout(AppReferences.getToken(requireContext()))
+
+                viewModelResponse()
+            } else {
+                baseActivity.showErrorSnackBar("No internet connection", true)
             }
-        })
+        }
 
-        logOutViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error ->
-            baseActivity.hideProgressDialog()
-            error?.let {
-                try {
-                    val errorMessage = JSONObject(error).getString("message")
-                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
-                } catch (e: JSONException) {
-                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
+                                        /* Get-User */
 
-//        Get-User
+        val getUserInfoRepository = GetUserInfoRepository(RetrofitClient.instance)
+        val factoryGetUser = GetUserInfoFactory(getUserInfoRepository)
+        getUserInfoViewModel = ViewModelProvider(
+            this@SettingsFragment , factoryGetUser
+        )[GetUserInfoViewModel::class.java]
 
+        getUserInfoViewModel.getUserInfo(AppReferences.getToken(requireContext()))
 
-        getUserInfoViewModel.getUserInfoResponseLiveData.observe(viewLifecycleOwner, Observer { response ->
+        getUserInfoViewModel.getUserInfoResponseLiveData.observe(viewLifecycleOwner) { response ->
             baseActivity.hideProgressDialog()
             response.let {
                 val status = response.status
@@ -117,20 +123,28 @@ class SettingsFragment : Fragment() {
 
                 val fullName = response.user.fullName
                 val email = response.user.email
-                val photo = response.user.image.url
+                val photo = response.user.image?.url
 
                 tv_user_name.text = fullName
                 tv_email_name.text = email
 
-                Glide
-                    .with(requireActivity())
-                    .load(photo)
-                    .into(iv_user_settings)
+                val defaultImage = "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg"
 
+                if (!photo.isNullOrEmpty()) {
+                    Glide
+                        .with(requireActivity())
+                        .load(photo)
+                        .into(iv_user_settings)
+                } else {
+                    Glide
+                        .with(requireActivity())
+                        .load(defaultImage)
+                        .into(iv_user_settings)
+                }
             }
-        })
+        }
 
-        getUserInfoViewModel.errorLiveData.observe(viewLifecycleOwner, Observer { error ->
+        getUserInfoViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
             baseActivity.hideProgressDialog()
             error?.let {
                 try {
@@ -140,10 +154,49 @@ class SettingsFragment : Fragment() {
                     Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
                 }
             }
-        })
+        }
 
-        getUserInfoViewModel.getUserInfo(AppReferences.getToken(requireContext()))
+        additionalButtons()
+    }
 
+    private fun viewModelResponse() {
+        logOutViewModel.logOutResponseLiveData.observe(viewLifecycleOwner) { response ->
+            baseActivity.hideProgressDialog()
+            response?.let {
+                val message = it.status
+                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+
+                Log.e("SignUpActivity", "Response Message: $message")
+
+                AppReferences.setLoginState(requireActivity(), false)
+                startActivity(Intent(requireContext(), SignInActivity::class.java))
+
+                activity?.finish()
+            }
+        }
+
+        logOutViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
+            baseActivity.hideProgressDialog()
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun resetButtonColor(button: MaterialButton) {
+        button.postDelayed({
+            button.setBackgroundColor(resources.getColor(R.color.white))
+            button.setTextColor(resources.getColor(R.color.colorPrimaryText))
+            button.setIconTintResource(R.color.colorPrimaryText)
+        }, 100)
+    }
+
+    private fun additionalButtons() {
         btn_edit_profile.setOnClickListener {
             btn_edit_profile.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             btn_edit_profile.setTextColor(resources.getColor(R.color.white))
@@ -172,21 +225,6 @@ class SettingsFragment : Fragment() {
             val intent = Intent(requireContext(), ChangePasswordActivity::class.java)
             startActivity(intent)
             resetButtonColor(btn_change_password)
-        }
-
-        btn_logout.setOnClickListener {
-            btn_logout.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            btn_logout.setTextColor(resources.getColor(R.color.white))
-            btn_logout.setIconTintResource(R.color.white)
-
-            resetButtonColor(btn_logout)
-
-            if (networkUtils.isNetworkAvailable()) {
-                baseActivity.showProgressDialog(requireContext(), "Logging Out...")
-                logOutViewModel.logout(AppReferences.getToken(requireContext()))
-            } else {
-                baseActivity.showErrorSnackBar("No internet connection", true)
-            }
         }
 
         btn_notification.setOnClickListener {
@@ -224,14 +262,6 @@ class SettingsFragment : Fragment() {
             startActivity(intent)
             resetButtonColor(btn_chats)
         }
-    }
-
-    private fun resetButtonColor(button: MaterialButton) {
-        button.postDelayed({
-            button.setBackgroundColor(resources.getColor(R.color.white))
-            button.setTextColor(resources.getColor(R.color.colorPrimaryText))
-            button.setIconTintResource(R.color.colorPrimaryText)
-        }, 100)
     }
 
 }

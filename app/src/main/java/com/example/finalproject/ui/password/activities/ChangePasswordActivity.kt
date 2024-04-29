@@ -1,9 +1,7 @@
 package com.example.finalproject.ui.password.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,15 +12,11 @@ import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.password.viewModels.ChangePasswordViewModel
 import com.example.finalproject.ui.password.viewModels.LogoutAllViewModel
 import com.example.finalproject.ui.register.activities.SignInActivity
-import com.example.finalproject.ui.setting.viewModels.LogOutViewModels
 import kotlinx.android.synthetic.main.activity_change_password.btn_change_pass
 import kotlinx.android.synthetic.main.activity_change_password.et_confirm_new_password
 import kotlinx.android.synthetic.main.activity_change_password.et_new_password
 import kotlinx.android.synthetic.main.activity_change_password.et_old_password
 import kotlinx.android.synthetic.main.activity_change_password.toolbar_change_password
-import kotlinx.android.synthetic.main.activity_complete_sign_up.et_first_name
-import kotlinx.android.synthetic.main.activity_delete_account.toolbar_delete_account
-import kotlinx.android.synthetic.main.activity_forgot_password.toolbar_forget_password
 import org.json.JSONException
 import org.json.JSONObject
 

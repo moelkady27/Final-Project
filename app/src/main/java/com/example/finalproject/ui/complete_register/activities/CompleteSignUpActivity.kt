@@ -4,13 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
+import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.complete_register.factory.CompleteSignUpFactory
+import com.example.finalproject.ui.complete_register.repository.CompleteSignUpRepository
 import com.example.finalproject.ui.complete_register.viewModels.CompleteSignUpViewModel
 import kotlinx.android.synthetic.main.activity_complete_sign_up.btn_next_sign_up
 import kotlinx.android.synthetic.main.activity_complete_sign_up.et_first_name
@@ -18,9 +19,6 @@ import kotlinx.android.synthetic.main.activity_complete_sign_up.et_gender
 import kotlinx.android.synthetic.main.activity_complete_sign_up.et_last_name
 import kotlinx.android.synthetic.main.activity_complete_sign_up.et_phone_number
 import kotlinx.android.synthetic.main.activity_complete_sign_up.toolbar_complete_sign_up
-import kotlinx.android.synthetic.main.activity_sign_in.et_email_sign_in
-import kotlinx.android.synthetic.main.activity_sign_in.et_password_sign_in
-import kotlinx.android.synthetic.main.activity_sign_up.et_username_sign_up
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -36,37 +34,16 @@ class CompleteSignUpActivity : BaseActivity() {
 
         networkUtils = NetworkUtils(this)
 
+        initView()
+
         setUpActionBar()
+    }
 
-        completeSignUpViewModel = ViewModelProvider(this).get(CompleteSignUpViewModel::class.java)
-
-        completeSignUpViewModel.completeSignUpResponseLiveData.observe(this, Observer { response ->
-            hideProgressDialog()
-            response?.let {
-                val status = it.status
-
-                Log.e("CompleteSignUpActivity", "Status: $status")
-
-                Toast.makeText(this@CompleteSignUpActivity, status, Toast.LENGTH_LONG).show()
-
-                startActivity(Intent(this@CompleteSignUpActivity, UploadPhotoActivity::class.java))
-            }
-        })
-
-        completeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
-            hideProgressDialog()
-            error?.let {
-                try {
-                    val errorMessage = JSONObject(error).getString("message")
-                    Toast.makeText(this@CompleteSignUpActivity, errorMessage, Toast.LENGTH_LONG).show()
-
-                    Log.e("CompleteSignUpActivity", "Complete Error: $errorMessage")
-
-                } catch (e: JSONException) {
-                    Toast.makeText(this@CompleteSignUpActivity, error, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
+    private fun initView(){
+        val completeSignUpRepository = CompleteSignUpRepository(RetrofitClient.instance)
+        val factoryCompleteSignUp = CompleteSignUpFactory(completeSignUpRepository)
+        completeSignUpViewModel = ViewModelProvider(
+            this@CompleteSignUpActivity, factoryCompleteSignUp)[CompleteSignUpViewModel::class.java]
 
         btn_next_sign_up.setOnClickListener {
             if (networkUtils.isNetworkAvailable()) {
@@ -75,7 +52,6 @@ class CompleteSignUpActivity : BaseActivity() {
                 showErrorSnackBar("No internet connection", true)
             }
         }
-
     }
 
     private fun setUpActionBar() {
@@ -104,6 +80,40 @@ class CompleteSignUpActivity : BaseActivity() {
         if (isValidInput()) {
             showProgressDialog(this@CompleteSignUpActivity , "completing registration...")
             completeSignUpViewModel.completeSignUp(token, firstName, lastName, gender, phoneNumber)
+
+            completeSignUpViewModel.completeSignUpResponseLiveData.observe(this) { response ->
+                hideProgressDialog()
+                response?.let {
+                    val status = it.status
+
+                    Log.e("CompleteSignUpActivity", "Status: $status")
+
+                    Toast.makeText(this@CompleteSignUpActivity, status, Toast.LENGTH_LONG).show()
+
+                    startActivity(
+                        Intent(
+                            this@CompleteSignUpActivity,
+                            UploadPhotoActivity::class.java
+                        )
+                    )
+                }
+            }
+
+            completeSignUpViewModel.errorLiveData.observe(this) { error ->
+                hideProgressDialog()
+                error?.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(this@CompleteSignUpActivity, errorMessage, Toast.LENGTH_LONG)
+                            .show()
+
+                        Log.e("CompleteSignUpActivity", "Complete Error: $errorMessage")
+
+                    } catch (e: JSONException) {
+                        Toast.makeText(this@CompleteSignUpActivity, error, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
     }
 

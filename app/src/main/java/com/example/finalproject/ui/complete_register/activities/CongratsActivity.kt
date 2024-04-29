@@ -13,9 +13,11 @@ class CongratsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_congrats)
 
-        btn_start_sign_up_success.setOnClickListener {
-//            startActivity(Intent(this@CongratsActivity, SignInActivity::class.java))
+        initView()
+    }
 
+    private fun initView(){
+        btn_start_sign_up_success.setOnClickListener {
             AppReferences.setLoginState(this@CongratsActivity, true)
 
             val intent = Intent(this@CongratsActivity, MainActivity::class.java)

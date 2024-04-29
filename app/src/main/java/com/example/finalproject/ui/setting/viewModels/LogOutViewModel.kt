@@ -2,19 +2,21 @@ package com.example.finalproject.ui.setting.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.ui.setting.models.LogOutResponse
+import com.example.finalproject.ui.setting.repository.LogOutRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LogOutViewModels: ViewModel() {
+class LogOutViewModel(
+    private val logOutRepository: LogOutRepository
+): ViewModel() {
 
     val logOutResponseLiveData: MutableLiveData<LogOutResponse> = MutableLiveData()
     val errorLiveData: MutableLiveData<String> = MutableLiveData()
 
     fun logout(token: String){
-        RetrofitClient.instance.logout("Bearer $token")
+        logOutRepository.logout("Bearer $token")
             .enqueue(object : Callback<LogOutResponse> {
                 override fun onResponse(
                     call: Call<LogOutResponse>,
