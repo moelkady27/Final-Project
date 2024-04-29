@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
+import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.password.factory.ForgotPasswordFactory
+import com.example.finalproject.ui.password.repository.ForgotPasswordRepository
 import com.example.finalproject.ui.password.viewModels.ForgotPasswordViewModel
 import kotlinx.android.synthetic.main.activity_forgot_password.btn_send
 import kotlinx.android.synthetic.main.activity_forgot_password.et_email_forgot_password
@@ -29,41 +31,16 @@ class ForgotPasswordActivity : BaseActivity() {
 
         networkUtils = NetworkUtils(this@ForgotPasswordActivity)
 
-        forgotPasswordViewModel = ViewModelProvider(this@ForgotPasswordActivity).get(ForgotPasswordViewModel::class.java)
-
-        forgotPasswordViewModel.forgotPasswordResponseLiveData.observe(this@ForgotPasswordActivity , Observer { response->
-            hideProgressDialog()
-            response.let {
-                val message = response.message
-
-                val email = response.email
-
-                AppReferences.setUserEmail(this@ForgotPasswordActivity , email)
-
-                Toast.makeText(this@ForgotPasswordActivity , message , Toast.LENGTH_LONG).show()
-
-                Log.e("status" , message)
-
-                startActivity(Intent(this@ForgotPasswordActivity, CheckYourMailActivity::class.java))
-
-            }
-        })
-
-        forgotPasswordViewModel.errorLiveDate.observe(this@ForgotPasswordActivity , Observer { error->
-            hideProgressDialog()
-            error.let {
-                try {
-                    val errorMessage = JSONObject(error).getString("message")
-                    Toast.makeText(this@ForgotPasswordActivity, errorMessage, Toast.LENGTH_LONG)
-                        .show()
-                } catch (e: Exception) {
-                    Toast.makeText(this@ForgotPasswordActivity, "Error Server", Toast.LENGTH_LONG)
-                        .show()
-                }
-            }
-        })
+        initView()
 
         setUpActionBar()
+
+    }
+
+    private fun initView() {
+        val forgotPasswordRepository = ForgotPasswordRepository(RetrofitClient.instance)
+        val factory = ForgotPasswordFactory(forgotPasswordRepository)
+        forgotPasswordViewModel = ViewModelProvider(this, factory)[ForgotPasswordViewModel::class.java]
 
         btn_send.setOnClickListener {
             forgotPass()
@@ -77,6 +54,47 @@ class ForgotPasswordActivity : BaseActivity() {
         if (isValidInput()){
             showProgressDialog(this@ForgotPasswordActivity ,"Sending OTP...")
             forgotPasswordViewModel.forgotPass(email)
+
+            forgotPasswordViewModel.forgotPasswordResponseLiveData.observe(this@ForgotPasswordActivity
+            ) { response ->
+                hideProgressDialog()
+                response.let {
+                    val message = response.message
+
+                    val email = response.email
+
+                    AppReferences.setUserEmail(this@ForgotPasswordActivity, email)
+
+                    Toast.makeText(this@ForgotPasswordActivity, message, Toast.LENGTH_LONG).show()
+
+                    Log.e("status", message)
+
+                    startActivity(
+                        Intent(
+                            this@ForgotPasswordActivity,
+                            CheckYourMailActivity::class.java
+                        )
+                    )
+                }
+            }
+
+            forgotPasswordViewModel.errorLiveDate.observe(this@ForgotPasswordActivity) { error ->
+                hideProgressDialog()
+                error.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(this@ForgotPasswordActivity, errorMessage, Toast.LENGTH_LONG)
+                            .show()
+                    } catch (e: Exception) {
+                        Toast.makeText(
+                            this@ForgotPasswordActivity,
+                            "Error Server",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+
         }
     }
 

@@ -4,13 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
+import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.complete_register.activities.CompleteSignUpActivity
+import com.example.finalproject.ui.register.factory.VerificationCodeSignUpFactory
+import com.example.finalproject.ui.register.repository.VerificationCodeSignUpRepository
 import com.example.finalproject.ui.register.viewModels.VerificationCodeSignUpViewModel
 import kotlinx.android.synthetic.main.activity_verification_code_sign_up.btn_verify_code
 import kotlinx.android.synthetic.main.activity_verification_code_sign_up.et_code_box
@@ -31,57 +33,15 @@ class VerificationCodeSignUpActivity : BaseActivity() {
 
         networkUtils = NetworkUtils(this)
 
-        verificationCodeSignUpViewModel =
-            ViewModelProvider(this).get(VerificationCodeSignUpViewModel::class.java)
+        initView()
 
-        verificationCodeSignUpViewModel.verificationCodeSignUpResponseLiveData.observe(
-            this,
-            Observer { response ->
-                hideProgressDialog()
-                response?.let {
+        setUpActionBar()
+    }
 
-                    AppReferences.setLoginState(this, true)
-
-                    val status = it.status
-
-                    Log.e(
-                        "VerificationCodeSignUpActivity",
-                        "Verification successful: Status - ${it.status}"
-                    )
-
-                    Toast.makeText(this, status, Toast.LENGTH_LONG).show()
-
-                    startActivity(Intent(this, CompleteSignUpActivity::class.java))
-                }
-            })
-
-        verificationCodeSignUpViewModel.resendCodeResponseLiveData.observe(
-            this,
-            Observer { response ->
-                hideProgressDialog()
-                response?.let {
-                    Toast.makeText(
-                        this@VerificationCodeSignUpActivity,
-                        "Resend Code Successful",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-            })
-
-        verificationCodeSignUpViewModel.errorLiveData.observe(this, Observer { error ->
-            hideProgressDialog()
-            error?.let {
-                try {
-                    val errorMessage = JSONObject(error).getString("message")
-                    Toast.makeText(this@VerificationCodeSignUpActivity, errorMessage, Toast.LENGTH_LONG).show()
-
-                    Log.e("VerificationCodeSignUpActivity", "Resend Code Error: $errorMessage")
-
-                } catch (e: JSONException) {
-                    Toast.makeText(this@VerificationCodeSignUpActivity, error, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
+    private fun initView() {
+        val verificationCodeSignUpRepository = VerificationCodeSignUpRepository(RetrofitClient.instance)
+        val factory = VerificationCodeSignUpFactory(verificationCodeSignUpRepository)
+        verificationCodeSignUpViewModel = ViewModelProvider(this, factory)[VerificationCodeSignUpViewModel::class.java]
 
         btn_verify_code.setOnClickListener {
             if (networkUtils.isNetworkAvailable()) {
@@ -99,7 +59,6 @@ class VerificationCodeSignUpActivity : BaseActivity() {
             }
         }
 
-        setUpActionBar()
     }
 
     private fun setUpActionBar() {
@@ -128,10 +87,52 @@ class VerificationCodeSignUpActivity : BaseActivity() {
             showProgressDialog(this@VerificationCodeSignUpActivity, "Verifying your self...")
             verificationCodeSignUpViewModel.verifyAccount(token, verificationCode)
 
+            verificationCodeSignUpViewModel.verificationCodeSignUpResponseLiveData.observe(this) { response ->
+                hideProgressDialog()
+                response?.let {
+
+                    AppReferences.setLoginState(this, true)
+
+                    val status = it.status
+
+                    Log.e(
+                        "VerificationCodeSignUpActivity",
+                        "Verification successful: Status - ${it.status}"
+                    )
+
+                    Toast.makeText(this, status, Toast.LENGTH_LONG).show()
+
+                    startActivity(Intent(this, CompleteSignUpActivity::class.java))
+                }
+            }
+
+            verificationCodeSignUpViewModel.errorLiveData.observe(this) { error ->
+                hideProgressDialog()
+                error?.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(
+                            this@VerificationCodeSignUpActivity,
+                            errorMessage,
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        Log.e("VerificationCodeSignUpActivity", "Resend Code Error: $errorMessage")
+
+                    } catch (e: JSONException) {
+                        Toast.makeText(
+                            this@VerificationCodeSignUpActivity,
+                            error,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
 
         } else {
             Toast.makeText(this, "Verification code cannot be empty", Toast.LENGTH_LONG).show()
         }
+
     }
 
     private fun resendCode() {
@@ -140,6 +141,39 @@ class VerificationCodeSignUpActivity : BaseActivity() {
         showProgressDialog(this@VerificationCodeSignUpActivity, "resending verifying code...")
         verificationCodeSignUpViewModel.resendCode(token)
 
+        verificationCodeSignUpViewModel.resendCodeResponseLiveData.observe(this) { response ->
+            hideProgressDialog()
+            response?.let {
+                Toast.makeText(
+                    this@VerificationCodeSignUpActivity,
+                    "Resend Code Successful",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
 
+        verificationCodeSignUpViewModel.errorLiveData.observe(this) { error ->
+            hideProgressDialog()
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(
+                        this@VerificationCodeSignUpActivity,
+                        errorMessage,
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    Log.e("VerificationCodeSignUpActivity", "Resend Code Error: $errorMessage")
+
+                } catch (e: JSONException) {
+                    Toast.makeText(
+                        this@VerificationCodeSignUpActivity,
+                        error,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
     }
+
 }

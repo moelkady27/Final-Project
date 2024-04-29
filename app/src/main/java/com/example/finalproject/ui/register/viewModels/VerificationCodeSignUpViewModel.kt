@@ -2,15 +2,16 @@ package com.example.finalproject.ui.register.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.VerificationCodeSignUpResponse
-import com.example.finalproject.ui.register.request.VerificationCodeSignUpRequest
+import com.example.finalproject.ui.register.repository.VerificationCodeSignUpRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class VerificationCodeSignUpViewModel : ViewModel() {
+class VerificationCodeSignUpViewModel(
+    private val verificationCodeSignUpRepository: VerificationCodeSignUpRepository
+) : ViewModel() {
 
     val verificationCodeSignUpResponseLiveData: MutableLiveData<VerificationCodeSignUpResponse> = MutableLiveData()
     val errorLiveData: MutableLiveData<String> = MutableLiveData()
@@ -18,9 +19,8 @@ class VerificationCodeSignUpViewModel : ViewModel() {
     val resendCodeResponseLiveData: MutableLiveData<ResendCodeResponse> = MutableLiveData()
 
     fun verifyAccount(token: String, otp: Int) {
-        val data = VerificationCodeSignUpRequest(otp)
 
-        RetrofitClient.instance.verifyAccount("Bearer $token", data)
+        verificationCodeSignUpRepository.verifyAccount(token, otp)
             .enqueue(object : Callback<VerificationCodeSignUpResponse> {
                 override fun onResponse(
                     call: Call<VerificationCodeSignUpResponse>,
@@ -40,7 +40,8 @@ class VerificationCodeSignUpViewModel : ViewModel() {
     }
 
     fun resendCode(token: String) {
-        RetrofitClient.instance.resendCode("Bearer $token")
+
+        verificationCodeSignUpRepository.resendCode("Bearer $token")
             .enqueue(object : Callback<ResendCodeResponse> {
                 override fun onResponse(
                     call: Call<ResendCodeResponse>,

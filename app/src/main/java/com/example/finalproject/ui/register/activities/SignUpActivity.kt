@@ -6,12 +6,14 @@ import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatCheckBox
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
+import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.register.factory.SignUpViewModelFactory
+import com.example.finalproject.ui.register.repository.SignUpRepository
 import com.example.finalproject.ui.register.viewModels.SignUpViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.btn_next_sign_up
 import kotlinx.android.synthetic.main.activity_sign_up.et_confirm_password_sign_up
@@ -33,41 +35,14 @@ class SignUpActivity : BaseActivity() {
 
         networkUtils = NetworkUtils(this)
 
-        signUpViewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
+        initView()
 
-        signUpViewModel.signUpResponseLiveData.observe(this@SignUpActivity, Observer { response ->
-            hideProgressDialog()
-            response?.let {
-                val message = it.message
-                val userId = it.userId
-                Toast.makeText(baseContext, message, Toast.LENGTH_LONG).show()
+    }
 
-                Log.e("SignUpActivity", "Response Message: $message")
-
-                val token = it.token
-
-                AppReferences.setToken(this@SignUpActivity, token)
-
-                AppReferences.setUserId(this@SignUpActivity , userId)
-
-                Log.e("SignUpActivity", "Sign Up successful: token - $token")
-
-                startActivity(Intent(this@SignUpActivity, VerificationCodeSignUpActivity::class.java))
-                finish()
-            }
-        })
-
-        signUpViewModel.errorLiveData.observe(this@SignUpActivity, Observer { error ->
-            hideProgressDialog()
-            error?.let {
-                try {
-                    val errorMessage = JSONObject(error).getString("message")
-                    Toast.makeText(this@SignUpActivity, errorMessage, Toast.LENGTH_LONG).show()
-                } catch (e: JSONException) {
-                    Toast.makeText(this@SignUpActivity, error, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
+    private fun initView() {
+        val signUpRepository = SignUpRepository(RetrofitClient.instance)
+        val factory = SignUpViewModelFactory(signUpRepository)
+        signUpViewModel = ViewModelProvider(this, factory)[SignUpViewModel::class.java]
 
         tv_login.setOnClickListener {
             startActivity(Intent(this@SignUpActivity, SignInActivity::class.java))
@@ -90,11 +65,49 @@ class SignUpActivity : BaseActivity() {
         val password = et_password_sign_up.text.toString().trim()
         val confirmPass = et_confirm_password_sign_up.text.toString().trim()
 
-//        signUpViewModel.signUp(userName, email, password, confirmPass)
-
         if (isValidInput()) {
             showProgressDialog(this@SignUpActivity, "Signing Up...")
             signUpViewModel.signUp(userName , email, password, confirmPass)
+
+            signUpViewModel.signUpResponseLiveData.observe(this@SignUpActivity) { response ->
+                hideProgressDialog()
+                response?.let {
+                    val message = it.message
+                    val userId = it.userId
+                    Toast.makeText(baseContext, message, Toast.LENGTH_LONG).show()
+
+                    Log.e("SignUpActivity", "Response Message: $message")
+
+                    val token = it.token
+
+                    AppReferences.setToken(this@SignUpActivity, token)
+
+                    AppReferences.setUserId(this@SignUpActivity, userId)
+
+                    Log.e("SignUpActivity", "Sign Up successful: token - $token")
+
+                    startActivity(
+                        Intent(
+                            this@SignUpActivity,
+                            VerificationCodeSignUpActivity::class.java
+                        )
+                    )
+                    finish()
+                }
+            }
+
+            signUpViewModel.errorLiveData.observe(this@SignUpActivity) { error ->
+                hideProgressDialog()
+                error?.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(this@SignUpActivity, errorMessage, Toast.LENGTH_LONG).show()
+                    } catch (e: JSONException) {
+                        Toast.makeText(this@SignUpActivity, error, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
         }
     }
 

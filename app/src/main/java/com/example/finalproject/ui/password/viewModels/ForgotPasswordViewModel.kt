@@ -2,21 +2,22 @@ package com.example.finalproject.ui.password.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.ui.password.models.ForgotPasswordResponse
-import com.example.finalproject.ui.password.request.ForgotPasswordRequest
+import com.example.finalproject.ui.password.repository.ForgotPasswordRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ForgotPasswordViewModel: ViewModel() {
+class ForgotPasswordViewModel(
+    private val forgotPasswordRepository: ForgotPasswordRepository
+): ViewModel() {
 
     val forgotPasswordResponseLiveData: MutableLiveData<ForgotPasswordResponse> = MutableLiveData()
     val errorLiveDate: MutableLiveData<String> = MutableLiveData()
 
     fun forgotPass(email: String){
-        val data = ForgotPasswordRequest(email)
-        RetrofitClient.instance.forgotPassword( data)
+
+        forgotPasswordRepository.forgotPassword(email)
             .enqueue(object : Callback<ForgotPasswordResponse>{
                 override fun onResponse(
                     call: Call<ForgotPasswordResponse>,
