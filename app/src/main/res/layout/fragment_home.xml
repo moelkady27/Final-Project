@@ -55,13 +55,15 @@
                     android:id="@+id/tv_location_home_title_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
                     android:layout_marginStart="5dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="4dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Manhattan, New York"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_notification_home"
                     app:layout_constraintStart_toEndOf="@+id/iv_location_home"
                     app:layout_constraintTop_toTopOf="@id/tv_location_home_title_1" />
 

@@ -172,5 +172,8 @@
     <string name="enter_here" translatable="false">Enter Here</string>
     <string name="add_photos_to_your" translatable="false">Add <b>photos</b> to your</string>
     <string name="listing" translatable="false">listing</string>
+    <string name="listings" translatable="false">Listings</string>
+    <string name="sold" translatable="false">Sold</string>
+    <string name="reviews" translatable="false">Reviews</string>
 
 </resources>
