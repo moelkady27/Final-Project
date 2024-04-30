@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.retrofit.RetrofitClient
@@ -18,8 +19,10 @@ import com.example.finalproject.ui.profile.activities.EditProfileActivity
 import com.example.finalproject.ui.profile.factory.GetUserInfoFactory
 import com.example.finalproject.ui.profile.repository.GetUserInfoRepository
 import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_profile.floatingActionButton
 import kotlinx.android.synthetic.main.fragment_profile.image_profile
+import kotlinx.android.synthetic.main.fragment_profile.tab_layout
 import kotlinx.android.synthetic.main.fragment_profile.tv_profile_email
 import kotlinx.android.synthetic.main.fragment_profile.tv_profile_name
 import org.json.JSONException
@@ -28,6 +31,9 @@ import org.json.JSONObject
 class ProfileFragment : Fragment() {
 
     private lateinit var getUserInfoViewModel: GetUserInfoViewModel
+
+    private lateinit var viewPager2: ViewPager2
+    private lateinit var adapter: MyViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +53,22 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewPager2 = view.findViewById(R.id.view)
+
+        adapter = MyViewAdapter(childFragmentManager, lifecycle)
+        viewPager2.adapter = adapter
+
+        TabLayoutMediator(tab_layout, viewPager2) { tab, position ->
+            when (position) {
+                0 ->
+                    tab.text = "Pending"
+                1 ->
+                    tab.text = "Listings"
+                2 ->
+                    tab.text = "Sold"
+            }
+        }.attach()
 
         initView()
     }

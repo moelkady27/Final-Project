@@ -111,7 +111,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_profile_title_1"
+                        android:id="@+id/listing_count"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -138,7 +138,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_profile_title_1" />
+                        app:layout_constraintTop_toBottomOf="@id/listing_count" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -154,7 +154,7 @@
                     app:layout_constraintTop_toTopOf="@id/con_profile_listings">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_profile_title_3"
+                        android:id="@+id/sold_count"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -181,7 +181,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_profile_title_3" />
+                        app:layout_constraintTop_toBottomOf="@id/sold_count" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -196,7 +196,7 @@
                     app:layout_constraintTop_toTopOf="@+id/con_profile_sold">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_profile_title_5"
+                        android:id="@+id/reviews_count"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -223,13 +223,52 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_profile_title_5" />
+                        app:layout_constraintTop_toBottomOf="@id/reviews_count" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/con"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:background="@color/home_search"
+                app:layout_constraintEnd_toEndOf="@+id/constraint_profile_1"
+                app:layout_constraintStart_toStartOf="@+id/constraint_profile_1"
+                app:layout_constraintTop_toBottomOf="@+id/constraint_profile_1">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginEnd="17dp"
+                    android:layout_marginBottom="17dp"
+                    android:background="@drawable/round_white_black"
+                    android:backgroundTint="@color/home_search"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </com.google.android.material.tabs.TabLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/con"
+                app:layout_constraintStart_toStartOf="@+id/con"
+                app:layout_constraintTop_toBottomOf="@+id/con" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
