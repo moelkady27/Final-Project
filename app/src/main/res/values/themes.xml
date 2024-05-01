@@ -32,22 +32,11 @@
         <item name="android:fontFamily">@font/poppins_medium</item>
     </style>
 
-<!--    <style name="ViewPagerStyle">-->
-<!--        <item name="android:fontFamily">@font/poppins_medium</item>-->
-<!--        <item name="textAllCaps">false</item>-->
-<!--        <item name="android:textSize">15sp</item>-->
-<!--    </style>-->
-
-<!--    <style name="RoundedTabLayoutStyle" parent="Widget.Design.TabLayout">-->
-<!--        <item name="tabBackground">@drawable/tabs_selector</item>-->
-<!--        <item name="tabIndicator">@null</item>-->
-<!--        <item name="android:background">@drawable/round_white_black</item>-->
-<!--        <item name="tabSelectedTextColor">@color/colorThemeDarkGreen</item>-->
-<!--        <item name="android:textSize">15sp</item>-->
-<!--        <item name="textAllCaps">false</item>-->
-<!--        <item name="fontFamily">@font/poppins_medium</item>-->
-<!--        <item name="tabTextColor">#A1A5C1</item>-->
-<!--    </style>-->
+    <style name="RoundedTabLayoutStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 

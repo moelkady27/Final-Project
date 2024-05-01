@@ -38,4 +38,6 @@
     <color name="colorText">#1F4C6B</color>
 
     <color name="starColor">#FFEEA651</color>
+
+    <color name="tabLayoutColor">#FFA1A5C1</color>
 </resources>

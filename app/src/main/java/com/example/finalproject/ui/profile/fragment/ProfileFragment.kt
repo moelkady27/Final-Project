@@ -16,13 +16,14 @@ import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.profile.activities.EditProfileActivity
+import com.example.finalproject.ui.profile.adapter.MyViewAdapter
 import com.example.finalproject.ui.profile.factory.GetUserInfoFactory
 import com.example.finalproject.ui.profile.repository.GetUserInfoRepository
 import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_profile.floatingActionButton
 import kotlinx.android.synthetic.main.fragment_profile.image_profile
-import kotlinx.android.synthetic.main.fragment_profile.tab_layout
+import kotlinx.android.synthetic.main.fragment_profile.tab_layout_profile
 import kotlinx.android.synthetic.main.fragment_profile.tv_profile_email
 import kotlinx.android.synthetic.main.fragment_profile.tv_profile_name
 import org.json.JSONException
@@ -54,12 +55,12 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewPager2 = view.findViewById(R.id.view)
+        viewPager2 = view.findViewById(R.id.view_pager_profile)
 
         adapter = MyViewAdapter(childFragmentManager, lifecycle)
         viewPager2.adapter = adapter
 
-        TabLayoutMediator(tab_layout, viewPager2) { tab, position ->
+        TabLayoutMediator(tab_layout_profile, viewPager2) { tab, position ->
             when (position) {
                 0 ->
                     tab.text = "Pending"
