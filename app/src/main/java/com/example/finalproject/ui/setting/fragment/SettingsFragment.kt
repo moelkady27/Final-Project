@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
@@ -21,7 +22,9 @@ import com.example.finalproject.ui.register.activities.SignInActivity
 import com.example.finalproject.ui.password.activities.ChangePasswordActivity
 import com.example.finalproject.ui.setting.activities.DeleteAccountActivity
 import com.example.finalproject.ui.profile.activities.EditProfileActivity
+import com.example.finalproject.ui.profile.db.UserDatabase
 import com.example.finalproject.ui.profile.factory.GetUserInfoFactory
+import com.example.finalproject.ui.profile.models.User
 import com.example.finalproject.ui.profile.repository.GetUserInfoRepository
 import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
 import com.example.finalproject.ui.search.SearchUsersActivity
@@ -41,6 +44,7 @@ import kotlinx.android.synthetic.main.fragment_settings.iv_user_settings
 import kotlinx.android.synthetic.main.fragment_settings.search_for_user
 import kotlinx.android.synthetic.main.fragment_settings.tv_email_name
 import kotlinx.android.synthetic.main.fragment_settings.tv_user_name
+import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -104,42 +108,55 @@ class SettingsFragment : Fragment() {
             }
         }
 
-                                        /* Get-User */
+                                        /* Get-User-Info */
 
+        if (networkUtils.isNetworkAvailable()) {
+            fetchUserDataFromServer()
+        } else {
+            fetchUserDataFromCache()
+        }
+
+        additionalButtons()
+    }
+
+    private fun fetchUserDataFromServer() {
         val getUserInfoRepository = GetUserInfoRepository(RetrofitClient.instance)
         val factoryGetUser = GetUserInfoFactory(getUserInfoRepository)
         getUserInfoViewModel = ViewModelProvider(
-            this@SettingsFragment , factoryGetUser
+            this@SettingsFragment, factoryGetUser
         )[GetUserInfoViewModel::class.java]
 
         getUserInfoViewModel.getUserInfo(AppReferences.getToken(requireContext()))
 
         getUserInfoViewModel.getUserInfoResponseLiveData.observe(viewLifecycleOwner) { response ->
             baseActivity.hideProgressDialog()
-            response.let {
+            response?.let {
                 val status = response.status
-
                 Log.e("GetUser", status)
 
-                val fullName = response.user.fullName
-                val email = response.user.email
-                val photo = response.user.image?.url
+                val user = response.user
+                val userEntity = User(
+                    _id = user._id,
+                    createdAt = user.createdAt,
+                    email = user.email,
+                    firstName = user.firstName,
+                    fullName = user.fullName,
+                    gender = user.gender,
+                    image = user.image,
+                    isVerified = user.isVerified,
+                    lastName = user.lastName,
+                    location = user.location,
+                    phone = user.phone,
+                    role = user.role,
+                    updatedAt = user.updatedAt,
+                    username = user.username
+                )
 
-                tv_user_name.text = fullName
-                tv_email_name.text = email
+                lifecycleScope.launch {
+                    val userDao = UserDatabase.getInstance(requireContext()).userDao()
+                    userDao.saveUser(userEntity)
 
-                val defaultImage = "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg"
-
-                if (!photo.isNullOrEmpty()) {
-                    Glide
-                        .with(requireActivity())
-                        .load(photo)
-                        .into(iv_user_settings)
-                } else {
-                    Glide
-                        .with(requireActivity())
-                        .load(defaultImage)
-                        .into(iv_user_settings)
+                    updateProfile(userEntity)
                 }
             }
         }
@@ -151,12 +168,39 @@ class SettingsFragment : Fragment() {
                     val errorMessage = JSONObject(error).getString("message")
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
                 } catch (e: JSONException) {
-                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                    // Handle JSON exception
                 }
             }
         }
+    }
 
-        additionalButtons()
+    private fun fetchUserDataFromCache() {
+        lifecycleScope.launch {
+            val userDao = UserDatabase.getInstance(requireContext()).userDao()
+            val cachedUser = userDao.getUser(AppReferences.getUserId(requireContext()))
+
+            updateProfile(cachedUser)
+        }
+    }
+
+    private fun updateProfile(user: User) {
+        user.let {
+            tv_user_name.text = user.fullName
+            tv_email_name.text = user.email
+
+            val photo = user.image.url
+
+            if (photo.isNotEmpty()) {
+                Glide.with(requireActivity())
+                    .load(photo)
+                    .into(iv_user_settings)
+            }
+        }
+
+        lifecycleScope.launch {
+            val userDao = UserDatabase.getInstance(requireContext()).userDao()
+            userDao.saveUser(user)
+        }
     }
 
     private fun viewModelResponse() {

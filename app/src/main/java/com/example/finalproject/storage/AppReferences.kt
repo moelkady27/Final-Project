@@ -28,7 +28,7 @@ object AppReferences {
         editor.apply()
     }
 
-    fun getUserId(context: Activity?): String {
+    fun getUserId(context: Context): String {
         val sharedPreferences: SharedPreferences =
             context!!.getSharedPreferences("user", Context.MODE_PRIVATE)
         return sharedPreferences.getString("userId", "")!!

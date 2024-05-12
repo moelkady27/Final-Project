@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
@@ -17,7 +18,9 @@ import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.profile.activities.EditProfileActivity
 import com.example.finalproject.ui.profile.adapter.MyViewAdapter
+import com.example.finalproject.ui.profile.db.UserDatabase
 import com.example.finalproject.ui.profile.factory.GetUserInfoFactory
+import com.example.finalproject.ui.profile.models.User
 import com.example.finalproject.ui.profile.repository.GetUserInfoRepository
 import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
 import com.google.android.material.tabs.TabLayoutMediator
@@ -26,10 +29,16 @@ import kotlinx.android.synthetic.main.fragment_profile.image_profile
 import kotlinx.android.synthetic.main.fragment_profile.tab_layout_profile
 import kotlinx.android.synthetic.main.fragment_profile.tv_profile_email
 import kotlinx.android.synthetic.main.fragment_profile.tv_profile_name
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONException
 import org.json.JSONObject
 
 class ProfileFragment : Fragment() {
+
+    private lateinit var baseActivity: BaseActivity
 
     private lateinit var getUserInfoViewModel: GetUserInfoViewModel
 
@@ -38,6 +47,7 @@ class ProfileFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        baseActivity = BaseActivity()
     }
 
     override fun onCreateView(
@@ -75,7 +85,10 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initView(){
-                                    /* Get-User-Info-Profile */
+
+        val userId = AppReferences.getUserId(requireContext())
+
+        /* Get-User-Info-Profile */
 
         val getUserInfoRepository = GetUserInfoRepository(RetrofitClient.instance)
         val factoryGetUserProfile = GetUserInfoFactory(getUserInfoRepository)
@@ -91,27 +104,31 @@ class ProfileFragment : Fragment() {
 
                 Log.e("GetUser", status)
 
-                val fullName = response.user.fullName
-                val email = response.user.email
-                val photo = response.user.image?.url
+                val user = response.user
+                val userEntity = User(
+                    _id = user._id,
+                    createdAt = user.createdAt,
+                    email = user.email,
+                    firstName = user.firstName,
+                    fullName = user.fullName,
+                    gender = user.gender,
+                    image = user.image,
+                    isVerified = user.isVerified,
+                    lastName = user.lastName,
+                    location = user.location,
+                    phone = user.phone,
+                    role = user.role,
+                    updatedAt = user.updatedAt,
+                    username = user.username
+                )
 
-                tv_profile_name.text = fullName
-                tv_profile_email.text = email
+                lifecycleScope.launch {
+                    val userDao = UserDatabase.getInstance(requireContext()).userDao()
+                    userDao.saveUser(userEntity)
 
-                val defaultImage = "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg"
-
-                if (!photo.isNullOrEmpty()) {
-                    Glide
-                        .with(requireActivity())
-                        .load(photo)
-                        .into(image_profile)
-                } else {
-                    Glide
-                        .with(requireActivity())
-                        .load(defaultImage)
-                        .into(image_profile)
+                    val updatedUser = userDao.getUser(userEntity._id)
+                    updateProfile(updatedUser)
                 }
-
             }
         }
 
@@ -122,7 +139,7 @@ class ProfileFragment : Fragment() {
                     val errorMessage = JSONObject(error).getString("message")
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
                 } catch (e: JSONException) {
-                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+//                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -132,5 +149,43 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
+        CoroutineScope(Dispatchers.IO).launch {
+            val user = UserDatabase.getInstance(requireContext()).userDao().getUser(userId)
+
+            withContext(Dispatchers.Main) {
+
+                val fullName = user.fullName
+                val email = user.email
+                val photo = user.image.url
+
+                tv_profile_name.text = fullName
+                tv_profile_email.text = email
+
+                if (photo.isNotEmpty()) {
+                    Glide
+                        .with(requireActivity())
+                        .load(photo)
+                        .into(image_profile)
+                }
+            }
+        }
+
+     }
+
+    private fun updateProfile(user: User) {
+        user.let {
+            tv_profile_name.text = user.fullName
+            tv_profile_email.text = user.email
+
+            val photo = user.image.url
+
+            if (photo.isNotEmpty()) {
+                Glide.with(requireActivity())
+                    .load(photo)
+                    .into(image_profile)
+            }
+        }
     }
+
+
 }

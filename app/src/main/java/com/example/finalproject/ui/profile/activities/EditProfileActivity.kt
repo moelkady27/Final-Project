@@ -101,13 +101,13 @@ class EditProfileActivity : BaseActivity() {
             response?.let {
                 val message = response.status
 
-                response.user?.let { user ->
+                response.user.let { user ->
                     val firstName = user.firstName
                     val lastName = user.lastName
                     val gender = user.gender
                     val username = user.username
                     val phoneNumber = user.phone
-                    val image = user.image?.url
+                    val image = user.image.url
 
                     Log.e("message", message)
 
@@ -117,7 +117,7 @@ class EditProfileActivity : BaseActivity() {
                     edt_user_name.setText(username)
                     edt_phone_number.setText(phoneNumber)
 
-                    image?.let {
+                    image.let {
                         Glide
                             .with(this@EditProfileActivity)
                             .load(it)
@@ -126,7 +126,7 @@ class EditProfileActivity : BaseActivity() {
                     }
 
                     val defaultImage =
-                        "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg"
+                        "https://res.cloudinary.com/dgslxtxg8/image/upload/v1715336663/avatar/ds5uvwbqoxv5dayoivke.jpg"
 
                     if (image == defaultImage) {
                         floatingActionButton_delete.visibility = View.GONE

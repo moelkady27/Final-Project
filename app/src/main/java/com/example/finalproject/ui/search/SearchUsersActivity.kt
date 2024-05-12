@@ -3,11 +3,8 @@ package com.example.finalproject.ui.search
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,9 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.ui.chat.activities.ChatActivity
-import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModel
-import kotlinx.android.synthetic.main.activity_chat_list.toolbar_message
-import kotlinx.android.synthetic.main.activity_search_users.recycle_search
 import kotlinx.android.synthetic.main.activity_search_users.sv_user_chat_search
 import kotlinx.android.synthetic.main.activity_search_users.toolbar_search
 
