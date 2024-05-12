@@ -1,5 +1,6 @@
 package com.example.finalproject.retrofit
 
+import com.example.finalproject.ui.add_listing.models.SetLocationResidenceResponse
 import com.example.finalproject.ui.chat.models.ChatListUsersResponse
 import com.example.finalproject.ui.chat.models.DeleteMessageResponse
 import com.example.finalproject.ui.chat.models.EditMessageResponse
@@ -208,4 +209,12 @@ interface ApiService {
         @Path("receiverId") receiverId: String,
         @Part images: List<MultipartBody.Part>
     ): Call<SendMessageResponse>
+
+    @POST("api/v1/residence/location/{residenceId}")
+    fun locationResidence(
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String,
+        @Query("longitude") longitude: Double,
+        @Query("latitude") latitude: Double
+    ): Call<SetLocationResidenceResponse>
 }
