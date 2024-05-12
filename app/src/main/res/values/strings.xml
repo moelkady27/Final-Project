@@ -213,6 +213,67 @@
     <string name="brick_and_tile" translatable="false">Brick and Tile</string>
     <string name="poured_contrete" translatable="false">Poured Contrete</string>
     <string name="building_type" translatable="false">Building Type</string>
+    <string name="roof_style" translatable="false">Roof Style</string>
+    <string name="flat" translatable="false">Flat</string>
+    <string name="gable" translatable="false">Gable</string>
+    <string name="gambrel" translatable="false">Gambrel</string>
+    <string name="hip" translatable="false">Hip</string>
+    <string name="mansard" translatable="false">Mansard</string>
+    <string name="shed" translatable="false">Shed</string>
+    <string name="roof_material" translatable="false">Roof Material</string>
+    <string name="clay_or_tile" translatable="false">Clay or Tile</string>
+    <string name="standard_shingle" translatable="false">Standard Shingle</string>
+    <string name="membran" translatable="false">Membran</string>
+    <string name="metal" translatable="false">Metal</string>
+    <string name="roll" translatable="false">Roll</string>
+    <string name="gravel_tar" translatable="false">Gravel &amp; Tar</string>
+    <string name="wood_shakes" translatable="false">Wood Shakes</string>
+    <string name="wood_shingles" translatable="false">Wood Shingles</string>
+    <string name="house_style" translatable="false">House Style</string>
+    <string name="_1story" translatable="false">1Story</string>
+    <string name="_1_5fin" translatable="false">1.5Fin</string>
+    <string name="_1_5unf" translatable="false">1.5Unf</string>
+    <string name="_2story" translatable="false">2Story</string>
+    <string name="_2_5fin" translatable="false">2.5Fin</string>
+    <string name="_2_5unf" translatable="false">2.5Unf</string>
+    <string name="sfoyer" translatable="false">SFoyer</string>
+    <string name="slvl" translatable="false">SLvl</string>
+    <string name="residence_type" translatable="false">Residence Type</string>
+    <string name="type_of_residence" translatable="false">Type of Residence</string>
+    <string name="central_air" translatable="false">Central Air</string>
+    <string name="yes" translatable="false">Yes</string>
+    <string name="no" translatable="false">No</string>
+    <string name="street" translatable="false">Street</string>
+    <string name="paved" translatable="false">Paved</string>
+    <string name="gravel" translatable="false">Gravel</string>
+    <string name="alley" translatable="false">Alley</string>
+    <string name="no_alley_access" translatable="false">No Alley Access</string>
+    <string name="heating" translatable="false">Heating</string>
+    <string name="floor" translatable="false">Floor</string>
+    <string name="gas_water" translatable="false">Gas Water</string>
+    <string name="gravity" translatable="false">Gravity</string>
+    <string name="other_water" translatable="false">Other Water</string>
+    <string name="wall" translatable="false">Wall</string>
+    <string name="heating_quality" translatable="false">Heating Quality</string>
+    <string name="excellent" translatable="false">Excellent</string>
+    <string name="good" translatable="false">Good</string>
+    <string name="average" translatable="false">Average</string>
+    <string name="fair" translatable="false">Fair</string>
+    <string name="poor" translatable="false">Poor</string>
+    <string name="masonry_veneer_type" translatable="false">Masonry Veneer Type</string>
+    <string name="brick_face" translatable="false">Brick Face</string>
+    <string name="brick_common" translatable="false">Brick Common</string>
+    <string name="none" translatable="false">None</string>
+    <string name="masonry_veneer_area" translatable="false">Masonry Veneer Area</string>
+    <string name="enter_masonry_veneer_area" translatable="false">Enter Masonry Veneer Area</string>
+    <string name="exterior_covering_on_house" translatable="false">Exterior Covering On House</string>
+    <string name="exterior_covering_on_house_1" translatable="false">Exterior Covering On House 1</string>
+    <string name="exterior_covering_on_house_2" translatable="false">Exterior Covering On House 2</string>
+    <string name="exterior_condition" translatable="false">Exterior Condition</string>
+    <string name="exterior_quality" translatable="false">Exterior Quality</string>
+    <string name="conditions" translatable="false">Conditions</string>
+    <string name="condition_1" translatable="false">Condition 1</string>
+    <string name="condition_2" translatable="false">Condition 2</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>
@@ -241,6 +302,53 @@
         <item>Townhouse End Unit</item>
         <item>Duplex</item>
         <item>Single Family</item>
+    </string-array>
+
+    <string-array name="residence_type_items" translatable="false">
+        <item>2 family conversion</item>
+        <item>multilevel and split</item>
+        <item>duplex</item>
+        <item>split foyer</item>
+        <item>multi-level</item>
+        <item>1 story unfinished attic</item>
+        <item>1 story finished attic</item>
+        <item>2story and older</item>
+        <item>2story and newer</item>
+        <item>1story and older</item>
+        <item>1story and newer</item>
+    </string-array>
+
+    <string-array name="exterior_covering_items" translatable="false">
+        <item>Asbestos Shingles</item>
+        <item>Asphalt Shingles</item>
+        <item>Brick Face</item>
+        <item>Brick Common</item>
+        <item>Cement Board</item>
+        <item>Hardboard</item>
+        <item>Hardboard Siding</item>
+        <item>Metal Siding</item>
+        <item>Plywood</item>
+        <item>Precast Concrete</item>
+        <item>Stucco</item>
+        <item>Vinyl Siding</item>
+        <item>Wood Siding</item>
+        <item>Wood Shingles</item>
+        <item>Cinder Block</item>
+        <item>Stone</item>
+        <item>Imitation Stucco</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="conditions_items" translatable="false">
+        <item>Normal</item>
+        <item>Adjacent To Feeder Street</item>
+        <item>Adjacent To Arterial Street</item>
+        <item>Adjacent To East West Railroad</item>
+        <item>Adjacent To North South</item>
+        <item>Within 200 Of East West</item>
+        <item>Within 200 Of North South</item>
+        <item>Adjacent To Positive Off Site Feature</item>
+        <item>Near Positive Off-Site Feature</item>
     </string-array>
 
 </resources>

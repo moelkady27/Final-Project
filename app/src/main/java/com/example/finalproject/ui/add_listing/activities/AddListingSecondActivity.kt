@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.add_listing.activities
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -9,7 +10,8 @@ import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_add_listing_second.autoCompleteBuildingType
 import kotlinx.android.synthetic.main.activity_add_listing_second.autoCompleteElectrical
 import kotlinx.android.synthetic.main.activity_add_listing_second.autoCompleteSaleType
-import kotlinx.android.synthetic.main.activity_add_listing_second.toolbar_extra_information
+import kotlinx.android.synthetic.main.activity_add_listing_second.btn_next_add_listing_second
+import kotlinx.android.synthetic.main.activity_add_listing_second.toolbar_add_listing_second
 
 class AddListingSecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,10 +21,17 @@ class AddListingSecondActivity : AppCompatActivity() {
         initDropDowns()
 
         setupActionBar()
+
+        btn_next_add_listing_second.setOnClickListener {
+            val intent = Intent(this@AddListingSecondActivity ,
+                AddListingThirdActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun setupActionBar() {
-        setSupportActionBar(toolbar_extra_information)
+        setSupportActionBar(toolbar_add_listing_second)
 
         val actionBar = supportActionBar
         if (actionBar != null) {
@@ -31,7 +40,7 @@ class AddListingSecondActivity : AppCompatActivity() {
             actionBar.title = ""
         }
 
-        toolbar_extra_information.setNavigationOnClickListener {
+        toolbar_add_listing_second.setNavigationOnClickListener {
             onBackPressed()
         }
     }
