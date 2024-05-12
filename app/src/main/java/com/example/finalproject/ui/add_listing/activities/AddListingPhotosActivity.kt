@@ -52,7 +52,7 @@ class AddListingPhotosActivity : AppCompatActivity() {
         }
 
         button_next_listing_photos.setOnClickListener {
-            startActivity(Intent(this, ExtraInformationActivity::class.java))
+            startActivity(Intent(this, AddListingSecondActivity::class.java))
         }
 
         recyclerView.layoutManager = GridLayoutManager(this, 2)

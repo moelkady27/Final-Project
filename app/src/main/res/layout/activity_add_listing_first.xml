@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.add_listing.activities.FormDetailActivity">
+    tools:context=".ui.add_listing.activities.AddListingFirstActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                 android:gravity="start"
                 android:text="@string/tv_form_detail_title_2"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@id/constraint_home_name"
                 app:layout_constraintStart_toStartOf="@id/constraint_home_name"
                 app:layout_constraintTop_toBottomOf="@id/constraint_home_name"/>
@@ -183,7 +183,7 @@
                 android:gravity="start"
                 android:text="@string/tv_form_detail_title_3"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/cg_listing_type"
                 app:layout_constraintTop_toBottomOf="@id/cg_listing_type"/>

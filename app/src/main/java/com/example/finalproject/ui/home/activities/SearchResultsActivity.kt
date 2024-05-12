@@ -1,17 +1,11 @@
 package com.example.finalproject.ui.home.activities
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
-import com.example.finalproject.ui.home.adapter.FeaturedViewAllAdapter
 import com.example.finalproject.ui.home.adapter.SearchResultsAdapter
-import kotlinx.android.synthetic.main.activity_form_detail.toolbar_form_detail
 import kotlinx.android.synthetic.main.activity_search_results.toolbar_search_results
 
 class SearchResultsActivity : AppCompatActivity() {

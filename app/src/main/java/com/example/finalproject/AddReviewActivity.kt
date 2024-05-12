@@ -1,13 +1,8 @@
 package com.example.finalproject
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.finalproject.R
 import kotlinx.android.synthetic.main.activity_add_review.toolbar_add_review
-import kotlinx.android.synthetic.main.activity_form_detail.toolbar_form_detail
 
 class AddReviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

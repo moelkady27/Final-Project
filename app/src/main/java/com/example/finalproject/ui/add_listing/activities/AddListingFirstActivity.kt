@@ -6,18 +6,18 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.finalproject.R
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.activity_form_detail.btn_next_form_detail
-import kotlinx.android.synthetic.main.activity_form_detail.toolbar_form_detail
+import kotlinx.android.synthetic.main.activity_add_listing_first.btn_next_form_detail
+import kotlinx.android.synthetic.main.activity_add_listing_first.toolbar_form_detail
 
-class FormDetailActivity : AppCompatActivity() {
+class AddListingFirstActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_form_detail)
+        setContentView(R.layout.activity_add_listing_first)
 
         setUpActionBar()
 
         btn_next_form_detail.setOnClickListener {
-            val intent = Intent(this@FormDetailActivity ,
+            val intent = Intent(this@AddListingFirstActivity ,
                 AddListingLocationActivity::class.java)
             startActivity(intent)
         }

@@ -132,7 +132,7 @@
     <string name="almost_finish_complete" translatable="false"><b>Almost finish,</b> complete</string>
     <string name="the_listing" translatable="false">the listing</string>
     <string name="sell_price" translatable="false">Sell Price</string>
-    <string name="enter_your_sell_price" translatable="false">Enter your Sell Price</string>
+    <string name="enter_your_sell_price" translatable="false">Enter Your Sell Price</string>
     <string name="enter_your_rent_price" translatable="false">Enter your Rent Price</string>
     <string name="rent_price" translatable="false">Rent Price</string>
     <string name="dollar" translatable="false">$</string>
@@ -175,8 +175,72 @@
     <string name="listings" translatable="false">Listings</string>
     <string name="sold" translatable="false">Sold</string>
     <string name="reviews" translatable="false">Reviews</string>
-    <string name="pending">Pending</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pending" translatable="false">Pending</string>
+    <string name="tvMsZoningTitle" translatable="false">MsZoning</string>
+    <string name="agricultural" translatable="false">Agricultural</string>
+    <string name="commercial" translatable="false">Commercial</string>
+    <string name="floating_village" translatable="false">Floating Village</string>
+    <string name="industrial" translatable="false">Industrial</string>
+    <string name="high_residential" translatable="false">High Residential</string>
+    <string name="low" translatable="false">Low</string>
+    <string name="medium" translatable="false">Medium</string>
+    <string name="sale_condition" translatable="false">Sale Condition</string>
+    <string name="normal" translatable="false">Normal</string>
+    <string name="abnormal" translatable="false">Abnormal</string>
+    <string name="adjoining_land_purchase" translatable="false">Adjoining Land Purchase</string>
+    <string name="allocation" translatable="false">Allocation</string>
+    <string name="family" translatable="false">Family</string>
+    <string name="partial" translatable="false">Partial</string>
+    <string name="month_of_sold" translatable="false">Month Of Sold</string>
+    <string name="enter_month_of_sold" translatable="false">Enter Month Of Sold</string>
+    <string name="payment_period" translatable="false">Payment Period</string>
+    <string name="sale_type" translatable="false">Sale Type</string>
+    <string name="utilities" translatable="false">Utilities</string>
+    <string name="gas" translatable="false">Gas</string>
+    <string name="electricity" translatable="false">Electricity</string>
+    <string name="water" translatable="false">Water</string>
+    <string name="lot_shape" translatable="false">Lot Shape</string>
+    <string name="regular" translatable="false">Regular</string>
+    <string name="slightly" translatable="false">Slightly</string>
+    <string name="moderately" translatable="false">Moderately</string>
+    <string name="irregular" translatable="false">Irregular</string>
+    <string name="electrical" translatable="false">Electrical</string>
+    <string name="foundation" translatable="false">Foundation</string>
+    <string name="slab" translatable="false">Slab</string>
+    <string name="stone" translatable="false">Stone</string>
+    <string name="wood" translatable="false">Wood</string>
+    <string name="cinder_block" translatable="false">Cinder Block</string>
+    <string name="brick_and_tile" translatable="false">Brick and Tile</string>
+    <string name="poured_contrete" translatable="false">Poured Contrete</string>
+    <string name="building_type" translatable="false">Building Type</string>
+
+    <string-array name="sale_type_items" translatable="false">
+        <item>Conventional</item>
+        <item>Cash</item>
+        <item>VA Loan</item>
+        <item>New</item>
+        <item>Court Officer Deed/Estate</item>
+        <item>Contract Low Interest</item>
+        <item>Contract 15% Down Payment Regular Terms </item>
+        <item>Contract Low Down Payment and Low Interest</item>
+        <item>Contract Low Down</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="electrical_items" translatable="false">
+        <item>Average</item>
+        <item>Poor</item>
+        <item>Fair</item>
+        <item>Mixed</item>
+        <item>Standard Circuit Breakers &amp; Romex</item>
+    </string-array>
+
+    <string-array name="building_type_items" translatable="false">
+        <item>2 Family Conversion</item>
+        <item>Townhouse Inside Unit</item>
+        <item>Townhouse End Unit</item>
+        <item>Duplex</item>
+        <item>Single Family</item>
+    </string-array>
 
 </resources>
