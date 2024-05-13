@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
-import com.example.finalproject.ui.add_listing.activities.Image
+import com.example.finalproject.ui.add_listing.models.Image
 import kotlinx.android.synthetic.main.each_row_add_listing_photos.view.add_image_card_view
 import kotlinx.android.synthetic.main.each_row_add_listing_photos.view.card_img_add_listing_photos
 import kotlinx.android.synthetic.main.each_row_add_listing_photos.view.floating_action_delete
@@ -53,7 +53,7 @@ class AddListingPhotosAdapter(
 
             Glide
                 .with(holder.itemView.context)
-                .load(x.image)
+                .load(x.url)
                 .into(holder.itemView.img_add_listing_photos)
 
             holder.itemView.floating_action_delete.setOnClickListener {
@@ -64,8 +64,8 @@ class AddListingPhotosAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addImage(imagePath: String) {
-        list.add(list.size - 1, Image(imagePath))
+    fun addImage(imageUrl: String) {
+        list.add(list.size - 1, Image("", "", imageUrl))
         notifyDataSetChanged()
     }
 }

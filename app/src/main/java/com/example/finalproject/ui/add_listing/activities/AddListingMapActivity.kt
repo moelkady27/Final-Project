@@ -171,7 +171,7 @@ class AddListingMapActivity : BaseActivity(), OnMapReadyCallback {
 
             showProgressDialog(this@AddListingMapActivity , "Setting up your LocationSignIn")
 
-            setLocationResidenceViewModel.setLocationResidence(token, "66408b0c1799d8e78a3e2b91", selectedLocation!!.longitude, selectedLocation!!.latitude)
+            setLocationResidenceViewModel.setLocationResidence(token, "6641ee6a9194ef9e21f806c5", selectedLocation!!.longitude, selectedLocation!!.latitude)
             setLocationResidenceViewModel.locationResponseLiveData.observe(this) { response ->
                 hideProgressDialog()
                 response?.let {

@@ -4,8 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.ui.add_listing.repository.SetLocationResidenceRepository
 import com.example.finalproject.ui.add_listing.viewModel.SetLocationResidenceViewModel
-import com.example.finalproject.ui.complete_register.repository.SetLocationRepository
-import com.example.finalproject.ui.complete_register.viewModels.SetLocationViewModel
 
 class LocationResidenceFactory(
     private val setLocationResidenceRepository: SetLocationResidenceRepository
