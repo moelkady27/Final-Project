@@ -1,7 +1,9 @@
 package com.example.finalproject.retrofit
 
+import com.example.finalproject.ui.add_listing.models.CreateResidenceResponse
 import com.example.finalproject.ui.add_listing.models.SetLocationResidenceResponse
 import com.example.finalproject.ui.add_listing.models.UploadPhotoResidenceResponse
+import com.example.finalproject.ui.add_listing.request.CreateResidenceRequest
 import com.example.finalproject.ui.chat.models.ChatListUsersResponse
 import com.example.finalproject.ui.chat.models.DeleteMessageResponse
 import com.example.finalproject.ui.chat.models.EditMessageResponse
@@ -226,4 +228,10 @@ interface ApiService {
         @Path("residenceId") residenceId: String,
         @Part images: MultipartBody.Part
     ): Call<UploadPhotoResidenceResponse>
+
+    @POST("api/v1/residence/create")
+    fun createResidence(
+        @Header("Authorization") token: String,
+        @Body req: CreateResidenceRequest
+    ): Call<CreateResidenceResponse>
 }

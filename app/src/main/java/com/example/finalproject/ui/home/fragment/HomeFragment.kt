@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
-import com.example.finalproject.ui.add_listing.activities.AddListingFirstActivity
+import com.example.finalproject.ui.add_listing.activities.CreateResidenceActivity
 import com.example.finalproject.ui.home.activities.FeaturedEstatesActivity
 import com.example.finalproject.ui.home.activities.PopularNearestYouActivity
 import com.example.finalproject.ui.home.activities.SearchResultsActivity
@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
         }
 
         iv_add_list_home.setOnClickListener {
-            val intent = Intent(requireContext() , AddListingFirstActivity::class.java)
+            val intent = Intent(requireContext() , CreateResidenceActivity::class.java)
             startActivity(intent)
         }
 

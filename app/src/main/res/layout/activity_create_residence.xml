@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.add_listing.activities.AddListingFirstActivity">
+    tools:context=".ui.add_listing.activities.CreateResidenceActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -161,7 +161,7 @@
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sell"
+                    android:text="@string/sale"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="18sp"
                     android:textAppearance="@style/ChipTextStyle"

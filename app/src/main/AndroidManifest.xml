@@ -61,7 +61,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.add_listing.activities.AddListingFirstActivity"
+            android:name=".ui.add_listing.activities.CreateResidenceActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

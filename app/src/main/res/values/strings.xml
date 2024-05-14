@@ -118,7 +118,7 @@
     <string name="tv_form_detail_title_1" translatable="false">Fill detail of your <b>real estate</b></string>
     <string name="et_home_name_add_listing" translatable="false">Name of House, Apartment, etc</string>
     <string name="tv_form_detail_title_2" translatable="false">Listing type</string>
-    <string name="sell" translatable="false">Sell</string>
+    <string name="sale" translatable="false">Sale</string>
     <string name="rent" translatable="false">Rent</string>
     <string name="tv_form_detail_title_3" translatable="false">Property category</string>
     <string name="chip_cottage" translatable="false">Cottage</string>
