@@ -43,7 +43,7 @@
             </androidx.appcompat.widget.Toolbar>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvMsZoningTitle"
+                android:id="@+id/tvNeighborhoodTitle1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
@@ -52,12 +52,52 @@
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="start"
-                android:text="@string/tvMsZoningTitle"
+                android:text="@string/neighborhood"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbar_add_listing_second"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tvNeighborhoodTitle2"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/neighborhood"
+                android:textColorHint="@color/colorPrimaryText"
+                app:layout_constraintStart_toStartOf="@id/tvNeighborhoodTitle1"
+                app:layout_constraintEnd_toEndOf="@id/tvNeighborhoodTitle1"
+                app:layout_constraintTop_toBottomOf="@id/tvNeighborhoodTitle1">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteNeighborhood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/colorPrimaryText"
+                    android:inputType="none"
+                    android:hint="@null"
+                    android:textSize="18sp"
+                    tools:text="Conventional" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMsZoningTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/tvMsZoningTitle"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/tvNeighborhoodTitle2"
+                app:layout_constraintStart_toStartOf="@+id/tvNeighborhoodTitle2"
+                app:layout_constraintTop_toBottomOf="@id/tvNeighborhoodTitle2"/>
 
             <HorizontalScrollView
                 android:id="@+id/HSVMsZoning"

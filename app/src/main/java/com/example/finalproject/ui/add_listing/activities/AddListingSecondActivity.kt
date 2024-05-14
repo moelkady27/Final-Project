@@ -9,6 +9,7 @@ import com.example.finalproject.R
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_add_listing_second.autoCompleteBuildingType
 import kotlinx.android.synthetic.main.activity_add_listing_second.autoCompleteElectrical
+import kotlinx.android.synthetic.main.activity_add_listing_second.autoCompleteNeighborhood
 import kotlinx.android.synthetic.main.activity_add_listing_second.autoCompleteSaleType
 import kotlinx.android.synthetic.main.activity_add_listing_second.btn_next_add_listing_second
 import kotlinx.android.synthetic.main.activity_add_listing_second.toolbar_add_listing_second
@@ -57,6 +58,12 @@ class AddListingSecondActivity : AppCompatActivity() {
     }
 
     private fun initDropDowns() {
+        val neighborhoodItems = resources.getStringArray(R.array.neighborhood_items)
+        val arrayNeighborhoodAdapter = ArrayAdapter(
+            this@AddListingSecondActivity, R.layout.dropdown_item, neighborhoodItems
+        )
+        autoCompleteNeighborhood.setAdapter(arrayNeighborhoodAdapter)
+
         val saleTypeItems = resources.getStringArray(R.array.sale_type_items)
         val arraySaleTypeAdapter = ArrayAdapter(
             this@AddListingSecondActivity, R.layout.dropdown_item, saleTypeItems

@@ -274,6 +274,7 @@
     <string name="conditions" translatable="false">Conditions</string>
     <string name="condition_1" translatable="false">Condition 1</string>
     <string name="condition_2" translatable="false">Condition 2</string>
+    <string name="neighborhood" translatable="false">Neighborhood</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>
@@ -349,6 +350,34 @@
         <item>Within 200 Of North South</item>
         <item>Adjacent To Positive Off Site Feature</item>
         <item>Near Positive Off-Site Feature</item>
+    </string-array>
+
+    <string-array name="neighborhood_items" translatable="false">
+        <item>Bloomington Heights</item>
+        <item>Bluestem</item>
+        <item>Briardale</item>
+        <item>Brookside</item>
+        <item>Clear Creek</item>
+        <item>College Creek</item>
+        <item>Crawford</item>
+        <item>Edwards</item>
+        <item>Gilbert</item>
+        <item>Iowa DOT and Rail Road</item>
+        <item>Meadow Village</item>
+        <item>Mitchell</item>
+        <item>North Ames</item>
+        <item>Northridge</item>
+        <item>Northpark Villa</item>
+        <item>Northridge Heights</item>
+        <item>Northwest Ames</item>
+        <item>Old Town</item>
+        <item>South &amp; West of Iowa State University</item>
+        <item>Sawyer</item>
+        <item>Sawyer West</item>
+        <item>Somerset</item>
+        <item>Stone Brook</item>
+        <item>Timberland</item>
+        <item>Veenker</item>
     </string-array>
 
 </resources>
