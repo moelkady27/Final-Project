@@ -14,7 +14,6 @@ import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.add_listing.factory.CreateResidenceFactory
 import com.example.finalproject.ui.add_listing.repository.CreateResidenceRepository
 import com.example.finalproject.ui.add_listing.viewModel.CreateResidenceViewModel
-import com.example.finalproject.ui.complete_register.activities.UploadPreviewActivity
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_create_residence.btn_next_form_detail
 import kotlinx.android.synthetic.main.activity_create_residence.chip_apartment
@@ -42,35 +41,9 @@ class CreateResidenceActivity : BaseActivity() {
 
         initView()
 
+        initChips()
+
         setUpActionBar()
-
-        chip_house.setOnCheckedChangeListener { chip, _ ->
-            toggleChipSelection(chip as Chip)
-        }
-
-        chip_apartment.setOnCheckedChangeListener { chip, _ ->
-            toggleChipSelection(chip as Chip)
-        }
-
-        chip_hotel.setOnCheckedChangeListener { chip, _ ->
-            toggleChipSelection(chip as Chip)
-        }
-
-        chip_villa.setOnCheckedChangeListener { chip, _ ->
-            toggleChipSelection(chip as Chip)
-        }
-
-        chip_cottage.setOnCheckedChangeListener { chip, _ ->
-            toggleChipSelection(chip as Chip)
-        }
-
-        chip_rent.setOnCheckedChangeListener { chip, _ ->
-            toggleChipSelection(chip as Chip)
-        }
-
-        chip_sell.setOnCheckedChangeListener { chip, _ ->
-            toggleChipSelection(chip as Chip)
-        }
     }
 
     private fun initView() {
@@ -136,7 +109,7 @@ class CreateResidenceActivity : BaseActivity() {
                         Toast.makeText(this@CreateResidenceActivity, errorMessage, Toast.LENGTH_LONG)
                             .show()
 
-                        Log.e("CompleteSignUpActivity", "Complete Error: $errorMessage")
+                        Log.e("CreateResidenceActivity", "Complete Error: $errorMessage")
 
                     } catch (e: JSONException) {
                         Toast.makeText(this@CreateResidenceActivity, error, Toast.LENGTH_LONG).show()
@@ -178,6 +151,21 @@ class CreateResidenceActivity : BaseActivity() {
         }
 
         return true
+    }
+
+    private fun initChips(){
+        val chipIds = listOf(
+            R.id.chip_house, R.id.chip_apartment, R.id.chip_hotel,
+            R.id.chip_villa, R.id.chip_cottage,
+
+            R.id.chip_rent, R.id.chip_sell
+        )
+
+        chipIds.forEach { chipId ->
+            findViewById<Chip>(chipId).setOnCheckedChangeListener { chip, _ ->
+                toggleChipSelection(chip as Chip)
+            }
+        }
     }
 
     private fun setUpActionBar() {

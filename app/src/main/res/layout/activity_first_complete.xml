@@ -113,6 +113,7 @@
                     android:id="@+id/MsZoningChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
@@ -267,6 +268,7 @@
                     android:id="@+id/SaleConditionChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
@@ -474,6 +476,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                app:singleSelection="true"
                 app:layout_constraintStart_toStartOf="@id/tvPaymentPeriodTitle"
                 app:layout_constraintTop_toBottomOf="@id/tvPaymentPeriodTitle">
 
@@ -577,6 +580,7 @@
                     android:id="@+id/UtilitiesChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:singleSelection="false"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
@@ -656,6 +660,7 @@
                     android:id="@+id/LotShapeChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
@@ -790,6 +795,7 @@
                 android:id="@+id/FoundationChipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:singleSelection="true"
                 app:chipSpacing="15dp">
 
                 <com.google.android.material.chip.Chip
@@ -927,7 +933,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_next_add_listing_second"
+                android:id="@+id/btn_next_first_complete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

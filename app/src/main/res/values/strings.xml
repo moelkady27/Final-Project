@@ -196,9 +196,9 @@
     <string name="payment_period" translatable="false">Payment Period</string>
     <string name="sale_type" translatable="false">Sale Type</string>
     <string name="utilities" translatable="false">Utilities</string>
-    <string name="gas" translatable="false">Gas</string>
-    <string name="electricity" translatable="false">Electricity</string>
-    <string name="water" translatable="false">Water</string>
+    <string name="gas" translatable="false">gas</string>
+    <string name="electricity" translatable="false">electricity</string>
+    <string name="water" translatable="false">water</string>
     <string name="lot_shape" translatable="false">Lot Shape</string>
     <string name="regular" translatable="false">Regular</string>
     <string name="slightly" translatable="false">Slightly</string>
@@ -315,8 +315,8 @@
         <item>New</item>
         <item>Court Officer Deed/Estate</item>
         <item>Contract Low Interest</item>
-        <item>Contract 15% Down Payment Regular Terms </item>
-        <item>Contract Low Down Payment and Low Interest</item>
+        <item>Contract 15% Down payment regular terms </item>
+        <item>Contract Low Down payment and low intere</item>
         <item>Contract Low Down</item>
         <item>Other</item>
     </string-array>

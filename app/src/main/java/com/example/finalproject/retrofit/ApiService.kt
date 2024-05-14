@@ -1,9 +1,11 @@
 package com.example.finalproject.retrofit
 
 import com.example.finalproject.ui.add_listing.models.CreateResidenceResponse
+import com.example.finalproject.ui.add_listing.models.FirstCompleteResponse
 import com.example.finalproject.ui.add_listing.models.SetLocationResidenceResponse
 import com.example.finalproject.ui.add_listing.models.UploadPhotoResidenceResponse
 import com.example.finalproject.ui.add_listing.request.CreateResidenceRequest
+import com.example.finalproject.ui.add_listing.request.FirstCompleteRequest
 import com.example.finalproject.ui.chat.models.ChatListUsersResponse
 import com.example.finalproject.ui.chat.models.DeleteMessageResponse
 import com.example.finalproject.ui.chat.models.EditMessageResponse
@@ -234,4 +236,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body req: CreateResidenceRequest
     ): Call<CreateResidenceResponse>
+
+    @POST("api/v1/residence/complete/1st/{residenceId}")
+    fun firstComplete(
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String,
+        @Body req: FirstCompleteRequest
+    ): Call<FirstCompleteResponse>
 }
