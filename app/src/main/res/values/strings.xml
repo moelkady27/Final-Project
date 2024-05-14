@@ -275,6 +275,38 @@
     <string name="condition_1" translatable="false">Condition 1</string>
     <string name="condition_2" translatable="false">Condition 2</string>
     <string name="neighborhood" translatable="false">Neighborhood</string>
+    <string name="has_garage" translatable="false">Has garage</string>
+    <string name="garage_type" translatable="false">Garage type</string>
+    <string name="more_than_one" translatable="false">more than one</string>
+    <string name="attached" translatable="false">attached</string>
+    <string name="basement" translatable="false">basement</string>
+    <string name="built_in" translatable="false">built in</string>
+    <string name="car_port" translatable="false">car port</string>
+    <string name="detached" translatable="false">detached</string>
+    <string name="not_available" translatable="false">not available</string>
+    <string name="garage_quality" translatable="false">Garage quality</string>
+    <string name="garage_cars" translatable="false">Garage Cars</string>
+    <string name="garage_finish" translatable="false">Garage finish</string>
+    <string name="finished" translatable="false">finished</string>
+    <string name="rough_finished" translatable="false">rough finished</string>
+    <string name="unfinished" translatable="false">unfinished</string>
+    <string name="has_basement" translatable="false">Has Basement</string>
+    <string name="unfinished_basement_area" translatable="false">Unfinished Basement Area</string>
+    <string name="enter_unfinished_basement_area" translatable="false">Enter Unfinished Basement Area</string>
+    <string name="basement_exposure" translatable="false">Basement exposure</string>
+    <string name="minimum" translatable="false">minimum</string>
+    <string name="no_exposure" translatable="false">no exposure</string>
+    <string name="rating_of_basement" translatable="false">Rating of basement</string>
+    <string name="below_average" translatable="false">below average</string>
+    <string name="average_rec_room" translatable="false">average rec room</string>
+    <string name="height_of_basement" translatable="false">Height of basement</string>
+    <string name="condition_of_basement" translatable="false">Condition of basement</string>
+    <string name="has_fire_place" translatable="false">Has fire place</string>
+    <string name="fire_places" translatable="false">Fire places</string>
+    <string name="fire_place_quality" translatable="false">Fire place quality</string>
+    <string name="kitchen" translatable="false">kitchen</string>
+    <string name="kitchen_quality" translatable="false">Kitchen quality</string>
+    <string name="rooms_without_bathroms" translatable="false">Rooms without bathroms</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>
