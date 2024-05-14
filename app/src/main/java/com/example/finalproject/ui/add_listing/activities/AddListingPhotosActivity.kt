@@ -79,6 +79,10 @@ class AddListingPhotosActivity : BaseActivity() {
     }
 
     private fun initView() {
+
+        val id = intent.getStringExtra("lol").toString()
+        Log.e("residenceId" , "photo is $id")
+
         val addPhotoResidenceRepository = AddPhotoResidenceRepository(RetrofitClient.instance)
         val factory = AddPhotoResidenceFactory(addPhotoResidenceRepository)
         addPhotoResidenceViewModel = ViewModelProvider(
@@ -171,7 +175,7 @@ class AddListingPhotosActivity : BaseActivity() {
 
                     Log.e("status", status)
 
-                    startActivity(Intent(this@AddListingPhotosActivity, AddListingSecondActivity::class.java))
+                    startActivity(Intent(this@AddListingPhotosActivity, FirstCompleteActivity::class.java))
                 }
             }
 

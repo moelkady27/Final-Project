@@ -6,17 +6,17 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.example.finalproject.R
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.activity_add_listing_third.autoCompleteCondition11
-import kotlinx.android.synthetic.main.activity_add_listing_third.autoCompleteCondition22
-import kotlinx.android.synthetic.main.activity_add_listing_third.autoCompleteExteriorCovering11
-import kotlinx.android.synthetic.main.activity_add_listing_third.autoCompleteExteriorCovering22
-import kotlinx.android.synthetic.main.activity_add_listing_third.autoCompleteResidenceType
-import kotlinx.android.synthetic.main.activity_add_listing_third.toolbar_add_listing_third
+import kotlinx.android.synthetic.main.activity_second_complete.autoCompleteCondition11
+import kotlinx.android.synthetic.main.activity_second_complete.autoCompleteCondition22
+import kotlinx.android.synthetic.main.activity_second_complete.autoCompleteExteriorCovering11
+import kotlinx.android.synthetic.main.activity_second_complete.autoCompleteExteriorCovering22
+import kotlinx.android.synthetic.main.activity_second_complete.autoCompleteResidenceType
+import kotlinx.android.synthetic.main.activity_second_complete.toolbar_add_listing_third
 
-class AddListingThirdActivity : AppCompatActivity() {
+class SecondCompleteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_listing_third)
+        setContentView(R.layout.activity_second_complete)
 
         initDropDowns()
 
@@ -52,31 +52,31 @@ class AddListingThirdActivity : AppCompatActivity() {
     private fun initDropDowns() {
         val residenceTypeItems = resources.getStringArray(R.array.residence_type_items)
         val arrayResidenceTypeAdapter = ArrayAdapter(
-            this@AddListingThirdActivity, R.layout.dropdown_item, residenceTypeItems
+            this@SecondCompleteActivity, R.layout.dropdown_item, residenceTypeItems
         )
         autoCompleteResidenceType.setAdapter(arrayResidenceTypeAdapter)
 
         val exteriorCoveringItems11 = resources.getStringArray(R.array.exterior_covering_items)
         val arrayExteriorCoveringAdapter11 = ArrayAdapter(
-            this@AddListingThirdActivity, R.layout.dropdown_item, exteriorCoveringItems11
+            this@SecondCompleteActivity, R.layout.dropdown_item, exteriorCoveringItems11
         )
         autoCompleteExteriorCovering11.setAdapter(arrayExteriorCoveringAdapter11)
 
         val exteriorCoveringItems22 = resources.getStringArray(R.array.exterior_covering_items)
         val arrayExteriorCoveringAdapter22 = ArrayAdapter(
-            this@AddListingThirdActivity, R.layout.dropdown_item, exteriorCoveringItems22
+            this@SecondCompleteActivity, R.layout.dropdown_item, exteriorCoveringItems22
         )
         autoCompleteExteriorCovering22.setAdapter(arrayExteriorCoveringAdapter22)
 
         val conditionsItems11 = resources.getStringArray(R.array.conditions_items)
         val arrayConditionsAdapter11 = ArrayAdapter(
-            this@AddListingThirdActivity, R.layout.dropdown_item, conditionsItems11
+            this@SecondCompleteActivity, R.layout.dropdown_item, conditionsItems11
         )
         autoCompleteCondition11.setAdapter(arrayConditionsAdapter11)
 
         val conditionsItems22 = resources.getStringArray(R.array.conditions_items)
         val arrayConditionsAdapter22 = ArrayAdapter(
-            this@AddListingThirdActivity, R.layout.dropdown_item, conditionsItems22
+            this@SecondCompleteActivity, R.layout.dropdown_item, conditionsItems22
         )
         autoCompleteCondition22.setAdapter(arrayConditionsAdapter22)
     }

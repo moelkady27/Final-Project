@@ -62,4 +62,29 @@ open class BaseActivity : AppCompatActivity() {
         val intent = Intent(Settings.ACTION_WIFI_SETTINGS)
         startActivity(intent)
     }
+
+    fun showErrorSnackBarResidence(message: String, errorMessage: Boolean) {
+        val snackBar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
+        val snackBarView = snackBar.view
+
+        if (errorMessage){
+            snackBarView.setBackgroundColor(
+                ContextCompat.getColor(
+                    this@BaseActivity,
+                    R.color.colorSnackBarError
+                )
+            )
+
+        }
+        else{
+            snackBarView.setBackgroundColor(
+                ContextCompat.getColor(
+                    this@BaseActivity,
+                    R.color.colorSnackBarSuccess
+                )
+            )
+        }
+        snackBar.show()
+    }
+
 }

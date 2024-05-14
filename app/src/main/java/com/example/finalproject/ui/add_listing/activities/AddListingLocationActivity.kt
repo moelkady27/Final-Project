@@ -2,6 +2,7 @@ package com.example.finalproject.ui.add_listing.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.finalproject.R
 import kotlinx.android.synthetic.main.activity_add_listing_location.select_on_the_map
@@ -14,9 +15,13 @@ class AddListingLocationActivity : AppCompatActivity() {
 
         setUpActionBar()
 
+        val id = intent.getStringExtra("residenceId").toString()
+        Log.e("residenceId" , "location is $id")
+
         select_on_the_map.setOnClickListener {
             val intent = Intent(this@AddListingLocationActivity,
-                AddListingMapActivity::class.java)
+                FirstCompleteActivity::class.java)
+            intent.putExtra("residenceId", id)
             startActivity(intent)
         }
     }

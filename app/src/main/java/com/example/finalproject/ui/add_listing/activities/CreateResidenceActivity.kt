@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.add_listing.activities
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.add_listing.factory.CreateResidenceFactory
 import com.example.finalproject.ui.add_listing.repository.CreateResidenceRepository
 import com.example.finalproject.ui.add_listing.viewModel.CreateResidenceViewModel
+import com.example.finalproject.ui.complete_register.activities.UploadPreviewActivity
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_create_residence.btn_next_form_detail
 import kotlinx.android.synthetic.main.activity_create_residence.chip_apartment
@@ -116,7 +118,14 @@ class CreateResidenceActivity : BaseActivity() {
                 response?.let {
                     val status = it.status
 
+                    val residenceId = response.residence._id
+
                     Log.e("CreateResidenceActivity", "Status: $status")
+
+                    val intent = Intent(this@CreateResidenceActivity, AddListingLocationActivity::class.java)
+                    intent.putExtra("residenceId", residenceId)
+                    Log.e("residenceId" , "create is $residenceId")
+                    startActivity(intent)
                 }
             }
             createResidenceVewModel.errorLiveData.observe(this) { error ->
@@ -159,12 +168,12 @@ class CreateResidenceActivity : BaseActivity() {
         }
 
         if (type.isEmpty()) {
-            showErrorSnackBar("Please select a type (Rent or Sale)", true)
+            showErrorSnackBarResidence("Please Select Listing Type", true)
             return false
         }
 
         if (category.isEmpty()) {
-            showErrorSnackBar("Please select a category (House, Apartment, Hotel, Villa, or Cottage)", true)
+            showErrorSnackBarResidence("Please Select Property Category", true)
             return false
         }
 
