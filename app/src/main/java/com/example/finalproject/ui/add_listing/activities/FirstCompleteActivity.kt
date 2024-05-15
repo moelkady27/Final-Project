@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.add_listing.activities
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -166,6 +167,12 @@ class FirstCompleteActivity : BaseActivity() {
                 response?.let {
                     val status = it.status
                     Log.e("FirstCompleteActivity", "Status: $status")
+
+                    val intent = Intent(
+                        this@FirstCompleteActivity, SecondCompleteActivity::class.java)
+                    intent.putExtra("residenceId", residenceId)
+                    Log.e("residenceId" , "First Complete is $residenceId")
+                    startActivity(intent)
                 }
             }
             firstCompleteViewModel.errorLiveData.observe(this) { error ->

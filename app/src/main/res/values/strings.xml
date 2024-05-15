@@ -241,8 +241,8 @@
     <string name="residence_type" translatable="false">Residence Type</string>
     <string name="type_of_residence" translatable="false">Type of Residence</string>
     <string name="central_air" translatable="false">Central Air</string>
-    <string name="yes" translatable="false">Yes</string>
-    <string name="no" translatable="false">No</string>
+    <string name="yes" translatable="false">yes</string>
+    <string name="no" translatable="false">no</string>
     <string name="street" translatable="false">Street</string>
     <string name="paved" translatable="false">Paved</string>
     <string name="gravel" translatable="false">Gravel</string>

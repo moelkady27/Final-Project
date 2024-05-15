@@ -72,6 +72,7 @@
                     android:id="@+id/RoofStyleChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
@@ -196,6 +197,7 @@
                     android:id="@+id/RoofMaterialChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
@@ -350,6 +352,7 @@
                     android:id="@+id/HouseStyleChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
@@ -368,7 +371,7 @@
                         app:chipStartPadding="25dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/house_style_1.5Fin"
+                        android:id="@+id/house_style_1_5Fin"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -383,7 +386,7 @@
                         app:chipStartPadding="25dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/house_style_1.5Unf"
+                        android:id="@+id/house_style_1_5Unf"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -413,7 +416,7 @@
                         app:chipStartPadding="25dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/house_style_2.5Fin"
+                        android:id="@+id/house_style_2_5Fin"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -428,7 +431,7 @@
                         app:chipStartPadding="25dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/house_style_2.5Unf"
+                        android:id="@+id/house_style_2_5Unf"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -535,20 +538,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                app:singleSelection="true"
                 app:layout_constraintStart_toStartOf="@id/tvCentralAirTitle"
                 app:layout_constraintTop_toBottomOf="@id/tvCentralAirTitle">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/central_air_yes"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/yes"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="18sp"
                     android:textAppearance="@style/ChipTextStyle"
-                    app:chipIcon="@drawable/ic_yes"
-                    app:chipIconTint="@color/colorPrimaryText"
                     app:chipStartPadding="25dp"
                     app:chipEndPadding="25dp"
                     app:chipBackgroundColor="@color/home_search"
@@ -557,15 +559,13 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/central_air_no"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/no"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="18sp"
                     android:textAppearance="@style/ChipTextStyle"
-                    app:chipIcon="@drawable/ic_cancel"
-                    app:chipIconTint="@color/colorPrimaryText"
                     app:chipStartPadding="25dp"
                     app:chipEndPadding="25dp"
                     app:chipBackgroundColor="@color/home_search"
@@ -593,6 +593,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                app:singleSelection="true"
                 app:layout_constraintStart_toStartOf="@id/tvStreetTitle"
                 app:layout_constraintTop_toBottomOf="@id/tvStreetTitle">
 
@@ -656,6 +657,7 @@
                     android:id="@+id/AlleyChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
@@ -735,6 +737,7 @@
                     android:id="@+id/HeatingChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
@@ -859,6 +862,7 @@
                     android:id="@+id/HeatingQualityChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
@@ -968,6 +972,7 @@
                     android:id="@+id/MasonryVeneerTypeChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
@@ -1173,6 +1178,7 @@
                     android:id="@+id/ExteriorConditionChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
@@ -1282,6 +1288,7 @@
                     android:id="@+id/ExteriorQualityChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
@@ -1430,7 +1437,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_next_add_listing_third"
+                android:id="@+id/btn_next_second_complete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

@@ -2,10 +2,12 @@ package com.example.finalproject.retrofit
 
 import com.example.finalproject.ui.add_listing.models.CreateResidenceResponse
 import com.example.finalproject.ui.add_listing.models.FirstCompleteResponse
+import com.example.finalproject.ui.add_listing.models.SecondCompleteResponse
 import com.example.finalproject.ui.add_listing.models.SetLocationResidenceResponse
 import com.example.finalproject.ui.add_listing.models.UploadPhotoResidenceResponse
 import com.example.finalproject.ui.add_listing.request.CreateResidenceRequest
 import com.example.finalproject.ui.add_listing.request.FirstCompleteRequest
+import com.example.finalproject.ui.add_listing.request.SecondCompleteRequest
 import com.example.finalproject.ui.chat.models.ChatListUsersResponse
 import com.example.finalproject.ui.chat.models.DeleteMessageResponse
 import com.example.finalproject.ui.chat.models.EditMessageResponse
@@ -243,4 +245,12 @@ interface ApiService {
         @Path("residenceId") residenceId: String,
         @Body req: FirstCompleteRequest
     ): Call<FirstCompleteResponse>
+
+    @POST("api/v1/residence/complete/2nd/{residenceId}")
+    fun secondComplete(
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String,
+        @Body req: SecondCompleteRequest
+    ): Call<SecondCompleteResponse>
+
 }
