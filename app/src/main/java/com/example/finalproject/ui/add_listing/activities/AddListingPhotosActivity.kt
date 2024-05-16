@@ -73,15 +73,15 @@ class AddListingPhotosActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_listing_photos)
 
+        val residenceId = intent.getStringExtra("residenceId").toString()
+        Log.e("residenceId" , "Photo is $residenceId")
+
         initView()
 
         setUpActionBar()
     }
 
     private fun initView() {
-
-        val id = intent.getStringExtra("lol").toString()
-        Log.e("residenceId" , "photo is $id")
 
         val addPhotoResidenceRepository = AddPhotoResidenceRepository(RetrofitClient.instance)
         val factory = AddPhotoResidenceFactory(addPhotoResidenceRepository)
@@ -128,12 +128,12 @@ class AddListingPhotosActivity : BaseActivity() {
     private fun openImagePicker() {
         if (ContextCompat.checkSelfPermission(
                 this,
-                Manifest.permission.READ_MEDIA_IMAGES
+                Manifest.permission.READ_EXTERNAL_STORAGE
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                 REQUEST_CODE_GALLERY
             )
         } else {
@@ -162,7 +162,7 @@ class AddListingPhotosActivity : BaseActivity() {
             val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
             val body = MultipartBody.Part.createFormData("images", file.name, requestFile)
             val token = AppReferences.getToken(this@AddListingPhotosActivity)
-            val residenceId = "66423767bb3bce1ac1356aad"
+            val residenceId = intent.getStringExtra("residenceId").toString()
 
             addPhotoResidenceViewModel.uploadResidencePhoto(token, residenceId, body)
 
@@ -175,7 +175,10 @@ class AddListingPhotosActivity : BaseActivity() {
 
                     Log.e("status", status)
 
-                    startActivity(Intent(this@AddListingPhotosActivity, FirstCompleteActivity::class.java))
+                    val id = it.residenceId
+                    val intent = Intent(this@AddListingPhotosActivity, FirstCompleteActivity::class.java)
+                    intent.putExtra("residenceId", id)
+                    startActivity(intent)
                 }
             }
 

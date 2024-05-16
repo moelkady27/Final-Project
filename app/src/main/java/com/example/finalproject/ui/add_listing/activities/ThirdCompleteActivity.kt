@@ -58,6 +58,9 @@ class ThirdCompleteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_third_complete)
 
+        val residenceId = intent.getStringExtra("residenceId").toString()
+        Log.e("residenceId" , "third is $residenceId")
+
         initView()
 
         setupActionBar()

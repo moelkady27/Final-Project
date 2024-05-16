@@ -60,6 +60,9 @@ class AddListingMapActivity : BaseActivity(), OnMapReadyCallback {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
+        val residenceId = intent.getStringExtra("residenceId").toString()
+        Log.e("residenceId" , "Map is $residenceId")
+
         initView()
     }
 
@@ -169,19 +172,27 @@ class AddListingMapActivity : BaseActivity(), OnMapReadyCallback {
         if (selectedLocation != null) {
             val token = AppReferences.getToken(this@AddListingMapActivity)
 
+            val residenceId = intent.getStringExtra("residenceId").toString()
+
             showProgressDialog(this@AddListingMapActivity , "Setting up your LocationSignIn")
 
-            setLocationResidenceViewModel.setLocationResidence(token, "6641ee6a9194ef9e21f806c5", selectedLocation!!.longitude, selectedLocation!!.latitude)
+            setLocationResidenceViewModel.setLocationResidence(token, residenceId, selectedLocation!!.longitude, selectedLocation!!.latitude)
             setLocationResidenceViewModel.locationResponseLiveData.observe(this) { response ->
                 hideProgressDialog()
                 response?.let {
                     val status = it.status
 
-                    Log.e("MapActivity", "Status: $status")
-
                     Toast.makeText(this@AddListingMapActivity, status, Toast.LENGTH_LONG).show()
 
-                    startActivity(Intent(this, AddListingPhotosActivity::class.java))
+                    Log.e("MapActivity", "Status: $status")
+
+                    val id = it.residenceId
+                    Log.e("MapActivity", "id: $id")
+
+                    val intent = Intent(this@AddListingMapActivity, AddListingPhotosActivity::class.java)
+                    intent.putExtra("residenceId", id)
+                    startActivity(intent)
+
                 }
             }
 
