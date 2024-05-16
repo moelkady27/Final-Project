@@ -4,10 +4,12 @@ import com.example.finalproject.ui.add_listing.models.CreateResidenceResponse
 import com.example.finalproject.ui.add_listing.models.FirstCompleteResponse
 import com.example.finalproject.ui.add_listing.models.SecondCompleteResponse
 import com.example.finalproject.ui.add_listing.models.SetLocationResidenceResponse
+import com.example.finalproject.ui.add_listing.models.ThirdCompleteResponse
 import com.example.finalproject.ui.add_listing.models.UploadPhotoResidenceResponse
 import com.example.finalproject.ui.add_listing.request.CreateResidenceRequest
 import com.example.finalproject.ui.add_listing.request.FirstCompleteRequest
 import com.example.finalproject.ui.add_listing.request.SecondCompleteRequest
+import com.example.finalproject.ui.add_listing.request.ThirdCompleteRequest
 import com.example.finalproject.ui.chat.models.ChatListUsersResponse
 import com.example.finalproject.ui.chat.models.DeleteMessageResponse
 import com.example.finalproject.ui.chat.models.EditMessageResponse
@@ -253,4 +255,10 @@ interface ApiService {
         @Body req: SecondCompleteRequest
     ): Call<SecondCompleteResponse>
 
+    @POST("api/v1/residence/complete/3rd/{residenceId}")
+    fun thirdComplete(
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String,
+        @Body req: ThirdCompleteRequest
+    ): Call<ThirdCompleteResponse>
 }
