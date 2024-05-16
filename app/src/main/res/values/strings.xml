@@ -346,6 +346,7 @@
     <string name="enter_house_age" translatable="false">Enter House Age</string>
     <string name="house_remodel_age" translatable="false">House Remodel Age</string>
     <string name="enter_house_remodel_age" translatable="false">Enter House Remodel Age</string>
+    <string name="enter_lot_area" translatable="false">Enter Lot Area</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>

@@ -603,7 +603,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/search_border"
                 android:fontFamily="@font/poppins_medium"
-                android:hint="Enter Lot Area"
+                android:hint="@string/enter_lot_area"
                 android:inputType="number"
                 android:padding="20dp"
                 android:textColor="@color/colorPrimaryText"

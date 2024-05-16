@@ -2,12 +2,14 @@ package com.example.finalproject.retrofit
 
 import com.example.finalproject.ui.add_listing.models.CreateResidenceResponse
 import com.example.finalproject.ui.add_listing.models.FirstCompleteResponse
+import com.example.finalproject.ui.add_listing.models.FourthCompleteResponse
 import com.example.finalproject.ui.add_listing.models.SecondCompleteResponse
 import com.example.finalproject.ui.add_listing.models.SetLocationResidenceResponse
 import com.example.finalproject.ui.add_listing.models.ThirdCompleteResponse
 import com.example.finalproject.ui.add_listing.models.UploadPhotoResidenceResponse
 import com.example.finalproject.ui.add_listing.request.CreateResidenceRequest
 import com.example.finalproject.ui.add_listing.request.FirstCompleteRequest
+import com.example.finalproject.ui.add_listing.request.FourthCompleteRequest
 import com.example.finalproject.ui.add_listing.request.SecondCompleteRequest
 import com.example.finalproject.ui.add_listing.request.ThirdCompleteRequest
 import com.example.finalproject.ui.chat.models.ChatListUsersResponse
@@ -261,4 +263,12 @@ interface ApiService {
         @Path("residenceId") residenceId: String,
         @Body req: ThirdCompleteRequest
     ): Call<ThirdCompleteResponse>
+
+    @POST("api/v1/residence/complete/4th/{residenceId}")
+    fun fourthComplete(
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String,
+        @Body req: FourthCompleteRequest
+    ): Call<FourthCompleteResponse>
+
 }

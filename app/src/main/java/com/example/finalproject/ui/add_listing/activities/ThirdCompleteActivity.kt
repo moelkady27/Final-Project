@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.add_listing.activities
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -291,11 +292,11 @@ class ThirdCompleteActivity : BaseActivity() {
         if (btn_yes_garage.isChecked) {
             hasGarage = "true"
             garageType = when {
-                garage_type_more_than_one.isChecked -> "more than one type"
+                garage_type_more_than_one.isChecked -> "more than one"
                 garage_type_attached.isChecked -> "attached"
                 garage_type_basement.isChecked -> "basement"
-                garage_type_built_in.isChecked -> "built-In"
-                garage_type_car_port.isChecked -> "car Port"
+                garage_type_built_in.isChecked -> "built in"
+                garage_type_car_port.isChecked -> "car port"
                 garage_type_detached.isChecked -> "detached"
                 garage_type_not_available.isChecked -> "not available"
                 else -> ""
@@ -435,6 +436,11 @@ class ThirdCompleteActivity : BaseActivity() {
                     val message = response.status
 
                     Log.e("Third Complete", message)
+
+                    val id = it.residence._id
+                    val intent = Intent(this@ThirdCompleteActivity, FourthCompleteActivity::class.java)
+                    intent.putExtra("residenceId", id)
+                    startActivity(intent)
                 }
             }
 
