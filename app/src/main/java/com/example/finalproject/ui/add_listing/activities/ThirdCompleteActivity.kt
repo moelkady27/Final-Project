@@ -321,10 +321,10 @@ class ThirdCompleteActivity : BaseActivity() {
             }
         } else {
             hasGarage = "false"
-            garageType = ""
-            garageQuality = ""
-            garageCars = ""
-            garageFinish = ""
+            garageType = "NA"
+            garageQuality = "NA"
+            garageCars = 0.toString()
+            garageFinish = "NA"
         }
 
         val hasBasement: String
@@ -375,11 +375,11 @@ class ThirdCompleteActivity : BaseActivity() {
             }
         } else {
             hasBasement = "false"
-            basementArea = ""
-            basementExposure = ""
-            basementRating = ""
-            basementHeight = ""
-            basementCondition = ""
+            basementArea = 0.toString()
+            basementExposure = "NO"
+            basementRating = "NO"
+            basementHeight = "NO"
+            basementCondition = "NO"
         }
 
         val hasFirePlace: String
@@ -398,8 +398,8 @@ class ThirdCompleteActivity : BaseActivity() {
             }
         } else {
             hasFirePlace = "false"
-            firePlaceCount = ""
-            firePlaceQuality = ""
+            firePlaceCount = 0.toString()
+            firePlaceQuality = "NA"
         }
 
         val bedroomCount: String = count_bedrooms.text.toString()
