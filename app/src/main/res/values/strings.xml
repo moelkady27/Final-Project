@@ -153,7 +153,7 @@
     <string name="park" translatable="false">Park</string>
     <string name="home_theatre" translatable="false">Home theatre</string>
     <string name="kid_s_friendly" translatable="false">Kid’s Friendly</string>
-    <string name="submit" translatable="false">submit</string>
+    <string name="submit" translatable="false">Submit</string>
     <string name="search_results" translatable="false">Search Results</string>
     <string name="results_found" translatable="false">Results Found</string>
     <string name="found" translatable="false">Found</string>
@@ -307,6 +307,45 @@
     <string name="kitchen" translatable="false">kitchen</string>
     <string name="kitchen_quality" translatable="false">Kitchen quality</string>
     <string name="rooms_without_bathroms" translatable="false">Rooms without bathroms</string>
+    <string name="property_configuration" translatable="false">Property Configuration</string>
+    <string name="inside" translatable="false">Inside</string>
+    <string name="corner" translatable="false">Corner</string>
+    <string name="cul_de_sac" translatable="false">Cul De Sac</string>
+    <string name="frontage_on_2" translatable="false">Frontage On 2</string>
+    <string name="frontage_on_3" translatable="false">Frontage On 3</string>
+    <string name="property_flatness" translatable="false">Property Flatness</string>
+    <string name="level" translatable="false">Level</string>
+    <string name="banked" translatable="false">Banked</string>
+    <string name="hillside" translatable="false">Hillside</string>
+    <string name="depression" translatable="false">Depression</string>
+    <string name="property_slope" translatable="false">Property Slope</string>
+    <string name="gentle" translatable="false">Gentle</string>
+    <string name="moderate" translatable="false">Moderate</string>
+    <string name="severe" translatable="false">Severe</string>
+    <string name="driveway_type" translatable="false">DriveWay Type</string>
+    <string name="pool_area" translatable="false">Pool Area</string>
+    <string name="enter_pool_area" translatable="false">Enter Pool Area</string>
+    <string name="property_quality" translatable="false">Property Quality</string>
+    <string name="property_condition" translatable="false">Property Condition</string>
+    <string name="enter_property_quality" translatable="false">Enter Property Quality</string>
+    <string name="enter_property_condition" translatable="false">Enter Property Condition</string>
+    <string name="total_area" translatable="false">Total Area</string>
+    <string name="enter_total_area" translatable="false">Enter Total Area</string>
+    <string name="total_porch_sf" translatable="false">Total Porch SF</string>
+    <string name="enter_total_porch_sf" translatable="false">Enter Total Porch SF</string>
+    <string name="lot_area" translatable="false">Lot Area</string>
+    <string name="lot_frontage" translatable="false">Lot Frontage</string>
+    <string name="enter_lot_frontage" translatable="false">Enter Lot Frontage</string>
+    <string name="total_square_feet" translatable="false">Total Square Feet</string>
+    <string name="enter_total_square_feet" translatable="false">Enter Total Square Feet</string>
+    <string name="low_quality_finished_sf" translatable="false">Low Quality Finished SF</string>
+    <string name="enter_low_quality_finished_sf" translatable="false">Enter Low Quality Finished SF</string>
+    <string name="miscval" translatable="false">MiscVal</string>
+    <string name="enter_value_of_miscellaneous" translatable="false">Enter Value Of Miscellaneous</string>
+    <string name="house_age" translatable="false">House Age</string>
+    <string name="enter_house_age" translatable="false">Enter House Age</string>
+    <string name="house_remodel_age" translatable="false">House Remodel Age</string>
+    <string name="enter_house_remodel_age" translatable="false">Enter House Remodel Age</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>

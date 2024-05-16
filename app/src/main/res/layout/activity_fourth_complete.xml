@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.add_listing.activities.FourthCompleteActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_fourth_complete"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/toolbar_fourth_complete_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/add_listing"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="22sp" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_almost_finish_complete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/almost_finish_complete"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_fourth_complete" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_the_listing"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/the_listing"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_almost_finish_complete"
+                app:layout_constraintStart_toStartOf="@+id/tv_almost_finish_complete"
+                app:layout_constraintTop_toBottomOf="@+id/tv_almost_finish_complete" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_lot_configuration_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/property_configuration"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/tv_the_listing"
+                app:layout_constraintStart_toStartOf="@id/tv_the_listing"
+                app:layout_constraintTop_toBottomOf="@id/tv_the_listing"/>
+
+            <HorizontalScrollView
+                android:id="@+id/HSVLotConfiguration"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="@+id/tv_lot_configuration_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_lot_configuration_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_lot_configuration_title">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/LotConfigurationChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:chipSpacing="15dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/lotConfiguration_inside"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/inside"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/lotConfiguration_corner"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/corner"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/lotConfiguration_cul_de_sac"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cul_de_sac"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/lotConfiguration_frontage_on_2"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/frontage_on_2"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/lotConfiguration_frontage_on_3"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/frontage_on_3"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_land_contour_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/property_flatness"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/HSVLotConfiguration"
+                app:layout_constraintStart_toStartOf="@id/HSVLotConfiguration"
+                app:layout_constraintTop_toBottomOf="@id/HSVLotConfiguration"/>
+
+            <HorizontalScrollView
+                android:id="@+id/HSVLandContour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="@+id/tv_land_contour_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_land_contour_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_land_contour_title">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/LandContourChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:chipSpacing="15dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/landContour_level"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/level"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/landContour_banked"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/banked"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/landContour_hillside"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hillside"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/landContour_depression"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/depression"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_land_slope_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/property_slope"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/HSVLandContour"
+                app:layout_constraintStart_toStartOf="@id/HSVLandContour"
+                app:layout_constraintTop_toBottomOf="@id/HSVLandContour"/>
+
+            <HorizontalScrollView
+                android:id="@+id/HSVLandSlope"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="@+id/tv_land_slope_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_land_slope_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_land_slope_title">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/LandSlopeChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:chipSpacing="15dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/landSlope_gentle"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gentle"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/landSlope_moderate"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/moderate"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/landSlope_severe"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/severe"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_paved_drive_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/driveway_type"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/HSVLandSlope"
+                app:layout_constraintStart_toStartOf="@id/HSVLandSlope"
+                app:layout_constraintTop_toBottomOf="@id/HSVLandSlope"/>
+
+            <HorizontalScrollView
+                android:id="@+id/HSVPavedDrive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="@+id/tv_paved_drive_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_paved_drive_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_paved_drive_title">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/PavedDriveChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:chipSpacing="15dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/pavedDrive_paved"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/paved"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/pavedDrive_gravel"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gravel"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/pavedDrive_partial"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/partial"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_pool_area_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/pool_area"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@id/HSVPavedDrive"
+                app:layout_constraintEnd_toEndOf="@id/HSVPavedDrive"
+                app:layout_constraintTop_toBottomOf="@id/HSVPavedDrive" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_pool_area"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="@string/enter_pool_area"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/tv_pool_area_title"
+                app:layout_constraintStart_toStartOf="@id/tv_pool_area_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_pool_area_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_overall_quality_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/property_quality"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/et_pool_area"
+                app:layout_constraintStart_toStartOf="@id/et_pool_area"
+                app:layout_constraintTop_toBottomOf="@id/et_pool_area" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_overall_quality"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="@string/enter_property_quality"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_overall_quality_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_overall_quality_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_overall_quality_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_overall_condition_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/property_condition"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/et_overall_quality"
+                app:layout_constraintStart_toStartOf="@id/et_overall_quality"
+                app:layout_constraintTop_toBottomOf="@id/et_overall_quality" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_overall_condition"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="@string/enter_property_condition"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_overall_condition_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_overall_condition_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_overall_condition_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_total_area_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/total_area"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/et_overall_condition"
+                app:layout_constraintStart_toStartOf="@id/et_overall_condition"
+                app:layout_constraintTop_toBottomOf="@id/et_overall_condition" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_total_area"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="@string/enter_total_area"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_total_area_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_total_area_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_total_area_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_total_porch_sf_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/total_porch_sf"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/et_total_area"
+                app:layout_constraintStart_toStartOf="@id/et_total_area"
+                app:layout_constraintTop_toBottomOf="@id/et_total_area" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_total_porch_sf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="@string/enter_total_porch_sf"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_total_porch_sf_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_total_porch_sf_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_total_porch_sf_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_lot_area_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/lot_area"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/et_total_porch_sf"
+                app:layout_constraintStart_toStartOf="@id/et_total_porch_sf"
+                app:layout_constraintTop_toBottomOf="@id/et_total_porch_sf" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_lot_area"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="Enter Lot Area"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_lot_area_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_lot_area_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_lot_area_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_lot_frontage_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/lot_frontage"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/et_lot_area"
+                app:layout_constraintStart_toStartOf="@id/et_lot_area"
+                app:layout_constraintTop_toBottomOf="@id/et_lot_area" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_lot_frontage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="@string/enter_lot_frontage"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_lot_frontage_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_lot_frontage_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_lot_frontage_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_total_square_feet_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/total_square_feet"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/et_lot_frontage"
+                app:layout_constraintStart_toStartOf="@id/et_lot_frontage"
+                app:layout_constraintTop_toBottomOf="@id/et_lot_frontage" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_total_square_feet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="@string/enter_total_square_feet"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_total_square_feet_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_total_square_feet_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_total_square_feet_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_low_quality_finished_sf_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/low_quality_finished_sf"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/et_total_square_feet"
+                app:layout_constraintStart_toStartOf="@id/et_total_square_feet"
+                app:layout_constraintTop_toBottomOf="@id/et_total_square_feet" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_low_quality_finished_sf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="@string/enter_low_quality_finished_sf"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_low_quality_finished_sf_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_low_quality_finished_sf_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_low_quality_finished_sf_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_misc_value_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/miscval"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/et_low_quality_finished_sf"
+                app:layout_constraintStart_toStartOf="@id/et_low_quality_finished_sf"
+                app:layout_constraintTop_toBottomOf="@id/et_low_quality_finished_sf" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_misc_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="@string/enter_value_of_miscellaneous"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_misc_value_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_misc_value_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_misc_value_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_house_age_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/house_age"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/et_misc_value"
+                app:layout_constraintStart_toStartOf="@id/et_misc_value"
+                app:layout_constraintTop_toBottomOf="@id/et_misc_value" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_house_age"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="@string/enter_house_age"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_house_age_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_house_age_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_house_age_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_house_remodel_age_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/house_remodel_age"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/et_house_age"
+                app:layout_constraintStart_toStartOf="@id/et_house_age"
+                app:layout_constraintTop_toBottomOf="@id/et_house_age" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_house_remodel_age"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="@string/enter_house_remodel_age"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_house_remodel_age_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_house_remodel_age_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_house_remodel_age_title" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_submit_fourth_complete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginEnd="100dp"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="@string/submit"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/et_house_remodel_age"
+                app:layout_constraintStart_toStartOf="@+id/et_house_remodel_age"
+                app:layout_constraintTop_toBottomOf="@id/et_house_remodel_age" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
