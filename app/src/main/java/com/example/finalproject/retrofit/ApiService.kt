@@ -24,6 +24,7 @@ import com.example.finalproject.ui.complete_register.models.LocationResponse
 import com.example.finalproject.ui.setting.models.LogOutResponse
 import com.example.finalproject.ui.complete_register.models.UploadPhotoResponse
 import com.example.finalproject.ui.complete_register.request.CompleteSignUpRequest
+import com.example.finalproject.ui.favourite.models.AddToFavouritesResponse
 import com.example.finalproject.ui.home.models.GetAllResidencesResponse
 import com.example.finalproject.ui.password.models.ChangePasswordResponse
 import com.example.finalproject.ui.password.models.ForgotPasswordResponse
@@ -293,4 +294,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("page") page: Int
     ): Call<GetAllResidencesResponse>
+
+    @GET("api/v1/user/favorites/add/{residenceId}")
+    fun addToFavorites(
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String
+    ): Call<AddToFavouritesResponse>
+
 }

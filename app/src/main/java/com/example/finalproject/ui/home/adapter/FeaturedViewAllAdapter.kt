@@ -3,6 +3,7 @@ package com.example.finalproject.ui.home.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
@@ -12,6 +13,7 @@ import kotlinx.android.synthetic.main.each_row_featured_view_all.view.apartment_
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.apartment_price_featured_view_all
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.home_featured_view_all_title_3
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.image_featured_view_all
+import kotlinx.android.synthetic.main.each_row_featured_view_all.view.iv_featured_view_all_fav
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.tv_apartment_view_all
 
 class FeaturedViewAllAdapter(
@@ -19,6 +21,8 @@ class FeaturedViewAllAdapter(
 ): RecyclerView.Adapter<FeaturedViewAllAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    private val clickedItems = mutableSetOf<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -38,8 +42,10 @@ class FeaturedViewAllAdapter(
 
         holder.itemView.tv_apartment_view_all.text = featuredEstates.category
         holder.itemView.apartment_name_featured_view_all.text = featuredEstates.title
-        holder.itemView.apartment_location_featured_view_all.text = featuredEstates.location.fullAddress
-        holder.itemView.apartment_price_featured_view_all.text = featuredEstates.salePrice.toString()
+        holder.itemView.apartment_location_featured_view_all.text =
+            featuredEstates.location.fullAddress
+        holder.itemView.apartment_price_featured_view_all.text =
+            featuredEstates.salePrice.toString()
         holder.itemView.home_featured_view_all_title_3.text = featuredEstates.paymentPeriod
 
         if (featuredEstates.images.isNotEmpty()) {
@@ -49,6 +55,25 @@ class FeaturedViewAllAdapter(
         } else {
             // TODO: Show default image when the list is empty
         }
+
+        val isClicked = clickedItems.contains(position)
+
+        if (isClicked){
+            holder.itemView.iv_featured_view_all_fav.backgroundTintList =
+                ContextCompat.getColorStateList(holder.itemView.context, R.color.colorPrimary)
+        } else {
+            holder.itemView.iv_featured_view_all_fav.backgroundTintList =
+                ContextCompat.getColorStateList(holder.itemView.context, R.color.edit_text)
+        }
+
+        holder.itemView.iv_featured_view_all_fav.setOnClickListener {
+            if (isClicked) {
+                clickedItems.remove(position)
+            } else {
+                clickedItems.add(position)
+            }
+            notifyItemChanged(position)
+        }
     }
 
     fun addItems(newItems: List<Residence>) {
@@ -56,5 +81,4 @@ class FeaturedViewAllAdapter(
         list.addAll(newItems)
         notifyItemRangeInserted(startPosition, newItems.size)
     }
-
 }

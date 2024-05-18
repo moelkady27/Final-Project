@@ -28,7 +28,7 @@ import com.example.finalproject.ui.profile.models.User
 import com.example.finalproject.ui.profile.repository.GetUserInfoRepository
 import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
 import com.example.finalproject.ui.search.SearchUsersActivity
-import com.example.finalproject.ui.setting.activities.FavouritesActivity
+import com.example.finalproject.ui.favourite.activities.FavouritesActivity
 import com.example.finalproject.ui.setting.factory.LogOutFactory
 import com.example.finalproject.ui.setting.repository.LogOutRepository
 import com.example.finalproject.ui.setting.viewModels.LogOutViewModel

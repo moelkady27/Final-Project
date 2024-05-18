@@ -11,6 +11,9 @@ import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.favourite.factory.AddToFavouritesFactory
+import com.example.finalproject.ui.favourite.repository.AddToFavouritesRepository
+import com.example.finalproject.ui.favourite.viewModel.AddToFavouritesViewModel
 import com.example.finalproject.ui.home.adapter.FeaturedViewAllAdapter
 import com.example.finalproject.ui.home.factory.HomeFeaturedEstatesFactory
 import com.example.finalproject.ui.home.repository.HomeFeaturedEstatesRepository
@@ -25,6 +28,8 @@ class FeaturedEstatesActivity : BaseActivity() {
     private lateinit var featuredViewAllAdapter: FeaturedViewAllAdapter
 
     private lateinit var homeFeaturedEstatesViewModel: HomeFeaturedEstatesViewModel
+
+    private lateinit var addToFavouritesViewModel: AddToFavouritesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +70,26 @@ class FeaturedEstatesActivity : BaseActivity() {
             }
         }
         initPagination(token)
+
+        val addToFavouritesRepository = AddToFavouritesRepository(RetrofitClient.instance)
+        val addToFavouritesFactory = AddToFavouritesFactory(addToFavouritesRepository)
+        addToFavouritesViewModel = ViewModelProvider(
+            this@FeaturedEstatesActivity, addToFavouritesFactory
+        )[AddToFavouritesViewModel::class.java]
+
+        // TODO: ResidenceId is not working
+
+//        addToFavouritesViewModel.addToFavourites(token, residenceId)
+
+        addToFavouritesViewModel.addToFavouritesLiveData.observe(
+            this@FeaturedEstatesActivity
+        ){ response ->
+            hideProgressDialog()
+            response?.let {
+                val status = it.status
+                Log.e("AddToFavourites", "Added to Favourites $status")
+            }
+        }
     }
 
     private fun initPagination(token: String) {

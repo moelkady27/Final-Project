@@ -167,9 +167,9 @@
         android:id="@+id/iv_featured_view_all_fav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/favourites"
         app:layout_constraintBottom_toBottomOf="@+id/home_featured_view_all_title_3"
         app:layout_constraintEnd_toEndOf="@+id/apartment_location_featured_view_all"
-        app:layout_constraintTop_toTopOf="@+id/home_featured_view_all_title_3"
-        app:srcCompat="@drawable/favourites" />
+        app:layout_constraintTop_toTopOf="@+id/home_featured_view_all_title_3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
