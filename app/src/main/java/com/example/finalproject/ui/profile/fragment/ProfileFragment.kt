@@ -45,6 +45,8 @@ class ProfileFragment : Fragment() {
     private lateinit var viewPager2: ViewPager2
     private lateinit var adapter: MyViewAdapter
 
+    private var isProfileUpdated = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         baseActivity = BaseActivity()
@@ -128,6 +130,11 @@ class ProfileFragment : Fragment() {
 
                     val updatedUser = userDao.getUser(userEntity._id)
                     updateProfile(updatedUser)
+
+                    if (!isProfileUpdated) {
+                        isProfileUpdated = true
+                        getUserInfoViewModel.getUserInfo(AppReferences.getToken(requireContext()))
+                    }
                 }
             }
         }

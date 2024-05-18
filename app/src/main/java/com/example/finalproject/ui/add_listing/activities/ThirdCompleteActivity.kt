@@ -439,7 +439,7 @@ class ThirdCompleteActivity : BaseActivity() {
 
                     val id = it.residence._id
                     val intent = Intent(this@ThirdCompleteActivity, FourthCompleteActivity::class.java)
-                    intent.putExtra("residenceId", id)
+                    intent.putExtra("residenceId", "$id")
                     startActivity(intent)
                 }
             }

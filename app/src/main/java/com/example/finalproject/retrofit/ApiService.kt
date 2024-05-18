@@ -38,6 +38,7 @@ import com.example.finalproject.ui.profile.models.ChangeProfileImageResponse
 import com.example.finalproject.ui.profile.models.DeleteProfileImageResponse
 import com.example.finalproject.ui.profile.models.EditProfileResponse
 import com.example.finalproject.ui.profile.models.GetUserResponse
+import com.example.finalproject.ui.profile.models.PendingResponse
 import com.example.finalproject.ui.profile.request.EditProfileRequest
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
@@ -271,4 +272,8 @@ interface ApiService {
         @Body req: FourthCompleteRequest
     ): Call<FourthCompleteResponse>
 
+    @GET("api/v1/residence/pending")
+    fun getPendingResidence(
+        @Header("Authorization") token: String,
+    ): Call<PendingResponse>
 }
