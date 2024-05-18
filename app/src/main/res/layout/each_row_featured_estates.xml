@@ -19,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_featured_estates"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
@@ -100,6 +101,7 @@
         android:textColor="@color/favourite"
         android:fontFamily="@font/poppins_medium"
         android:maxLines="1"
+        android:ellipsize="marquee"
         app:layout_constraintBottom_toBottomOf="@+id/iv_location_featured_estates"
         app:layout_constraintEnd_toEndOf="@+id/apartment_name_featured_estates"
         app:layout_constraintStart_toEndOf="@+id/iv_location_featured_estates"
