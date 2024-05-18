@@ -60,7 +60,7 @@ class ListingsFragment : Fragment() {
 
         approvedViewModel.getApproved(AppReferences.getToken(requireContext()))
 
-        approvedViewModel.pendingResponseLiveData.observe(viewLifecycleOwner) { response ->
+        approvedViewModel.approvedResponseLiveData.observe(viewLifecycleOwner) { response ->
             baseActivity.hideProgressDialog()
             response?.let {
                 listingsAdapter = ListingsAdapter(it.residence)

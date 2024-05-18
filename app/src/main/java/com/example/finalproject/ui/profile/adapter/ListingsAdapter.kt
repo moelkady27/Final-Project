@@ -39,7 +39,7 @@ class ListingsAdapter(
             tv_listings_profile_title_1.text = residence.title
             listings_profile_price_2.text = residence.salePrice.toString()
             tv_listings_profile_title_2.text = residence.location.fullAddress
-            number_star_listings_profile.text = residence.likes.toString()
+//            number_star_listings_profile.text = residence.likes.toString()
 
             Glide.with(this)
                 .load(residence.images.firstOrNull()?.url)

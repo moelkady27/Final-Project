@@ -281,4 +281,9 @@ interface ApiService {
     fun getApprovedResidence(
         @Header("Authorization") token: String,
     ): Call<ResidenceResponse>
+
+    @GET("api/v1/residence/sold")
+    fun getSoldResidence(
+        @Header("Authorization") token: String,
+    ): Call<ResidenceResponse>
 }

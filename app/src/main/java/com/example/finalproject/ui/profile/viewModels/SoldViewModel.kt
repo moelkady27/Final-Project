@@ -3,27 +3,26 @@ package com.example.finalproject.ui.profile.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finalproject.ui.profile.models.ResidenceResponse
-import com.example.finalproject.ui.profile.repository.ApprovedRepository
-import com.example.finalproject.ui.profile.repository.PendingRepository
+import com.example.finalproject.ui.profile.repository.SoldRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ApprovedViewModel(
-    private val approvedRepository: ApprovedRepository
+class SoldViewModel(
+    private val soldRepository: SoldRepository
 ): ViewModel() {
-    val approvedResponseLiveData: MutableLiveData<ResidenceResponse> = MutableLiveData()
+    val soldResponseLiveData: MutableLiveData<ResidenceResponse> = MutableLiveData()
     val errorLiveData: MutableLiveData<String> = MutableLiveData()
 
-    fun getApproved(token: String) {
-        approvedRepository.getApproved(token)
+    fun getSold(token: String) {
+        soldRepository.getSold(token)
             .enqueue(object : Callback<ResidenceResponse>{
                 override fun onResponse(
                     call: Call<ResidenceResponse>,
                     response: Response<ResidenceResponse>
                 ) {
                     if (response.isSuccessful) {
-                        approvedResponseLiveData.value = response.body()
+                        soldResponseLiveData.value = response.body()
                     } else {
                         errorLiveData.value = response.errorBody().toString()
                     }
