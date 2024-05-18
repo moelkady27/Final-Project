@@ -19,7 +19,9 @@ class HomeFeaturedEstatesViewModel(
     private var currentPage = 1
     private var isLastPage = false
 
-    fun getFeaturedEstates(token: String) {
+
+                                /* Get Featured Estates View All */
+    fun getFeaturedEstatesViewAll(token: String) {
         if (loadingLiveData.value == true || isLastPage) {
             return
         }
@@ -46,6 +48,29 @@ class HomeFeaturedEstatesViewModel(
 
                 override fun onFailure(call: Call<GetAllResidencesResponse>, t: Throwable) {
                     loadingLiveData.value = false
+                    errorLiveData.value = t.message
+                }
+            })
+    }
+
+
+                                /* Get Featured Estates Home */
+    fun getFeaturedEstates(token: String) {
+        homeFeaturedEstatesRepository.getFeaturedEstates("Bearer $token", currentPage)
+            .enqueue(object : Callback<GetAllResidencesResponse> {
+                override fun onResponse(
+                    call: Call<GetAllResidencesResponse>,
+                    response: Response<GetAllResidencesResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val data = response.body()
+                        homeFeaturedEstatesLiveData.value = data!!
+                    } else {
+                        errorLiveData.value = response.errorBody()?.string()
+                    }
+                }
+
+                override fun onFailure(call: Call<GetAllResidencesResponse>, t: Throwable) {
                     errorLiveData.value = t.message
                 }
             })

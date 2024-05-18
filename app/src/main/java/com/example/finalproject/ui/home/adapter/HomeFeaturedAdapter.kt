@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.home.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +14,16 @@ import kotlinx.android.synthetic.main.each_row_featured_estates.view.apartment_p
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.image_featured_estates
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.tv_apartment_view_all
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.tv_featured_estates_3
+import java.util.Random
+import kotlin.math.min
 
 class HomeFeaturedAdapter(
     private val list: MutableList<Residence>
 ): RecyclerView.Adapter<HomeFeaturedAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    private val random = Random()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -30,7 +35,7 @@ class HomeFeaturedAdapter(
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return min(list.size, 5)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -52,9 +57,18 @@ class HomeFeaturedAdapter(
 
     }
 
-    fun addItems(newItems: List<Residence>) {
-        val startPosition = list.size
-        list.addAll(newItems)
-        notifyItemRangeInserted(startPosition, newItems.size)
+//    fun addItems(newItems: List<Residence>) {
+//        val startPosition = list.size
+//        list.addAll(newItems)
+//        notifyItemRangeInserted(startPosition, newItems.size)
+//    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setItems(items: List<Residence>) {
+        list.clear()
+        val shuffledItems = items.shuffled(random)
+        val selectedItems = shuffledItems.take(5)
+        list.addAll(selectedItems)
+        notifyDataSetChanged()
     }
 }

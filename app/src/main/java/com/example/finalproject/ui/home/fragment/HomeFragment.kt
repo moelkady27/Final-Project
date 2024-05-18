@@ -72,14 +72,9 @@ class HomeFragment : Fragment() {
 //            LinearLayoutManager.HORIZONTAL , false)
 //        recyclerView.adapter = homePopularAdapter
 
-        recyclerView = view.findViewById(R.id.rv_home_featured)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext() ,
-            LinearLayoutManager.VERTICAL , false)
-
-        homeFeaturedAdapter = HomeFeaturedAdapter(mutableListOf())
-        recyclerView.adapter = homeFeaturedAdapter
-
         initView()
+
+        initButtons()
     }
 
     private fun initView(){
@@ -88,6 +83,13 @@ class HomeFragment : Fragment() {
         homeFeaturedEstatesViewModel = ViewModelProvider(
             this@HomeFragment, factory)[HomeFeaturedEstatesViewModel::class.java]
 
+        recyclerView = requireView().findViewById(R.id.rv_home_featured)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext() ,
+            LinearLayoutManager.VERTICAL , false)
+
+        homeFeaturedAdapter = HomeFeaturedAdapter(mutableListOf())
+        recyclerView.adapter = homeFeaturedAdapter
+
         val token = AppReferences.getToken(requireContext())
 
         homeFeaturedEstatesViewModel.getFeaturedEstates(token)
@@ -95,14 +97,10 @@ class HomeFragment : Fragment() {
         homeFeaturedEstatesViewModel.homeFeaturedEstatesLiveData.observe(viewLifecycleOwner) { response ->
             baseActivity.hideProgressDialog()
             response?.let {
-                homeFeaturedAdapter.addItems(it.residences)
+                homeFeaturedAdapter.setItems(it.residences)
                 Log.e("HomeFragment", it.residences.size.toString())
             }
         }
-
-        initButtons()
-        initPagination(token)
-
     }
 
     private fun initButtons(){
@@ -130,21 +128,5 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), SearchResultsActivity::class.java)
             startActivity(intent)
         }
-    }
-
-    private fun initPagination(token: String) {
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val totalItemCount = layoutManager.itemCount
-                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
-
-                if (lastVisibleItemPosition + 1 >= totalItemCount) {
-                    homeFeaturedEstatesViewModel.getFeaturedEstates(token)
-                }
-            }
-        })
     }
 }
