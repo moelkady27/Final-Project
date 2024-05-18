@@ -24,6 +24,7 @@ import com.example.finalproject.ui.complete_register.models.LocationResponse
 import com.example.finalproject.ui.setting.models.LogOutResponse
 import com.example.finalproject.ui.complete_register.models.UploadPhotoResponse
 import com.example.finalproject.ui.complete_register.request.CompleteSignUpRequest
+import com.example.finalproject.ui.home.models.GetAllResidencesResponse
 import com.example.finalproject.ui.password.models.ChangePasswordResponse
 import com.example.finalproject.ui.password.models.ForgotPasswordResponse
 import com.example.finalproject.ui.password.models.LogOutAllResponse
@@ -286,4 +287,9 @@ interface ApiService {
     fun getSoldResidence(
         @Header("Authorization") token: String,
     ): Call<ResidenceResponse>
+
+    @GET("api/v1/residence/all")
+    fun getFeaturedEstates(
+        @Header("Authorization") token: String
+    ): Call<GetAllResidencesResponse>
 }
