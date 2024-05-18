@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,9 @@ import com.example.finalproject.ui.profile.adapter.PendingAdapter
 import com.example.finalproject.ui.profile.factory.PendingFactory
 import com.example.finalproject.ui.profile.repository.PendingRepository
 import com.example.finalproject.ui.profile.viewModels.PendingViewModel
+import kotlinx.android.synthetic.main.fragment_pending.tv_pending_title_1
+import org.json.JSONException
+import org.json.JSONObject
 
 class PendingFragment : Fragment() {
 
@@ -64,13 +68,28 @@ class PendingFragment : Fragment() {
         pendingViewModel.getPending(AppReferences.getToken(requireContext()))
 
         pendingViewModel.pendingResponseLiveData.observe(viewLifecycleOwner) {response ->
+            BaseActivity().hideProgressDialog()
             response.let {
 
                 val status = it.status
                 pendingAdapter = PendingAdapter(it.residence)
                 recyclerView.adapter = pendingAdapter
 
+                tv_pending_title_1.text = it.count.toString()
+
                 Log.e("status", status)
+            }
+        }
+
+        pendingViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
+            BaseActivity().hideProgressDialog()
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+//                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                }
             }
         }
     }

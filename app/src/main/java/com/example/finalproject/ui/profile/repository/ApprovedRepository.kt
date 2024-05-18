@@ -4,12 +4,12 @@ import com.example.finalproject.retrofit.ApiService
 import com.example.finalproject.ui.profile.models.ResidenceResponse
 import retrofit2.Call
 
-class PendingRepository(
+class ApprovedRepository(
     private val apiService: ApiService
 ) {
-    fun getPending(
+    fun getApproved(
         token: String
     ):Call<ResidenceResponse> {
-        return apiService.getPendingResidence(token)
+        return apiService.getApprovedResidence(token)
     }
 }

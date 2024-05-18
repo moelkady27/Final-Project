@@ -5,19 +5,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
+import com.example.finalproject.retrofit.RetrofitClient
+import com.example.finalproject.storage.AppReferences
+import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.profile.adapter.ListingsAdapter
+import com.example.finalproject.ui.profile.factory.ApprovedFactory
+import com.example.finalproject.ui.profile.repository.ApprovedRepository
+import com.example.finalproject.ui.profile.viewModels.ApprovedViewModel
+import kotlinx.android.synthetic.main.fragment_listings.tv_listings_title_1
+import org.json.JSONException
+import org.json.JSONObject
 
 class ListingsFragment : Fragment() {
+
+    private lateinit var baseActivity: BaseActivity
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var listingsAdapter: ListingsAdapter
 
+    private lateinit var approvedViewModel: ApprovedViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        baseActivity = BaseActivity()
     }
 
     override fun onCreateView(
@@ -31,12 +46,41 @@ class ListingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = view.findViewById(R.id.recycle_listings_profile)
-
-        listingsAdapter = ListingsAdapter()
-
         recyclerView.layoutManager = GridLayoutManager(requireContext() , 2)
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = listingsAdapter
+
+        initView()
+    }
+
+    private fun initView() {
+        val approvedRepository = ApprovedRepository(RetrofitClient.instance)
+        val factory = ApprovedFactory(approvedRepository)
+        approvedViewModel = ViewModelProvider(this@ListingsFragment, factory
+        )[ApprovedViewModel::class.java]
+
+        approvedViewModel.getApproved(AppReferences.getToken(requireContext()))
+
+        approvedViewModel.pendingResponseLiveData.observe(viewLifecycleOwner) { response ->
+            baseActivity.hideProgressDialog()
+            response?.let {
+                listingsAdapter = ListingsAdapter(it.residence)
+                recyclerView.adapter = listingsAdapter
+
+                tv_listings_title_1.text = it.count.toString()
+            }
+        }
+
+        approvedViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
+            BaseActivity().hideProgressDialog()
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+//                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
 }
