@@ -290,6 +290,7 @@ interface ApiService {
 
     @GET("api/v1/residence/all")
     fun getFeaturedEstates(
-        @Header("Authorization") token: String
+        @Header("Authorization") token: String,
+        @Query("page") page: Int
     ): Call<GetAllResidencesResponse>
 }

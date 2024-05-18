@@ -16,9 +16,6 @@ import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.add_listing.activities.CreateResidenceActivity
-import com.example.finalproject.ui.add_listing.factory.CreateResidenceFactory
-import com.example.finalproject.ui.add_listing.repository.CreateResidenceRepository
-import com.example.finalproject.ui.add_listing.viewModel.CreateResidenceViewModel
 import com.example.finalproject.ui.home.activities.FeaturedEstatesActivity
 import com.example.finalproject.ui.home.activities.PopularNearestYouActivity
 import com.example.finalproject.ui.home.activities.SearchResultsActivity
@@ -79,6 +76,9 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext() ,
             LinearLayoutManager.VERTICAL , false)
 
+        homeFeaturedAdapter = HomeFeaturedAdapter(mutableListOf())
+        recyclerView.adapter = homeFeaturedAdapter
+
         initView()
     }
 
@@ -92,19 +92,16 @@ class HomeFragment : Fragment() {
 
         homeFeaturedEstatesViewModel.getFeaturedEstates(token)
 
-        homeFeaturedEstatesViewModel.homeFeaturedEstatesLiveData
-            .observe(viewLifecycleOwner) { response ->
-                baseActivity.hideProgressDialog()
-                response.let {
-                    homeFeaturedAdapter = HomeFeaturedAdapter(it.residences)
-                    recyclerView.adapter = homeFeaturedAdapter
-
-                    val status = response.status
-                    Log.e("HomeFeatured", "HomeFeatured: $status")
-                }
+        homeFeaturedEstatesViewModel.homeFeaturedEstatesLiveData.observe(viewLifecycleOwner) { response ->
+            baseActivity.hideProgressDialog()
+            response?.let {
+                homeFeaturedAdapter.addItems(it.residences)
+                Log.e("HomeFragment", it.residences.size.toString())
             }
+        }
 
         initButtons()
+        initPagination(token)
 
     }
 
@@ -133,5 +130,21 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), SearchResultsActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun initPagination(token: String) {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val totalItemCount = layoutManager.itemCount
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+
+                if (lastVisibleItemPosition + 1 >= totalItemCount) {
+                    homeFeaturedEstatesViewModel.getFeaturedEstates(token)
+                }
+            }
+        })
     }
 }

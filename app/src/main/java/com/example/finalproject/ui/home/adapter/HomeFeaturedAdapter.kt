@@ -1,6 +1,5 @@
 package com.example.finalproject.ui.home.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,7 @@ import kotlinx.android.synthetic.main.each_row_featured_estates.view.tv_apartmen
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.tv_featured_estates_3
 
 class HomeFeaturedAdapter(
-    private val list: List<Residence>
+    private val list: MutableList<Residence>
 ): RecyclerView.Adapter<HomeFeaturedAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -31,7 +30,7 @@ class HomeFeaturedAdapter(
     }
 
     override fun getItemCount(): Int {
-        return list.size.coerceAtMost(5)
+        return list.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -53,4 +52,9 @@ class HomeFeaturedAdapter(
 
     }
 
+    fun addItems(newItems: List<Residence>) {
+        val startPosition = list.size
+        list.addAll(newItems)
+        notifyItemRangeInserted(startPosition, newItems.size)
+    }
 }

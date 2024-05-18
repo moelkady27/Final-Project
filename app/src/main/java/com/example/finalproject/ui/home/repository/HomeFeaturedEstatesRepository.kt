@@ -8,8 +8,9 @@ class HomeFeaturedEstatesRepository(
     private val apiService: ApiService
 ) {
     fun getFeaturedEstates(
-        token: String
+        token: String,
+        page: Int
     ): Call<GetAllResidencesResponse> {
-        return apiService.getFeaturedEstates(token)
+        return apiService.getFeaturedEstates(token, page)
     }
 }
