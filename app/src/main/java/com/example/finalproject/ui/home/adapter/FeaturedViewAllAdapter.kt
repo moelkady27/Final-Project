@@ -53,7 +53,9 @@ class FeaturedViewAllAdapter(
                 .load(featuredEstates.images[0].url)
                 .into(holder.itemView.image_featured_view_all)
         } else {
-            // TODO: Show default image when the list is empty
+            Glide.with(holder.itemView)
+                .load(R.drawable.home_image)
+                .into(holder.itemView.image_featured_view_all)
         }
 
         val isClicked = clickedItems.contains(position)

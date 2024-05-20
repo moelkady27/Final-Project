@@ -52,7 +52,9 @@ class HomeFeaturedAdapter(
                 .load(homeFeatured.images[0].url)
                 .into(holder.itemView.image_featured_estates)
         } else {
-            // TODO: Show default image when the list is empty
+            Glide.with(holder.itemView)
+                .load(R.drawable.home_image)
+                .into(holder.itemView.image_featured_estates)
         }
 
     }
