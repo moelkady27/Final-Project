@@ -14,10 +14,14 @@ import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.favourite.adapter.FavouritesAdapter
 import com.example.finalproject.ui.favourite.factory.AllFavouritesFactory
 import com.example.finalproject.ui.favourite.factory.DeleteAllFavouriteFactory
+import com.example.finalproject.ui.favourite.factory.DeleteFavouriteFactory
+import com.example.finalproject.ui.favourite.models.Wishlist
 import com.example.finalproject.ui.favourite.repository.AllFavouritesRepository
 import com.example.finalproject.ui.favourite.repository.DeleteAllFavouriteRepository
+import com.example.finalproject.ui.favourite.repository.DeleteFavouriteRepository
 import com.example.finalproject.ui.favourite.viewModel.AllFavouritesViewModel
 import com.example.finalproject.ui.favourite.viewModel.DeleteAllFavouriteViewModel
+import com.example.finalproject.ui.favourite.viewModel.DeleteFavouriteViewModel
 import kotlinx.android.synthetic.main.activity_favourites.iv_delete_favourites
 import kotlinx.android.synthetic.main.activity_favourites.iv_empty_favourites
 import kotlinx.android.synthetic.main.activity_favourites.number_favourites
@@ -38,6 +42,8 @@ class FavouritesActivity : BaseActivity() {
 
     private lateinit var deleteAllFavouriteViewModel: DeleteAllFavouriteViewModel
 
+    private lateinit var deleteFavouriteViewModel: DeleteFavouriteViewModel
+
     private lateinit var networkUtils: NetworkUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +56,11 @@ class FavouritesActivity : BaseActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this@FavouritesActivity , LinearLayoutManager.VERTICAL , false)
 
         networkUtils = NetworkUtils(this@FavouritesActivity)
+
+        val deleteFavouriteRepository = DeleteFavouriteRepository(RetrofitClient.instance)
+        val deleteFavouriteFactory = DeleteFavouriteFactory(deleteFavouriteRepository)
+        deleteFavouriteViewModel = ViewModelProvider(this@FavouritesActivity, deleteFavouriteFactory
+        )[DeleteFavouriteViewModel::class.java]
 
         initView()
     }
@@ -72,10 +83,13 @@ class FavouritesActivity : BaseActivity() {
         val token = AppReferences.getToken(this@FavouritesActivity)
         allFavouritesViewModel.getFavourites(token)
 
-        allFavouritesViewModel.getFavouritesLiveData.observe(this@FavouritesActivity) {response ->
+        allFavouritesViewModel.getFavouritesLiveData.observe(this@FavouritesActivity) { response ->
             hideProgressDialog()
             response.let {
-                favouritesAdapter = FavouritesAdapter(it.wishlist)
+                favouritesAdapter = FavouritesAdapter(
+                    it.wishlist.toMutableList()) { wishlist, position ->
+                    deleteFavourite(wishlist)
+                }
                 recyclerView.adapter = favouritesAdapter
 
                 number_favourites.text = it.wishlist.size.toString()
@@ -86,7 +100,6 @@ class FavouritesActivity : BaseActivity() {
                     tv_empty_favourites_title_2.visibility = View.GONE
                     tv_empty_favourites_title_3.visibility = View.GONE
                     tv_empty_favourites_title_4.visibility = View.GONE
-
                 } else {
                     recycle_favourites.visibility = View.GONE
                     iv_empty_favourites.visibility = View.VISIBLE
@@ -97,21 +110,57 @@ class FavouritesActivity : BaseActivity() {
             }
         }
 
-        allFavouritesViewModel.errorLiveData.observe(this@FavouritesActivity) {error ->
+        allFavouritesViewModel.errorLiveData.observe(this@FavouritesActivity) { error ->
             hideProgressDialog()
             error.let {
                 try {
                     val errorMessage = JSONObject(error).getString("message")
-                    Toast.makeText(this@FavouritesActivity , errorMessage , Toast.LENGTH_LONG).show()
-                }
-                catch (e:Exception){
-                    Toast.makeText(this@FavouritesActivity , "Error Server" , Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@FavouritesActivity, errorMessage, Toast.LENGTH_LONG).show()
+                } catch (e: Exception) {
+                    Toast.makeText(this@FavouritesActivity, "Error Server", Toast.LENGTH_LONG).show()
                 }
             }
         }
 
         iv_delete_favourites.setOnClickListener {
             deleteAllFavourites()
+        }
+    }
+
+    private fun deleteFavourite(wishlist: Wishlist) {
+        if (networkUtils.isNetworkAvailable()) {
+            showProgressDialog(this@FavouritesActivity, "please wait...")
+            val token = AppReferences.getToken(this@FavouritesActivity)
+            deleteFavouriteViewModel.deleteFavourite(token, wishlist._id)
+
+            deleteFavouriteViewModel.deleteFavouriteLiveData.observe(this@FavouritesActivity) { response ->
+                hideProgressDialog()
+                response.let {
+                    Toast.makeText(this@FavouritesActivity, it.message, Toast.LENGTH_LONG).show()
+
+                    if (favouritesAdapter.itemCount == 0) {
+                        recycle_favourites.visibility = View.GONE
+                        iv_empty_favourites.visibility = View.VISIBLE
+                        tv_empty_favourites_title_2.visibility = View.VISIBLE
+                        tv_empty_favourites_title_3.visibility = View.VISIBLE
+                        tv_empty_favourites_title_4.visibility = View.VISIBLE
+                    }
+                }
+            }
+
+            deleteFavouriteViewModel.errorLiveData.observe(this@FavouritesActivity) { error ->
+                hideProgressDialog()
+                error.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(this@FavouritesActivity, errorMessage, Toast.LENGTH_LONG).show()
+                    } catch (e: Exception) {
+                        Toast.makeText(this@FavouritesActivity, "Error Server", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        } else {
+            showErrorSnackBar("No internet connection", true)
         }
     }
 

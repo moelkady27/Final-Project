@@ -7,18 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.ui.favourite.models.Wishlist
-import kotlinx.android.synthetic.main.each_row_favourite.view.apartment_location_favourite
-import kotlinx.android.synthetic.main.each_row_favourite.view.apartment_name_favourite
-import kotlinx.android.synthetic.main.each_row_favourite.view.apartment_price_favourite
-import kotlinx.android.synthetic.main.each_row_favourite.view.cv_image_favourite
-import kotlinx.android.synthetic.main.each_row_favourite.view.imageView2
-import kotlinx.android.synthetic.main.each_row_favourite.view.image_favourite
-import kotlinx.android.synthetic.main.each_row_favourite.view.number_star_favourite
-import kotlinx.android.synthetic.main.each_row_favourite.view.tv_apartment_favourites
+import kotlinx.android.synthetic.main.each_row_favourite.view.*
 
 class FavouritesAdapter(
-    private val list: List<Wishlist>
-): RecyclerView.Adapter<FavouritesAdapter.MyViewHolder>() {
+    private val list: MutableList<Wishlist>,
+    private val onDeleteFavouriteClicked: (Wishlist, Int) -> Unit
+) : RecyclerView.Adapter<FavouritesAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -49,6 +43,9 @@ class FavouritesAdapter(
                 .load(favourite.images.firstOrNull()?.url)
                 .into(image_favourite)
 
+            imageView2.setOnClickListener {
+                onDeleteFavouriteClicked(favourite, position)
+            }
         }
     }
 }
