@@ -1,5 +1,7 @@
 package com.example.finalproject.ui.favourite.adapter
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,4 +50,14 @@ class FavouritesAdapter(
             }
         }
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun removeFavourite(item: Wishlist) {
+        val position = list.indexOf(item)
+        if (position != -1) {
+            list.remove(item)
+            notifyDataSetChanged()
+        }
+    }
+
 }

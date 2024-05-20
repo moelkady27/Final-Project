@@ -87,9 +87,10 @@ class FavouritesActivity : BaseActivity() {
             hideProgressDialog()
             response.let {
                 favouritesAdapter = FavouritesAdapter(
-                    it.wishlist.toMutableList()) { wishlist, position ->
+                    it.wishlist.toMutableList()) { wishlist, _ ->
                     deleteFavourite(wishlist)
                 }
+
                 recyclerView.adapter = favouritesAdapter
 
                 number_favourites.text = it.wishlist.size.toString()
@@ -137,6 +138,10 @@ class FavouritesActivity : BaseActivity() {
                 hideProgressDialog()
                 response.let {
                     Toast.makeText(this@FavouritesActivity, it.message, Toast.LENGTH_LONG).show()
+
+                    favouritesAdapter.removeFavourite(wishlist)
+
+                    number_favourites.text = favouritesAdapter.itemCount.toString()
 
                     if (favouritesAdapter.itemCount == 0) {
                         recycle_favourites.visibility = View.GONE
