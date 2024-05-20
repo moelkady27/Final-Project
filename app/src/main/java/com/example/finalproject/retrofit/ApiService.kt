@@ -26,6 +26,7 @@ import com.example.finalproject.ui.complete_register.models.UploadPhotoResponse
 import com.example.finalproject.ui.complete_register.request.CompleteSignUpRequest
 import com.example.finalproject.ui.favourite.models.AddToFavouritesResponse
 import com.example.finalproject.ui.favourite.models.DeleteFavouriteResponse
+import com.example.finalproject.ui.favourite.models.GetAllFavouritesResponse
 import com.example.finalproject.ui.home.models.GetAllResidencesResponse
 import com.example.finalproject.ui.password.models.ChangePasswordResponse
 import com.example.finalproject.ui.password.models.ForgotPasswordResponse
@@ -307,4 +308,9 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("residenceId") residenceId: String
     ): Call<DeleteFavouriteResponse>
+
+    @GET("api/v1/user/favorites")
+    fun getFavorites(
+        @Header("Authorization") token: String
+    ): Call<GetAllFavouritesResponse>
 }

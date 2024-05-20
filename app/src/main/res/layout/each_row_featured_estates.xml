@@ -167,6 +167,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_featured_estates_3"
         app:layout_constraintEnd_toEndOf="@+id/apartment_location_featured_estates"
         app:layout_constraintTop_toTopOf="@+id/tv_featured_estates_3"
-        app:srcCompat="@drawable/favourites" />
+        android:background="@drawable/favourites" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
