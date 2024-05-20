@@ -11,7 +11,7 @@ data class Residence(
     val hasGarage: Boolean,
     val images: List<Image>,
     val isCompleted: Boolean,
-    val isLiked: Boolean,
+    var isLiked: Boolean,
     val isSold: Boolean,
     val likes: Int,
     val location: Location,

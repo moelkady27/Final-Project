@@ -2,6 +2,7 @@ package com.example.finalproject.ui.home.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,15 +13,21 @@ import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.favourite.factory.AddToFavouritesFactory
+import com.example.finalproject.ui.favourite.factory.DeleteFavouriteFactory
 import com.example.finalproject.ui.favourite.repository.AddToFavouritesRepository
+import com.example.finalproject.ui.favourite.repository.DeleteFavouriteRepository
 import com.example.finalproject.ui.favourite.viewModel.AddToFavouritesViewModel
+import com.example.finalproject.ui.favourite.viewModel.DeleteFavouriteViewModel
 import com.example.finalproject.ui.home.adapter.FeaturedViewAllAdapter
 import com.example.finalproject.ui.home.factory.HomeFeaturedEstatesFactory
 import com.example.finalproject.ui.home.repository.HomeFeaturedEstatesRepository
 import com.example.finalproject.ui.home.viewModel.HomeFeaturedEstatesViewModel
 import kotlinx.android.synthetic.main.activity_featured_estates.toolbar_featured_estates
+import org.json.JSONException
+import org.json.JSONObject
 
 class FeaturedEstatesActivity : BaseActivity() {
+
     private lateinit var networkUtils: NetworkUtils
 
     private lateinit var recyclerView: RecyclerView
@@ -31,6 +38,8 @@ class FeaturedEstatesActivity : BaseActivity() {
 
     private lateinit var addToFavouritesViewModel: AddToFavouritesViewModel
 
+    private lateinit var deleteFavouriteViewModel: DeleteFavouriteViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_featured_estates)
@@ -38,10 +47,26 @@ class FeaturedEstatesActivity : BaseActivity() {
         networkUtils = NetworkUtils(this@FeaturedEstatesActivity)
 
         recyclerView = findViewById(R.id.recycle_featured_estates)
-
         recyclerView.layoutManager = GridLayoutManager(this@FeaturedEstatesActivity , 2)
         recyclerView.setHasFixedSize(true)
-        featuredViewAllAdapter = FeaturedViewAllAdapter(mutableListOf())
+
+
+        val addToFavouritesRepository = AddToFavouritesRepository(RetrofitClient.instance)
+        val addToFavouritesFactory = AddToFavouritesFactory(addToFavouritesRepository)
+        addToFavouritesViewModel = ViewModelProvider(
+            this@FeaturedEstatesActivity, addToFavouritesFactory
+        )[AddToFavouritesViewModel::class.java]
+
+        val deleteFavouritesRepository = DeleteFavouriteRepository(RetrofitClient.instance)
+        val deleteFavouriteFactory = DeleteFavouriteFactory(deleteFavouritesRepository)
+        deleteFavouriteViewModel = ViewModelProvider(this@FeaturedEstatesActivity, deleteFavouriteFactory
+        )[DeleteFavouriteViewModel::class.java]
+
+        featuredViewAllAdapter = FeaturedViewAllAdapter(
+            this@FeaturedEstatesActivity,
+            mutableListOf()) { residence, isLiked ->
+            handleFavouriteClick(residence._id, isLiked)
+        }
         recyclerView.adapter = featuredViewAllAdapter
 
         initView()
@@ -60,8 +85,7 @@ class FeaturedEstatesActivity : BaseActivity() {
 
         homeFeaturedEstatesViewModel.getFeaturedEstatesViewAll(token)
 
-        homeFeaturedEstatesViewModel.homeFeaturedEstatesLiveData.observe(
-            this@FeaturedEstatesActivity
+        homeFeaturedEstatesViewModel.homeFeaturedEstatesLiveData.observe(this@FeaturedEstatesActivity
         ) { response ->
             hideProgressDialog()
             response?.let {
@@ -69,6 +93,20 @@ class FeaturedEstatesActivity : BaseActivity() {
                 Log.e("FeaturedEstates", it.residences.size.toString())
             }
         }
+
+        homeFeaturedEstatesViewModel.errorLiveData.observe(this@FeaturedEstatesActivity) { error ->
+            hideProgressDialog()
+            error.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(this@FeaturedEstatesActivity, errorMessage, Toast.LENGTH_LONG)
+                        .show()
+                } catch (e: JSONException) {
+//                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
         initPagination(token)
 
         val addToFavouritesRepository = AddToFavouritesRepository(RetrofitClient.instance)
@@ -77,19 +115,6 @@ class FeaturedEstatesActivity : BaseActivity() {
             this@FeaturedEstatesActivity, addToFavouritesFactory
         )[AddToFavouritesViewModel::class.java]
 
-        // TODO: ResidenceId is not working
-
-//        addToFavouritesViewModel.addToFavourites(token, residenceId)
-
-        addToFavouritesViewModel.addToFavouritesLiveData.observe(
-            this@FeaturedEstatesActivity
-        ){ response ->
-            hideProgressDialog()
-            response?.let {
-                val status = it.status
-                Log.e("AddToFavourites", "Added to Favourites $status")
-            }
-        }
     }
 
     private fun initPagination(token: String) {
@@ -106,6 +131,57 @@ class FeaturedEstatesActivity : BaseActivity() {
                 }
             }
         })
+    }
+
+    private fun handleFavouriteClick(residenceId: String, isLiked: Boolean) {
+        if (isLiked) {
+            val token = AppReferences.getToken(this@FeaturedEstatesActivity)
+            addToFavouritesViewModel.addToFavourites(token, residenceId)
+
+            addToFavouritesViewModel.addToFavouritesLiveData.observe(this@FeaturedEstatesActivity) { response ->
+                hideProgressDialog()
+                response?.let {
+                    val status = it.status
+                    Log.e("AddToFavourites", "Added to Favourites $status")
+                }
+            }
+
+            addToFavouritesViewModel.errorLiveData.observe(this@FeaturedEstatesActivity) { error ->
+                hideProgressDialog()
+                error.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(this@FeaturedEstatesActivity, errorMessage, Toast.LENGTH_LONG)
+                            .show()
+                    } catch (e: JSONException) {
+//                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        } else {
+            val token = AppReferences.getToken(this@FeaturedEstatesActivity)
+            deleteFavouriteViewModel.deleteFavourite(token, residenceId)
+
+            deleteFavouriteViewModel.deleteFavouriteLiveData.observe(this@FeaturedEstatesActivity) { response ->
+                hideProgressDialog()
+                response?.let {
+                    val status = it.status
+                    Log.e("DeleteFavourite", "Deleted from Favourites $status")
+                }
+            }
+
+            deleteFavouriteViewModel.errorLiveData.observe(this@FeaturedEstatesActivity) { error ->
+                hideProgressDialog()
+                error.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(this@FeaturedEstatesActivity, errorMessage, Toast.LENGTH_LONG).show()
+                    } catch (e: JSONException) {
+//                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
     }
 
     private fun setUpActionBar() {
