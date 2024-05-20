@@ -18,11 +18,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_popular_view_all"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/home_popular_image" />
+            android:background="@drawable/home_popular_image" />
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -129,9 +130,9 @@
         android:id="@+id/iv_popular_view_all_favourite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/favourites"
         app:layout_constraintBottom_toBottomOf="@+id/tv_popular_view_all_location"
         app:layout_constraintEnd_toEndOf="@+id/cv_image_popular_view_all"
-        app:layout_constraintTop_toTopOf="@+id/tv_popular_view_all_location"
-        app:srcCompat="@drawable/favourites" />
+        app:layout_constraintTop_toTopOf="@+id/tv_popular_view_all_location" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

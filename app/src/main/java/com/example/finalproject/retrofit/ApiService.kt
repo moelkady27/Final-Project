@@ -29,6 +29,7 @@ import com.example.finalproject.ui.favourite.models.DeleteAllFavouriteResponse
 import com.example.finalproject.ui.favourite.models.DeleteFavouriteResponse
 import com.example.finalproject.ui.favourite.models.GetAllFavouritesResponse
 import com.example.finalproject.ui.home.models.GetAllResidencesResponse
+import com.example.finalproject.ui.home.models.GetNearestResidencesResponse
 import com.example.finalproject.ui.password.models.ChangePasswordResponse
 import com.example.finalproject.ui.password.models.ForgotPasswordResponse
 import com.example.finalproject.ui.password.models.LogOutAllResponse
@@ -319,4 +320,11 @@ interface ApiService {
     fun deleteAllFavorites(
         @Header("Authorization") token: String,
     ): Call<DeleteAllFavouriteResponse>
+
+    @GET("api/v1/residence/nearest")
+    fun getNearestEstates(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int
+    ): Call<GetNearestResidencesResponse>
+
 }

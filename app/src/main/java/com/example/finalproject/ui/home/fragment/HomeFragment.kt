@@ -22,8 +22,11 @@ import com.example.finalproject.ui.home.activities.SearchResultsActivity
 import com.example.finalproject.ui.home.adapter.HomeFeaturedAdapter
 import com.example.finalproject.ui.home.adapter.HomePopularAdapter
 import com.example.finalproject.ui.home.factory.HomeFeaturedEstatesFactory
+import com.example.finalproject.ui.home.factory.HomePopularEstatesFactory
 import com.example.finalproject.ui.home.repository.HomeFeaturedEstatesRepository
+import com.example.finalproject.ui.home.repository.HomePopularEstatesRepository
 import com.example.finalproject.ui.home.viewModel.HomeFeaturedEstatesViewModel
+import com.example.finalproject.ui.home.viewModel.HomePopularEstatesViewModel
 import kotlinx.android.synthetic.main.fragment_home.iv_add_list_home
 import kotlinx.android.synthetic.main.fragment_home.iv_search_home
 import kotlinx.android.synthetic.main.fragment_home.tv_home_title_3
@@ -36,6 +39,8 @@ class HomeFragment : Fragment() {
     private lateinit var networkUtils: NetworkUtils
 
     private lateinit var homeFeaturedEstatesViewModel: HomeFeaturedEstatesViewModel
+
+    private lateinit var homePopularEstatesViewModel: HomePopularEstatesViewModel
 
     private lateinit var recyclerView: RecyclerView
 
@@ -65,19 +70,14 @@ class HomeFragment : Fragment() {
 
         networkUtils = NetworkUtils(requireContext())
 
-//        recyclerView = view.findViewById(R.id.rv_home_popular)
-//
-//        homePopularAdapter = HomePopularAdapter()
-//        recyclerView.layoutManager = LinearLayoutManager(requireContext() ,
-//            LinearLayoutManager.HORIZONTAL , false)
-//        recyclerView.adapter = homePopularAdapter
-
         initView()
 
         initButtons()
     }
 
     private fun initView(){
+                                    /* Home Featured Estates */
+
         val homeFeaturedEstatesRepository = HomeFeaturedEstatesRepository(RetrofitClient.instance)
         val factory = HomeFeaturedEstatesFactory(homeFeaturedEstatesRepository)
         homeFeaturedEstatesViewModel = ViewModelProvider(
@@ -99,6 +99,31 @@ class HomeFragment : Fragment() {
             response?.let {
                 homeFeaturedAdapter.setItems(it.residences)
                 Log.e("HomeFragment", it.residences.size.toString())
+            }
+        }
+
+
+                                    /* Home Popular Estates */
+
+        val homePopularEstatesRepository = HomePopularEstatesRepository(RetrofitClient.instance)
+        val popularEstatesFactory = HomePopularEstatesFactory(homePopularEstatesRepository)
+        homePopularEstatesViewModel = ViewModelProvider(
+            this@HomeFragment, popularEstatesFactory)[HomePopularEstatesViewModel::class.java]
+
+        recyclerView = requireView().findViewById(R.id.rv_home_popular)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext() ,
+            LinearLayoutManager.HORIZONTAL , false)
+
+        homePopularAdapter = HomePopularAdapter(mutableListOf())
+        recyclerView.adapter = homePopularAdapter
+
+        homePopularEstatesViewModel.getPopularEstates(token)
+
+        homePopularEstatesViewModel.homePopularEstatesLiveData.observe(viewLifecycleOwner) { response ->
+            baseActivity.hideProgressDialog()
+            response?.let {
+                homePopularAdapter.setPopularItems(it.residences)
+                Log.e("HomePopularEstates", it.residences.size.toString())
             }
         }
     }
