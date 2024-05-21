@@ -6,6 +6,7 @@ data class Residence(
     val bedroomAbvGr: Int,
     val category: String,
     val centralAir: String,
+    val createdAt: String,
     val hasBasement: Boolean,
     val hasFireplace: Boolean,
     val hasGarage: Boolean,
@@ -13,7 +14,6 @@ data class Residence(
     val isCompleted: Boolean,
     val isLiked: Boolean,
     val isSold: Boolean,
-    val likes: Int,
     val location: LocationX,
     val neighborhood: String,
     val ownerId: OwnerId,
@@ -26,5 +26,6 @@ data class Residence(
     val totalarea: Int,
     val totalbaths: Int,
     val totalporchsf: Int,
-    val type: String
+    val type: String,
+    val updatedAt: String
 )

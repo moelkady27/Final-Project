@@ -47,12 +47,7 @@ class PendingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = view.findViewById(R.id.recycle_pending_profile)
-
-//        pendingAdapter = PendingAdapter()
-
         recyclerView.layoutManager = GridLayoutManager(requireContext() , 2)
-        recyclerView.setHasFixedSize(true)
-//        recyclerView.adapter = pendingAdapter
 
         initView()
     }
@@ -65,20 +60,24 @@ class PendingFragment : Fragment() {
             factory
         )[PendingViewModel::class.java]
 
-        pendingViewModel.getPending(AppReferences.getToken(requireContext()))
+        pendingAdapter = PendingAdapter(mutableListOf())
+        recyclerView.adapter = pendingAdapter
+
+        val token = AppReferences.getToken(requireContext())
+        pendingViewModel.getPending(token)
 
         pendingViewModel.pendingResponseLiveData.observe(viewLifecycleOwner) {response ->
             BaseActivity().hideProgressDialog()
-            response.let {
+            response?.let {
 
                 val status = it.status
-                pendingAdapter = PendingAdapter(it.residence)
-                recyclerView.adapter = pendingAdapter
-
-                tv_pending_title_1.text = it.count.toString()
-
                 Log.e("status", status)
-            }
+
+                it.residences?.let { residence ->
+                    pendingAdapter.addItems(residence)
+                }
+
+                tv_pending_title_1.text = pendingAdapter.itemCount.toString()            }
         }
 
         pendingViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
@@ -88,10 +87,26 @@ class PendingFragment : Fragment() {
                     val errorMessage = JSONObject(error).getString("message")
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
                 } catch (e: JSONException) {
-//                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
                 }
             }
         }
+        initPagination(token)
     }
 
+    private fun initPagination(token: String) {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                val totalItemCount = layoutManager.itemCount
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+
+                if (lastVisibleItemPosition + 1 >= totalItemCount) {
+                    pendingViewModel.getPending(token)
+                }
+            }
+        })
+    }
 }

@@ -8,8 +8,9 @@ class PendingRepository(
     private val apiService: ApiService
 ) {
     fun getPending(
-        token: String
+        token: String,
+        page: Int
     ):Call<ResidenceResponse> {
-        return apiService.getPendingResidence(token)
+        return apiService.getPendingResidence(token, page)
     }
 }

@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.each_row_pending_profile.view.tv_pending_p
 import kotlinx.android.synthetic.main.each_row_pending_profile.view.tv_pending_profile_title_1
 
 class PendingAdapter(
-    private val list: List<Residence>
+    private val list: MutableList<Residence>
 ): RecyclerView.Adapter<PendingAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -39,9 +39,19 @@ class PendingAdapter(
             tv_pending_profile_rent.text = residence.type
             number_star_pending_profile.text = residence.status
 
-            Glide.with(this)
-                .load(residence.images.firstOrNull()?.url)
-                .into(iv_image_pending_profile)
+            if (residence.images.isNotEmpty()) {
+                Glide
+                    .with(this)
+                    .load(residence.images.first().url)
+                    .into(iv_image_pending_profile)
+            }
+            else {
+                Glide
+                    .with(this)
+                    .load(R.drawable.image_pending)
+                    .into(iv_image_pending_profile)
+            }
+
 
 //            if (residence.isLiked) {
 //
@@ -52,5 +62,10 @@ class PendingAdapter(
         }
     }
 
+    fun addItems(newItems: List<Residence>) {
+        val startPosition = list.size
+        list.addAll(newItems)
+        notifyItemRangeInserted(startPosition, newItems.size)
+    }
 
 }
