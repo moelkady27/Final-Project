@@ -1,6 +1,7 @@
 package com.example.finalproject.ui.profile.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ class SoldFragment : Fragment() {
     private lateinit var baseActivity: BaseActivity
 
     private lateinit var recyclerView: RecyclerView
+
     private lateinit var soldAdapter: SoldAdapter
 
     private lateinit var soldViewModel: SoldViewModel
@@ -45,9 +47,8 @@ class SoldFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = view.findViewById(R.id.recycle_sold_profile)
+        recyclerView = requireView().findViewById(R.id.recycle_sold_profile)
         recyclerView.layoutManager = GridLayoutManager(requireContext() , 2)
-        recyclerView.setHasFixedSize(true)
 
         initView()
     }
@@ -58,15 +59,24 @@ class SoldFragment : Fragment() {
         soldViewModel = ViewModelProvider(this@SoldFragment, factory
         )[SoldViewModel::class.java]
 
-        soldViewModel.getSold(AppReferences.getToken(requireContext()))
+        soldAdapter = SoldAdapter(mutableListOf())
+        recyclerView.adapter = soldAdapter
+
+        val token = AppReferences.getToken(requireContext())
+
+        soldViewModel.getSold(token)
 
         soldViewModel.soldResponseLiveData.observe(viewLifecycleOwner) { response ->
             BaseActivity().hideProgressDialog()
             response?.let {
-                soldAdapter = SoldAdapter(it.residence)
-                recyclerView.adapter = soldAdapter
+                val status = it.status
+                Log.e("status", status)
 
-                tv_sold_title_1.text = it.count.toString()
+                it.residences?.let { residence ->
+                    soldAdapter.addItems(residence)
+                }
+
+                tv_sold_title_1.text = soldAdapter.itemCount.toString()
             }
         }
 
@@ -77,10 +87,28 @@ class SoldFragment : Fragment() {
                     val errorMessage = JSONObject(error).getString("message")
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
                 } catch (e: JSONException) {
-//                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
                 }
             }
         }
+
+        initPagination(token)
+    }
+
+    private fun initPagination(token: String) {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                val totalItemCount = layoutManager.itemCount
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+
+                if (lastVisibleItemPosition + 1 >= totalItemCount) {
+                    soldViewModel.getSold(token)
+                }
+            }
+        })
     }
 
 }

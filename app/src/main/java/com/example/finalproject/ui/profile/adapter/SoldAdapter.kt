@@ -9,11 +9,12 @@ import com.example.finalproject.R
 import com.example.finalproject.ui.profile.models.Residence
 import kotlinx.android.synthetic.main.each_row_sold_profile.view.iv_image_sold_profile
 import kotlinx.android.synthetic.main.each_row_sold_profile.view.sold_profile_price_2
+import kotlinx.android.synthetic.main.each_row_sold_profile.view.sold_profile_price_4
 import kotlinx.android.synthetic.main.each_row_sold_profile.view.tv_sold_profile_title_1
 import kotlinx.android.synthetic.main.each_row_sold_profile.view.tv_sold_profile_title_2
 
 class SoldAdapter(
-    private val list: List<Residence>
+    private val list: MutableList<Residence>
 ): RecyclerView.Adapter<SoldAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -37,19 +38,25 @@ class SoldAdapter(
         holder.itemView.apply {
             tv_sold_profile_title_1.text = residence.title
             sold_profile_price_2.text = residence.salePrice.toString()
+            sold_profile_price_4.text = residence.paymentPeriod
             tv_sold_profile_title_2.text = residence.location.fullAddress
-//            number_star_sold_profile.text = residence.likes.toString()
 
-            Glide.with(this)
-                .load(residence.images.firstOrNull()?.url)
-                .into(iv_image_sold_profile)
-
-//            if (residence.isLiked) {
-//
-//            } else {
-//
-//            }
+            if (residence.images.isNotEmpty()) {
+                Glide.with(this)
+                    .load(residence.images[0].url)
+                    .into(iv_image_sold_profile)
+            } else {
+                Glide.with(this)
+                    .load(R.drawable.image_sold)
+                    .into(iv_image_sold_profile)
+            }
         }
+    }
+
+    fun addItems(newItems: List<Residence>) {
+        val startPosition = list.size
+        list.addAll(newItems)
+        notifyItemRangeInserted(startPosition, newItems.size)
     }
 
 }

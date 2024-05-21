@@ -8,8 +8,9 @@ class SoldRepository(
     private val apiService: ApiService
 ) {
     fun getSold(
-        token: String
+        token: String,
+        page: Int
     ):Call<ResidenceResponse> {
-        return apiService.getSoldResidence(token)
+        return apiService.getSoldResidence(token, page)
     }
 }

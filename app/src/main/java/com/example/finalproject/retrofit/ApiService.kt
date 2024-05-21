@@ -293,6 +293,7 @@ interface ApiService {
     @GET("api/v1/residence/sold")
     fun getSoldResidence(
         @Header("Authorization") token: String,
+        @Query("page") page: Int
     ): Call<ResidenceResponse>
 
     @GET("api/v1/residence/all")

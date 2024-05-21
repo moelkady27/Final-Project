@@ -14,7 +14,7 @@
         android:fontFamily="@font/poppins_bold"
         android:gravity="center|start"
         android:text="12"
-        android:textColor="@color/colorPrimaryText"
+        android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/tv_sold_title_2"
         app:layout_constraintStart_toStartOf="parent"
