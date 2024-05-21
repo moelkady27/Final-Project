@@ -9,12 +9,12 @@ import com.example.finalproject.R
 import com.example.finalproject.ui.profile.models.Residence
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.iv_image_listings_profile
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.listings_profile_price_2
-import kotlinx.android.synthetic.main.each_row_listings_profile.view.number_star_listings_profile
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.tv_listings_profile_title_1
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.tv_listings_profile_title_2
+import kotlinx.android.synthetic.main.each_row_pending_profile.view.iv_image_pending_profile
 
 class ListingsAdapter(
-    private val list: List<Residence>
+    private val list: MutableList<Residence>
 ): RecyclerView.Adapter<ListingsAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -41,17 +41,25 @@ class ListingsAdapter(
             tv_listings_profile_title_2.text = residence.location.fullAddress
 //            number_star_listings_profile.text = residence.likes.toString()
 
-            Glide.with(this)
-                .load(residence.images.firstOrNull()?.url)
-                .into(iv_image_listings_profile)
-
-            if (residence.isLiked) {
-
-            } else {
-
+            if (residence.images.isNotEmpty()) {
+                Glide
+                    .with(this)
+                    .load(residence.images.first().url)
+                    .into(iv_image_listings_profile)
+            }
+            else {
+                Glide
+                    .with(this)
+                    .load(R.drawable.image_pending)
+                    .into(iv_image_listings_profile)
             }
         }
     }
 
+    fun addItems(newItems: List<Residence>) {
+        val startPosition = list.size
+        list.addAll(newItems)
+        notifyItemRangeInserted(startPosition, newItems.size)
+    }
 
 }

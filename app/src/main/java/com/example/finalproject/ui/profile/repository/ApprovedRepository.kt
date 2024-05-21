@@ -8,8 +8,9 @@ class ApprovedRepository(
     private val apiService: ApiService
 ) {
     fun getApproved(
-        token: String
+        token: String,
+        page: Int
     ):Call<ResidenceResponse> {
-        return apiService.getApprovedResidence(token)
+        return apiService.getApprovedResidence(token, page)
     }
 }
