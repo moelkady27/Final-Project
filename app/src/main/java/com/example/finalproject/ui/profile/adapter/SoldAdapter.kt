@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.profile.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,6 +58,12 @@ class SoldAdapter(
         val startPosition = list.size
         list.addAll(newItems)
         notifyItemRangeInserted(startPosition, newItems.size)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun clearItems() {
+        list.clear()
+        notifyDataSetChanged()
     }
 
 }

@@ -27,6 +27,7 @@ class PendingFragment : Fragment() {
     private lateinit var baseActivity: BaseActivity
 
     private lateinit var recyclerView: RecyclerView
+
     private lateinit var pendingAdapter: PendingAdapter
 
     private lateinit var pendingViewModel: PendingViewModel
@@ -64,20 +65,22 @@ class PendingFragment : Fragment() {
         recyclerView.adapter = pendingAdapter
 
         val token = AppReferences.getToken(requireContext())
+
+        pendingViewModel.resetPagination()
+
+        pendingAdapter.clearItems()
+
         pendingViewModel.getPending(token)
 
         pendingViewModel.pendingResponseLiveData.observe(viewLifecycleOwner) {response ->
-            BaseActivity().hideProgressDialog()
+            baseActivity.hideProgressDialog()
             response?.let {
-
                 val status = it.status
                 Log.e("status", status)
 
-                it.residences?.let { residence ->
-                    pendingAdapter.addItems(residence)
-                }
-
-                tv_pending_title_1.text = pendingAdapter.itemCount.toString()            }
+                pendingAdapter.addItems(it.residences)
+                tv_pending_title_1.text = pendingAdapter.itemCount.toString()
+            }
         }
 
         pendingViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->

@@ -48,4 +48,9 @@ class ApprovedViewModel(
                 }
             })
     }
+
+    fun resetPagination() {
+        currentPage = 1
+        isLastPage = false
+    }
 }

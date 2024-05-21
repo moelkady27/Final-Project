@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.profile.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,14 +52,6 @@ class PendingAdapter(
                     .load(R.drawable.image_pending)
                     .into(iv_image_pending_profile)
             }
-
-
-//            if (residence.isLiked) {
-//
-//            } else {
-//
-//            }
-
         }
     }
 
@@ -66,6 +59,12 @@ class PendingAdapter(
         val startPosition = list.size
         list.addAll(newItems)
         notifyItemRangeInserted(startPosition, newItems.size)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun clearItems() {
+        list.clear()
+        notifyDataSetChanged()
     }
 
 }

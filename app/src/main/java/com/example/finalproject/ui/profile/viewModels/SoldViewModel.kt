@@ -49,4 +49,9 @@ class SoldViewModel(
                 }
             })
     }
+
+    fun resetPagination() {
+        currentPage = 1
+        isLastPage = false
+    }
 }

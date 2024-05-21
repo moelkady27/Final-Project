@@ -50,4 +50,9 @@ class PendingViewModel(
 
             })
     }
+
+    fun resetPagination() {
+        currentPage = 1
+        isLastPage = false
+    }
 }

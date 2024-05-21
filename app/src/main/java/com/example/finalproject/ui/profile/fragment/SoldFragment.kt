@@ -64,6 +64,10 @@ class SoldFragment : Fragment() {
 
         val token = AppReferences.getToken(requireContext())
 
+        soldViewModel.resetPagination()
+
+        soldAdapter.clearItems()
+
         soldViewModel.getSold(token)
 
         soldViewModel.soldResponseLiveData.observe(viewLifecycleOwner) { response ->
@@ -72,10 +76,7 @@ class SoldFragment : Fragment() {
                 val status = it.status
                 Log.e("status", status)
 
-                it.residences?.let { residence ->
-                    soldAdapter.addItems(residence)
-                }
-
+                soldAdapter.addItems(it.residences)
                 tv_sold_title_1.text = soldAdapter.itemCount.toString()
             }
         }

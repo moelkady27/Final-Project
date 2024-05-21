@@ -1,6 +1,7 @@
 package com.example.finalproject.ui.profile.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,7 @@ class ListingsFragment : Fragment() {
     private lateinit var baseActivity: BaseActivity
 
     private lateinit var recyclerView: RecyclerView
+
     private lateinit var listingsAdapter: ListingsAdapter
 
     private lateinit var approvedViewModel: ApprovedViewModel
@@ -61,11 +63,19 @@ class ListingsFragment : Fragment() {
         listingsAdapter = ListingsAdapter(mutableListOf())
         recyclerView.adapter = listingsAdapter
 
-        approvedViewModel.getApproved(AppReferences.getToken(requireContext()))
+        val token = AppReferences.getToken(requireContext())
+
+        approvedViewModel.resetPagination()
+
+        listingsAdapter.clearItems()
+
+        approvedViewModel.getApproved(token)
 
         approvedViewModel.approvedResponseLiveData.observe(viewLifecycleOwner) { response ->
             baseActivity.hideProgressDialog()
             response?.let {
+                val status = it.status
+                Log.e("status", status)
 
                 listingsAdapter.addItems(it.residences)
                 tv_listings_title_1.text = listingsAdapter.itemCount.toString()
