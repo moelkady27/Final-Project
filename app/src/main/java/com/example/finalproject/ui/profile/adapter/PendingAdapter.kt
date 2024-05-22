@@ -19,6 +19,8 @@ class PendingAdapter(
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
+    private val itemIds = mutableSetOf<String>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
             R.layout.each_row_pending_profile,
@@ -56,14 +58,21 @@ class PendingAdapter(
     }
 
     fun addItems(newItems: List<Residence>) {
+        val uniqueItems = newItems.filter { item ->
+            item._id !in itemIds
+        }
         val startPosition = list.size
-        list.addAll(newItems)
-        notifyItemRangeInserted(startPosition, newItems.size)
+        list.addAll(uniqueItems)
+        uniqueItems.forEach { item ->
+            itemIds.add(item._id)
+        }
+        notifyItemRangeInserted(startPosition, uniqueItems.size)
     }
 
     @SuppressLint("NotifyDataSetChanged")
     fun clearItems() {
         list.clear()
+        itemIds.clear()
         notifyDataSetChanged()
     }
 

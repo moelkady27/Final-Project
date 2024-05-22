@@ -12,13 +12,14 @@ import kotlinx.android.synthetic.main.each_row_listings_profile.view.iv_image_li
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.listings_profile_price_2
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.tv_listings_profile_title_1
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.tv_listings_profile_title_2
-import kotlinx.android.synthetic.main.each_row_pending_profile.view.iv_image_pending_profile
 
 class ListingsAdapter(
     private val list: MutableList<Residence>
 ): RecyclerView.Adapter<ListingsAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    private val itemIds = mutableSetOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -58,14 +59,21 @@ class ListingsAdapter(
     }
 
     fun addItems(newItems: List<Residence>) {
+        val uniqueItems = newItems.filter { item ->
+            item._id !in itemIds
+        }
         val startPosition = list.size
-        list.addAll(newItems)
-        notifyItemRangeInserted(startPosition, newItems.size)
+        list.addAll(uniqueItems)
+        uniqueItems.forEach { item ->
+            itemIds.add(item._id)
+        }
+        notifyItemRangeInserted(startPosition, uniqueItems.size)
     }
 
     @SuppressLint("NotifyDataSetChanged")
     fun clearItems() {
         list.clear()
+        itemIds.clear()
         notifyDataSetChanged()
     }
 
