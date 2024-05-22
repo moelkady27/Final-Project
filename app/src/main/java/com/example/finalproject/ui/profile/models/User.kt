@@ -19,5 +19,8 @@ data class User(
     val phone: String,
     val role: String,
     val updatedAt: String,
-    val username: String
+    val username: String,
+    val soldCount: Int,
+    val pendingCount: Int,
+    val approvedCount: Int
 )

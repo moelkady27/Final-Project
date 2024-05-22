@@ -149,7 +149,10 @@ class SettingsFragment : Fragment() {
                     phone = user.phone,
                     role = user.role,
                     updatedAt = user.updatedAt,
-                    username = user.username
+                    username = user.username,
+                    soldCount = response.soldCount,
+                    pendingCount = response.pendingCount,
+                    approvedCount = response.approvedCount
                 )
 
                 lifecycleScope.launch {

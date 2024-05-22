@@ -26,6 +26,9 @@ import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_profile.floatingActionButton
 import kotlinx.android.synthetic.main.fragment_profile.image_profile
+import kotlinx.android.synthetic.main.fragment_profile.listing_count
+import kotlinx.android.synthetic.main.fragment_profile.reviews_count
+import kotlinx.android.synthetic.main.fragment_profile.sold_count
 import kotlinx.android.synthetic.main.fragment_profile.tab_layout_profile
 import kotlinx.android.synthetic.main.fragment_profile.tv_profile_email
 import kotlinx.android.synthetic.main.fragment_profile.tv_profile_name
@@ -101,7 +104,7 @@ class ProfileFragment : Fragment() {
 
         getUserInfoViewModel.getUserInfoResponseLiveData.observe(viewLifecycleOwner) { response ->
             BaseActivity().hideProgressDialog()
-            response.let {
+            response?.let {
                 val status = response.status
 
                 Log.e("GetUser", status)
@@ -121,7 +124,10 @@ class ProfileFragment : Fragment() {
                     phone = user.phone,
                     role = user.role,
                     updatedAt = user.updatedAt,
-                    username = user.username
+                    username = user.username,
+                    soldCount = response.soldCount,
+                    pendingCount = response.pendingCount,
+                    approvedCount = response.approvedCount
                 )
 
                 lifecycleScope.launch {
@@ -146,7 +152,7 @@ class ProfileFragment : Fragment() {
                     val errorMessage = JSONObject(error).getString("message")
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
                 } catch (e: JSONException) {
-//                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -174,6 +180,10 @@ class ProfileFragment : Fragment() {
                         .load(photo)
                         .into(image_profile)
                 }
+
+                listing_count.text = user.approvedCount.toString()
+                sold_count.text = user.soldCount.toString()
+                reviews_count.text = user.pendingCount.toString()
             }
         }
 
@@ -191,6 +201,10 @@ class ProfileFragment : Fragment() {
                     .load(photo)
                     .into(image_profile)
             }
+
+            listing_count.text = user.approvedCount.toString()
+            sold_count.text = user.soldCount.toString()
+            reviews_count.text = user.pendingCount.toString()
         }
     }
 
