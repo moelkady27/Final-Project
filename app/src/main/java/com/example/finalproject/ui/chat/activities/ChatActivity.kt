@@ -132,13 +132,17 @@ class ChatActivity : BaseActivity() {
         }
 
         iv_gallery_chat.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(this@ChatActivity,
-                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this@ChatActivity,
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_GALLERY)
-                return@setOnClickListener
-            }
+//            if (ContextCompat.checkSelfPermission(this@ChatActivity,
+//                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(this@ChatActivity,
+//                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_GALLERY)
+//                return@setOnClickListener
+//            }
+//            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//            pickImageFromGallery.launch(galleryIntent)
+
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            intent.type = "image/*"
             pickImageFromGallery.launch(galleryIntent)
         }
 
