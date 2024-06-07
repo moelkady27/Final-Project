@@ -110,10 +110,16 @@ class SettingsFragment : Fragment() {
 
                                         /* Get-User-Info */
 
+//        if (networkUtils.isNetworkAvailable()) {
+//            fetchUserDataFromServer()
+//        } else {
+//            fetchUserDataFromCache()
+//        }
+
+        fetchUserDataFromCache()
+
         if (networkUtils.isNetworkAvailable()) {
             fetchUserDataFromServer()
-        } else {
-            fetchUserDataFromCache()
         }
 
         additionalButtons()
@@ -182,27 +188,37 @@ class SettingsFragment : Fragment() {
             val userDao = UserDatabase.getInstance(requireContext()).userDao()
             val cachedUser = userDao.getUser(AppReferences.getUserId(requireContext()))
 
-            updateProfile(cachedUser)
+            if (cachedUser != null) {
+                updateProfile(cachedUser)
+            } else {
+                if (networkUtils.isNetworkAvailable()) {
+                    fetchUserDataFromServer()
+                } else {
+                    Toast.makeText(requireContext(), "No user data available", Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 
-    private fun updateProfile(user: User) {
-        user.let {
-            tv_user_name.text = user.fullName
-            tv_email_name.text = user.email
+    private fun updateProfile(user: User?) {
+        user?.let {
+            tv_user_name.text = it.fullName
+            tv_email_name.text = it.email
 
-            val photo = user.image.url
+            val photo = it.image.url
 
             if (photo.isNotEmpty()) {
                 Glide.with(requireActivity())
                     .load(photo)
                     .into(iv_user_settings)
             }
-        }
 
-        lifecycleScope.launch {
-            val userDao = UserDatabase.getInstance(requireContext()).userDao()
-            userDao.saveUser(user)
+            lifecycleScope.launch {
+                val userDao = UserDatabase.getInstance(requireContext()).userDao()
+                userDao.saveUser(it)
+            }
+        } ?: run {
+            Toast.makeText(requireContext(), "User data is not available", Toast.LENGTH_LONG).show()
         }
     }
 
