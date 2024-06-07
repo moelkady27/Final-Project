@@ -82,15 +82,21 @@ class UploadPhotoActivity : BaseActivity() {
 
                                     /* Gallery-Button */
 
+//        fl_from_gallery.setOnClickListener {
+//            if (ContextCompat.checkSelfPermission(this@UploadPhotoActivity,
+//                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(this@UploadPhotoActivity,
+//                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_GALLERY)
+//                return@setOnClickListener
+//            }
+//            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//            pickImageFromGallery.launch(galleryIntent)
+//        }
+
         fl_from_gallery.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(this@UploadPhotoActivity,
-                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this@UploadPhotoActivity,
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_GALLERY)
-                return@setOnClickListener
-            }
-            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            pickImageFromGallery.launch(galleryIntent)
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            pickImageFromGallery.launch(intent)
         }
 
                                     /* Skip-Upload-Photo-Button */
