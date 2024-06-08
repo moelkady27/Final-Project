@@ -1,14 +1,19 @@
 package com.example.finalproject.ui.profile.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.ui.profile.models.Residence
+import com.example.finalproject.ui.update_listing.activities.UpdateResidenceActivity
+import kotlinx.android.synthetic.main.each_row_listings_profile.iv_listings_profile_edit
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.iv_image_listings_profile
+import kotlinx.android.synthetic.main.each_row_listings_profile.view.iv_listings_profile_edit
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.listings_profile_price_2
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.tv_listings_profile_title_1
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.tv_listings_profile_title_2
@@ -54,6 +59,11 @@ class ListingsAdapter(
                     .with(this)
                     .load(R.drawable.image_pending)
                     .into(iv_image_listings_profile)
+            }
+
+            iv_listings_profile_edit.setOnClickListener {
+                val intent = Intent(context, UpdateResidenceActivity::class.java)
+                context.startActivity(intent)
             }
         }
     }

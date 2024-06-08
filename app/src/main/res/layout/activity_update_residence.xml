@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.update_listing.activities.UpdateResidenceActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_update_residence"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/edit_listing"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="22sp" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_update_residence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/toolbar_update_residence"
+                app:layout_constraintEnd_toEndOf="@id/toolbar_update_residence"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_update_residence">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_image_update_residence"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_update_residence"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/image_update" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_apartment_update_residence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/search_border"
+                    android:fontFamily="@font/poppins_medium"
+                    android:padding="5dp"
+                    android:text="@string/chip_villa"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/number_star_update_residence"
+                    app:layout_constraintEnd_toEndOf="@+id/apartment_name_update_residence"
+                    app:layout_constraintTop_toTopOf="@+id/number_star_update_residence" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/star_update_residence"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/baseline_star_24"
+                    app:layout_constraintStart_toEndOf="@+id/cv_image_update_residence"
+                    app:layout_constraintTop_toTopOf="@+id/cv_image_update_residence" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/number_star_update_residence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="5"
+                    android:textSize="16sp"
+                    android:textColor="@color/edit_text"
+                    android:fontFamily="@font/poppins_medium"
+                    app:layout_constraintBottom_toBottomOf="@+id/star_update_residence"
+                    app:layout_constraintStart_toEndOf="@+id/star_update_residence"
+                    app:layout_constraintTop_toTopOf="@+id/star_update_residence" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/apartment_name_update_residence"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Woodland Apartment"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:maxLines="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/star_update_residence"
+                    app:layout_constraintTop_toBottomOf="@+id/star_update_residence" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_location_update_residence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-5dp"
+                    app:layout_constraintStart_toStartOf="@+id/apartment_name_update_residence"
+                    app:layout_constraintTop_toBottomOf="@+id/apartment_name_update_residence"
+                    app:srcCompat="@drawable/baseline_location_on_24"
+                    app:tint="@color/favourite" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/apartment_location_update_residence"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="1012 Ocean avanue, New yourk, USA"
+                    android:textSize="12sp"
+                    android:textColor="@color/favourite"
+                    android:fontFamily="@font/poppins_medium"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_location_update_residence"
+                    app:layout_constraintEnd_toEndOf="@+id/apartment_name_update_residence"
+                    app:layout_constraintStart_toEndOf="@+id/iv_location_update_residence"
+                    app:layout_constraintTop_toTopOf="@+id/iv_location_update_residence" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_update_residence_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
+                    android:text="$"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_location_update_residence"
+                    app:layout_constraintStart_toStartOf="@+id/apartment_name_update_residence"
+                    app:layout_constraintTop_toBottomOf="@+id/apartment_location_update_residence" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/apartment_price_update_residence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="340"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_update_residence_1"
+                    app:layout_constraintStart_toEndOf="@+id/tv_update_residence_1"
+                    app:layout_constraintTop_toTopOf="@+id/tv_update_residence_1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_update_residence_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:layout_marginStart="3dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    app:layout_constraintBottom_toBottomOf="@+id/apartment_price_update_residence"
+                    app:layout_constraintStart_toEndOf="@+id/apartment_price_update_residence"
+                    app:layout_constraintTop_toTopOf="@+id/apartment_price_update_residence" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_update_residence_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="month"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_update_residence_2"
+                    app:layout_constraintStart_toEndOf="@+id/tv_update_residence_2"
+                    app:layout_constraintTop_toTopOf="@+id/tv_update_residence_2" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_update_residence_fav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_update_residence_3"
+                    app:layout_constraintEnd_toEndOf="@+id/apartment_location_update_residence"
+                    app:layout_constraintTop_toTopOf="@+id/tv_update_residence_3"
+                    android:background="@drawable/favourites" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_listing_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center|start"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/listing_title"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/constraint_update_residence"
+                app:layout_constraintStart_toStartOf="@id/constraint_update_residence"
+                app:layout_constraintTop_toBottomOf="@id/constraint_update_residence"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_listing_title_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/search_border"
+            app:layout_constraintTop_toBottomOf="@id/tv_listing_title_update"
+            app:layout_constraintEnd_toEndOf="@id/tv_listing_title_update"
+            app:layout_constraintStart_toStartOf="@id/tv_listing_title_update">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_home_update_listing"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/ic_home"
+                android:backgroundTint="@color/colorPrimaryText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/search_border"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_home_update_listing"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_home_name_update_listing"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/search_border"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="@string/et_home_name_add_listing"
+                    android:inputType="text"
+                    android:paddingStart="25dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="0dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textColorHint="@color/home_popular"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_listing_type_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/tv_form_detail_title_2"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/constraint_listing_title_update"
+                app:layout_constraintStart_toStartOf="@id/constraint_listing_title_update"
+                app:layout_constraintTop_toBottomOf="@id/constraint_listing_title_update"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_listing_type_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:singleSelection="true"
+                app:layout_constraintStart_toStartOf="@id/tv_listing_type_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_listing_type_update">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_rent_update"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rent"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_sell_update"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sale"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_property_category_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/tv_form_detail_title_3"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/cg_listing_type_update"
+                app:layout_constraintTop_toBottomOf="@id/cg_listing_type_update"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_property_category_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:chipSpacing="15dp"
+                app:singleSelection="true"
+                app:layout_constraintEnd_toEndOf="@id/tv_property_category_update"
+                app:layout_constraintStart_toStartOf="@id/tv_property_category_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_property_category_update">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_house_update"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_house"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_apartment_update"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_apartment"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_hotel_update"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_hotel"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_villa_update"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_villa"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_cottage_update"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_cottage"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_location_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/location_home"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/cg_property_category_update"
+                app:layout_constraintStart_toStartOf="@id/cg_property_category_update"
+                app:layout_constraintTop_toBottomOf="@id/cg_property_category_update"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_update_listing_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/location_add_listing"
+                app:cardCornerRadius="25dp"
+                app:layout_constraintEnd_toEndOf="@id/tv_location_update"
+                app:layout_constraintStart_toStartOf="@id/tv_location_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_location_update">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/location_image" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/select_map_update_listing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="@string/select_on_the_map"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorPrimaryText"
+                        android:fontFamily="@font/poppins_medium"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_listing_photos_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/listing_photos"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/cv_update_listing_location"
+                app:layout_constraintStart_toStartOf="@id/cv_update_listing_location"
+                app:layout_constraintTop_toBottomOf="@id/cv_update_listing_location"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_update_listing_photos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_listing_photos_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_listing_photos_update"
+                app:layout_constraintTop_toBottomOf="@+id/tv_listing_photos_update" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_next_update_listing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/recyclerView_update_listing_photos"
+                app:layout_constraintStart_toStartOf="@+id/recyclerView_update_listing_photos"
+                app:layout_constraintTop_toBottomOf="@id/recyclerView_update_listing_photos" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

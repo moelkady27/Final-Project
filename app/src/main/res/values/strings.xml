@@ -117,10 +117,10 @@
     <string name="add_listing" translatable="false">Add Listing</string>
     <string name="tv_form_detail_title_1" translatable="false">Fill detail of your <b>real estate</b></string>
     <string name="et_home_name_add_listing" translatable="false">Name of House, Apartment, etc</string>
-    <string name="tv_form_detail_title_2" translatable="false">Listing type</string>
+    <string name="tv_form_detail_title_2" translatable="false">Listing Type</string>
     <string name="sale" translatable="false">Sale</string>
     <string name="rent" translatable="false">Rent</string>
-    <string name="tv_form_detail_title_3" translatable="false">Property category</string>
+    <string name="tv_form_detail_title_3" translatable="false">Property Category</string>
     <string name="chip_cottage" translatable="false">Cottage</string>
     <string name="chip_villa" translatable="false">Villa</string>
     <string name="chip_hotel" translatable="false">Hotel</string>
@@ -306,7 +306,7 @@
     <string name="fire_place_quality" translatable="false">Fire place quality</string>
     <string name="kitchen" translatable="false">kitchen</string>
     <string name="kitchen_quality" translatable="false">Kitchen quality</string>
-    <string name="rooms_without_bathroms" translatable="false">Rooms without bathroms</string>
+    <string name="rooms_without_bathrooms" translatable="false">Rooms without bathrooms</string>
     <string name="property_configuration" translatable="false">Property Configuration</string>
     <string name="inside" translatable="false">Inside</string>
     <string name="corner" translatable="false">Corner</string>
@@ -347,6 +347,10 @@
     <string name="house_remodel_age" translatable="false">House Remodel Age</string>
     <string name="enter_house_remodel_age" translatable="false">Enter House Remodel Age</string>
     <string name="enter_lot_area" translatable="false">Enter Lot Area</string>
+    <string name="edit_listing" translatable="false">Edit Listing</string>
+    <string name="listing_title" translatable="false">Listing Title</string>
+    <string name="listing_photos" translatable="false">Listing Photos</string>
+    <string name="almost_finish_update" translatable="false"><b>Almost finish,</b> update</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>
