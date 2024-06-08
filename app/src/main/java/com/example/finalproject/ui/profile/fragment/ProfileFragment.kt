@@ -165,25 +165,29 @@ class ProfileFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             val user = UserDatabase.getInstance(requireContext()).userDao().getUser(userId)
 
-            withContext(Dispatchers.Main) {
+            if (user != null) {
+                withContext(Dispatchers.Main) {
 
-                val fullName = user.fullName
-                val email = user.email
-                val photo = user.image.url
+                    val fullName = user.fullName
+                    val email = user.email
+                    val photo = user.image.url
 
-                tv_profile_name.text = fullName
-                tv_profile_email.text = email
+                    tv_profile_name.text = fullName
+                    tv_profile_email.text = email
 
-                if (photo.isNotEmpty()) {
-                    Glide
-                        .with(requireActivity())
-                        .load(photo)
-                        .into(image_profile)
+                    if (photo.isNotEmpty()) {
+                        Glide
+                            .with(requireActivity())
+                            .load(photo)
+                            .into(image_profile)
+                    }
+
+                    listing_count.text = user.approvedCount.toString()
+                    sold_count.text = user.soldCount.toString()
+                    reviews_count.text = user.pendingCount.toString()
                 }
-
-                listing_count.text = user.approvedCount.toString()
-                sold_count.text = user.soldCount.toString()
-                reviews_count.text = user.pendingCount.toString()
+            } else {
+                Log.e("ProfileFragment", "User with id $userId not found in the database")
             }
         }
 
