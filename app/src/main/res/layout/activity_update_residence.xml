@@ -494,7 +494,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="15dp"
-                        android:text="@string/select_on_the_map"
+                        android:text="@string/show_on_map"
                         android:textSize="18sp"
                         android:textColor="@color/colorPrimaryText"
                         android:fontFamily="@font/poppins_medium"/>

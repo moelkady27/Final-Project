@@ -351,6 +351,7 @@
     <string name="listing_title" translatable="false">Listing Title</string>
     <string name="listing_photos" translatable="false">Listing Photos</string>
     <string name="almost_finish_update" translatable="false"><b>Almost finish,</b> update</string>
+    <string name="show_on_map">Show on Map</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>

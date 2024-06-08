@@ -2,6 +2,7 @@ package com.example.finalproject.ui.profile.adapter
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import kotlinx.android.synthetic.main.each_row_listings_profile.iv_listings_prof
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.iv_image_listings_profile
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.iv_listings_profile_edit
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.listings_profile_price_2
+import kotlinx.android.synthetic.main.each_row_listings_profile.view.listings_profile_price_4
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.tv_listings_profile_title_1
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.tv_listings_profile_title_2
 
@@ -46,6 +48,7 @@ class ListingsAdapter(
             tv_listings_profile_title_1.text = residence.title
             listings_profile_price_2.text = residence.salePrice.toString()
             tv_listings_profile_title_2.text = residence.location.fullAddress
+            listings_profile_price_4.text = residence.paymentPeriod
 //            number_star_listings_profile.text = residence.likes.toString()
 
             if (residence.images.isNotEmpty()) {
@@ -63,6 +66,8 @@ class ListingsAdapter(
 
             iv_listings_profile_edit.setOnClickListener {
                 val intent = Intent(context, UpdateResidenceActivity::class.java)
+                intent.putExtra("residence_id", residence._id)
+                Log.e("Residence Listing ID", residence._id)
                 context.startActivity(intent)
             }
         }
