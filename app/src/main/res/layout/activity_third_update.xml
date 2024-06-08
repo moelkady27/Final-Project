@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.add_listing.activities.ThirdCompleteActivity">
+    tools:context=".ui.update_listing.activities.ThirdUpdateActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_third_complete"
+                android:id="@+id/toolbar_third_update"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_marginTop="20dp"
@@ -29,21 +28,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/toolbar_title_2"
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="@string/add_listing"
+                    android:text="@string/edit_listing"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="22sp" />
 
             </androidx.appcompat.widget.Toolbar>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_has_garage"
+                android:id="@+id/tv_has_garage_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
@@ -56,20 +54,20 @@
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolbar_third_complete"/>
+                app:layout_constraintTop_toBottomOf="@id/toolbar_third_update"/>
 
             <RadioGroup
-                android:id="@+id/radio_group_garage"
+                android:id="@+id/radio_group_garage_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/tv_has_garage"
-                app:layout_constraintStart_toStartOf="@+id/tv_has_garage"
-                app:layout_constraintTop_toBottomOf="@+id/tv_has_garage" >
+                app:layout_constraintEnd_toEndOf="@+id/tv_has_garage_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_has_garage_update"
+                app:layout_constraintTop_toBottomOf="@+id/tv_has_garage_update" >
 
                 <RadioButton
-                    android:id="@+id/btn_yes_garage"
+                    android:id="@+id/btn_yes_garage_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/yes"
@@ -79,7 +77,7 @@
                     android:textColor="@color/home_popular"/>
 
                 <RadioButton
-                    android:id="@+id/btn_no_garage"
+                    android:id="@+id/btn_no_garage_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/no"
@@ -92,7 +90,7 @@
             </RadioGroup>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/garage_type"
+                android:id="@+id/tv_garage_type_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -101,29 +99,29 @@
                 android:text="@string/garage_type"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/radio_group_garage"
-                app:layout_constraintStart_toStartOf="@+id/radio_group_garage"
-                app:layout_constraintTop_toBottomOf="@id/radio_group_garage" />
+                app:layout_constraintEnd_toEndOf="@+id/radio_group_garage_update"
+                app:layout_constraintStart_toStartOf="@+id/radio_group_garage_update"
+                app:layout_constraintTop_toBottomOf="@id/radio_group_garage_update" />
 
             <HorizontalScrollView
-                android:id="@+id/garage_type_scroll"
+                android:id="@+id/hsv_garage_type_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="@+id/garage_type"
-                app:layout_constraintStart_toStartOf="@+id/garage_type"
-                app:layout_constraintTop_toBottomOf="@id/garage_type">
+                app:layout_constraintEnd_toEndOf="@+id/tv_garage_type_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_garage_type_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_garage_type_update">
 
                 <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/garage_type_chip_group"
+                    android:id="@+id/garage_type_chip_group_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_type_more_than_one"
+                        android:id="@+id/garage_type_more_than_one_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -138,7 +136,7 @@
                         app:chipStartPadding="25dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_type_attached"
+                        android:id="@+id/garage_type_attached_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -153,7 +151,7 @@
                         app:chipStartPadding="25dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_type_basement"
+                        android:id="@+id/garage_type_basement_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -168,7 +166,7 @@
                         app:chipStartPadding="25dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_type_built_in"
+                        android:id="@+id/garage_type_built_in_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -183,7 +181,7 @@
                         app:chipStartPadding="25dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_type_car_port"
+                        android:id="@+id/garage_type_car_port_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -198,7 +196,7 @@
                         app:chipStartPadding="25dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_type_detached"
+                        android:id="@+id/garage_type_detached_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -213,7 +211,7 @@
                         app:chipStartPadding="25dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_type_not_available"
+                        android:id="@+id/garage_type_not_available_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -232,7 +230,7 @@
             </HorizontalScrollView>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_garage_quality"
+                android:id="@+id/tv_garage_quality_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -241,29 +239,29 @@
                 android:text="@string/garage_quality"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/garage_type_scroll"
-                app:layout_constraintStart_toStartOf="@+id/garage_type_scroll"
-                app:layout_constraintTop_toBottomOf="@id/garage_type_scroll"/>
+                app:layout_constraintEnd_toEndOf="@+id/hsv_garage_type_update"
+                app:layout_constraintStart_toStartOf="@+id/hsv_garage_type_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_garage_type_update"/>
 
             <HorizontalScrollView
-                android:id="@+id/garage_quality_scroll"
+                android:id="@+id/hsv_garage_quality_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="@+id/tv_garage_quality"
-                app:layout_constraintStart_toStartOf="@+id/tv_garage_quality"
-                app:layout_constraintTop_toBottomOf="@id/tv_garage_quality">
+                app:layout_constraintEnd_toEndOf="@+id/tv_garage_quality_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_garage_quality_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_garage_quality_update">
 
                 <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/garage_quality_chip_group"
+                    android:id="@+id/garage_quality_chip_group_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_quality_excellent"
+                        android:id="@+id/garage_quality_excellent_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -278,7 +276,7 @@
                         app:chipMinHeight="70dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_quality_good"
+                        android:id="@+id/garage_quality_good_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -293,7 +291,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_quality_average"
+                        android:id="@+id/garage_quality_average_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -308,7 +306,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_quality_fair"
+                        android:id="@+id/garage_quality_fair_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -323,7 +321,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_quality_poor"
+                        android:id="@+id/garage_quality_poor_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -342,7 +340,7 @@
             </HorizontalScrollView>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_garage_cars"
+                android:id="@+id/tv_garage_cars_update_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -351,22 +349,22 @@
                 android:text="@string/garage_cars"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/garage_quality_scroll"
-                app:layout_constraintStart_toStartOf="@+id/garage_quality_scroll"
-                app:layout_constraintTop_toBottomOf="@id/garage_quality_scroll"/>
+                app:layout_constraintEnd_toEndOf="@+id/hsv_garage_quality_update"
+                app:layout_constraintStart_toStartOf="@+id/hsv_garage_quality_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_garage_quality_update"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/con_garage_cars"
+                android:id="@+id/con_garage_cars_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/search_border"
-                app:layout_constraintEnd_toEndOf="@+id/tv_garage_cars"
-                app:layout_constraintStart_toStartOf="@+id/tv_garage_cars"
-                app:layout_constraintTop_toBottomOf="@+id/tv_garage_cars">
+                app:layout_constraintEnd_toEndOf="@+id/tv_garage_cars_update_1"
+                app:layout_constraintStart_toStartOf="@+id/tv_garage_cars_update_1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_garage_cars_update_1">
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/tv_garage_cars_update_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -378,12 +376,12 @@
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/minus_garage_cars"
+                    app:layout_constraintEnd_toStartOf="@+id/minus_garage_cars_update"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/plus_garage_cars"
+                    android:id="@+id/plus_garage_cars_update"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="20dp"
@@ -399,7 +397,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/count_garage_cars"
+                    android:id="@+id/count_garage_cars_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="18dp"
@@ -408,12 +406,12 @@
                     android:text="0"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/minus_garage_cars"
-                    app:layout_constraintEnd_toStartOf="@+id/plus_garage_cars"
-                    app:layout_constraintTop_toTopOf="@+id/minus_garage_cars" />
+                    app:layout_constraintBottom_toBottomOf="@+id/minus_garage_cars_update"
+                    app:layout_constraintEnd_toStartOf="@+id/plus_garage_cars_update"
+                    app:layout_constraintTop_toTopOf="@+id/minus_garage_cars_update" />
 
                 <Button
-                    android:id="@+id/minus_garage_cars"
+                    android:id="@+id/minus_garage_cars_update"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="18dp"
@@ -424,13 +422,13 @@
                     android:gravity="center"
                     android:fontFamily="@font/poppins_bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/count_garage_cars"
+                    app:layout_constraintEnd_toStartOf="@+id/count_garage_cars_update"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_garage_finish"
+                android:id="@+id/tv_garage_finish_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -439,29 +437,29 @@
                 android:text="@string/garage_finish"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/con_garage_cars"
-                app:layout_constraintStart_toStartOf="@+id/con_garage_cars"
-                app:layout_constraintTop_toBottomOf="@id/con_garage_cars"/>
+                app:layout_constraintEnd_toEndOf="@+id/con_garage_cars_update"
+                app:layout_constraintStart_toStartOf="@+id/con_garage_cars_update"
+                app:layout_constraintTop_toBottomOf="@id/con_garage_cars_update"/>
 
             <HorizontalScrollView
-                android:id="@+id/garage_finish_scroll"
+                android:id="@+id/hsv_garage_finish_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="@+id/tv_garage_finish"
-                app:layout_constraintStart_toStartOf="@+id/tv_garage_finish"
-                app:layout_constraintTop_toBottomOf="@id/tv_garage_finish">
+                app:layout_constraintEnd_toEndOf="@+id/tv_garage_finish_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_garage_finish_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_garage_finish_update">
 
                 <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/garage_finish_chip_group"
+                    android:id="@+id/garage_finish_chip_group_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_finish_finished"
+                        android:id="@+id/garage_finish_finished_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -476,7 +474,7 @@
                         app:chipMinHeight="70dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_finish_rough_finished"
+                        android:id="@+id/garage_finish_rough_finished_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -491,7 +489,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_finish_unfinished"
+                        android:id="@+id/garage_finish_unfinished_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -506,7 +504,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/garage_finish_not_available"
+                        android:id="@+id/garage_finish_not_available_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -525,7 +523,7 @@
             </HorizontalScrollView>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/has_basement"
+                android:id="@+id/tv_has_basement_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -534,22 +532,22 @@
                 android:text="@string/has_basement"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/tv_has_garage"
-                app:layout_constraintStart_toStartOf="@+id/tv_has_garage"
-                app:layout_constraintTop_toBottomOf="@id/garage_finish_scroll" />
+                app:layout_constraintEnd_toEndOf="@+id/tv_has_garage_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_has_garage_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_garage_finish_update" />
 
             <RadioGroup
-                android:id="@+id/radio_group_basement"
+                android:id="@+id/radio_group_basement_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/has_basement"
-                app:layout_constraintStart_toStartOf="@+id/has_basement"
-                app:layout_constraintTop_toBottomOf="@+id/has_basement" >
+                app:layout_constraintEnd_toEndOf="@+id/tv_has_basement_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_has_basement_update"
+                app:layout_constraintTop_toBottomOf="@+id/tv_has_basement_update" >
 
                 <RadioButton
-                    android:id="@+id/btn_yes_basement"
+                    android:id="@+id/btn_yes_basement_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/yes"
@@ -559,7 +557,7 @@
                     android:textColor="@color/home_popular"/>
 
                 <RadioButton
-                    android:id="@+id/btn_no_basement"
+                    android:id="@+id/btn_no_basement_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/no"
@@ -572,7 +570,7 @@
             </RadioGroup>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_basement_area"
+                android:id="@+id/tv_basement_area_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -581,12 +579,12 @@
                 android:text="@string/unfinished_basement_area"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/radio_group_basement"
-                app:layout_constraintStart_toStartOf="@+id/radio_group_basement"
-                app:layout_constraintTop_toBottomOf="@id/radio_group_basement"/>
+                app:layout_constraintEnd_toEndOf="@+id/radio_group_basement_update"
+                app:layout_constraintStart_toStartOf="@+id/radio_group_basement_update"
+                app:layout_constraintTop_toBottomOf="@id/radio_group_basement_update"/>
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_basement_area"
+                android:id="@+id/et_basement_area_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -598,12 +596,12 @@
                 android:textColor="@color/colorPrimaryText"
                 android:textColorHint="@color/home_popular"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@id/tv_basement_area"
-                app:layout_constraintStart_toStartOf="@id/tv_basement_area"
-                app:layout_constraintTop_toBottomOf="@id/tv_basement_area" />
+                app:layout_constraintEnd_toEndOf="@id/tv_basement_area_update"
+                app:layout_constraintStart_toStartOf="@id/tv_basement_area_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_basement_area_update" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_basement_exposure"
+                android:id="@+id/tv_basement_exposure_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -612,29 +610,29 @@
                 android:text="@string/basement_exposure"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/et_basement_area"
-                app:layout_constraintStart_toStartOf="@+id/et_basement_area"
-                app:layout_constraintTop_toBottomOf="@id/et_basement_area"/>
+                app:layout_constraintEnd_toEndOf="@+id/et_basement_area_update"
+                app:layout_constraintStart_toStartOf="@+id/et_basement_area_update"
+                app:layout_constraintTop_toBottomOf="@id/et_basement_area_update"/>
 
             <HorizontalScrollView
-                android:id="@+id/basement_exposure_scroll"
+                android:id="@+id/hsv_basement_exposure_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="@+id/tv_basement_exposure"
-                app:layout_constraintStart_toStartOf="@+id/tv_basement_exposure"
-                app:layout_constraintTop_toBottomOf="@id/tv_basement_exposure">
+                app:layout_constraintEnd_toEndOf="@+id/tv_basement_exposure_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_basement_exposure_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_basement_exposure_update">
 
                 <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/basement_exposure_chip_group"
+                    android:id="@+id/basement_exposure_chip_group_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/basement_exposure_good"
+                        android:id="@+id/basement_exposure_good_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -649,7 +647,7 @@
                         app:chipMinHeight="70dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/basement_exposure_average"
+                        android:id="@+id/basement_exposure_average_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -664,7 +662,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/basement_exposure_minimum"
+                        android:id="@+id/basement_exposure_minimum_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -679,7 +677,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/basement_exposure_no_exposure"
+                        android:id="@+id/basement_exposure_no_exposure_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -698,7 +696,7 @@
             </HorizontalScrollView>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_rating_of_basement"
+                android:id="@+id/tv_rating_of_basement_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -707,29 +705,29 @@
                 android:text="@string/rating_of_basement"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/basement_exposure_scroll"
-                app:layout_constraintStart_toStartOf="@+id/basement_exposure_scroll"
-                app:layout_constraintTop_toBottomOf="@id/basement_exposure_scroll"/>
+                app:layout_constraintEnd_toEndOf="@+id/hsv_basement_exposure_update"
+                app:layout_constraintStart_toStartOf="@+id/hsv_basement_exposure_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_basement_exposure_update"/>
 
             <HorizontalScrollView
-                android:id="@+id/rating_of_basement_scroll"
+                android:id="@+id/hsv_rating_of_basement_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="@+id/tv_rating_of_basement"
-                app:layout_constraintStart_toStartOf="@+id/tv_rating_of_basement"
-                app:layout_constraintTop_toBottomOf="@id/tv_rating_of_basement">
+                app:layout_constraintEnd_toEndOf="@+id/tv_rating_of_basement_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_rating_of_basement_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_rating_of_basement_update">
 
                 <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/rating_of_basement_chip_group"
+                    android:id="@+id/rating_of_basement_chip_group_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/rating_of_basement_good"
+                        android:id="@+id/rating_of_basement_good_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -744,7 +742,7 @@
                         app:chipMinHeight="70dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/rating_of_basement_average"
+                        android:id="@+id/rating_of_basement_average_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -759,7 +757,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/rating_of_basement_below_average"
+                        android:id="@+id/rating_of_basement_below_average_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -774,7 +772,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/rating_of_basement_rec_room"
+                        android:id="@+id/rating_of_basement_rec_room_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -789,7 +787,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/rating_of_basement_low"
+                        android:id="@+id/rating_of_basement_low_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -804,7 +802,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/rating_of_basement_unfinished"
+                        android:id="@+id/rating_of_basement_unfinished_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -823,7 +821,7 @@
             </HorizontalScrollView>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_height_of_basement"
+                android:id="@+id/tv_height_of_basement_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -832,29 +830,29 @@
                 android:text="@string/height_of_basement"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/rating_of_basement_scroll"
-                app:layout_constraintStart_toStartOf="@+id/rating_of_basement_scroll"
-                app:layout_constraintTop_toBottomOf="@id/rating_of_basement_scroll"/>
+                app:layout_constraintEnd_toEndOf="@+id/hsv_rating_of_basement_update"
+                app:layout_constraintStart_toStartOf="@+id/hsv_rating_of_basement_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_rating_of_basement_update"/>
 
             <HorizontalScrollView
-                android:id="@+id/height_of_basement_scroll"
+                android:id="@+id/hsv_height_of_basement_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="@+id/tv_height_of_basement"
-                app:layout_constraintStart_toStartOf="@+id/tv_height_of_basement"
-                app:layout_constraintTop_toBottomOf="@id/tv_height_of_basement">
+                app:layout_constraintEnd_toEndOf="@+id/tv_height_of_basement_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_height_of_basement_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_height_of_basement_update">
 
                 <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/height_of_basement_chip_group"
+                    android:id="@+id/height_of_basement_chip_group_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/height_of_basement_excellent"
+                        android:id="@+id/height_of_basement_excellent_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -869,7 +867,7 @@
                         app:chipMinHeight="70dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/height_of_basement_good"
+                        android:id="@+id/height_of_basement_good_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -884,7 +882,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/height_of_basement_average"
+                        android:id="@+id/height_of_basement_average_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -899,7 +897,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/height_of_basement_fair"
+                        android:id="@+id/height_of_basement_fair_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -914,7 +912,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/height_of_basement_poor"
+                        android:id="@+id/height_of_basement_poor_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -933,7 +931,7 @@
             </HorizontalScrollView>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_condition_of_basement"
+                android:id="@+id/tv_condition_of_basement_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -942,29 +940,29 @@
                 android:text="@string/condition_of_basement"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/height_of_basement_scroll"
-                app:layout_constraintStart_toStartOf="@+id/height_of_basement_scroll"
-                app:layout_constraintTop_toBottomOf="@id/height_of_basement_scroll"/>
+                app:layout_constraintEnd_toEndOf="@+id/hsv_height_of_basement_update"
+                app:layout_constraintStart_toStartOf="@+id/hsv_height_of_basement_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_height_of_basement_update"/>
 
             <HorizontalScrollView
-                android:id="@+id/condition_of_basement_scroll"
+                android:id="@+id/hsv_condition_of_basement_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="@+id/tv_condition_of_basement"
-                app:layout_constraintStart_toStartOf="@+id/tv_condition_of_basement"
-                app:layout_constraintTop_toBottomOf="@id/tv_condition_of_basement">
+                app:layout_constraintEnd_toEndOf="@+id/tv_condition_of_basement_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_condition_of_basement_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_condition_of_basement_update">
 
                 <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/condition_of_basement_chip_group"
+                    android:id="@+id/condition_of_basement_chip_group_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/condition_of_basement_excellent"
+                        android:id="@+id/condition_of_basement_excellent_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -979,7 +977,7 @@
                         app:chipMinHeight="70dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/condition_of_basement_good"
+                        android:id="@+id/condition_of_basement_good_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -994,7 +992,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/condition_of_basement_average"
+                        android:id="@+id/condition_of_basement_average_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1009,7 +1007,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/condition_of_basement_fair"
+                        android:id="@+id/condition_of_basement_fair_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1024,7 +1022,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/condition_of_basement_poor"
+                        android:id="@+id/condition_of_basement_poor_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1039,7 +1037,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/condition_of_basement_not_available"
+                        android:id="@+id/condition_of_basement_not_available_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1058,7 +1056,7 @@
             </HorizontalScrollView>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/has_fire_place"
+                android:id="@+id/tv_has_fire_place_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -1067,22 +1065,22 @@
                 android:text="@string/has_fire_place"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/tv_has_garage"
-                app:layout_constraintStart_toStartOf="@+id/tv_has_garage"
-                app:layout_constraintTop_toBottomOf="@id/condition_of_basement_scroll" />
+                app:layout_constraintEnd_toEndOf="@+id/tv_has_garage_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_has_garage_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_condition_of_basement_update" />
 
             <RadioGroup
-                android:id="@+id/radio_group_fire_place"
+                android:id="@+id/radio_group_fire_place_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/has_fire_place"
-                app:layout_constraintStart_toStartOf="@+id/has_fire_place"
-                app:layout_constraintTop_toBottomOf="@+id/has_fire_place" >
+                app:layout_constraintEnd_toEndOf="@+id/tv_has_fire_place_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_has_fire_place_update"
+                app:layout_constraintTop_toBottomOf="@+id/tv_has_fire_place_update" >
 
                 <RadioButton
-                    android:id="@+id/btn_yes_fire_place"
+                    android:id="@+id/btn_yes_fire_place_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/yes"
@@ -1092,7 +1090,7 @@
                     android:textColor="@color/home_popular"/>
 
                 <RadioButton
-                    android:id="@+id/btn_no_fire_place"
+                    android:id="@+id/btn_no_fire_place_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/no"
@@ -1105,17 +1103,17 @@
             </RadioGroup>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/con_fire_places"
+                android:id="@+id/con_fire_places_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/search_border"
-                app:layout_constraintEnd_toEndOf="@+id/radio_group_fire_place"
-                app:layout_constraintStart_toStartOf="@+id/radio_group_fire_place"
-                app:layout_constraintTop_toBottomOf="@+id/radio_group_fire_place">
+                app:layout_constraintEnd_toEndOf="@+id/radio_group_fire_place_update"
+                app:layout_constraintStart_toStartOf="@+id/radio_group_fire_place_update"
+                app:layout_constraintTop_toBottomOf="@+id/radio_group_fire_place_update">
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/tv_fire_places_update"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -1127,12 +1125,12 @@
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/minus_fire_places"
+                    app:layout_constraintEnd_toStartOf="@+id/minus_fire_places_update"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/plus_fire_places"
+                    android:id="@+id/plus_fire_places_update"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="20dp"
@@ -1148,7 +1146,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/count_fire_places"
+                    android:id="@+id/count_fire_places_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="18dp"
@@ -1157,12 +1155,12 @@
                     android:text="0"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/minus_fire_places"
-                    app:layout_constraintEnd_toStartOf="@+id/plus_fire_places"
-                    app:layout_constraintTop_toTopOf="@+id/minus_fire_places" />
+                    app:layout_constraintBottom_toBottomOf="@+id/minus_fire_places_update"
+                    app:layout_constraintEnd_toStartOf="@+id/plus_fire_places_update"
+                    app:layout_constraintTop_toTopOf="@+id/minus_fire_places_update" />
 
                 <Button
-                    android:id="@+id/minus_fire_places"
+                    android:id="@+id/minus_fire_places_update"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="18dp"
@@ -1173,13 +1171,13 @@
                     android:gravity="center"
                     android:fontFamily="@font/poppins_bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/count_fire_places"
+                    app:layout_constraintEnd_toStartOf="@+id/count_fire_places_update"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/fire_place_quality"
+                android:id="@+id/tv_fire_place_quality_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -1188,29 +1186,29 @@
                 android:text="@string/fire_place_quality"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/con_fire_places"
-                app:layout_constraintStart_toStartOf="@+id/con_fire_places"
-                app:layout_constraintTop_toBottomOf="@id/con_fire_places" />
+                app:layout_constraintEnd_toEndOf="@+id/con_fire_places_update"
+                app:layout_constraintStart_toStartOf="@+id/con_fire_places_update"
+                app:layout_constraintTop_toBottomOf="@id/con_fire_places_update" />
 
             <HorizontalScrollView
-                android:id="@+id/fire_place_quality_scroll"
+                android:id="@+id/hsv_fire_place_quality_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="@+id/fire_place_quality"
-                app:layout_constraintStart_toStartOf="@+id/fire_place_quality"
-                app:layout_constraintTop_toBottomOf="@id/fire_place_quality">
+                app:layout_constraintEnd_toEndOf="@+id/tv_fire_place_quality_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_fire_place_quality_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_fire_place_quality_update">
 
                 <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/fire_place_quality_chip_group"
+                    android:id="@+id/fire_place_quality_chip_group_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/fire_place_quality_excellent"
+                        android:id="@+id/fire_place_quality_excellent_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1225,7 +1223,7 @@
                         app:chipMinHeight="70dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/fire_place_quality_good"
+                        android:id="@+id/fire_place_quality_good_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1240,7 +1238,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/fire_place_quality_average"
+                        android:id="@+id/fire_place_quality_average_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1255,7 +1253,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/fire_place_quality_fair"
+                        android:id="@+id/fire_place_quality_fair_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1270,7 +1268,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/fire_place_quality_poor"
+                        android:id="@+id/fire_place_quality_poor_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1289,17 +1287,17 @@
             </HorizontalScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/con_bedrooms"
+                android:id="@+id/con_bedrooms_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/search_border"
-                app:layout_constraintEnd_toEndOf="@+id/tv_has_garage"
-                app:layout_constraintStart_toStartOf="@+id/tv_has_garage"
-                app:layout_constraintTop_toBottomOf="@+id/fire_place_quality_scroll">
+                app:layout_constraintEnd_toEndOf="@+id/tv_has_garage_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_has_garage_update"
+                app:layout_constraintTop_toBottomOf="@+id/hsv_fire_place_quality_update">
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/tv_bedroom_update"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -1311,12 +1309,12 @@
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/minus_bedrooms"
+                    app:layout_constraintEnd_toStartOf="@+id/minus_bedrooms_update"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/plus_bedrooms"
+                    android:id="@+id/plus_bedrooms_update"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="20dp"
@@ -1332,7 +1330,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/count_bedrooms"
+                    android:id="@+id/count_bedrooms_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="18dp"
@@ -1341,12 +1339,12 @@
                     android:text="0"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/minus_bedrooms"
-                    app:layout_constraintEnd_toStartOf="@+id/plus_bedrooms"
-                    app:layout_constraintTop_toTopOf="@+id/minus_bedrooms" />
+                    app:layout_constraintBottom_toBottomOf="@+id/minus_bedrooms_update"
+                    app:layout_constraintEnd_toStartOf="@+id/plus_bedrooms_update"
+                    app:layout_constraintTop_toTopOf="@+id/minus_bedrooms_update" />
 
                 <Button
-                    android:id="@+id/minus_bedrooms"
+                    android:id="@+id/minus_bedrooms_update"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="18dp"
@@ -1357,23 +1355,23 @@
                     android:gravity="center"
                     android:fontFamily="@font/poppins_bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/count_bedrooms"
+                    app:layout_constraintEnd_toStartOf="@+id/count_bedrooms_update"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/con_bathrooms"
+                android:id="@+id/con_bathrooms_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/search_border"
-                app:layout_constraintEnd_toEndOf="@+id/con_bedrooms"
-                app:layout_constraintStart_toStartOf="@+id/con_bedrooms"
-                app:layout_constraintTop_toBottomOf="@+id/con_bedrooms">
+                app:layout_constraintEnd_toEndOf="@+id/con_bedrooms_update"
+                app:layout_constraintStart_toStartOf="@+id/con_bedrooms_update"
+                app:layout_constraintTop_toBottomOf="@+id/con_bedrooms_update">
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/tv_bathroom_update"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -1385,12 +1383,12 @@
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/minus_bathrooms"
+                    app:layout_constraintEnd_toStartOf="@+id/minus_bathrooms_update"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/plus_bathrooms"
+                    android:id="@+id/plus_bathrooms_update"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="20dp"
@@ -1406,7 +1404,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/count_bathrooms"
+                    android:id="@+id/count_bathrooms_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="18dp"
@@ -1415,12 +1413,12 @@
                     android:text="0"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/minus_bathrooms"
-                    app:layout_constraintEnd_toStartOf="@+id/plus_bathrooms"
-                    app:layout_constraintTop_toTopOf="@+id/minus_bathrooms" />
+                    app:layout_constraintBottom_toBottomOf="@+id/minus_bathrooms_update"
+                    app:layout_constraintEnd_toStartOf="@+id/plus_bathrooms_update"
+                    app:layout_constraintTop_toTopOf="@+id/minus_bathrooms_update" />
 
                 <Button
-                    android:id="@+id/minus_bathrooms"
+                    android:id="@+id/minus_bathrooms_update"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="18dp"
@@ -1431,23 +1429,23 @@
                     android:gravity="center"
                     android:fontFamily="@font/poppins_bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/count_bathrooms"
+                    app:layout_constraintEnd_toStartOf="@+id/count_bathrooms_update"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/con_kitchen"
+                android:id="@+id/con_kitchen_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/search_border"
-                app:layout_constraintEnd_toEndOf="@+id/con_bathrooms"
-                app:layout_constraintStart_toStartOf="@+id/con_bathrooms"
-                app:layout_constraintTop_toBottomOf="@+id/con_bathrooms">
+                app:layout_constraintEnd_toEndOf="@+id/con_bathrooms_update"
+                app:layout_constraintStart_toStartOf="@+id/con_bathrooms_update"
+                app:layout_constraintTop_toBottomOf="@+id/con_bathrooms_update">
 
                 <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/tv_kitchen_update"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -1459,12 +1457,12 @@
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/minus_kitchen"
+                    app:layout_constraintEnd_toStartOf="@+id/minus_kitchen_update"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/plus_kitchen"
+                    android:id="@+id/plus_kitchen_update"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="20dp"
@@ -1480,7 +1478,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/count_kitchen"
+                    android:id="@+id/count_kitchen_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="18dp"
@@ -1489,12 +1487,12 @@
                     android:text="0"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/minus_kitchen"
-                    app:layout_constraintEnd_toStartOf="@+id/plus_kitchen"
-                    app:layout_constraintTop_toTopOf="@+id/minus_kitchen" />
+                    app:layout_constraintBottom_toBottomOf="@+id/minus_kitchen_update"
+                    app:layout_constraintEnd_toStartOf="@+id/plus_kitchen_update"
+                    app:layout_constraintTop_toTopOf="@+id/minus_kitchen_update" />
 
                 <Button
-                    android:id="@+id/minus_kitchen"
+                    android:id="@+id/minus_kitchen_update"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="18dp"
@@ -1505,13 +1503,13 @@
                     android:gravity="center"
                     android:fontFamily="@font/poppins_bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/count_kitchen"
+                    app:layout_constraintEnd_toStartOf="@+id/count_kitchen_update"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/kitchen_quality"
+                android:id="@+id/tv_kitchen_quality_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -1520,29 +1518,29 @@
                 android:text="@string/kitchen_quality"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/con_kitchen"
-                app:layout_constraintStart_toStartOf="@+id/con_kitchen"
-                app:layout_constraintTop_toBottomOf="@id/con_kitchen" />
+                app:layout_constraintEnd_toEndOf="@+id/con_kitchen_update"
+                app:layout_constraintStart_toStartOf="@+id/con_kitchen_update"
+                app:layout_constraintTop_toBottomOf="@id/con_kitchen_update" />
 
             <HorizontalScrollView
-                android:id="@+id/kitchen_quality_scroll"
+                android:id="@+id/hsv_kitchen_quality_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="@+id/kitchen_quality"
-                app:layout_constraintStart_toStartOf="@+id/kitchen_quality"
-                app:layout_constraintTop_toBottomOf="@id/kitchen_quality">
+                app:layout_constraintEnd_toEndOf="@+id/tv_kitchen_quality_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_kitchen_quality_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_kitchen_quality_update">
 
                 <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/kitchen_quality_chip_group"
+                    android:id="@+id/kitchen_quality_chip_group_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:singleSelection="true"
                     app:chipSpacing="15dp">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/kitchen_quality_excellent"
+                        android:id="@+id/kitchen_quality_excellent_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1557,7 +1555,7 @@
                         app:chipMinHeight="70dp" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/kitchen_quality_good"
+                        android:id="@+id/kitchen_quality_good_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1572,7 +1570,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/kitchen_quality_average"
+                        android:id="@+id/kitchen_quality_average_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1587,7 +1585,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/kitchen_quality_fair"
+                        android:id="@+id/kitchen_quality_fair_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1602,7 +1600,7 @@
                         app:chipMinHeight="70dp"/>
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/kitchen_quality_poor"
+                        android:id="@+id/kitchen_quality_poor_update"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1621,17 +1619,17 @@
             </HorizontalScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/con_rooms_without_bathrooms"
+                android:id="@+id/con_rooms_without_bathrooms_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
                 android:background="@drawable/search_border"
-                app:layout_constraintEnd_toEndOf="@+id/kitchen_quality_scroll"
-                app:layout_constraintStart_toStartOf="@+id/kitchen_quality_scroll"
-                app:layout_constraintTop_toBottomOf="@+id/kitchen_quality_scroll">
+                app:layout_constraintEnd_toEndOf="@+id/hsv_kitchen_quality_update"
+                app:layout_constraintStart_toStartOf="@+id/hsv_kitchen_quality_update"
+                app:layout_constraintTop_toBottomOf="@+id/hsv_kitchen_quality_update">
 
                 <TextView
-                    android:id="@+id/textView19"
+                    android:id="@+id/tv_rooms_without_bathrooms_update"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -1643,12 +1641,12 @@
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/minus_rooms_without_bathrooms"
+                    app:layout_constraintEnd_toStartOf="@+id/minus_rooms_without_bathrooms_update"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/plus_rooms_without_bathrooms"
+                    android:id="@+id/plus_rooms_without_bathrooms_update"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="20dp"
@@ -1664,7 +1662,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/count_rooms_without_bathrooms"
+                    android:id="@+id/count_rooms_without_bathrooms_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="18dp"
@@ -1673,12 +1671,12 @@
                     android:text="0"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/minus_rooms_without_bathrooms"
-                    app:layout_constraintEnd_toStartOf="@+id/plus_rooms_without_bathrooms"
-                    app:layout_constraintTop_toTopOf="@+id/minus_rooms_without_bathrooms" />
+                    app:layout_constraintBottom_toBottomOf="@+id/minus_rooms_without_bathrooms_update"
+                    app:layout_constraintEnd_toStartOf="@+id/plus_rooms_without_bathrooms_update"
+                    app:layout_constraintTop_toTopOf="@+id/minus_rooms_without_bathrooms_update" />
 
                 <Button
-                    android:id="@+id/minus_rooms_without_bathrooms"
+                    android:id="@+id/minus_rooms_without_bathrooms_update"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="18dp"
@@ -1689,20 +1687,20 @@
                     android:gravity="center"
                     android:fontFamily="@font/poppins_bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/count_rooms_without_bathrooms"
+                    app:layout_constraintEnd_toStartOf="@+id/count_rooms_without_bathrooms_update"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_next_third_complete"
+                android:id="@+id/btn_next_third_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="50dp"
-                android:layout_marginStart="100dp"
-                android:layout_marginEnd="100dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
                 android:background="@drawable/button_background"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
@@ -1711,11 +1709,11 @@
                 android:text="@string/next"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/con_rooms_without_bathrooms"
-                app:layout_constraintStart_toStartOf="@+id/con_rooms_without_bathrooms"
-                app:layout_constraintTop_toBottomOf="@id/con_rooms_without_bathrooms" />
+                app:layout_constraintEnd_toEndOf="@+id/con_rooms_without_bathrooms_update"
+                app:layout_constraintStart_toStartOf="@+id/con_rooms_without_bathrooms_update"
+                app:layout_constraintTop_toBottomOf="@id/con_rooms_without_bathrooms_update" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
