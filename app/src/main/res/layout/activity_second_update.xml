@@ -1,0 +1,1465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.update_listing.activities.SecondUpdateActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_second_update"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/edit_listing"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="22sp" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_roof_style_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/roof_style"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_second_update"/>
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_roof_style_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="@+id/tv_roof_style_title_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_roof_style_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_roof_style_title_update">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/RoofStyleChipGroupUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:chipSpacing="15dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_style_flat_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/flat"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_style_gable_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gable"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_style_gambrel_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gambrel"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_style_hip_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hip"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_style_mansard_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mansard"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_style_Shed_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shed"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_roof_material_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/roof_material"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/hsv_roof_style_update"
+                app:layout_constraintStart_toStartOf="@+id/hsv_roof_style_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_roof_style_update"/>
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_roof_material_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="@+id/tv_roof_material_title_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_roof_material_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_roof_material_title_update">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/RoofMaterialChipGroupUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:chipSpacing="15dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_material_clay_or_tile_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/clay_or_tile"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_material_standard_shingle_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/standard_shingle"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_material_membran_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/membran"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_material_metal_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/metal"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_material_roll_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/roll"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_material_gravel_tar_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gravel_tar"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_material_wood_shakes_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wood_shakes"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/roof_material_wood_shingles_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wood_shingles"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_house_style_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/house_style"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/hsv_roof_material_update"
+                app:layout_constraintStart_toStartOf="@+id/hsv_roof_material_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_roof_material_update"/>
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_house_style_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="@+id/tv_house_style_title_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_house_style_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_house_style_title_update">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/HouseStyleChipGroupUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:chipSpacing="15dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/house_style_1Story_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_1story"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/house_style_1_5Fin_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_1_5fin"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/house_style_1_5Unf_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_1_5unf"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/house_style_2Story_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_2story"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/house_style_2_5Fin_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_2_5fin"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/house_style_2_5Unf_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_2_5unf"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/house_style_SFoyer_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sfoyer"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/house_style_SLvl_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/slvl"
+                        android:textAppearance="@style/ChipTextStyle"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipEndPadding="25dp"
+                        app:chipMinHeight="70dp"
+                        app:chipStartPadding="25dp" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_residence_type_title_update_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/residence_type"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/hsv_house_style_update"
+                app:layout_constraintStart_toStartOf="@id/hsv_house_style_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_house_style_update"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tv_residence_type_title_update_2"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/type_of_residence"
+                android:textColorHint="@color/colorPrimaryText"
+                app:layout_constraintStart_toStartOf="@id/tv_residence_type_title_update_1"
+                app:layout_constraintEnd_toEndOf="@id/tv_residence_type_title_update_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_residence_type_title_update_1">
+
+                <AutoCompleteTextView
+                    android:id="@+id/auto_complete_residence_type_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/colorPrimaryText"
+                    android:inputType="none"
+                    android:hint="@null"
+                    android:textSize="18sp"
+                    tools:text="1story and older or 1story and newer" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_central_air_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/central_air"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/tv_residence_type_title_update_2"
+                app:layout_constraintStart_toStartOf="@id/tv_residence_type_title_update_2"
+                app:layout_constraintTop_toBottomOf="@id/tv_residence_type_title_update_2"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/CentralAirChipGroupUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:singleSelection="true"
+                app:layout_constraintStart_toStartOf="@id/tv_central_air_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_central_air_title_update">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/central_air_yes_update"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yes"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/central_air_no_update"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_street_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/street"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/tv_central_air_title_update"
+                app:layout_constraintStart_toStartOf="@id/tv_central_air_title_update"
+                app:layout_constraintTop_toBottomOf="@id/CentralAirChipGroupUpdate"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/StreetChipGroupUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:singleSelection="true"
+                app:layout_constraintStart_toStartOf="@id/tv_street_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_street_title_update">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/street_paved_update"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/paved"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/street_gravel_update"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gravel"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/ChipTextStyle"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
+                    app:chipBackgroundColor="@color/home_search"
+                    app:chipCornerRadius="15dp"
+                    app:chipMinHeight="70dp"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_alley_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/alley"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/tv_street_title_update"
+                app:layout_constraintStart_toStartOf="@id/tv_street_title_update"
+                app:layout_constraintTop_toBottomOf="@id/StreetChipGroupUpdate"/>
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_alley"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="@+id/tv_alley_title_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_alley_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_alley_title_update">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/AlleyChipGroupUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:chipSpacing="15dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/alley_paved_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/paved"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/alley_gravel_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gravel"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/alley_no_alley_access_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_alley_access"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_heating_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/heating"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/hsv_alley"
+                app:layout_constraintStart_toStartOf="@id/hsv_alley"
+                app:layout_constraintTop_toBottomOf="@id/hsv_alley"/>
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_heating_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="@+id/tv_heating_title_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_heating_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_heating_title_update">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/HeatingChipGroupUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:chipSpacing="15dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/heating_floor_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/floor"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/heating_gas_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gas"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/heating_gas_water_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gas_water"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/heating_gravity_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gravity"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/heating_other_water_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/other_water"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/heating_wall_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wall"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_heating_quality_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/heating_quality"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/hsv_heating_update"
+                app:layout_constraintStart_toStartOf="@id/hsv_heating_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_heating_update"/>
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_heating_quality_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="@+id/tv_heating_quality_title_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_heating_quality_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_heating_quality_title_update">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/HeatingQualityChipGroupUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:chipSpacing="15dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/heating_quality_excellent_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/excellent"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/heating_quality_good_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/good"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/heating_quality_average_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/average"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/heating_quality_fair_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fair"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/heating_quality_poor_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/poor"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_masonry_veneer_type_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/masonry_veneer_type"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/hsv_heating_quality_update"
+                app:layout_constraintStart_toStartOf="@id/hsv_heating_quality_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_heating_quality_update"/>
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_masonry_veneer_type_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="@+id/tv_masonry_veneer_type_title_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_masonry_veneer_type_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_masonry_veneer_type_title_update">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/MasonryVeneerTypeChipGroupUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:chipSpacing="15dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/masonry_veneer_type_brick_face_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/brick_face"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/masonry_veneer_type_brick_common_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/brick_common"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/masonry_veneer_type_cinder_block_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cinder_block"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/masonry_veneer_type_none_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/none"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/masonry_veneer_type_stone_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stone"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_masonry_veneer_area_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/masonry_veneer_area"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@id/hsv_masonry_veneer_type_update"
+                app:layout_constraintEnd_toEndOf="@id/hsv_masonry_veneer_type_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_masonry_veneer_type_update" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_masonry_veneer_area_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="@string/enter_masonry_veneer_area"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/home_popular"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/tv_masonry_veneer_area_title_update"
+                app:layout_constraintStart_toStartOf="@id/tv_masonry_veneer_area_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_masonry_veneer_area_title_update" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_exterior_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/exterior_covering_on_house"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/et_masonry_veneer_area_update"
+                app:layout_constraintStart_toStartOf="@id/et_masonry_veneer_area_update"
+                app:layout_constraintTop_toBottomOf="@id/et_masonry_veneer_area_update"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tv_exterior_covering_on_house_update_1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/exterior_covering_on_house_1"
+                android:textColorHint="@color/colorPrimaryText"
+                app:layout_constraintStart_toStartOf="@id/tv_exterior_title_update"
+                app:layout_constraintEnd_toEndOf="@id/tv_exterior_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_exterior_title_update">
+
+                <AutoCompleteTextView
+                    android:id="@+id/auto_complete_exterior_covering_update11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/colorPrimaryText"
+                    android:inputType="none"
+                    android:hint="@null"
+                    android:textSize="18sp"
+                    tools:text="asbestos shingles" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tv_exterior_covering_on_house_update_2"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/exterior_covering_on_house_2"
+                android:textColorHint="@color/colorPrimaryText"
+                app:layout_constraintStart_toStartOf="@id/tv_exterior_covering_on_house_update_1"
+                app:layout_constraintEnd_toEndOf="@id/tv_exterior_covering_on_house_update_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_exterior_covering_on_house_update_1">
+
+                <AutoCompleteTextView
+                    android:id="@+id/auto_complete_exterior_covering_update22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/colorPrimaryText"
+                    android:inputType="none"
+                    android:hint="@null"
+                    android:textSize="18sp"
+                    tools:text="asbestos shingles" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_exterior_condition_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/exterior_condition"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/tv_exterior_covering_on_house_update_2"
+                app:layout_constraintStart_toStartOf="@id/tv_exterior_covering_on_house_update_2"
+                app:layout_constraintTop_toBottomOf="@id/tv_exterior_covering_on_house_update_2"/>
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_exterior_condition_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="@+id/tv_exterior_condition_title_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_exterior_condition_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_exterior_condition_title_update">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/ExteriorConditionChipGroupUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:chipSpacing="15dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/exterior_condition_excellent_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/excellent"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/exterior_condition_good_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/good"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/exterior_condition_average_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/average"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/exterior_condition_fair_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fair"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/exterior_condition_poor_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/poor"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_exterior_quality_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/exterior_quality"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/hsv_exterior_condition_update"
+                app:layout_constraintStart_toStartOf="@id/hsv_exterior_condition_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_exterior_condition_update"/>
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_exterior_quality_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="@+id/tv_exterior_quality_title_update"
+                app:layout_constraintStart_toStartOf="@+id/tv_exterior_quality_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_exterior_quality_title_update">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/ExteriorQualityChipGroupUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:chipSpacing="15dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/exterior_quality_excellent_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/excellent"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/exterior_quality_good_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/good"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/exterior_quality_average_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/average"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/exterior_quality_fair_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fair"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/exterior_quality_poor_update"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/poor"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        android:textAppearance="@style/ChipTextStyle"
+                        app:chipStartPadding="25dp"
+                        app:chipEndPadding="25dp"
+                        app:chipBackgroundColor="@color/home_search"
+                        app:chipCornerRadius="15dp"
+                        app:chipMinHeight="70dp"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_conditions_title_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start"
+                android:text="@string/conditions"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/hsv_exterior_quality_update"
+                app:layout_constraintStart_toStartOf="@id/hsv_exterior_quality_update"
+                app:layout_constraintTop_toBottomOf="@id/hsv_exterior_quality_update"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tv_condition_update_1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/condition_1"
+                android:textColorHint="@color/colorPrimaryText"
+                app:layout_constraintStart_toStartOf="@id/tv_conditions_title_update"
+                app:layout_constraintEnd_toEndOf="@id/tv_conditions_title_update"
+                app:layout_constraintTop_toBottomOf="@id/tv_conditions_title_update">
+
+                <AutoCompleteTextView
+                    android:id="@+id/auto_complete_condition_update11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/colorPrimaryText"
+                    android:inputType="none"
+                    android:hint="@null"
+                    android:textSize="18sp"
+                    tools:text="adjacent to north south" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tv_condition_update_2"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/condition_2"
+                android:textColorHint="@color/colorPrimaryText"
+                app:layout_constraintStart_toStartOf="@id/tv_condition_update_1"
+                app:layout_constraintEnd_toEndOf="@id/tv_condition_update_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_condition_update_1">
+
+                <AutoCompleteTextView
+                    android:id="@+id/auto_complete_condition_update22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/colorPrimaryText"
+                    android:inputType="none"
+                    android:hint="@null"
+                    android:textSize="18sp"
+                    tools:text="adjacent to north south" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_next_second_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_condition_update_2"
+                app:layout_constraintStart_toStartOf="@+id/tv_condition_update_2"
+                app:layout_constraintTop_toBottomOf="@id/tv_condition_update_2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
