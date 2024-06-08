@@ -174,7 +174,7 @@ class EditProfileActivity : BaseActivity() {
         floatingActionButton_delete.setOnClickListener {
             if (networkUtils.isNetworkAvailable()){
                 deleteProfileImage()
-                val defaultImage = "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg"
+                val defaultImage = "https://res.cloudinary.com/dgslxtxg8/image/upload/v1715336663/avatar/ds5uvwbqoxv5dayoivke.jpg"
                 Glide
                     .with(this@EditProfileActivity)
                     .load(defaultImage)
@@ -200,9 +200,9 @@ class EditProfileActivity : BaseActivity() {
 //        }
 
         tv_change_profile_picture.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             intent.type = "image/*"
-            pickImageFromGallery.launch(intent)
+            pickImageFromGallery.launch(galleryIntent)
         }
 
     }

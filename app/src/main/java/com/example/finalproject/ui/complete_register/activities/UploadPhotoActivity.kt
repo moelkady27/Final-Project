@@ -74,7 +74,15 @@ class UploadPhotoActivity : BaseActivity() {
 
         btn_next_upload_photo.setOnClickListener {
             if (networkUtils.isNetworkAvailable()) {
-                uploadPhoto()
+                if (::selectedImage.isInitialized) {
+                    uploadPhoto()
+                } else {
+                    Toast.makeText(
+                        this@UploadPhotoActivity,
+                        "Please select an image first",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             } else {
                 showErrorSnackBar("No internet connection", true)
             }
@@ -94,9 +102,9 @@ class UploadPhotoActivity : BaseActivity() {
 //        }
 
         fl_from_gallery.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             intent.type = "image/*"
-            pickImageFromGallery.launch(intent)
+            pickImageFromGallery.launch(galleryIntent)
         }
 
                                     /* Skip-Upload-Photo-Button */
@@ -105,7 +113,7 @@ class UploadPhotoActivity : BaseActivity() {
             if (networkUtils.isNetworkAvailable()) {
 
                 val intent = Intent(this@UploadPhotoActivity , UploadPreviewActivity::class.java)
-                val imageDef = "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg"
+                val imageDef = "https://res.cloudinary.com/dgslxtxg8/image/upload/v1715336663/avatar/ds5uvwbqoxv5dayoivke.jpg"
 
                 intent.putExtra("imageDef", imageDef)
 
