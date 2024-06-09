@@ -1,6 +1,5 @@
 package com.example.finalproject.ui.update_listing.activities
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
@@ -12,8 +11,6 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +20,9 @@ import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.add_listing.factory.AddPhotoResidenceFactory
+import com.example.finalproject.ui.add_listing.repository.AddPhotoResidenceRepository
+import com.example.finalproject.ui.add_listing.viewModel.AddPhotoResidenceViewModel
 import com.example.finalproject.ui.update_listing.adapter.UpdateListingPhotosAdapter
 import com.example.finalproject.ui.update_listing.factory.GetResidenceFactory
 import com.example.finalproject.ui.update_listing.models.Image
@@ -45,14 +45,20 @@ import kotlinx.android.synthetic.main.activity_update_residence.image_update_res
 import kotlinx.android.synthetic.main.activity_update_residence.toolbar_update_residence
 import kotlinx.android.synthetic.main.activity_update_residence.tv_apartment_update_residence
 import kotlinx.android.synthetic.main.activity_update_residence.tv_update_residence_3
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.File
 
 class UpdateResidenceActivity : BaseActivity() {
 
     private lateinit var networkUtils: NetworkUtils
 
     private lateinit var getResidenceViewModel: GetResidenceViewModel
+
+    private lateinit var addPhotoResidenceViewModel: AddPhotoResidenceViewModel
 
     private lateinit var recyclerView: RecyclerView
 
@@ -100,12 +106,6 @@ class UpdateResidenceActivity : BaseActivity() {
         Log.e("Residence ID", residenceId.toString())
 
 
-        btn_next_update_listing.setOnClickListener {
-            val intent = Intent(
-                this@UpdateResidenceActivity, FirstUpdateActivity::class.java)
-            startActivity(intent)
-        }
-
         networkUtils = NetworkUtils(this@UpdateResidenceActivity)
 
         initChips()
@@ -130,6 +130,27 @@ class UpdateResidenceActivity : BaseActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 2)
         recyclerView.adapter = adapter
 
+//        ********************* photo residence ****************
+
+        val addPhotoResidenceRepository = AddPhotoResidenceRepository(RetrofitClient.instance)
+        val factory = AddPhotoResidenceFactory(addPhotoResidenceRepository)
+        addPhotoResidenceViewModel = ViewModelProvider(
+            this,
+            factory
+        )[AddPhotoResidenceViewModel::class.java]
+
+        btn_next_update_listing.setOnClickListener {
+            for (image in imageList) {
+                if (image.url.isNotEmpty()) {
+                    Log.e("ImageList", "Image: ${image.url}")
+                    uploadImages(image.url)
+                }
+            }
+
+            val intent = Intent(this@UpdateResidenceActivity, FirstUpdateActivity::class.java)
+            startActivity(intent)
+
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -250,6 +271,45 @@ class UpdateResidenceActivity : BaseActivity() {
                 pickImageFromGallery.launch(galleryIntent)
             } else {
                 Toast.makeText(this@UpdateResidenceActivity, "Storage permission is required to access gallery", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun uploadImages(imageUrl: String) {
+        if (::selectedImage.isInitialized) {
+            val file = File(imageUrl)
+            val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            val body = MultipartBody.Part.createFormData("images", file.name, requestFile)
+            val token = AppReferences.getToken(this@UpdateResidenceActivity)
+            val residenceId = intent.getStringExtra("residence_id") ?: ""
+
+            addPhotoResidenceViewModel.uploadResidencePhoto(token, residenceId, body)
+
+            showProgressDialog(this@UpdateResidenceActivity, "Uploading your images...")
+
+            addPhotoResidenceViewModel.uploadPhotoResponseLiveData.observe(this@UpdateResidenceActivity) { response ->
+                hideProgressDialog()
+                response?.let {
+                    val status = it.status
+
+                    Log.e("status", status)
+
+                }
+            }
+
+            addPhotoResidenceViewModel.errorLiveData.observe(this@UpdateResidenceActivity) { error ->
+                hideProgressDialog()
+                error?.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(this@UpdateResidenceActivity, errorMessage, Toast.LENGTH_LONG).show()
+
+                        Log.e("Upload Image",  error)
+
+                    } catch (_: JSONException) {
+
+                    }
+                }
             }
         }
     }
