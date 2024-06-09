@@ -1,10 +1,19 @@
 package com.example.finalproject.ui.update_listing.activities
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +25,7 @@ import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.update_listing.adapter.UpdateListingPhotosAdapter
 import com.example.finalproject.ui.update_listing.factory.GetResidenceFactory
+import com.example.finalproject.ui.update_listing.models.Image
 import com.example.finalproject.ui.update_listing.repository.GetResidenceRepository
 import com.example.finalproject.ui.update_listing.viewModel.GetResidenceViewModel
 import com.google.android.material.chip.Chip
@@ -47,15 +57,44 @@ class UpdateResidenceActivity : BaseActivity() {
     private lateinit var recyclerView: RecyclerView
 
     private lateinit var adapter: UpdateListingPhotosAdapter
+
+    private lateinit var selectedImage: String
+
+    private var REQUEST_CODE_GALLERY = 0
+
+    private val imageList = arrayListOf(
+        Image("", "", "", isAddButton = true)
+    )
+
+    private val pickImageFromGallery =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let { uri ->
+                    selectedImage = getPathFromUri(uri)
+                    adapter.addImage(selectedImage)
+                }
+            }
+        }
+
+    private fun getPathFromUri(uri: Uri): String {
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = contentResolver.query(uri, projection, null, null, null)
+        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor?.moveToFirst()
+        val path = columnIndex?.let { cursor.getString(it) } ?: ""
+        cursor?.close()
+        return path
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_residence)
 
         recyclerView = findViewById(R.id.recyclerView_update_listing_photos)
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
-        adapter = UpdateListingPhotosAdapter()
-        recyclerView.adapter = adapter
+        adapter = UpdateListingPhotosAdapter(imageList) {
+            openImagePicker()
+        }
 
         val residenceId = intent.getStringExtra("residence_id")
         Log.e("Residence ID", residenceId.toString())
@@ -87,8 +126,13 @@ class UpdateResidenceActivity : BaseActivity() {
         )[GetResidenceViewModel::class.java]
 
         getResidence()
+
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        recyclerView.adapter = adapter
+
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun getResidence() {
         if(networkUtils.isNetworkAvailable()) {
             val token = AppReferences.getToken(this@UpdateResidenceActivity)
@@ -138,7 +182,19 @@ class UpdateResidenceActivity : BaseActivity() {
                         "villa" -> chip_villa_update.isChecked = true
                         "cottage" -> chip_cottage_update.isChecked = true
                     }
-                    
+
+                    if (response.residence.images.isNotEmpty()) {
+                        imageList.clear()
+                        for (image in response.residence.images) {
+                            imageList.add(Image(image._id, image.url, image.url, isAddButton = false))
+                        }
+                        imageList.add(Image("", "", "", isAddButton = true))
+                        adapter.notifyDataSetChanged()
+                    } else {
+                        Log.e("UpdateResidenceActivity", "No images found for this residence")
+                    }
+
+
                 }
 
                 getResidenceViewModel.errorLiveData.observe(this@UpdateResidenceActivity) { error ->
@@ -160,6 +216,41 @@ class UpdateResidenceActivity : BaseActivity() {
         }
         else {
             showErrorSnackBar("No internet connection", true)
+        }
+    }
+
+    private fun openImagePicker() {
+//        if (ContextCompat.checkSelfPermission(
+//                this,
+//                Manifest.permission.READ_EXTERNAL_STORAGE
+//            ) != PackageManager.PERMISSION_GRANTED
+//        ) {
+//            ActivityCompat.requestPermissions(
+//                this,
+//                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+//                REQUEST_CODE_GALLERY
+//            )
+//        } else {
+//            val intent = Intent(Intent.ACTION_PICK)
+//            intent.type = "image/*"
+//            pickImageFromGallery.launch(intent)
+//        }
+
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        intent.type = "image/*"
+        pickImageFromGallery.launch(galleryIntent)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_GALLERY) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                val galleryIntent = Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                pickImageFromGallery.launch(galleryIntent)
+            } else {
+                Toast.makeText(this@UpdateResidenceActivity, "Storage permission is required to access gallery", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
