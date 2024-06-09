@@ -23,10 +23,14 @@ import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.add_listing.factory.AddPhotoResidenceFactory
 import com.example.finalproject.ui.add_listing.repository.AddPhotoResidenceRepository
 import com.example.finalproject.ui.add_listing.viewModel.AddPhotoResidenceViewModel
+import com.example.finalproject.ui.complete_register.activities.MapActivity
 import com.example.finalproject.ui.update_listing.adapter.UpdateListingPhotosAdapter
+import com.example.finalproject.ui.update_listing.factory.DeleteResidenceImageFactory
 import com.example.finalproject.ui.update_listing.factory.GetResidenceFactory
 import com.example.finalproject.ui.update_listing.models.Image
+import com.example.finalproject.ui.update_listing.repository.DeleteResidenceImageRepository
 import com.example.finalproject.ui.update_listing.repository.GetResidenceRepository
+import com.example.finalproject.ui.update_listing.viewModel.DeleteResidenceImageViewModel
 import com.example.finalproject.ui.update_listing.viewModel.GetResidenceViewModel
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_update_residence.apartment_location_update_residence
@@ -42,6 +46,7 @@ import kotlinx.android.synthetic.main.activity_update_residence.chip_sell_update
 import kotlinx.android.synthetic.main.activity_update_residence.chip_villa_update
 import kotlinx.android.synthetic.main.activity_update_residence.et_home_name_update_listing
 import kotlinx.android.synthetic.main.activity_update_residence.image_update_residence
+import kotlinx.android.synthetic.main.activity_update_residence.select_map_update_listing
 import kotlinx.android.synthetic.main.activity_update_residence.toolbar_update_residence
 import kotlinx.android.synthetic.main.activity_update_residence.tv_apartment_update_residence
 import kotlinx.android.synthetic.main.activity_update_residence.tv_update_residence_3
@@ -60,6 +65,8 @@ class UpdateResidenceActivity : BaseActivity() {
 
     private lateinit var addPhotoResidenceViewModel: AddPhotoResidenceViewModel
 
+    private lateinit var deleteResidenceImageViewModel: DeleteResidenceImageViewModel
+
     private lateinit var recyclerView: RecyclerView
 
     private lateinit var adapter: UpdateListingPhotosAdapter
@@ -67,6 +74,8 @@ class UpdateResidenceActivity : BaseActivity() {
     private lateinit var selectedImage: String
 
     private var REQUEST_CODE_GALLERY = 0
+
+//    private var REQUEST_CODE_MAP = 1
 
     private val imageList = arrayListOf(
         Image("", "", "", isAddButton = true)
@@ -98,9 +107,14 @@ class UpdateResidenceActivity : BaseActivity() {
 
         recyclerView = findViewById(R.id.recyclerView_update_listing_photos)
         recyclerView.setHasFixedSize(true)
-        adapter = UpdateListingPhotosAdapter(imageList) {
-            openImagePicker()
-        }
+        adapter = UpdateListingPhotosAdapter(imageList,
+            onAddImageClick = {
+                openImagePicker()
+            },
+            onDeleteImageClick = { imageId ->
+                deleteResidenceImage(imageId)
+            }
+        )
 
         val residenceId = intent.getStringExtra("residence_id")
         Log.e("Residence ID", residenceId.toString())
@@ -151,6 +165,23 @@ class UpdateResidenceActivity : BaseActivity() {
             startActivity(intent)
 
         }
+
+        //        ********************* delete photo residence ****************
+
+        val deleteResidenceImageRepository = DeleteResidenceImageRepository(RetrofitClient.instance)
+        val factoryDeleteResidenceImage = DeleteResidenceImageFactory(deleteResidenceImageRepository)
+        deleteResidenceImageViewModel = ViewModelProvider(
+            this@UpdateResidenceActivity,
+            factoryDeleteResidenceImage
+        )[DeleteResidenceImageViewModel::class.java]
+
+//        select_map_update_listing.setOnClickListener {
+//            val mapIntent = Intent(this@UpdateResidenceActivity, MapActivity::class.java)
+//            val residenceLocation = getResidenceViewModel.getResidenceResponseLiveData.value?.residence?.location
+//            mapIntent.putExtra("latitude", residenceLocation?.coordinates?.get(0))
+//            mapIntent.putExtra("longitude", residenceLocation?.coordinates?.get(1))
+//            startActivityForResult(mapIntent, REQUEST_CODE_MAP)
+//        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -314,6 +345,38 @@ class UpdateResidenceActivity : BaseActivity() {
         }
     }
 
+    private fun deleteResidenceImage(imageId: String) {
+        val token = AppReferences.getToken(this@UpdateResidenceActivity)
+        deleteResidenceImageViewModel.deleteImage(token, imageId)
+
+        showProgressDialog(this@UpdateResidenceActivity, "Deleting your image...")
+
+        deleteResidenceImageViewModel.deleteResidenceImageResponseLiveData.observe(this@UpdateResidenceActivity) { response ->
+            hideProgressDialog()
+            response?.let {
+                val status = it.status
+
+                Log.e("status", status)
+
+            }
+        }
+
+        deleteResidenceImageViewModel.errorLiveData.observe(this@UpdateResidenceActivity) { error ->
+            hideProgressDialog()
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(this@UpdateResidenceActivity, errorMessage, Toast.LENGTH_LONG).show()
+
+                    Log.e("Delete Image",  error)
+
+                } catch (_: JSONException) {
+
+                }
+            }
+        }
+    }
+
     private fun initChips(){
         val chipIds = listOf(
             R.id.chip_rent_update, R.id.chip_sell_update,
@@ -357,5 +420,16 @@ class UpdateResidenceActivity : BaseActivity() {
             onBackPressed()
         }
     }
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == REQUEST_CODE_MAP && resultCode == Activity.RESULT_OK) {
+//            data?.let {
+//                val latitude = it.getDoubleExtra("latitude", 0.0)
+//                val longitude = it.getDoubleExtra("longitude", 0.0)
+//                val address = it.getStringExtra("address")
+//            }
+//        }
+//    }
 
 }

@@ -15,7 +15,8 @@ import kotlinx.android.synthetic.main.each_row_update_listing_photos.view.img_up
 
 class UpdateListingPhotosAdapter(
     private val list: ArrayList<Image>,
-    private val onAddImageClick: () -> Unit
+    private val onAddImageClick: () -> Unit,
+    private val onDeleteImageClick: (String) -> Unit
 ) : RecyclerView.Adapter<UpdateListingPhotosAdapter.MyViewHolder>(){
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -57,6 +58,7 @@ class UpdateListingPhotosAdapter(
                 .into(holder.itemView.img_update_listing_photos)
 
             holder.itemView.floating_action_delete_update.setOnClickListener {
+                onDeleteImageClick.invoke(x._id)
                 list.removeAt(position)
                 notifyDataSetChanged()
             }
