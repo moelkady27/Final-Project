@@ -27,11 +27,14 @@ import com.example.finalproject.ui.complete_register.activities.MapActivity
 import com.example.finalproject.ui.update_listing.adapter.UpdateListingPhotosAdapter
 import com.example.finalproject.ui.update_listing.factory.DeleteResidenceImageFactory
 import com.example.finalproject.ui.update_listing.factory.GetResidenceFactory
+import com.example.finalproject.ui.update_listing.factory.UpdateResidenceFactory
 import com.example.finalproject.ui.update_listing.models.Image
 import com.example.finalproject.ui.update_listing.repository.DeleteResidenceImageRepository
 import com.example.finalproject.ui.update_listing.repository.GetResidenceRepository
+import com.example.finalproject.ui.update_listing.repository.UpdateResidenceRepository
 import com.example.finalproject.ui.update_listing.viewModel.DeleteResidenceImageViewModel
 import com.example.finalproject.ui.update_listing.viewModel.GetResidenceViewModel
+import com.example.finalproject.ui.update_listing.viewModel.UpdateResidenceViewModel
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_update_residence.apartment_location_update_residence
 import kotlinx.android.synthetic.main.activity_update_residence.apartment_name_update_residence
@@ -66,6 +69,8 @@ class UpdateResidenceActivity : BaseActivity() {
     private lateinit var addPhotoResidenceViewModel: AddPhotoResidenceViewModel
 
     private lateinit var deleteResidenceImageViewModel: DeleteResidenceImageViewModel
+
+    private lateinit var updateResidenceViewModel: UpdateResidenceViewModel
 
     private lateinit var recyclerView: RecyclerView
 
@@ -153,12 +158,62 @@ class UpdateResidenceActivity : BaseActivity() {
             factory
         )[AddPhotoResidenceViewModel::class.java]
 
+        //        ********************* update residence ****************
+
+        val updateResidenceRepository = UpdateResidenceRepository(RetrofitClient.instance)
+        val factoryUpdateResidence = UpdateResidenceFactory(updateResidenceRepository)
+        updateResidenceViewModel = ViewModelProvider(
+            this@UpdateResidenceActivity, factoryUpdateResidence
+        )[UpdateResidenceViewModel::class.java]
+
         btn_next_update_listing.setOnClickListener {
             for (image in imageList) {
                 if (image.url.isNotEmpty()) {
                     Log.e("ImageList", "Image: ${image.url}")
                     uploadImages(image.url)
                 }
+            }
+
+            val title = et_home_name_update_listing.text.toString()
+            val type = if (chip_rent_update.isChecked) "rent" else "sale"
+            val category = when {
+                chip_house_update.isChecked -> "house"
+                chip_apartment_update.isChecked -> "apartment"
+                chip_hotel_update.isChecked -> "hotel"
+                chip_villa_update.isChecked -> "villa"
+                chip_cottage_update.isChecked -> "cottage"
+                else -> ""
+            }
+
+            if (isValidInput()) {
+                showProgressDialog(this@UpdateResidenceActivity , "please wait...")
+                val token = AppReferences.getToken(this@UpdateResidenceActivity)
+                val residenceId = intent.getStringExtra("residence_id").toString()
+                updateResidenceViewModel.updateResidence(token, residenceId, title, type, category)
+
+                updateResidenceViewModel.updateResidenceResponseLiveData.observe(this@UpdateResidenceActivity) { response ->
+                    hideProgressDialog()
+                    response?.let {
+                        val status = it.status
+                        Log.e("status", status)
+                    }
+                }
+
+                updateResidenceViewModel.errorLiveData.observe(this@UpdateResidenceActivity) { error ->
+                    hideProgressDialog()
+                    error?.let {
+                        try {
+                            val errorMessage = JSONObject(error).getString("message")
+                            Toast.makeText(this@UpdateResidenceActivity, errorMessage, Toast.LENGTH_LONG).show()
+                            Log.e("UpdateResidenceActivity", "Update Error: $errorMessage")
+                        } catch (e: JSONException) {
+                            Toast.makeText(this@UpdateResidenceActivity, error, Toast.LENGTH_LONG).show()
+                            Log.e("error is ", error)
+                        }
+                    }
+                }
+            } else {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
 
             val intent = Intent(this@UpdateResidenceActivity, FirstUpdateActivity::class.java)
@@ -169,7 +224,8 @@ class UpdateResidenceActivity : BaseActivity() {
         //        ********************* delete photo residence ****************
 
         val deleteResidenceImageRepository = DeleteResidenceImageRepository(RetrofitClient.instance)
-        val factoryDeleteResidenceImage = DeleteResidenceImageFactory(deleteResidenceImageRepository)
+        val factoryDeleteResidenceImage =
+            DeleteResidenceImageFactory(deleteResidenceImageRepository)
         deleteResidenceImageViewModel = ViewModelProvider(
             this@UpdateResidenceActivity,
             factoryDeleteResidenceImage
@@ -182,6 +238,35 @@ class UpdateResidenceActivity : BaseActivity() {
 //            mapIntent.putExtra("longitude", residenceLocation?.coordinates?.get(1))
 //            startActivityForResult(mapIntent, REQUEST_CODE_MAP)
 //        }
+    }
+
+    private fun isValidInput(): Boolean {
+        val title = et_home_name_update_listing.text.toString()
+        val type = if (chip_rent_update.isChecked) "rent" else "sale"
+        val category = when {
+            chip_house_update.isChecked -> "house"
+            chip_apartment_update.isChecked -> "apartment"
+            chip_hotel_update.isChecked -> "hotel"
+            chip_villa_update.isChecked -> "villa"
+            chip_cottage_update.isChecked -> "cottage"
+            else -> ""
+        }
+
+        if (title.isEmpty()) {
+            et_home_name_update_listing.error = "Title is required"
+            return false
+        }
+
+        if (type.isEmpty()) {
+            Toast.makeText(this, "Please select type", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (category.isEmpty()) {
+            Toast.makeText(this, "Please select category", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
     }
 
     @SuppressLint("NotifyDataSetChanged")
