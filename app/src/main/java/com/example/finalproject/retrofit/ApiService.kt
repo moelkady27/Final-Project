@@ -59,6 +59,7 @@ import com.example.finalproject.ui.setting.request.DeleteAccountRequest
 import com.example.finalproject.ui.update_listing.models.DeleteResidenceImageResponse
 import com.example.finalproject.ui.update_listing.models.GetResidenceResponse
 import com.example.finalproject.ui.update_listing.models.UpdateResidenceResponse
+import com.example.finalproject.ui.update_listing.request.FirstUpdateRequest
 import com.example.finalproject.ui.update_listing.request.UpdateResidenceRequest
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -352,4 +353,12 @@ interface ApiService {
         @Path("residenceId") residenceId: String,
         @Body req: UpdateResidenceRequest
     ): Call<UpdateResidenceResponse>
+
+    @PATCH("api/v1/residence/update/1st/{residenceId}")
+    fun firstUpdate(
+        @Body req: FirstUpdateRequest,
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String
+    ): Call<UpdateResidenceResponse>
+    
 }

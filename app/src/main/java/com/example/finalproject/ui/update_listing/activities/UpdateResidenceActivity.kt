@@ -23,7 +23,6 @@ import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.add_listing.factory.AddPhotoResidenceFactory
 import com.example.finalproject.ui.add_listing.repository.AddPhotoResidenceRepository
 import com.example.finalproject.ui.add_listing.viewModel.AddPhotoResidenceViewModel
-import com.example.finalproject.ui.complete_register.activities.MapActivity
 import com.example.finalproject.ui.update_listing.adapter.UpdateListingPhotosAdapter
 import com.example.finalproject.ui.update_listing.factory.DeleteResidenceImageFactory
 import com.example.finalproject.ui.update_listing.factory.GetResidenceFactory
@@ -49,7 +48,6 @@ import kotlinx.android.synthetic.main.activity_update_residence.chip_sell_update
 import kotlinx.android.synthetic.main.activity_update_residence.chip_villa_update
 import kotlinx.android.synthetic.main.activity_update_residence.et_home_name_update_listing
 import kotlinx.android.synthetic.main.activity_update_residence.image_update_residence
-import kotlinx.android.synthetic.main.activity_update_residence.select_map_update_listing
 import kotlinx.android.synthetic.main.activity_update_residence.toolbar_update_residence
 import kotlinx.android.synthetic.main.activity_update_residence.tv_apartment_update_residence
 import kotlinx.android.synthetic.main.activity_update_residence.tv_update_residence_3
@@ -185,10 +183,12 @@ class UpdateResidenceActivity : BaseActivity() {
                 else -> ""
             }
 
+            val token = AppReferences.getToken(this@UpdateResidenceActivity)
+
+            val residenceId = intent.getStringExtra("residence_id").toString()
+
             if (isValidInput()) {
                 showProgressDialog(this@UpdateResidenceActivity , "please wait...")
-                val token = AppReferences.getToken(this@UpdateResidenceActivity)
-                val residenceId = intent.getStringExtra("residence_id").toString()
                 updateResidenceViewModel.updateResidence(token, residenceId, title, type, category)
 
                 updateResidenceViewModel.updateResidenceResponseLiveData.observe(this@UpdateResidenceActivity) { response ->
@@ -217,6 +217,7 @@ class UpdateResidenceActivity : BaseActivity() {
             }
 
             val intent = Intent(this@UpdateResidenceActivity, FirstUpdateActivity::class.java)
+            intent.putExtra("residence_id", residenceId)
             startActivity(intent)
 
         }
