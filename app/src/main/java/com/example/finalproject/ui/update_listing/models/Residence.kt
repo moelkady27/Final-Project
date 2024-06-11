@@ -75,5 +75,6 @@ data class Residence(
     val totalsf: Int,
     val type: String,
     val updatedAt: String,
-    val utilities: String
+    val utilities: String,
+    val condition2: String,
 )
