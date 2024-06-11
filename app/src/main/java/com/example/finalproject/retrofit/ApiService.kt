@@ -60,7 +60,9 @@ import com.example.finalproject.ui.update_listing.models.DeleteResidenceImageRes
 import com.example.finalproject.ui.update_listing.models.GetResidenceResponse
 import com.example.finalproject.ui.update_listing.models.UpdateResidenceResponse
 import com.example.finalproject.ui.update_listing.request.FirstUpdateRequest
+import com.example.finalproject.ui.update_listing.request.FourthUpdateRequest
 import com.example.finalproject.ui.update_listing.request.SecondUpdateRequest
+import com.example.finalproject.ui.update_listing.request.ThirdUpdateRequest
 import com.example.finalproject.ui.update_listing.request.UpdateResidenceRequest
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -365,6 +367,20 @@ interface ApiService {
     @PATCH("api/v1/residence/update/2nd/{residenceId}")
     fun secondUpdate(
         @Body req: SecondUpdateRequest,
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String
+    ): Call<UpdateResidenceResponse>
+
+    @PATCH("api/v1/residence/update/3rd/{residenceId}")
+    fun thirdUpdate(
+        @Body req: ThirdUpdateRequest,
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String
+    ): Call<UpdateResidenceResponse>
+
+    @PATCH("api/v1/residence/update/4th/{residenceId}")
+    fun fourthUpdate(
+        @Body req: FourthUpdateRequest,
         @Header("Authorization") token: String,
         @Path("residenceId") residenceId: String
     ): Call<UpdateResidenceResponse>
