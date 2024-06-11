@@ -51,8 +51,8 @@ class FeaturedViewAllAdapter(
 
         holder.itemView.tv_apartment_view_all.text = featuredEstates.category
         holder.itemView.apartment_name_featured_view_all.text = featuredEstates.title
-//        holder.itemView.apartment_location_featured_view_all.text =
-//            featuredEstates.location.fullAddress
+        holder.itemView.apartment_location_featured_view_all.text =
+            featuredEstates.location.fullAddress
         holder.itemView.apartment_price_featured_view_all.text =
             featuredEstates.salePrice.toString()
         holder.itemView.home_featured_view_all_title_3.text = featuredEstates.paymentPeriod
