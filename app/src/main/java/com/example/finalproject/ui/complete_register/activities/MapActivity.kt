@@ -71,6 +71,12 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
 
         initView()
 
+//        val latitude = intent.getDoubleExtra("latitude", 0.0)
+//        val longitude = intent.getDoubleExtra("longitude", 0.0)
+//        selectedLocation = LatLng(latitude, longitude)
+//        locationSelected = true
+//
+//        Log.e("MapActivity", "Latitude: $latitude, Longitude: $longitude")
     }
 
     private fun initView() {

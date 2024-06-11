@@ -43,7 +43,7 @@ class HomeFeaturedAdapter(
 
         holder.itemView.tv_apartment_view_all.text = homeFeatured.category
         holder.itemView.apartment_name_featured_estates.text = homeFeatured.title
-        holder.itemView.apartment_location_featured_estates.text = homeFeatured.location.fullAddress
+//        holder.itemView.apartment_location_featured_estates.text = homeFeatured.location.fullAddress
         holder.itemView.apartment_price_featured_estates.text = homeFeatured.salePrice.toString()
         holder.itemView.tv_featured_estates_3.text = homeFeatured.paymentPeriod
 

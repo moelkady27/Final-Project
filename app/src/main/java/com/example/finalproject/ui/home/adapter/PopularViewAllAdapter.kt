@@ -9,10 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
-import com.example.finalproject.ui.home.models.Residence
 import com.example.finalproject.ui.home.models.ResidenceX
-import kotlinx.android.synthetic.main.each_row_featured_view_all.view.image_featured_view_all
-import kotlinx.android.synthetic.main.each_row_featured_view_all.view.iv_featured_view_all_fav
 import kotlinx.android.synthetic.main.each_row_popular_view_all.view.image_popular_view_all
 import kotlinx.android.synthetic.main.each_row_popular_view_all.view.iv_popular_view_all_favourite
 import kotlinx.android.synthetic.main.each_row_popular_view_all.view.popular_view_all_title_1

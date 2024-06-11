@@ -1,7 +1,6 @@
 package com.example.finalproject.ui.home.repository
 
 import com.example.finalproject.retrofit.ApiService
-import com.example.finalproject.ui.home.models.GetAllResidencesResponse
 import com.example.finalproject.ui.home.models.GetNearestResidencesResponse
 import retrofit2.Call
 
