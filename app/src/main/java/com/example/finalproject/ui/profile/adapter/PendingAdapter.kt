@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.ui.profile.models.Residence
 import kotlinx.android.synthetic.main.each_row_pending_profile.view.iv_image_pending_profile
+import kotlinx.android.synthetic.main.each_row_pending_profile.view.iv_pending_profile_favourite
 import kotlinx.android.synthetic.main.each_row_pending_profile.view.number_star_pending_profile
 import kotlinx.android.synthetic.main.each_row_pending_profile.view.tv_pending_profile_rent
 import kotlinx.android.synthetic.main.each_row_pending_profile.view.tv_pending_profile_title_1
@@ -54,6 +55,8 @@ class PendingAdapter(
                     .load(R.drawable.image_pending)
                     .into(iv_image_pending_profile)
             }
+
+            iv_pending_profile_favourite.visibility = View.GONE
         }
     }
 
