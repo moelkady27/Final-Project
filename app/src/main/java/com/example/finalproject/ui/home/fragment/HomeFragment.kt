@@ -7,15 +7,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.add_listing.activities.CreateResidenceActivity
+import com.example.finalproject.ui.chat.activities.ChatListUsersActivity
 import com.example.finalproject.ui.home.activities.FeaturedEstatesActivity
 import com.example.finalproject.ui.home.activities.PopularNearestYouActivity
 import com.example.finalproject.ui.home.activities.SearchResultsActivity
@@ -27,11 +30,25 @@ import com.example.finalproject.ui.home.repository.HomeFeaturedEstatesRepository
 import com.example.finalproject.ui.home.repository.HomePopularEstatesRepository
 import com.example.finalproject.ui.home.viewModel.HomeFeaturedEstatesViewModel
 import com.example.finalproject.ui.home.viewModel.HomePopularEstatesViewModel
+import com.example.finalproject.ui.profile.factory.GetUserInfoFactory
+import com.example.finalproject.ui.profile.repository.GetUserInfoRepository
+import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
+import kotlinx.android.synthetic.main.activity_edit_profile.edt_first_name
+import kotlinx.android.synthetic.main.activity_edit_profile.edt_gender
+import kotlinx.android.synthetic.main.activity_edit_profile.edt_last_name
+import kotlinx.android.synthetic.main.activity_edit_profile.edt_phone_number
+import kotlinx.android.synthetic.main.activity_edit_profile.edt_user_name
+import kotlinx.android.synthetic.main.activity_edit_profile.floatingActionButton_delete
+import kotlinx.android.synthetic.main.activity_edit_profile.ib_upload_preview
 import kotlinx.android.synthetic.main.fragment_home.iv_add_list_home
+import kotlinx.android.synthetic.main.fragment_home.iv_chat_home
 import kotlinx.android.synthetic.main.fragment_home.iv_search_home
 import kotlinx.android.synthetic.main.fragment_home.tv_home_title_3
 import kotlinx.android.synthetic.main.fragment_home.tv_home_title_5
+import kotlinx.android.synthetic.main.fragment_home.tv_location_home_title_2
 import kotlinx.android.synthetic.main.fragment_home.tv_search_home
+import org.json.JSONException
+import org.json.JSONObject
 
 class HomeFragment : Fragment() {
     private lateinit var baseActivity: BaseActivity
@@ -47,6 +64,8 @@ class HomeFragment : Fragment() {
     private lateinit var homePopularAdapter: HomePopularAdapter
 
     private lateinit var homeFeaturedAdapter: HomeFeaturedAdapter
+
+    private lateinit var getUserInfoViewModel: GetUserInfoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,6 +145,46 @@ class HomeFragment : Fragment() {
                 Log.e("HomePopularEstates", it.residences.size.toString())
             }
         }
+
+                            /* user location */
+
+        val getUserInfoRepository = GetUserInfoRepository(RetrofitClient.instance)
+        val factoryGetUser = GetUserInfoFactory(getUserInfoRepository)
+        getUserInfoViewModel = ViewModelProvider(
+            this@HomeFragment, factoryGetUser)[GetUserInfoViewModel::class.java]
+
+        getUserInfo()
+    }
+
+    private fun getUserInfo() {
+        getUserInfoViewModel.getUserInfo(AppReferences.getToken(requireContext()))
+
+        getUserInfoViewModel.getUserInfoResponseLiveData.observe(viewLifecycleOwner
+        ) { response ->
+            baseActivity.hideProgressDialog()
+            response?.let {
+                response.user.let { user ->
+                    val location = user.location.fullAddress
+
+                    tv_location_home_title_2.text = location
+                }
+            }
+        }
+
+        getUserInfoViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
+            baseActivity.hideProgressDialog()
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+
+                    Log.e("EditProfileActivity", "Error Update: $errorMessage")
+
+                } catch (e: JSONException) {
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     private fun initButtons(){
@@ -152,6 +211,10 @@ class HomeFragment : Fragment() {
         iv_search_home.setOnClickListener {
             val intent = Intent(requireContext(), SearchResultsActivity::class.java)
             startActivity(intent)
+        }
+
+        iv_chat_home.setOnClickListener {
+            startActivity(Intent(requireContext(), ChatListUsersActivity::class.java))
         }
     }
 }

@@ -62,6 +62,8 @@
                     android:text="Manhattan, New York"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="12sp"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/iv_notification_home"
                     app:layout_constraintStart_toEndOf="@+id/iv_location_home"
