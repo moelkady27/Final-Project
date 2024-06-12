@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
@@ -12,12 +13,15 @@ import kotlinx.android.synthetic.main.each_row_home_popular.view.home_popular_ti
 import kotlinx.android.synthetic.main.each_row_home_popular.view.home_popular_title_3
 import kotlinx.android.synthetic.main.each_row_home_popular.view.home_popular_title_5
 import kotlinx.android.synthetic.main.each_row_home_popular.view.image_home_popular
+import kotlinx.android.synthetic.main.each_row_home_popular.view.iv_home_popular_favourite
 import kotlinx.android.synthetic.main.each_row_home_popular.view.tv_home_popular_location
+import kotlinx.android.synthetic.main.each_row_popular_view_all.view.iv_popular_view_all_favourite
 import java.util.Random
 import kotlin.math.min
 
 class HomePopularAdapter(
-    private val list: MutableList<ResidenceX>
+    private val list: MutableList<ResidenceX>,
+    private val onFavouriteClick: (String, Boolean) -> Unit
 ): RecyclerView.Adapter<HomePopularAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -54,6 +58,20 @@ class HomePopularAdapter(
                 .load(R.drawable.home_image)
                 .into(holder.itemView.image_home_popular)
         }
+
+        val isLiked = homePopular.isLiked
+
+        if (isLiked) {
+            holder.itemView.iv_home_popular_favourite.backgroundTintList =
+                ContextCompat.getColorStateList(holder.itemView.context, R.color.colorPrimary)
+        } else {
+            holder.itemView.iv_home_popular_favourite.backgroundTintList =
+                ContextCompat.getColorStateList(holder.itemView.context, R.color.edit_text)
+        }
+
+        holder.itemView.iv_home_popular_favourite.setOnClickListener {
+            onFavouriteClick(homePopular._id, homePopular.isLiked)
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -65,4 +83,9 @@ class HomePopularAdapter(
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateFavouriteStatus(residenceId: String, isLiked: Boolean) {
+        list.find { it._id == residenceId }?.isLiked = isLiked
+        notifyDataSetChanged()
+    }
 }

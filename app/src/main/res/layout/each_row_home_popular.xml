@@ -130,9 +130,9 @@
         android:id="@+id/iv_home_popular_favourite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/favourites"
         app:layout_constraintBottom_toBottomOf="@+id/tv_home_popular_location"
         app:layout_constraintEnd_toEndOf="@+id/cv_image_home_popular"
-        app:layout_constraintTop_toTopOf="@+id/tv_home_popular_location"
-        app:srcCompat="@drawable/favourites" />
+        app:layout_constraintTop_toTopOf="@+id/tv_home_popular_location" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

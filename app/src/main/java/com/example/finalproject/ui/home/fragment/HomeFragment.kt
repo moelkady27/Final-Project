@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.retrofit.RetrofitClient
@@ -19,6 +18,12 @@ import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.add_listing.activities.CreateResidenceActivity
 import com.example.finalproject.ui.chat.activities.ChatListUsersActivity
+import com.example.finalproject.ui.favourite.factory.AddToFavouritesFactory
+import com.example.finalproject.ui.favourite.factory.DeleteFavouriteFactory
+import com.example.finalproject.ui.favourite.repository.AddToFavouritesRepository
+import com.example.finalproject.ui.favourite.repository.DeleteFavouriteRepository
+import com.example.finalproject.ui.favourite.viewModel.AddToFavouritesViewModel
+import com.example.finalproject.ui.favourite.viewModel.DeleteFavouriteViewModel
 import com.example.finalproject.ui.home.activities.FeaturedEstatesActivity
 import com.example.finalproject.ui.home.activities.PopularNearestYouActivity
 import com.example.finalproject.ui.home.activities.SearchResultsActivity
@@ -33,13 +38,6 @@ import com.example.finalproject.ui.home.viewModel.HomePopularEstatesViewModel
 import com.example.finalproject.ui.profile.factory.GetUserInfoFactory
 import com.example.finalproject.ui.profile.repository.GetUserInfoRepository
 import com.example.finalproject.ui.profile.viewModels.GetUserInfoViewModel
-import kotlinx.android.synthetic.main.activity_edit_profile.edt_first_name
-import kotlinx.android.synthetic.main.activity_edit_profile.edt_gender
-import kotlinx.android.synthetic.main.activity_edit_profile.edt_last_name
-import kotlinx.android.synthetic.main.activity_edit_profile.edt_phone_number
-import kotlinx.android.synthetic.main.activity_edit_profile.edt_user_name
-import kotlinx.android.synthetic.main.activity_edit_profile.floatingActionButton_delete
-import kotlinx.android.synthetic.main.activity_edit_profile.ib_upload_preview
 import kotlinx.android.synthetic.main.fragment_home.iv_add_list_home
 import kotlinx.android.synthetic.main.fragment_home.iv_chat_home
 import kotlinx.android.synthetic.main.fragment_home.iv_search_home
@@ -66,6 +64,10 @@ class HomeFragment : Fragment() {
     private lateinit var homeFeaturedAdapter: HomeFeaturedAdapter
 
     private lateinit var getUserInfoViewModel: GetUserInfoViewModel
+
+    private lateinit var addToFavouritesViewModel: AddToFavouritesViewModel
+
+    private lateinit var deleteFavouriteViewModel: DeleteFavouriteViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,7 +135,7 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext() ,
             LinearLayoutManager.HORIZONTAL , false)
 
-        homePopularAdapter = HomePopularAdapter(mutableListOf())
+        homePopularAdapter = HomePopularAdapter(mutableListOf(), ::handleFavouriteClick)
         recyclerView.adapter = homePopularAdapter
 
         homePopularEstatesViewModel.getPopularEstates(token)
@@ -182,6 +184,103 @@ class HomeFragment : Fragment() {
 
                 } catch (e: JSONException) {
                     Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun handleFavouriteClick(residenceId: String, isLiked: Boolean) {
+        if (!isLiked) {
+
+                                /* Add To Favourites */
+
+            val addToFavouritesRepository = AddToFavouritesRepository(RetrofitClient.instance)
+            val addToFavouritesFactory = AddToFavouritesFactory(addToFavouritesRepository)
+            addToFavouritesViewModel = ViewModelProvider(
+                this@HomeFragment, addToFavouritesFactory
+            )[AddToFavouritesViewModel::class.java]
+
+            val token = AppReferences.getToken(requireContext())
+
+            addToFavouritesViewModel.addToFavourites(token, residenceId)
+
+            addToFavouritesViewModel.addToFavouritesLiveData.removeObservers(this)
+            addToFavouritesViewModel.addToFavouritesLiveData.observe(
+                this@HomeFragment) { response ->
+                baseActivity.hideProgressDialog()
+                response?.let {
+                    val status = it.status
+                    Log.e("AddToFavourites", "Added to Favourites $status")
+                    homePopularAdapter.updateFavouriteStatus(residenceId, true)
+                }
+            }
+
+            addToFavouritesViewModel.errorLiveData.removeObservers(this)
+            addToFavouritesViewModel.errorLiveData.observe(this@HomeFragment) { error ->
+                baseActivity.hideProgressDialog()
+                error.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(
+                            requireContext(),
+                            errorMessage,
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        Log.e("AddToFavourites", errorMessage)
+                    } catch (e: JSONException) {
+                        Toast.makeText(
+                            requireContext(),
+                            error,
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        Log.e("AddToFavourites error is", error)
+                    }
+                }
+            }
+
+        } else {
+                                    /* Delete Favourite */
+
+            val deleteFavouritesRepository = DeleteFavouriteRepository(RetrofitClient.instance)
+            val deleteFavouriteFactory = DeleteFavouriteFactory(deleteFavouritesRepository)
+            deleteFavouriteViewModel = ViewModelProvider(
+                this@HomeFragment, deleteFavouriteFactory
+            )[DeleteFavouriteViewModel::class.java]
+
+            val token = AppReferences.getToken(requireContext())
+            deleteFavouriteViewModel.deleteFavourite(token, residenceId)
+
+            deleteFavouriteViewModel.deleteFavouriteLiveData.removeObservers(this)
+            deleteFavouriteViewModel.deleteFavouriteLiveData.observe(
+                this@HomeFragment) { response ->
+                baseActivity.hideProgressDialog()
+                response?.let {
+                    val status = it.status
+                    Log.e("DeleteFavourite", "Deleted from Favourites $status")
+                    homePopularAdapter.updateFavouriteStatus(residenceId, false)
+                }
+            }
+
+            deleteFavouriteViewModel.errorLiveData.removeObservers(this)
+            deleteFavouriteViewModel.errorLiveData.observe(this@HomeFragment) { error ->
+                baseActivity.hideProgressDialog()
+                error.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(
+                            requireContext(),
+                            errorMessage,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } catch (e: JSONException) {
+                        Toast.makeText(
+                            requireContext(),
+                            error,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
         }
