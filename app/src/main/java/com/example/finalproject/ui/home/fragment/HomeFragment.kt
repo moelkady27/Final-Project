@@ -108,7 +108,7 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext() ,
             LinearLayoutManager.VERTICAL , false)
 
-        homeFeaturedAdapter = HomeFeaturedAdapter(mutableListOf())
+        homeFeaturedAdapter = HomeFeaturedAdapter(mutableListOf(), ::handleFavouriteClick)
         recyclerView.adapter = homeFeaturedAdapter
 
         val token = AppReferences.getToken(requireContext())
@@ -212,6 +212,7 @@ class HomeFragment : Fragment() {
                     val status = it.status
                     Log.e("AddToFavourites", "Added to Favourites $status")
                     homePopularAdapter.updateFavouriteStatus(residenceId, true)
+                    homeFeaturedAdapter.updateFavouriteStatus(residenceId, true)
                 }
             }
 
@@ -260,6 +261,7 @@ class HomeFragment : Fragment() {
                     val status = it.status
                     Log.e("DeleteFavourite", "Deleted from Favourites $status")
                     homePopularAdapter.updateFavouriteStatus(residenceId, false)
+                    homeFeaturedAdapter.updateFavouriteStatus(residenceId, false)
                 }
             }
 

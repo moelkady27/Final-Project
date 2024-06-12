@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
@@ -12,13 +13,15 @@ import kotlinx.android.synthetic.main.each_row_featured_estates.view.apartment_l
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.apartment_name_featured_estates
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.apartment_price_featured_estates
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.image_featured_estates
+import kotlinx.android.synthetic.main.each_row_featured_estates.view.iv_featured_estates_fav
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.tv_apartment_view_all
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.tv_featured_estates_3
 import java.util.Random
 import kotlin.math.min
 
 class HomeFeaturedAdapter(
-    private val list: MutableList<Residence>
+    private val list: MutableList<Residence>,
+    private val onFavouriteClick: (String, Boolean) -> Unit
 ): RecyclerView.Adapter<HomeFeaturedAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -57,6 +60,19 @@ class HomeFeaturedAdapter(
                 .into(holder.itemView.image_featured_estates)
         }
 
+        val isLiked = homeFeatured.isLiked
+
+        if (isLiked) {
+            holder.itemView.iv_featured_estates_fav.backgroundTintList =
+                ContextCompat.getColorStateList(holder.itemView.context, R.color.colorPrimary)
+        } else {
+            holder.itemView.iv_featured_estates_fav.backgroundTintList =
+                ContextCompat.getColorStateList(holder.itemView.context, R.color.edit_text)
+        }
+
+        holder.itemView.iv_featured_estates_fav.setOnClickListener {
+            onFavouriteClick(homeFeatured._id, homeFeatured.isLiked)
+        }
     }
 
 //    fun addItems(newItems: List<Residence>) {
@@ -71,6 +87,12 @@ class HomeFeaturedAdapter(
         val shuffledItems = items.shuffled(random)
         val selectedItems = shuffledItems.take(5)
         list.addAll(selectedItems)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateFavouriteStatus(residenceId: String, isLiked: Boolean) {
+        list.find { it._id == residenceId }?.isLiked = isLiked
         notifyDataSetChanged()
     }
 }
