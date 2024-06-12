@@ -1,8 +1,8 @@
 
 package com.example.finalproject.ui.home.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +10,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
-import com.example.finalproject.storage.AppReferences
-import com.example.finalproject.ui.favourite.viewModel.DeleteFavouriteViewModel
 import com.example.finalproject.ui.home.models.Residence
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.apartment_location_featured_view_all
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.apartment_name_featured_view_all
@@ -24,14 +22,10 @@ import kotlinx.android.synthetic.main.each_row_featured_view_all.view.tv_apartme
 class FeaturedViewAllAdapter(
     private val context: Context,
     private val list: MutableList<Residence>,
-    private val onItemClicked: (Residence, Boolean) -> Unit
+    private val onFavouriteClick: (String, Boolean) -> Unit
 ): RecyclerView.Adapter<FeaturedViewAllAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
-
-    private val clickedItems = mutableSetOf<Int>()
-
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("liked_residences", Context.MODE_PRIVATE)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -67,28 +61,18 @@ class FeaturedViewAllAdapter(
                 .into(holder.itemView.image_featured_view_all)
         }
 
-        val isLiked = sharedPreferences.getBoolean(featuredEstates._id, false)
-        featuredEstates.isLiked = isLiked
+        val isLiked = featuredEstates.isLiked
 
         if (isLiked) {
             holder.itemView.iv_featured_view_all_fav.backgroundTintList =
-                ContextCompat.getColorStateList(holder.itemView.context, R.color.colorPrimary)
+                ContextCompat.getColorStateList(context, R.color.colorPrimary)
         } else {
             holder.itemView.iv_featured_view_all_fav.backgroundTintList =
-                ContextCompat.getColorStateList(holder.itemView.context, R.color.edit_text)
+                ContextCompat.getColorStateList(context, R.color.edit_text)
         }
 
         holder.itemView.iv_featured_view_all_fav.setOnClickListener {
-            val newLikedState = !isLiked
-            featuredEstates.isLiked = newLikedState
-            saveLikedState(featuredEstates._id, newLikedState)
-            notifyItemChanged(position)
-            onItemClicked(featuredEstates, newLikedState)
-
-//            if (!newLikedState) {
-//                val token = AppReferences.getToken(context)
-//                deleteFavouriteViewModel.deleteFavourite(token, featuredEstates._id)
-//            }
+            onFavouriteClick(featuredEstates._id, featuredEstates.isLiked)
         }
 
 
@@ -100,7 +84,9 @@ class FeaturedViewAllAdapter(
         notifyItemRangeInserted(startPosition, newItems.size)
     }
 
-    private fun saveLikedState(residenceId: String, isLiked: Boolean) {
-        sharedPreferences.edit().putBoolean(residenceId, isLiked).apply()
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateFavouriteStatus(residenceId: String, isLiked: Boolean) {
+        list.find { it._id == residenceId }?.isLiked = isLiked
+        notifyDataSetChanged()
     }
 }

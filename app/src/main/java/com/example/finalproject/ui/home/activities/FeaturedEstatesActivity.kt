@@ -3,7 +3,6 @@ package com.example.finalproject.ui.home.activities
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -62,11 +61,7 @@ class FeaturedEstatesActivity : BaseActivity() {
         deleteFavouriteViewModel = ViewModelProvider(this@FeaturedEstatesActivity, deleteFavouriteFactory
         )[DeleteFavouriteViewModel::class.java]
 
-        featuredViewAllAdapter = FeaturedViewAllAdapter(
-            this@FeaturedEstatesActivity,
-            mutableListOf()) { residence, isLiked ->
-            handleFavouriteClick(residence._id, isLiked)
-        }
+        featuredViewAllAdapter = FeaturedViewAllAdapter(this@FeaturedEstatesActivity, mutableListOf(), ::handleFavouriteClick)
         recyclerView.adapter = featuredViewAllAdapter
 
         initView()
@@ -134,7 +129,7 @@ class FeaturedEstatesActivity : BaseActivity() {
     }
 
     private fun handleFavouriteClick(residenceId: String, isLiked: Boolean) {
-        if (isLiked) {
+        if (!isLiked) {
             val token = AppReferences.getToken(this@FeaturedEstatesActivity)
             addToFavouritesViewModel.addToFavourites(token, residenceId)
 
@@ -143,6 +138,7 @@ class FeaturedEstatesActivity : BaseActivity() {
                 response?.let {
                     val status = it.status
                     Log.e("AddToFavourites", "Added to Favourites $status")
+                    featuredViewAllAdapter.updateFavouriteStatus(residenceId, true)
                 }
             }
 
@@ -167,6 +163,7 @@ class FeaturedEstatesActivity : BaseActivity() {
                 response?.let {
                     val status = it.status
                     Log.e("DeleteFavourite", "Deleted from Favourites $status")
+                    featuredViewAllAdapter.updateFavouriteStatus(residenceId, false)
                 }
             }
 
