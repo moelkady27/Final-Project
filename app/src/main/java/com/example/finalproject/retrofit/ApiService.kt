@@ -60,6 +60,7 @@ import com.example.finalproject.ui.update_listing.models.DeleteResidenceImageRes
 import com.example.finalproject.ui.update_listing.models.GetResidenceResponse
 import com.example.finalproject.ui.update_listing.models.UpdateResidenceResponse
 import com.example.finalproject.ui.update_listing.request.FirstUpdateRequest
+import com.example.finalproject.ui.update_listing.request.FourthUpdateRequest
 //import com.example.finalproject.ui.update_listing.request.FourthUpdateRequest
 import com.example.finalproject.ui.update_listing.request.SecondUpdateRequest
 import com.example.finalproject.ui.update_listing.request.ThirdUpdateRequest
@@ -378,11 +379,11 @@ interface ApiService {
         @Path("residenceId") residenceId: String
     ): Call<UpdateResidenceResponse>
 
-//    @PATCH("api/v1/residence/update/4th/{residenceId}")
-//    fun fourthUpdate(
-//        @Body req: FourthUpdateRequest,
-//        @Header("Authorization") token: String,
-//        @Path("residenceId") residenceId: String
-//    ): Call<UpdateResidenceResponse>
+    @PATCH("api/v1/residence/update/4th/{residenceId}")
+    fun fourthUpdate(
+        @Body req: FourthUpdateRequest,
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String
+    ): Call<UpdateResidenceResponse>
     
 }
