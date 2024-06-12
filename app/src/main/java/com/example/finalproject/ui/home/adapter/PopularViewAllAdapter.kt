@@ -1,7 +1,6 @@
 package com.example.finalproject.ui.home.adapter
 
-import android.content.Context
-import android.content.SharedPreferences
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,15 +17,12 @@ import kotlinx.android.synthetic.main.each_row_popular_view_all.view.popular_vie
 import kotlinx.android.synthetic.main.each_row_popular_view_all.view.tv_popular_view_all_location
 
 class PopularViewAllAdapter(
-    private val context: Context,
     private val list: MutableList<ResidenceX>,
-    private val onItemClicked: (ResidenceX, Boolean) -> Unit
+    private val onFavouriteClick: (String, Boolean) -> Unit
 ): RecyclerView.Adapter<PopularViewAllAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    private val sharedPreferences: SharedPreferences =
-        context.getSharedPreferences("liked_residences", Context.MODE_PRIVATE)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -59,8 +55,7 @@ class PopularViewAllAdapter(
                 .into(holder.itemView.image_popular_view_all)
         }
 
-        val isLiked = sharedPreferences.getBoolean(popularEstates._id, false)
-        popularEstates.isLiked = isLiked
+        val isLiked = popularEstates.isLiked
 
         if (isLiked) {
             holder.itemView.iv_popular_view_all_favourite.backgroundTintList =
@@ -71,11 +66,7 @@ class PopularViewAllAdapter(
         }
 
         holder.itemView.iv_popular_view_all_favourite.setOnClickListener {
-            val newLikedState = !isLiked
-            popularEstates.isLiked = newLikedState
-            saveLikedState(popularEstates._id, newLikedState)
-            notifyItemChanged(position)
-            onItemClicked(popularEstates, newLikedState)
+            onFavouriteClick(popularEstates._id, popularEstates.isLiked)
         }
     }
 
@@ -85,7 +76,9 @@ class PopularViewAllAdapter(
         notifyItemRangeInserted(startPosition, newItems.size)
     }
 
-    private fun saveLikedState(residenceId: String, isLiked: Boolean) {
-        sharedPreferences.edit().putBoolean(residenceId, isLiked).apply()
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateFavouriteStatus(residenceId: String, isLiked: Boolean) {
+        list.find { it._id == residenceId }?.isLiked = isLiked
+        notifyDataSetChanged()
     }
 }

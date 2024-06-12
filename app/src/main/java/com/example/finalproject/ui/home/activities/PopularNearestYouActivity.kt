@@ -58,11 +58,7 @@ class PopularNearestYouActivity : BaseActivity() {
             this@PopularNearestYouActivity , 2)
         recyclerView.setHasFixedSize(true)
 
-        popularViewAllAdapter = PopularViewAllAdapter(
-            this@PopularNearestYouActivity,
-            mutableListOf()) { residence, isLiked ->
-            handleFavouriteClick(residence._id, isLiked)
-        }
+        popularViewAllAdapter = PopularViewAllAdapter(mutableListOf(), ::handleFavouriteClick)
         recyclerView.adapter = popularViewAllAdapter
     }
 
@@ -129,7 +125,7 @@ class PopularNearestYouActivity : BaseActivity() {
     }
 
     private fun handleFavouriteClick(residenceId: String, isLiked: Boolean) {
-        if (isLiked) {
+        if (!isLiked) {
 
                                     /* Add To Favourites */
 
@@ -143,15 +139,18 @@ class PopularNearestYouActivity : BaseActivity() {
 
             addToFavouritesViewModel.addToFavourites(token, residenceId)
 
+            addToFavouritesViewModel.addToFavouritesLiveData.removeObservers(this)
             addToFavouritesViewModel.addToFavouritesLiveData.observe(
                 this@PopularNearestYouActivity) { response ->
                 hideProgressDialog()
                 response?.let {
                     val status = it.status
                     Log.e("AddToFavourites", "Added to Favourites $status")
+                    popularViewAllAdapter.updateFavouriteStatus(residenceId, true)
                 }
             }
 
+            addToFavouritesViewModel.errorLiveData.removeObservers(this)
             addToFavouritesViewModel.errorLiveData.observe(this@PopularNearestYouActivity) { error ->
                 hideProgressDialog()
                 error.let {
@@ -162,12 +161,16 @@ class PopularNearestYouActivity : BaseActivity() {
                             errorMessage,
                             Toast.LENGTH_LONG
                         ).show()
+
+                        Log.e("AddToFavourites", errorMessage)
                     } catch (e: JSONException) {
                       Toast.makeText(
                           this@PopularNearestYouActivity,
                           error,
                           Toast.LENGTH_LONG
                       ).show()
+
+                        Log.e("AddToFavourites error is", error)
                     }
                 }
             }
@@ -184,15 +187,18 @@ class PopularNearestYouActivity : BaseActivity() {
             val token = AppReferences.getToken(this@PopularNearestYouActivity)
             deleteFavouriteViewModel.deleteFavourite(token, residenceId)
 
+            deleteFavouriteViewModel.deleteFavouriteLiveData.removeObservers(this)
             deleteFavouriteViewModel.deleteFavouriteLiveData.observe(
                 this@PopularNearestYouActivity) { response ->
                 hideProgressDialog()
                 response?.let {
                     val status = it.status
                     Log.e("DeleteFavourite", "Deleted from Favourites $status")
+                    popularViewAllAdapter.updateFavouriteStatus(residenceId, false)
                 }
             }
 
+            deleteFavouriteViewModel.errorLiveData.removeObservers(this)
             deleteFavouriteViewModel.errorLiveData.observe(this@PopularNearestYouActivity) { error ->
                 hideProgressDialog()
                 error.let {

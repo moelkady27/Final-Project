@@ -8,6 +8,6 @@ data class Wishlist(
     val location: String,
     val paymentPeriod: String,
     val rating: Int,
-    val salePrice: Int,
+    val salePrice: Double,
     val title: String
 )

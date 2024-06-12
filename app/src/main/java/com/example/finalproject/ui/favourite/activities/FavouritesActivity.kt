@@ -1,6 +1,7 @@
 package com.example.finalproject.ui.favourite.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -137,7 +138,8 @@ class FavouritesActivity : BaseActivity() {
             deleteFavouriteViewModel.deleteFavouriteLiveData.observe(this@FavouritesActivity) { response ->
                 hideProgressDialog()
                 response.let {
-                    Toast.makeText(this@FavouritesActivity, it.message, Toast.LENGTH_LONG).show()
+//                    Toast.makeText(this@FavouritesActivity, it.message, Toast.LENGTH_LONG).show()
+                    Log.e("deleteFavourite", it.message)
 
                     favouritesAdapter.removeFavourite(wishlist)
 
@@ -184,6 +186,8 @@ class FavouritesActivity : BaseActivity() {
                 hideProgressDialog()
                 response.let {
                     Toast.makeText(this@FavouritesActivity , it.message , Toast.LENGTH_LONG).show()
+                    Log.e("deleteAllFavourite" , it.message)
+
                     number_favourites.text = "0"
                     recycle_favourites.visibility = View.GONE
                     iv_empty_favourites.visibility = View.VISIBLE
