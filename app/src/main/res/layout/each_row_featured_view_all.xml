@@ -63,14 +63,14 @@
         android:textColor="@color/edit_text"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/star_featured_view_all"
-        app:layout_constraintEnd_toEndOf="@+id/iv_featured_view_all_fav"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/star_featured_view_all" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/apartment_name_featured_view_all"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="3dp"
         android:text="Woodland Apartment"
         android:textColor="@color/colorPrimaryText"
         android:textSize="18sp"
@@ -81,54 +81,23 @@
         app:layout_constraintStart_toStartOf="@+id/tv_apartment_view_all"
         app:layout_constraintTop_toBottomOf="@+id/tv_apartment_view_all" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_location_featured_view_all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-5dp"
-        android:layout_marginTop="2dp"
-        app:srcCompat="@drawable/baseline_location_on_24"
-        app:tint="@color/favourite"
-        app:layout_constraintStart_toStartOf="@+id/apartment_name_featured_view_all"
-        app:layout_constraintTop_toBottomOf="@+id/apartment_name_featured_view_all" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/apartment_location_featured_view_all"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="1012 Ocean avanue, New yourk, USA"
-        android:textColor="@color/favourite"
-        android:textSize="12sp"
-        android:maxLines="1"
-        android:ellipsize="marquee"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_location_featured_view_all"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_location_featured_view_all"
-        app:layout_constraintTop_toTopOf="@+id/iv_location_featured_view_all" />
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/home_featured_view_all_title_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="$"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
         android:fontFamily="@font/poppins_semibold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/iv_location_featured_view_all"
         app:layout_constraintStart_toStartOf="@+id/apartment_name_featured_view_all"
-        app:layout_constraintTop_toBottomOf="@+id/apartment_location_featured_view_all" />
+        app:layout_constraintTop_toBottomOf="@+id/apartment_name_featured_view_all" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/apartment_price_featured_view_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
         android:text="340"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
@@ -164,12 +133,44 @@
         app:layout_constraintTop_toTopOf="@+id/home_featured_view_all_title_2" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_location_featured_view_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-5dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="15dp"
+        app:srcCompat="@drawable/baseline_location_on_24"
+        app:tint="@color/favourite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/home_featured_view_all_title_1"
+        app:layout_constraintTop_toBottomOf="@+id/apartment_price_featured_view_all" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/apartment_location_featured_view_all"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="1012 Ocean avanue, New yourk, USA"
+        android:textColor="@color/favourite"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="marquee"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_location_featured_view_all"
+        app:layout_constraintEnd_toStartOf="@+id/iv_featured_view_all_fav"
+        app:layout_constraintStart_toEndOf="@+id/iv_location_featured_view_all"
+        app:layout_constraintTop_toTopOf="@+id/iv_location_featured_view_all" />
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_featured_view_all_fav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/favourites"
-        app:layout_constraintBottom_toBottomOf="@+id/home_featured_view_all_title_3"
-        app:layout_constraintEnd_toEndOf="@+id/apartment_location_featured_view_all"
-        app:layout_constraintTop_toTopOf="@+id/home_featured_view_all_title_3" />
+        app:layout_constraintBottom_toBottomOf="@+id/apartment_location_featured_view_all"
+        app:layout_constraintEnd_toEndOf="@+id/cv_image_featured_view_all"
+        app:layout_constraintTop_toTopOf="@+id/apartment_location_featured_view_all" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
