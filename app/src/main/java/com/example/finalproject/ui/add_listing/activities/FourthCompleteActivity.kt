@@ -1,9 +1,12 @@
 package com.example.finalproject.ui.add_listing.activities
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
@@ -13,6 +16,8 @@ import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.add_listing.factory.FourthCompleteFactory
 import com.example.finalproject.ui.add_listing.repository.FourthCompleteRepository
 import com.example.finalproject.ui.add_listing.viewModel.FourthCompleteViewModel
+import com.example.finalproject.ui.home.fragment.HomeFragment
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_fourth_complete.btn_submit_fourth_complete
 import kotlinx.android.synthetic.main.activity_fourth_complete.et_house_age
@@ -73,6 +78,7 @@ class FourthCompleteActivity : BaseActivity() {
         btn_submit_fourth_complete.setOnClickListener {
             if (networkUtils.isNetworkAvailable()) {
                 fourthComplete()
+                showCompletedAddListingSuccess()
             } else {
                 showErrorSnackBar("No internet connection", true)
             }
@@ -333,6 +339,41 @@ class FourthCompleteActivity : BaseActivity() {
         }
     }
 
+    private fun toggleChipSelection(chip: Chip) {
+        chip.isSelected = !chip.isSelected
+        if (chip.isSelected) {
+            chip.setTextColor(Color.WHITE)
+            chip.setChipBackgroundColorResource(R.color.colorPrimary)
+        } else {
+            chip.setTextColor(resources.getColor(R.color.colorPrimaryText))
+            chip.setChipBackgroundColorResource(R.color.home_search)
+        }
+    }
+
+    private fun showCompletedAddListingSuccess() {
+        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialog)
+
+        val messageDialogView =
+            layoutInflater.inflate(R.layout.extra_information_success, null)
+
+        messageDialogView.background =
+            ContextCompat.getDrawable(this, R.drawable.message_options_dialog_background)
+
+        val addMoreButton = messageDialogView.findViewById<TextView>(R.id.add_more_extra_information_success)
+        val finishButton = messageDialogView.findViewById<TextView>(R.id.finish_extra_information_success)
+
+        addMoreButton.setOnClickListener {
+            // TODO - Navigate to the first screen from add listing
+        }
+
+        finishButton.setOnClickListener {
+            // TODO - Navigate to the home fragment
+        }
+
+        bottomSheetDialog.setContentView(messageDialogView)
+        bottomSheetDialog.show()
+    }
+
     private fun setupActionBar() {
         setSupportActionBar(toolbar_fourth_complete)
 
@@ -345,17 +386,6 @@ class FourthCompleteActivity : BaseActivity() {
 
         toolbar_fourth_complete.setNavigationOnClickListener {
             onBackPressed()
-        }
-    }
-
-    private fun toggleChipSelection(chip: Chip) {
-        chip.isSelected = !chip.isSelected
-        if (chip.isSelected) {
-            chip.setTextColor(Color.WHITE)
-            chip.setChipBackgroundColorResource(R.color.colorPrimary)
-        } else {
-            chip.setTextColor(resources.getColor(R.color.colorPrimaryText))
-            chip.setChipBackgroundColorResource(R.color.home_search)
         }
     }
 
