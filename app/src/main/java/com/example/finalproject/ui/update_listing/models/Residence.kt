@@ -18,6 +18,8 @@ data class Residence(
     val exterior1st: String,
     val exterior2nd: String,
     val fireplaceQu: String,
+    val bsmtQual: String,
+    val bsmtCond: String,
     val fireplaces: Int,
     val foundation: String,
     val garageCars: Int,
