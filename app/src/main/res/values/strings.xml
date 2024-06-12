@@ -353,6 +353,8 @@
     <string name="almost_finish_update" translatable="false"><b>Almost finish,</b> update</string>
     <string name="show_on_map" translatable="false">Show on Map</string>
     <string name="close" translatable="false">Close</string>
+    <string name="your_listing_just" translatable="false">Your listing just</string>
+    <string name="successfully_updated" translatable="false">successfully updated</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>
