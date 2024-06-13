@@ -3,6 +3,7 @@ package com.example.finalproject.ui.home.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.ui.home.models.Residence
+import com.example.finalproject.ui.residence_details.activities.ResidenceDetailsActivity
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.apartment_location_featured_view_all
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.apartment_name_featured_view_all
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.apartment_price_featured_view_all
@@ -75,6 +77,11 @@ class FeaturedViewAllAdapter(
             onFavouriteClick(featuredEstates._id, featuredEstates.isLiked)
         }
 
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ResidenceDetailsActivity::class.java)
+            intent.putExtra("residenceId", featuredEstates._id)
+            holder.itemView.context.startActivity(intent)
+        }
 
     }
 

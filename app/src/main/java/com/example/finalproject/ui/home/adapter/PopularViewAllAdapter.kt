@@ -1,6 +1,7 @@
 package com.example.finalproject.ui.home.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.ui.home.models.ResidenceX
+import com.example.finalproject.ui.residence_details.activities.ResidenceDetailsActivity
 import kotlinx.android.synthetic.main.each_row_popular_view_all.view.image_popular_view_all
 import kotlinx.android.synthetic.main.each_row_popular_view_all.view.iv_popular_view_all_favourite
 import kotlinx.android.synthetic.main.each_row_popular_view_all.view.popular_view_all_title_1
@@ -67,6 +69,12 @@ class PopularViewAllAdapter(
 
         holder.itemView.iv_popular_view_all_favourite.setOnClickListener {
             onFavouriteClick(popularEstates._id, popularEstates.isLiked)
+        }
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ResidenceDetailsActivity::class.java)
+            intent.putExtra("residenceId", popularEstates._id)
+            holder.itemView.context.startActivity(intent)
         }
     }
 
