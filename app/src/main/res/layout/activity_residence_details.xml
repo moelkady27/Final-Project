@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.residence_details.activities.ResidenceDetailsActivity">
 
     <ScrollView
@@ -182,6 +183,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/apartment_location_update_residence"
                 app:tabGravity="fill"
                 app:tabMode="fixed"
+                app:tabRippleColor="@null"
                 app:tabSelectedTextColor="@color/colorPrimary"
                 app:tabTextAppearance="@style/RoundedTabLayoutStyle"
                 app:tabTextColor="@color/colorPrimaryText">
@@ -212,6 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tabLayout_residence_details"
                 app:layout_constraintStart_toStartOf="@+id/tabLayout_residence_details"

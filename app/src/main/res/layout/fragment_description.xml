@@ -102,30 +102,40 @@
         app:layout_constraintStart_toStartOf="@+id/tv"
         app:layout_constraintTop_toBottomOf="@+id/constraint" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_loc"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_chat_home_background"
-        android:contentDescription="@string/content_description"
-        android:tint="@color/colorPrimaryText"
-        app:layout_constraintStart_toStartOf="@+id/tv1"
-        app:layout_constraintTop_toBottomOf="@+id/tv1"
-        app:srcCompat="@drawable/ic_location" />
+        app:layout_constraintEnd_toEndOf="@id/tv1"
+        app:layout_constraintStart_toStartOf="@id/tv1"
+        app:layout_constraintTop_toBottomOf="@id/tv1">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/apartment_location_update_residence"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:ellipsize="marquee"
-        android:fontFamily="@font/poppins_semibold"
-        android:maxLines="1"
-        android:text="1012 Ocean avanue, New yourk, USA"
-        android:textColor="@color/edit_text"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_loc"
-        app:layout_constraintStart_toEndOf="@+id/iv_loc"
-        app:layout_constraintTop_toTopOf="@+id/iv_loc" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_loc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_chat_home_background"
+            android:contentDescription="@string/content_description"
+            android:tint="@color/colorPrimaryText"
+            app:srcCompat="@drawable/ic_location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/apartment_location_update_residence"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:ellipsize="marquee"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="1012 Ocean avanue, New yourk, USA"
+            android:textColor="@color/edit_text"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_loc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_loc"
+            app:layout_constraintTop_toTopOf="@+id/iv_loc"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
