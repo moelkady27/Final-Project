@@ -22,7 +22,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="350dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -136,7 +136,7 @@
                 android:id="@+id/apartment_residence_title_details"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:maxLines="1"
                 android:text="Woodland Apartment"
@@ -146,34 +146,45 @@
                 app:layout_constraintStart_toStartOf="@+id/star_residence"
                 app:layout_constraintTop_toBottomOf="@+id/review" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_location_featured_estates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-5dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="@+id/apartment_residence_title_details"
+                app:layout_constraintTop_toBottomOf="@+id/apartment_residence_title_details"
+                app:srcCompat="@drawable/baseline_location_on_24"
+                app:tint="@color/favourite" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/apartment_location_update_residence"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:ellipsize="marquee"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/poppins_semibold"
                 android:maxLines="1"
                 android:text="1012 Ocean avanue, New yourk, USA"
                 android:textColor="@color/edit_text"
                 android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_location_featured_estates"
                 app:layout_constraintEnd_toEndOf="@+id/apartment_residence_title_details"
-                app:layout_constraintStart_toStartOf="@+id/apartment_residence_title_details"
-                app:layout_constraintTop_toBottomOf="@+id/apartment_residence_title_details" />
+                app:layout_constraintStart_toEndOf="@+id/iv_location_featured_estates"
+                app:layout_constraintTop_toTopOf="@+id/iv_location_featured_estates" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout_residence_details"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:tabTextAppearance="@style/RoundedTabLayoutStyle"
-                app:tabMode="fixed"
-                app:tabGravity="fill"
-                app:tabTextColor="@color/colorPrimaryText"
-                app:tabSelectedTextColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="@+id/apartment_location_update_residence"
-                app:layout_constraintStart_toStartOf="@+id/apartment_location_update_residence"
-                app:layout_constraintTop_toBottomOf="@+id/apartment_location_update_residence">
+                app:layout_constraintStart_toStartOf="@+id/apartment_residence_title_details"
+                app:layout_constraintTop_toBottomOf="@+id/apartment_location_update_residence"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                app:tabTextAppearance="@style/RoundedTabLayoutStyle"
+                app:tabTextColor="@color/colorPrimaryText">
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
@@ -201,7 +212,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tabLayout_residence_details"
                 app:layout_constraintStart_toStartOf="@+id/tabLayout_residence_details"
