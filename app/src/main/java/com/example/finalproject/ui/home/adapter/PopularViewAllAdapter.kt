@@ -17,11 +17,14 @@ import kotlinx.android.synthetic.main.each_row_popular_view_all.view.popular_vie
 import kotlinx.android.synthetic.main.each_row_popular_view_all.view.popular_view_all_title_3
 import kotlinx.android.synthetic.main.each_row_popular_view_all.view.popular_view_all_title_5
 import kotlinx.android.synthetic.main.each_row_popular_view_all.view.tv_popular_view_all_location
+import java.util.Locale
 
 class PopularViewAllAdapter(
     private val list: MutableList<ResidenceX>,
     private val onFavouriteClick: (String, Boolean) -> Unit
 ): RecyclerView.Adapter<PopularViewAllAdapter.MyViewHolder>() {
+
+    private var filteredList: MutableList<ResidenceX> = list
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -36,11 +39,11 @@ class PopularViewAllAdapter(
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return filteredList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val popularEstates = list[position]
+        val popularEstates = filteredList[position]
 
         holder.itemView.popular_view_all_title_1.text = popularEstates.title
         holder.itemView.popular_view_all_title_3.text = popularEstates.salePrice.toString()
@@ -87,6 +90,19 @@ class PopularViewAllAdapter(
     @SuppressLint("NotifyDataSetChanged")
     fun updateFavouriteStatus(residenceId: String, isLiked: Boolean) {
         list.find { it._id == residenceId }?.isLiked = isLiked
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun filterList(query: String) {
+        filteredList = if (query.trim().isBlank()) {
+            list
+        } else {
+            list.filter { popular ->
+                popular.title.lowercase(Locale.ROOT)
+                    .contains(query.trim().lowercase(Locale.ROOT))
+            }.toMutableList()
+        }
         notifyDataSetChanged()
     }
 }

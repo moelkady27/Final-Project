@@ -89,7 +89,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_search_popular"
+                        android:id="@+id/et_search_featured_estates"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
