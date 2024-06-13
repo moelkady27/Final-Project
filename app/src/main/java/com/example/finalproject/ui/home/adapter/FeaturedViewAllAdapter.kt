@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.ui.home.models.Residence
+import com.example.finalproject.ui.home.models.ResidenceX
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.apartment_location_featured_view_all
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.apartment_name_featured_view_all
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.apartment_price_featured_view_all
@@ -18,12 +19,15 @@ import kotlinx.android.synthetic.main.each_row_featured_view_all.view.home_featu
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.image_featured_view_all
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.iv_featured_view_all_fav
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.tv_apartment_view_all
+import java.util.Locale
 
 class FeaturedViewAllAdapter(
     private val context: Context,
     private val list: MutableList<Residence>,
     private val onFavouriteClick: (String, Boolean) -> Unit
 ): RecyclerView.Adapter<FeaturedViewAllAdapter.MyViewHolder>() {
+
+    private var filteredList: MutableList<Residence> = list
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -37,11 +41,11 @@ class FeaturedViewAllAdapter(
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return filteredList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val featuredEstates = list[position]
+        val featuredEstates = filteredList[position]
 
         holder.itemView.tv_apartment_view_all.text = featuredEstates.category
         holder.itemView.apartment_name_featured_view_all.text = featuredEstates.title
@@ -87,6 +91,19 @@ class FeaturedViewAllAdapter(
     @SuppressLint("NotifyDataSetChanged")
     fun updateFavouriteStatus(residenceId: String, isLiked: Boolean) {
         list.find { it._id == residenceId }?.isLiked = isLiked
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun filterList(query: String) {
+        filteredList = if (query.trim().isBlank()) {
+            list
+        } else {
+            list.filter { featured ->
+                featured.title.lowercase(Locale.ROOT)
+                    .contains(query.trim().lowercase(Locale.ROOT))
+            }.toMutableList()
+        }
         notifyDataSetChanged()
     }
 }

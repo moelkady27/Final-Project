@@ -1,6 +1,8 @@
 package com.example.finalproject.ui.home.activities
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -21,6 +23,7 @@ import com.example.finalproject.ui.home.adapter.FeaturedViewAllAdapter
 import com.example.finalproject.ui.home.factory.HomeFeaturedEstatesFactory
 import com.example.finalproject.ui.home.repository.HomeFeaturedEstatesRepository
 import com.example.finalproject.ui.home.viewModel.HomeFeaturedEstatesViewModel
+import kotlinx.android.synthetic.main.activity_featured_estates.et_search_featured_estates
 import kotlinx.android.synthetic.main.activity_featured_estates.toolbar_featured_estates
 import org.json.JSONException
 import org.json.JSONObject
@@ -65,6 +68,8 @@ class FeaturedEstatesActivity : BaseActivity() {
         recyclerView.adapter = featuredViewAllAdapter
 
         initView()
+
+        initSearch()
 
         setUpActionBar()
     }
@@ -179,6 +184,18 @@ class FeaturedEstatesActivity : BaseActivity() {
                 }
             }
         }
+    }
+
+    private fun initSearch() {
+        et_search_featured_estates.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                featuredViewAllAdapter.filterList(s.toString())
+            }
+        })
     }
 
     private fun setUpActionBar() {
