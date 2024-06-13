@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.each_row_featured_view_all.view.apartment_
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.home_featured_view_all_title_3
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.image_featured_view_all
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.iv_featured_view_all_fav
+import kotlinx.android.synthetic.main.each_row_featured_view_all.view.number_star_featured_estates
 import kotlinx.android.synthetic.main.each_row_featured_view_all.view.tv_apartment_view_all
 
 class FeaturedViewAllAdapter(
@@ -83,6 +84,7 @@ class FeaturedViewAllAdapter(
             holder.itemView.context.startActivity(intent)
         }
 
+        holder.itemView.number_star_featured_estates.text = featuredEstates.avgRating.toString()
     }
 
     fun addItems(newItems: List<Residence>) {

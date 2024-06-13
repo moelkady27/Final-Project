@@ -48,6 +48,7 @@ import kotlinx.android.synthetic.main.activity_update_residence.chip_sell_update
 import kotlinx.android.synthetic.main.activity_update_residence.chip_villa_update
 import kotlinx.android.synthetic.main.activity_update_residence.et_home_name_update_listing
 import kotlinx.android.synthetic.main.activity_update_residence.image_update_residence
+import kotlinx.android.synthetic.main.activity_update_residence.number_star_update_residence
 import kotlinx.android.synthetic.main.activity_update_residence.toolbar_update_residence
 import kotlinx.android.synthetic.main.activity_update_residence.tv_apartment_update_residence
 import kotlinx.android.synthetic.main.activity_update_residence.tv_update_residence_3
@@ -293,7 +294,7 @@ class UpdateResidenceActivity : BaseActivity() {
                     }
 
                     tv_apartment_update_residence.text = response.residence.category
-//                    number_star_update_residence
+                    number_star_update_residence.text = response.residence.avgRating.toString()
                     apartment_name_update_residence.text = response.residence.title
                     apartment_location_update_residence.text = response.residence.location.fullAddress
                     apartment_price_update_residence.text = response.residence.salePrice.toString()

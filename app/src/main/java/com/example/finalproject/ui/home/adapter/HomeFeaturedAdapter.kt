@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.each_row_featured_estates.view.apartment_n
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.apartment_price_featured_estates
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.image_featured_estates
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.iv_featured_estates_fav
+import kotlinx.android.synthetic.main.each_row_featured_estates.view.number_star_featured_estates_one
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.tv_apartment_view_all
 import kotlinx.android.synthetic.main.each_row_featured_estates.view.tv_featured_estates_3
 import java.util.Random
@@ -51,6 +52,7 @@ class HomeFeaturedAdapter(
         holder.itemView.apartment_location_featured_estates.text = homeFeatured.location.fullAddress
         holder.itemView.apartment_price_featured_estates.text = homeFeatured.salePrice.toString()
         holder.itemView.tv_featured_estates_3.text = homeFeatured.paymentPeriod
+        holder.itemView.number_star_featured_estates_one.text = homeFeatured.avgRating.toString()
 
         if (homeFeatured.images.isNotEmpty()) {
             Glide.with(holder.itemView)

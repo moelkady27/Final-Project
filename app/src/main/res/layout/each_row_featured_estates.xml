@@ -39,9 +39,9 @@
         android:text="@string/apartment"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/number_star_featured_estates"
+        app:layout_constraintBottom_toBottomOf="@+id/number_star_featured_estates_one"
         app:layout_constraintEnd_toEndOf="@+id/apartment_name_featured_estates"
-        app:layout_constraintTop_toTopOf="@+id/number_star_featured_estates" />
+        app:layout_constraintTop_toTopOf="@+id/number_star_featured_estates_one" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/star_featured_estates"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toTopOf="@+id/cv_image_featured_estates" />
 
     <TextView
-        android:id="@+id/number_star_featured_estates"
+        android:id="@+id/number_star_featured_estates_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"

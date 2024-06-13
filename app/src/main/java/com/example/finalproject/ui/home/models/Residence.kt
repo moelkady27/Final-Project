@@ -11,6 +11,7 @@ data class Residence(
     val bsmtFinType1: String,
     val bsmtQual: String,
     val bsmtUnfSF: Int,
+    val avgRating: Int,
     val category: String,
     val centralAir: String,
     val condition1: String,

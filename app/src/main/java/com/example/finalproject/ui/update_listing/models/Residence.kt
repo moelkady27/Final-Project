@@ -8,6 +8,7 @@ data class Residence(
     val bldgType: String,
     val bsmtExposure: String,
     val bsmtUnfSF: Int,
+    val avgRating: Int,
     val category: String,
     val centralAir: String,
     val condition1: String,
