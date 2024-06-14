@@ -20,17 +20,16 @@ class DetailsViewAdapter(
     }
 
     override fun createFragment(position: Int): Fragment {
-        return when (position) {
+        val fragment = when (position) {
             0 -> DescriptionFragment()
             1 -> GalleryFragment()
-            2 -> {
-                val reviewFragment = ReviewFragment()
-                val bundle = Bundle()
-                bundle.putString("residenceId", residenceId)
-                reviewFragment.arguments = bundle
-                reviewFragment
-            }
+            2 -> ReviewFragment()
             else -> throw IllegalArgumentException("Invalid position")
         }
+
+        fragment.arguments = Bundle().apply {
+            putString("residenceId", residenceId)
+        }
+        return fragment
     }
 }
