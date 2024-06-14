@@ -64,33 +64,37 @@ class ReviewFragment : Fragment() {
         getReviewsViewModel = ViewModelProvider(this, factory).get(GetReviewsViewModel::class.java)
 
         val token = AppReferences.getToken(requireContext())
-        val residenceId = "6668f9b9b1d92be79eac207c" // Replace with your actual residenceId
+        val residenceId = arguments?.getString("residenceId")
 
-        getReviewsViewModel.getReviews(token, residenceId)
+        if (residenceId != null) {
+            getReviewsViewModel.getReviews(token, residenceId)
 
-        getReviewsViewModel.getReviewsResponseLiveData.observe(viewLifecycleOwner) { response ->
-            baseActivity.hideProgressDialog()
-            response?.let {
-                val status = it.status
-                Log.e("status review", status)
+            getReviewsViewModel.getReviewsResponseLiveData.observe(viewLifecycleOwner) { response ->
+                baseActivity.hideProgressDialog()
+                response?.let {
+                    val status = it.status
+                    Log.e("status review", status)
 
-                Log.e("reviews", it.reviews.toString())
+                    Log.e("reviews", it.reviews.toString())
 
-                reviewAdapter.list = it.reviews.toMutableList()
-                reviewAdapter.notifyDataSetChanged()
-            }
-        }
-
-        getReviewsViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
-            BaseActivity().hideProgressDialog()
-            error?.let {
-                try {
-                    val errorMessage = JSONObject(error).getString("message")
-                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
-                } catch (e: JSONException) {
-                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                    reviewAdapter.list = it.reviews.toMutableList()
+                    reviewAdapter.notifyDataSetChanged()
                 }
             }
+
+            getReviewsViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
+                BaseActivity().hideProgressDialog()
+                error?.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                    } catch (e: JSONException) {
+                        Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(requireContext(), "Residence ID is not available", Toast.LENGTH_LONG).show()
         }
     }
 }
