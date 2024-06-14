@@ -159,7 +159,7 @@
                 app:tint="@color/favourite" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/apartment_location_update_residence"
+                android:id="@+id/apartment_location_residence_detailss"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
@@ -178,9 +178,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="@+id/apartment_location_update_residence"
+                app:layout_constraintEnd_toEndOf="@+id/apartment_location_residence_detailss"
                 app:layout_constraintStart_toStartOf="@+id/apartment_residence_title_details"
-                app:layout_constraintTop_toBottomOf="@+id/apartment_location_update_residence"
+                app:layout_constraintTop_toBottomOf="@+id/apartment_location_residence_detailss"
                 app:tabGravity="fill"
                 app:tabMode="fixed"
                 app:tabRippleColor="@null"
