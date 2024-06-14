@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_review_image_user"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            app:cardCornerRadius="75dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_agent_review_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_review_name_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/tv_user_name"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_review_image_user"
+            app:layout_constraintEnd_toStartOf="@+id/tv_review_time"
+            app:layout_constraintStart_toEndOf="@+id/cv_review_image_user"
+            app:layout_constraintTop_toTopOf="@+id/cv_review_image_user" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_review_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="2 months ago"
+            android:textColor="@color/edit_text"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_review_name_user"
+            app:layout_constraintTop_toTopOf="@+id/tv_review_name_user" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_review_comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins"
+        android:text="Lorem Ipsum is simply dummy text of the printing.Lorem Ipsum is simply dummy text of the printing."
+        android:textColor="@color/edit_text"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/constraint_review"
+        app:layout_constraintEnd_toEndOf="@id/constraint_review"
+        app:layout_constraintTop_toBottomOf="@id/constraint_review"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/star_review_details_1"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/baseline_star_24"
+        android:tint="@color/home_popular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_review_comment"
+        app:layout_constraintTop_toBottomOf="@+id/tv_review_comment" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/star_review_details_2"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/baseline_star_24"
+        android:tint="@color/home_popular"
+        app:layout_constraintStart_toEndOf="@+id/star_review_details_1"
+        app:layout_constraintTop_toTopOf="@+id/star_review_details_1"
+        app:layout_constraintBottom_toBottomOf="@+id/star_review_details_1"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/star_review_details_3"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/baseline_star_24"
+        android:tint="@color/home_popular"
+        app:layout_constraintStart_toEndOf="@+id/star_review_details_2"
+        app:layout_constraintTop_toTopOf="@+id/star_review_details_2"
+        app:layout_constraintBottom_toBottomOf="@+id/star_review_details_2"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/star_review_details_4"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/baseline_star_24"
+        android:tint="@color/home_popular"
+        app:layout_constraintStart_toEndOf="@+id/star_review_details_3"
+        app:layout_constraintTop_toTopOf="@+id/star_review_details_3"
+        app:layout_constraintBottom_toBottomOf="@+id/star_review_details_3"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/star_review_details_5"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/baseline_star_24"
+        android:tint="@color/home_popular"
+        app:layout_constraintStart_toEndOf="@+id/star_review_details_4"
+        app:layout_constraintTop_toTopOf="@+id/star_review_details_4"
+        app:layout_constraintBottom_toBottomOf="@+id/star_review_details_4"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/number_star_review_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="0"
+        android:textColor="@color/edit_text"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/star_review_details_5"
+        app:layout_constraintTop_toTopOf="@+id/star_review_details_5"
+        app:layout_constraintBottom_toBottomOf="@+id/star_review_details_5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_helpful_review_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/helpful"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_like_review"
+        app:layout_constraintTop_toTopOf="@+id/star_review_details_5"
+        app:layout_constraintBottom_toBottomOf="@+id/star_review_details_5" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_like_review"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_like"
+        android:tint="@color/colorPrimaryText"
+        app:layout_constraintEnd_toStartOf="@+id/number_of_likes_review_details"
+        app:layout_constraintTop_toTopOf="@+id/tv_helpful_review_details"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_helpful_review_details"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/number_of_likes_review_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="1"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_dislike_review"
+        app:layout_constraintTop_toTopOf="@+id/iv_like_review"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_like_review" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_dislike_review"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_dislike"
+        android:tint="@color/colorPrimaryText"
+        app:layout_constraintEnd_toStartOf="@+id/number_of_dislikes_review_details"
+        app:layout_constraintTop_toTopOf="@+id/number_of_likes_review_details"
+        app:layout_constraintBottom_toBottomOf="@+id/number_of_likes_review_details"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/number_of_dislikes_review_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="2"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_review_comment"
+        app:layout_constraintTop_toTopOf="@+id/iv_dislike_review"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_dislike_review" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/home_popular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/star_review_details_1"
+        app:layout_constraintEnd_toEndOf="@+id/tv_review_comment"
+        app:layout_constraintStart_toStartOf="@+id/tv_review_comment"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -355,9 +355,11 @@
     <string name="close" translatable="false">Close</string>
     <string name="your_listing_just" translatable="false">Your listing just</string>
     <string name="successfully_updated" translatable="false">successfully updated</string>
-    <string name="description">Description</string>
-    <string name="gallery">Gallery</string>
-    <string name="review">Review</string>
+    <string name="description" translatable="false">Description</string>
+    <string name="gallery" translatable="false">Gallery</string>
+    <string name="review" translatable="false">Review</string>
+    <string name="listing_agent" translatable="false">Listing Agent</string>
+    <string name="helpful" translatable="false">Helpful?</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>
@@ -462,8 +464,5 @@
         <item>Timberland</item>
         <item>Veenker</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="listing_agent">Listing Agent</string>
 
 </resources>
