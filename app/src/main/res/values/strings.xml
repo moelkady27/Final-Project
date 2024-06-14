@@ -464,5 +464,12 @@
         <item>Timberland</item>
         <item>Veenker</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="gas1">Gas</string>
+    <string name="electricity1">Electricity</string>
+    <string name="water1">Water</string>
+    <string name="facilities">Facilities</string>
+    <string name="cars">Cars</string>
 
 </resources>
