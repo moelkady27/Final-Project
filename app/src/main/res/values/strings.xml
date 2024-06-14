@@ -360,6 +360,12 @@
     <string name="review" translatable="false">Review</string>
     <string name="listing_agent" translatable="false">Listing Agent</string>
     <string name="helpful" translatable="false">Helpful?</string>
+    <string name="gas1" translatable="false">Gas</string>
+    <string name="electricity1" translatable="false">Electricity</string>
+    <string name="water1" translatable="false">Water</string>
+    <string name="facilities" translatable="false">Facilities</string>
+    <string name="cars" translatable="false">Cars</string>
+    <string name="property_details" translatable="false">Property Details</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>
@@ -464,12 +470,5 @@
         <item>Timberland</item>
         <item>Veenker</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="gas1">Gas</string>
-    <string name="electricity1">Electricity</string>
-    <string name="water1">Water</string>
-    <string name="facilities">Facilities</string>
-    <string name="cars">Cars</string>
 
 </resources>

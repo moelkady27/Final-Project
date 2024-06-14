@@ -201,7 +201,7 @@
         android:id="@+id/constraintLayout4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/tv"
         app:layout_constraintHorizontal_weight="3"
         app:layout_constraintStart_toStartOf="@+id/tv"
@@ -234,8 +234,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_total_area"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/ic_total_area"
                         android:backgroundTint="@color/colorPrimary"
@@ -247,11 +247,11 @@
                         android:id="@+id/textView_total_area"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/poppins"
                         android:text="@string/total_area"
                         android:textColor="@color/colorPrimaryText"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView_total_area"
                         app:layout_constraintStart_toStartOf="@+id/imageView_total_area"
                         app:layout_constraintTop_toBottomOf="@+id/imageView_total_area" />
@@ -260,12 +260,11 @@
                         android:id="@+id/textView_number_of_total_area"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/poppins_bold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="300"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/textView_total_area"
                         app:layout_constraintStart_toStartOf="@+id/textView_total_area"
@@ -297,8 +296,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_pool_area"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/ic_pool_area"
                         android:backgroundTint="@color/colorPrimary"
@@ -310,11 +309,11 @@
                         android:id="@+id/textView_pool_area"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/poppins"
                         android:text="@string/pool_area"
                         android:textColor="@color/colorPrimaryText"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView_pool_area"
                         app:layout_constraintStart_toStartOf="@+id/imageView_pool_area"
                         app:layout_constraintTop_toBottomOf="@+id/imageView_pool_area" />
@@ -323,9 +322,8 @@
                         android:id="@+id/textView_number_of_pool_area"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/poppins_bold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="100"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
@@ -360,8 +358,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_home_age"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/ic_home"
                         android:backgroundTint="@color/colorPrimary"
@@ -373,11 +371,11 @@
                         android:id="@+id/textView_home_age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/poppins"
                         android:text="@string/house_age"
                         android:textColor="@color/colorPrimaryText"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView_home_age"
                         app:layout_constraintStart_toStartOf="@+id/imageView_home_age"
                         app:layout_constraintTop_toBottomOf="@+id/imageView_home_age" />
@@ -386,12 +384,11 @@
                         android:id="@+id/textView_number_of_age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="5"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="30"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/textView_home_age"
                         app:layout_constraintStart_toStartOf="@+id/textView_home_age"
@@ -425,7 +422,6 @@
         android:id="@+id/constraintLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/tv"
         app:layout_constraintHorizontal_weight="3"
         app:layout_constraintStart_toStartOf="@+id/tv"
@@ -458,8 +454,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_bedrooms"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/ic_bedrooms"
                         android:backgroundTint="@color/colorPrimary"
@@ -471,11 +467,11 @@
                         android:id="@+id/textView_bedrooms"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/poppins"
                         android:text="@string/bedroom"
                         android:textColor="@color/colorPrimaryText"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView_bedrooms"
                         app:layout_constraintStart_toStartOf="@+id/imageView_bedrooms"
                         app:layout_constraintTop_toBottomOf="@+id/imageView_bedrooms" />
@@ -484,9 +480,8 @@
                         android:id="@+id/textView_number_of_bedrooms"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/poppins_bold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="3"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
@@ -521,8 +516,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_kitchen"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/ic_kitchen"
                         android:backgroundTint="@color/colorPrimary"
@@ -534,11 +529,11 @@
                         android:id="@+id/textView_kitchen"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/poppins"
                         android:text="@string/kitchen"
                         android:textColor="@color/colorPrimaryText"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView_kitchen"
                         app:layout_constraintStart_toStartOf="@+id/imageView_kitchen"
                         app:layout_constraintTop_toBottomOf="@+id/imageView_kitchen" />
@@ -547,9 +542,8 @@
                         android:id="@+id/textView_number_of_kitchen"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/poppins_bold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="1"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
@@ -584,8 +578,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_bathrooms"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/ic_bathrooms"
                         android:backgroundTint="@color/colorPrimary"
@@ -597,11 +591,11 @@
                         android:id="@+id/textView_bathrooms"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/poppins"
                         android:text="@string/bathroom"
                         android:textColor="@color/colorPrimaryText"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView_bathrooms"
                         app:layout_constraintStart_toStartOf="@+id/imageView_bathrooms"
                         app:layout_constraintTop_toBottomOf="@+id/imageView_bathrooms" />
@@ -610,9 +604,8 @@
                         android:id="@+id/textView_number_of_bathrooms"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/poppins_bold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="1"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
@@ -666,8 +659,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_basement"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/ic_basement"
                         android:backgroundTint="@color/colorPrimary"
@@ -679,11 +672,11 @@
                         android:id="@+id/textView_base_ment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/poppins"
                         android:text="@string/basement"
                         android:textColor="@color/colorPrimaryText"
-                        android:textSize="18sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView_basement"
                         app:layout_constraintStart_toStartOf="@+id/imageView_basement"
                         app:layout_constraintTop_toBottomOf="@+id/imageView_basement" />
@@ -714,8 +707,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_fireplace"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/ic_fireplace"
                         android:backgroundTint="@color/colorPrimary"
@@ -731,7 +724,7 @@
                         android:fontFamily="@font/poppins"
                         android:text="@string/fire_places"
                         android:textColor="@color/colorPrimaryText"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView_fireplace"
                         app:layout_constraintStart_toStartOf="@+id/imageView_fireplace"
                         app:layout_constraintTop_toBottomOf="@+id/imageView_fireplace" />
@@ -740,9 +733,8 @@
                         android:id="@+id/textView_number_of_fireplace"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/poppins_bold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="2"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
@@ -777,8 +769,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_garage_cars"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/ic_garage_cars"
                         android:backgroundTint="@color/colorPrimary"
@@ -790,11 +782,11 @@
                         android:id="@+id/textView_garage_cars"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/poppins"
                         android:text="@string/cars"
                         android:textColor="@color/colorPrimaryText"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView_garage_cars"
                         app:layout_constraintStart_toStartOf="@+id/imageView_garage_cars"
                         app:layout_constraintTop_toBottomOf="@+id/imageView_garage_cars" />
@@ -803,9 +795,8 @@
                         android:id="@+id/textView_number_of_garage_cars"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/poppins_bold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="5"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
@@ -822,6 +813,729 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_property_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/property_details"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:fontFamily="@font/poppins_bold"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout5"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout5"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cv_property_details_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/profile_background"
+            android:padding="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_property_details"
+            app:layout_constraintStart_toStartOf="@+id/tv_property_details"
+            app:layout_constraintTop_toBottomOf="@+id/tv_property_details">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_msZoning_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/tvMsZoningTitle"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_msZoning_details_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_msZoning_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/agricultural"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_msZoning_details_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_msZoning_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_msZoning_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sale_condition_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/sale_condition"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_sale_condition_details_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_msZoning_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sale_condition_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/normal"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_sale_condition_details_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_sale_condition_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_sale_condition_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_month_of_sold_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/month_of_sold"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_month_of_sold_details_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_sale_condition_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_month_of_sold_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="5"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_month_of_sold_details_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_month_of_sold_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_month_of_sold_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sale_type_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/sale_type"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_sale_type_details_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_month_of_sold_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sale_type_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Conventional"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_sale_type_details_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_sale_type_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_sale_type_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_foundation_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/foundation"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_foundation_details_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_sale_type_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_foundation_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/slab"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_foundation_details_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_foundation_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_foundation_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_street_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/street"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_street_details_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_foundation_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_street_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/paved"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_street_details_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_street_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_street_details_1"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cv_property_details_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/profile_background"
+            android:padding="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/cv_property_details_1"
+            app:layout_constraintStart_toStartOf="@+id/cv_property_details_1"
+            app:layout_constraintTop_toBottomOf="@+id/cv_property_details_1">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_roof_style_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/roof_style"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_roof_style_details_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_roof_style_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/flat"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_roof_style_details_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_roof_style_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_roof_style_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_roof_material_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/roof_material"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_roof_material_details_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_roof_style_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_roof_material_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/standard_shingle"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_roof_material_details_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_roof_material_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_roof_material_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_building_type_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/building_type"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_building_type_details_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_roof_material_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_building_type_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Single Family"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_building_type_details_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_building_type_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_building_type_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_lot_shape_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/lot_shape"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_lot_shape_details_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_building_type_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_lot_shape_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/regular"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_lot_shape_details_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_lot_shape_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_lot_shape_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_house_style_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/house_style"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_house_style_details_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_lot_shape_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_house_style_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/_1story"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_house_style_details_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_house_style_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_house_style_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_alley_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/alley"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_alley_details_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_house_style_details_1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_alley_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/gravel"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_alley_details_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_alley_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_alley_details_1"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cv_property_details_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/profile_background"
+            android:padding="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/cv_property_details_2"
+            app:layout_constraintStart_toStartOf="@+id/cv_property_details_2"
+            app:layout_constraintTop_toBottomOf="@+id/cv_property_details_2">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_masonry_veneer_type_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/masonry_veneer_type"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_masonry_veneer_type_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/standard_shingle"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_masonry_veneer_type_details_1"
+                app:layout_constraintEnd_toEndOf="@+id/tv_masonry_veneer_type_details_1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_masonry_veneer_type_details_1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_masonry_veneer_area_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/masonry_veneer_area"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_masonry_veneer_type_details_2"
+                app:layout_constraintEnd_toEndOf="@+id/tv_masonry_veneer_type_details_2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_masonry_veneer_type_details_2"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_masonry_veneer_area_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="5"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_masonry_veneer_area_details_1"
+                app:layout_constraintEnd_toEndOf="@+id/tv_masonry_veneer_area_details_1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_masonry_veneer_area_details_1" />
+
+            <View
+                android:id="@+id/view_masonry"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/home_popular"
+                app:layout_constraintTop_toBottomOf="@id/tv_masonry_veneer_area_details_2"
+                app:layout_constraintEnd_toEndOf="@+id/tv_masonry_veneer_area_details_2"
+                app:layout_constraintStart_toStartOf="@+id/tv_masonry_veneer_area_details_2"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_exterior_covering_on_house_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/exterior_covering_on_house_1"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/view_masonry"
+                app:layout_constraintEnd_toEndOf="@+id/view_masonry"
+                app:layout_constraintTop_toBottomOf="@+id/view_masonry"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_exterior_covering_on_house_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Asphalt Shingles"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_exterior_covering_on_house_details_1"
+                app:layout_constraintEnd_toEndOf="@+id/tv_exterior_covering_on_house_details_1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_exterior_covering_on_house_details_1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_exterior_covering_on_house_details_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/exterior_covering_on_house_2"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_exterior_covering_on_house_details_2"
+                app:layout_constraintEnd_toEndOf="@+id/tv_exterior_covering_on_house_details_2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_exterior_covering_on_house_details_2"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_exterior_covering_on_house_details_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Metal Siding"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_exterior_covering_on_house_details_3"
+                app:layout_constraintEnd_toEndOf="@+id/tv_exterior_covering_on_house_details_3"
+                app:layout_constraintTop_toBottomOf="@+id/tv_exterior_covering_on_house_details_3" />
+
+            <View
+                android:id="@+id/view_exterior"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/home_popular"
+                app:layout_constraintTop_toBottomOf="@id/tv_exterior_covering_on_house_details_4"
+                app:layout_constraintEnd_toEndOf="@+id/tv_exterior_covering_on_house_details_4"
+                app:layout_constraintStart_toStartOf="@+id/tv_exterior_covering_on_house_details_4"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_condition_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/condition_1"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/view_exterior"
+                app:layout_constraintEnd_toEndOf="@+id/view_exterior"
+                app:layout_constraintTop_toBottomOf="@+id/view_exterior"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_condition_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Adjacent To Feeder Street"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_condition_details_1"
+                app:layout_constraintEnd_toEndOf="@+id/tv_condition_details_1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_condition_details_1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_condition_details_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/condition_2"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_condition_details_2"
+                app:layout_constraintEnd_toEndOf="@+id/tv_condition_details_2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_condition_details_2"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_condition_details_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Within 200 Of North South"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_condition_details_3"
+                app:layout_constraintEnd_toEndOf="@+id/tv_condition_details_3"
+                app:layout_constraintTop_toBottomOf="@+id/tv_condition_details_3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cv_property_details_4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/profile_background"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/cv_property_details_3"
+        app:layout_constraintStart_toStartOf="@+id/cv_property_details_3"
+        app:layout_constraintTop_toBottomOf="@+id/cv_property_details_3">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_heating_quality_details_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/heating_quality"
+            android:textColor="@color/tabLayoutColor"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_heating_quality_details_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_heating_quality_details_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/good"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_heating_quality_details_1"
+            app:layout_constraintTop_toTopOf="@+id/tv_heating_quality_details_1"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_heating_quality_details_1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_exterior_quality_details_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/exterior_quality"
+            android:textColor="@color/tabLayoutColor"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_exterior_quality_details_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_heating_quality_details_1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_exterior_quality_details_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/excellent"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_exterior_quality_details_1"
+            app:layout_constraintTop_toTopOf="@+id/tv_exterior_quality_details_1"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_exterior_quality_details_1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_exterior_condition_details_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/exterior_condition"
+            android:textColor="@color/tabLayoutColor"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_exterior_condition_details_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_exterior_quality_details_1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_exterior_condition_details_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/average"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_exterior_condition_details_1"
+            app:layout_constraintTop_toTopOf="@+id/tv_exterior_condition_details_1"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_exterior_condition_details_1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_kitchen_quality_details_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/kitchen_quality"
+            android:textColor="@color/tabLayoutColor"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_kitchen_quality_details_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_exterior_condition_details_1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_kitchen_quality_details_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/good"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_kitchen_quality_details_1"
+            app:layout_constraintTop_toTopOf="@+id/tv_kitchen_quality_details_1"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_kitchen_quality_details_1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_garage_quality_details_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/garage_quality"
+            android:textColor="@color/tabLayoutColor"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_garage_quality_details_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_kitchen_quality_details_1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_garage_quality_details_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/excellent"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_garage_quality_details_1"
+            app:layout_constraintTop_toTopOf="@+id/tv_garage_quality_details_1"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_garage_quality_details_1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_fire_place_quality_details_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/fire_place_quality"
+            android:textColor="@color/tabLayoutColor"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_fire_place_quality_details_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_garage_quality_details_1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_fire_place_quality_details_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/poor"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_fire_place_quality_details_1"
+            app:layout_constraintTop_toTopOf="@+id/tv_fire_place_quality_details_1"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_fire_place_quality_details_1"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
