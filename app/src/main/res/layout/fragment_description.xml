@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_user_settings"
+            android:id="@+id/cv_agent_description"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="start"
@@ -50,7 +50,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_user_name"
+            android:id="@+id/tv_agent_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -59,10 +59,10 @@
             android:text="@string/tv_user_name"
             android:textColor="@color/colorPrimaryText"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/cv_user_settings"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_agent_description"
             app:layout_constraintEnd_toStartOf="@+id/iv_chat_details"
-            app:layout_constraintStart_toEndOf="@+id/cv_user_settings"
-            app:layout_constraintTop_toTopOf="@+id/cv_user_settings" />
+            app:layout_constraintStart_toEndOf="@+id/cv_agent_description"
+            app:layout_constraintTop_toTopOf="@+id/cv_agent_description" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_close"
@@ -81,9 +81,9 @@
             android:background="@drawable/ic_chat_home_background"
             android:contentDescription="@string/content_description"
             android:tint="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_user_name"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_agent_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_user_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_agent_name"
             app:srcCompat="@drawable/ic_chat" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -125,12 +125,12 @@
             app:srcCompat="@drawable/ic_location" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/apartment_location_update_residence"
+            android:id="@+id/apartment_location_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:ellipsize="marquee"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/poppins"
             android:text="1012 Ocean avanue, New yourk, USA"
             android:textColor="@color/edit_text"
             android:textSize="16sp"
