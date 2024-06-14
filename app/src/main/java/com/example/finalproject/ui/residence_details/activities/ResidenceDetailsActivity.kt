@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_residence_details.apartment_locat
 import kotlinx.android.synthetic.main.activity_residence_details.apartment_residence_title_details
 import kotlinx.android.synthetic.main.activity_residence_details.number_star_residence_details
 import kotlinx.android.synthetic.main.activity_residence_details.residence_image_details
+import kotlinx.android.synthetic.main.activity_residence_details.sale_type_residence_details
 import kotlinx.android.synthetic.main.activity_residence_details.tabLayout_residence_details
 import kotlinx.android.synthetic.main.activity_residence_details.tv_apartment_residence_category_details
 import kotlinx.android.synthetic.main.activity_update_residence.image_update_residence
@@ -103,6 +104,8 @@ class ResidenceDetailsActivity : BaseActivity() {
                     apartment_residence_title_details.text = response.residence.title
 
                     apartment_location_residence_detailss.text = response.residence.location.fullAddress
+
+                    sale_type_residence_details.text = response.residence.type
                 }
 
                 getResidenceViewModel.errorLiveData.observe(this@ResidenceDetailsActivity) { error ->

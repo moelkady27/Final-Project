@@ -62,59 +62,22 @@
                 app:layout_constraintTop_toTopOf="@+id/star_residence" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/arrow1"
+                android:id="@+id/sale_type_residence_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="("
-                android:textSize="16sp"
-                android:textColor="@color/edit_text"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/search_border"
                 android:fontFamily="@font/poppins_medium"
-                app:layout_constraintBottom_toBottomOf="@+id/number_star_residence_details"
-                app:layout_constraintStart_toEndOf="@+id/number_star_residence_details"
-                app:layout_constraintTop_toTopOf="@+id/number_star_residence_details" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/number_reviews_residence_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="680"
-                android:textSize="16sp"
-                android:textColor="@color/edit_text"
-                android:fontFamily="@font/poppins_medium"
-                app:layout_constraintBottom_toBottomOf="@+id/arrow1"
-                app:layout_constraintStart_toEndOf="@+id/arrow1"
-                app:layout_constraintTop_toTopOf="@+id/arrow1" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/review"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:text="@string/reviews"
-                android:textSize="16sp"
-                android:textColor="@color/edit_text"
-                android:fontFamily="@font/poppins_medium"
-                app:layout_constraintBottom_toBottomOf="@+id/number_reviews_residence_details"
-                app:layout_constraintStart_toEndOf="@+id/number_reviews_residence_details"
-                app:layout_constraintTop_toTopOf="@+id/number_reviews_residence_details" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/arrow2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="20dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text=")"
                 android:gravity="center_vertical"
-                android:textColor="@color/edit_text"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/arrow1"
-                app:layout_constraintEnd_toStartOf="@+id/tv_apartment_residence_category_details"
-                app:layout_constraintStart_toEndOf="@+id/review"
-                app:layout_constraintTop_toTopOf="@+id/arrow1" />
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/sale"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintBottom_toBottomOf="@+id/star_residence"
+                app:layout_constraintStart_toEndOf="@+id/number_star_residence_details"
+                app:layout_constraintTop_toTopOf="@+id/star_residence" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_apartment_residence_category_details"
@@ -129,9 +92,9 @@
                 android:text="@string/apartment"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/review"
+                app:layout_constraintBottom_toBottomOf="@+id/star_residence"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/review" />
+                app:layout_constraintTop_toTopOf="@+id/star_residence" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/apartment_residence_title_details"
@@ -145,7 +108,7 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/tv_apartment_residence_category_details"
                 app:layout_constraintStart_toStartOf="@+id/star_residence"
-                app:layout_constraintTop_toBottomOf="@+id/review" />
+                app:layout_constraintTop_toBottomOf="@+id/star_residence" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_location_featured_estates"
