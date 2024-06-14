@@ -1,7 +1,7 @@
 package com.example.finalproject.ui.residence_details.models
 
-data class AddReviewResponse(
-    val message: String,
-    val review: Review,
+data class GetReviewsResponse(
+    val count: Int,
+    val reviews: List<Review>,
     val status: String
 )
