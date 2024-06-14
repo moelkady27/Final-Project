@@ -53,7 +53,9 @@ import com.example.finalproject.ui.register.models.VerificationCodeSignUpRespons
 import com.example.finalproject.ui.register.request.SignInRequest
 import com.example.finalproject.ui.register.request.SignUpRequest
 import com.example.finalproject.ui.register.request.VerificationCodeSignUpRequest
+import com.example.finalproject.ui.residence_details.models.AddReviewResponse
 import com.example.finalproject.ui.residence_details.models.GetReviewsResponse
+import com.example.finalproject.ui.residence_details.request.AddReviewRequest
 import com.example.finalproject.ui.search.SearchResponse
 import com.example.finalproject.ui.setting.models.DeleteAccountResponse
 import com.example.finalproject.ui.setting.request.DeleteAccountRequest
@@ -387,12 +389,12 @@ interface ApiService {
         @Path("residenceId") residenceId: String
     ): Call<UpdateResidenceResponse>
 
-//    @POST("api/v1/review/{residenceId}")
-//    fun addReview(
-//        @Body req: AddReviewRequest,
-//        @Header("Authorization") token: String,
-//        @Path("residenceId") residenceId: String
-//    ): Call<AddReviewResponse>
+    @POST("api/v1/review/{residenceId}")
+    fun addReview(
+        @Body req: AddReviewRequest,
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String
+    ): Call<AddReviewResponse>
 
     @GET("api/v1/review/get/{residenceId}")
     fun getReviews(

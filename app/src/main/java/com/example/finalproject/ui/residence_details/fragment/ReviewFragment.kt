@@ -1,6 +1,7 @@
 package com.example.finalproject.ui.residence_details.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.finalproject.AddReviewActivity
 import com.example.finalproject.R
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
@@ -19,6 +21,7 @@ import com.example.finalproject.ui.residence_details.adapter.ReviewAdapter
 import com.example.finalproject.ui.residence_details.factory.GetReviewsFactory
 import com.example.finalproject.ui.residence_details.repository.GetReviewsRepository
 import com.example.finalproject.ui.residence_details.viewModel.GetReviewsViewModel
+import kotlinx.android.synthetic.main.fragment_review.btn_add_review
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -61,7 +64,8 @@ class ReviewFragment : Fragment() {
     private fun initView() {
         val getReviewsRepository = GetReviewsRepository(RetrofitClient.instance)
         val factory = GetReviewsFactory(getReviewsRepository)
-        getReviewsViewModel = ViewModelProvider(this, factory).get(GetReviewsViewModel::class.java)
+        getReviewsViewModel = ViewModelProvider(this, factory
+        )[GetReviewsViewModel::class.java]
 
         val token = AppReferences.getToken(requireContext())
         val residenceId = arguments?.getString("residenceId")
@@ -95,6 +99,12 @@ class ReviewFragment : Fragment() {
             }
         } else {
             Toast.makeText(requireContext(), "Residence ID is not available", Toast.LENGTH_LONG).show()
+        }
+
+        btn_add_review.setOnClickListener {
+            val intent = Intent(requireContext(), AddReviewActivity::class.java)
+            intent.putExtra("residenceId", residenceId)
+            startActivity(intent)
         }
     }
 }
