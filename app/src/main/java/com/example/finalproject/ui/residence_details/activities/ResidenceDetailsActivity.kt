@@ -1,12 +1,15 @@
 package com.example.finalproject.ui.residence_details.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.example.finalproject.AddReviewActivity
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.retrofit.RetrofitClient
@@ -19,11 +22,13 @@ import com.example.finalproject.ui.update_listing.viewModel.GetResidenceViewMode
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_residence_details.apartment_location_residence_detailss
 import kotlinx.android.synthetic.main.activity_residence_details.apartment_residence_title_details
+import kotlinx.android.synthetic.main.activity_residence_details.btn_add_review
 import kotlinx.android.synthetic.main.activity_residence_details.number_star_residence_details
 import kotlinx.android.synthetic.main.activity_residence_details.residence_image_details
 import kotlinx.android.synthetic.main.activity_residence_details.sale_type_residence_details
 import kotlinx.android.synthetic.main.activity_residence_details.tabLayout_residence_details
 import kotlinx.android.synthetic.main.activity_residence_details.tv_apartment_residence_category_details
+import kotlinx.android.synthetic.main.activity_residence_details.view_pager_residence_details
 import kotlinx.android.synthetic.main.activity_update_residence.image_update_residence
 import org.json.JSONException
 import org.json.JSONObject
@@ -59,6 +64,22 @@ class ResidenceDetailsActivity : BaseActivity() {
                     tab.text = "Review"
             }
         }.attach()
+
+        view_pager_residence_details.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                if (position == 2) {
+                    btn_add_review.visibility = View.VISIBLE
+                }
+            }
+        })
+
+        btn_add_review.setOnClickListener {
+            val intent = Intent(
+                this@ResidenceDetailsActivity, AddReviewActivity::class.java)
+            intent.putExtra("residenceId", residenceId)
+            startActivity(intent)
+        }
 
         networkUtils = NetworkUtils(this@ResidenceDetailsActivity)
 
