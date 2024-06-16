@@ -68,5 +68,7 @@ class ReviewAdapter(
         holder.itemView.number_star_review_details.text = review.rating.toString()
 
         holder.itemView.number_of_likes_review_details.text = review.reviewLikes.toString()
+
+        holder.itemView.number_of_dislikes_review_details.text = review.unLikes.toString()
     }
 }

@@ -70,6 +70,8 @@ class ResidenceDetailsActivity : BaseActivity() {
                 super.onPageSelected(position)
                 if (position == 2) {
                     btn_add_review.visibility = View.VISIBLE
+                } else {
+                    btn_add_review.visibility = View.GONE
                 }
             }
         })

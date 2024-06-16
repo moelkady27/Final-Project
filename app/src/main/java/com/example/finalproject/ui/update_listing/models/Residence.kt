@@ -73,7 +73,7 @@ data class Residence(
     val title: String,
     val totRmsAbvGrd: Int,
     val totalarea: String,
-    val totalbaths: Int,
+    val totalbaths: Double,
     val totalporchsf: String,
     val totalsf: String,
     val type: String,
