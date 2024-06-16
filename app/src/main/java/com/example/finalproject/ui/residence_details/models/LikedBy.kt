@@ -1,7 +1,7 @@
 package com.example.finalproject.ui.residence_details.models
 
-data class ImageX(
+data class LikedBy(
     val _id: String,
-    val public_id: String,
-    val url: String
+    val image: Image,
+    val username: String
 )

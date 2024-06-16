@@ -366,6 +366,8 @@
     <string name="facilities" translatable="false">Facilities</string>
     <string name="cars" translatable="false">Cars</string>
     <string name="property_details" translatable="false">Property Details</string>
+    <string name="how_was_experience" translatable="false">How was your experience with %1$s ?</string>
+
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>

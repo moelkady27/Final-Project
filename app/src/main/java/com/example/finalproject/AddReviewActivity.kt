@@ -1,24 +1,22 @@
 package com.example.finalproject
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.residence_details.activities.ResidenceDetailsActivity
 import com.example.finalproject.ui.residence_details.factory.AddReviewFactory
 import com.example.finalproject.ui.residence_details.factory.GetReviewsFactory
 import com.example.finalproject.ui.residence_details.repository.AddReviewRepository
 import com.example.finalproject.ui.residence_details.repository.GetReviewsRepository
 import com.example.finalproject.ui.residence_details.viewModel.AddReviewViewModel
 import com.example.finalproject.ui.residence_details.viewModel.GetReviewsViewModel
-import com.example.finalproject.ui.update_listing.factory.GetResidenceFactory
-import com.example.finalproject.ui.update_listing.repository.GetResidenceRepository
-import com.example.finalproject.ui.update_listing.viewModel.GetResidenceViewModel
 import kotlinx.android.synthetic.main.activity_add_review.btn_submit_review
 import kotlinx.android.synthetic.main.activity_add_review.civ_add_review_agent
 import kotlinx.android.synthetic.main.activity_add_review.et_add_review_detailed
@@ -53,12 +51,30 @@ class AddReviewActivity : BaseActivity() {
     }
 
     private fun initView() {
+                                    /* Get Reviews */
+
         val getReviewsRepository = GetReviewsRepository(RetrofitClient.instance)
         val factory = GetReviewsFactory(getReviewsRepository)
         getReviewsViewModel = ViewModelProvider(this, factory
         )[GetReviewsViewModel::class.java]
 
         getResidence()
+
+                                    /* Add Review */
+
+        val addReviewRepository = AddReviewRepository(RetrofitClient.instance)
+        val addReviewFactory = AddReviewFactory(addReviewRepository)
+        addReviewViewModel = ViewModelProvider(this@AddReviewActivity, addReviewFactory
+        )[AddReviewViewModel::class.java]
+
+        btn_submit_review.setOnClickListener {
+            if (networkUtils.isNetworkAvailable()) {
+                showProgressDialog(this@AddReviewActivity, "Adding Review...")
+                addReview()
+            } else {
+                showErrorSnackBar("No internet connection", true)
+            }
+        }
     }
 
     private fun getResidence() {
@@ -85,7 +101,7 @@ class AddReviewActivity : BaseActivity() {
                             Log.e("UpdateResidenceActivity", "No images found for this residence")
                         }
 
-                        val owner = response.reviews[0].userId
+                        val owner = response.reviews[0].residenceId.ownerId
 
                         if (owner.image.url.isNotEmpty()) {
                             Glide
@@ -98,15 +114,7 @@ class AddReviewActivity : BaseActivity() {
 
                         tv_add_review_title_1.text = owner.username
 
-                        val name = owner.username
-                        tv_add_review_title_3.text = "How was your experience with $name ?"
-
-                        btn_submit_review.setOnClickListener {
-                            if (networkUtils.isNetworkAvailable()) {
-                                showProgressDialog(this@AddReviewActivity, "Adding Review...")
-                                addReview()
-                            }
-                        }
+                        tv_add_review_title_3.text = getString(R.string.how_was_experience, owner.username)
                     }
                 }
 
@@ -139,18 +147,17 @@ class AddReviewActivity : BaseActivity() {
         val rating = rb_add_review.rating.toString()
         val comment = et_add_review_detailed.text.toString()
 
-        val addReviewRepository = AddReviewRepository(RetrofitClient.instance)
-        val factory = AddReviewFactory(addReviewRepository)
-        addReviewViewModel = ViewModelProvider(this@AddReviewActivity, factory)[AddReviewViewModel::class.java]
-
         addReviewViewModel.addReview(token, id!!, rating, comment)
 
         addReviewViewModel.addReviewLiveData.observe(this) { response ->
             hideProgressDialog()
             response.let {
                 val message = response.message
-
                 Log.e("AddReviewActivity", "Review Added: $message")
+
+                val intent = Intent(this@AddReviewActivity, ResidenceDetailsActivity::class.java)
+                intent.putExtra("residenceId", id)
+                startActivity(intent)
             }
         }
 

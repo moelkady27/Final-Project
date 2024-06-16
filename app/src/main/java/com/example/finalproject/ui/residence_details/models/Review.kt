@@ -5,10 +5,11 @@ data class Review(
     val _id: String,
     val comment: String,
     val createdAt: String,
-    val likedBy: List<Any>,
+    val likedBy: List<LikedBy>,
     val rating: Int,
     val residenceId: ResidenceId,
     val reviewLikes: Int,
+    val unLikes: Int,
     val updatedAt: String,
     val userId: UserId
 )

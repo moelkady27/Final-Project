@@ -128,7 +128,7 @@
             android:id="@+id/apartment_location_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
             android:ellipsize="marquee"
             android:fontFamily="@font/poppins"
             android:text="1012 Ocean avanue, New yourk, USA"
@@ -342,7 +342,6 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -562,7 +561,6 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -753,7 +751,6 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -920,31 +917,31 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_month_of_sold_details_1"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_sale_type_details_1"
+                android:id="@+id/tv_central_air_details_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="@string/sale_type"
+                android:text="@string/central_air"
                 android:textColor="@color/tabLayoutColor"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/tv_sale_type_details_2"
+                app:layout_constraintEnd_toStartOf="@+id/tv_central_air_details_2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_month_of_sold_details_1"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_sale_type_details_2"
+                android:id="@+id/tv_central_air_details_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Conventional"
+                android:text="No"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tv_sale_type_details_1"
-                app:layout_constraintTop_toTopOf="@+id/tv_sale_type_details_1"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_sale_type_details_1"/>
+                app:layout_constraintStart_toEndOf="@+id/tv_central_air_details_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_central_air_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_central_air_details_1"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_foundation_details_1"
@@ -957,7 +954,7 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/tv_foundation_details_2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_sale_type_details_1"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_central_air_details_1"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_foundation_details_2"
@@ -1361,6 +1358,32 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_condition_details_3"
                 app:layout_constraintEnd_toEndOf="@+id/tv_condition_details_3"
                 app:layout_constraintTop_toBottomOf="@+id/tv_condition_details_3" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sale_type_details_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/sale_type"
+                android:textColor="@color/tabLayoutColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_condition_details_4"
+                app:layout_constraintStart_toStartOf="@+id/tv_condition_details_4"
+                app:layout_constraintTop_toBottomOf="@id/tv_condition_details_4"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sale_type_details_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Conventional"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_sale_type_details_1"
+                app:layout_constraintEnd_toEndOf="@+id/tv_sale_type_details_1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sale_type_details_1"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
