@@ -408,4 +408,10 @@ interface ApiService {
         @Path("reviewId") reviewId: String
     ): Call<LikeReviewResponse>
 
+    @GET("api/v1/review/remove-like/{reviewId}")
+    fun removeLike(
+        @Header("Authorization") token: String,
+        @Path("reviewId") reviewId: String
+    ): Call<LikeReviewResponse>
+
 }

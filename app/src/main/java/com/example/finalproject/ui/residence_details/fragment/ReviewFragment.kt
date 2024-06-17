@@ -18,11 +18,14 @@ import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.residence_details.adapter.ReviewAdapter
 import com.example.finalproject.ui.residence_details.factory.GetReviewsFactory
 import com.example.finalproject.ui.residence_details.factory.LikeReviewFactory
+import com.example.finalproject.ui.residence_details.factory.RemoveLikeFactory
 import com.example.finalproject.ui.residence_details.models.Review
 import com.example.finalproject.ui.residence_details.repository.GetReviewsRepository
 import com.example.finalproject.ui.residence_details.repository.LikeReviewRepository
+import com.example.finalproject.ui.residence_details.repository.RemoveLikeRepository
 import com.example.finalproject.ui.residence_details.viewModel.GetReviewsViewModel
 import com.example.finalproject.ui.residence_details.viewModel.LikeReviewViewModel
+import com.example.finalproject.ui.residence_details.viewModel.RemoveLikeViewModel
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -37,6 +40,8 @@ class ReviewFragment : Fragment() {
     private lateinit var getReviewsViewModel: GetReviewsViewModel
 
     private lateinit var likeReviewViewModel: LikeReviewViewModel
+
+    private lateinit var removeLikeViewModel: RemoveLikeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,6 +82,15 @@ class ReviewFragment : Fragment() {
         likeReviewViewModel = ViewModelProvider(
             this, likeReviewFactory
         )[LikeReviewViewModel::class.java]
+
+                                    /* Remove-Like */
+
+        val removeLikeRepository = RemoveLikeRepository(RetrofitClient.instance)
+        val removeLikeFactory = RemoveLikeFactory(removeLikeRepository)
+        removeLikeViewModel = ViewModelProvider(
+            this, removeLikeFactory
+        )[RemoveLikeViewModel::class.java]
+
     }
 
     private fun initRecyclerView() {
@@ -144,6 +158,36 @@ class ReviewFragment : Fragment() {
         }
 
         likeReviewViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
+            BaseActivity().hideProgressDialog()
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun removeLike(review: Review) {
+        val token = AppReferences.getToken(requireContext())
+        val reviewId = review._id
+
+        removeLikeViewModel.removeLike(token, reviewId)
+
+        removeLikeViewModel.removeLikeLiveData.observe(viewLifecycleOwner) { response ->
+            baseActivity.hideProgressDialog()
+            response?.let {
+                val message = it.message
+                Log.e("RemoveLike", "RemoveLikeMessage: $message")
+                Log.e("ReviewLikes", "AllReviewLikes: ${it.reviewLikes}")
+
+                reviewAdapter.updateLikes(reviewId, it.reviewLikes)
+            }
+        }
+
+        removeLikeViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
             BaseActivity().hideProgressDialog()
             error?.let {
                 try {
