@@ -8,7 +8,7 @@ data class Review(
     val likedBy: List<LikedBy>,
     val rating: Int,
     val residenceId: ResidenceId,
-    val reviewLikes: Int,
+    var reviewLikes: Int,
     val unLikes: Int,
     val updatedAt: String,
     val userId: UserId

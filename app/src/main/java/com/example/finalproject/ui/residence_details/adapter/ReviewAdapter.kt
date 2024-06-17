@@ -13,7 +13,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ReviewAdapter(
-    var list: MutableList<Review>
+    var list: MutableList<Review>,
+    private val onLikeClicked: (Review, Int) -> Unit
 ) : RecyclerView.Adapter<ReviewAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -70,5 +71,18 @@ class ReviewAdapter(
         holder.itemView.number_of_likes_review_details.text = review.reviewLikes.toString()
 
         holder.itemView.number_of_dislikes_review_details.text = review.unLikes.toString()
+
+        holder.itemView.iv_like_review.setOnClickListener {
+            onLikeClicked(review, position)
+        }
     }
+
+    fun updateLikes(reviewId: String, newLikesCount: Int) {
+        val position = list.indexOfFirst { it._id == reviewId }
+        if (position != -1) {
+            list[position].reviewLikes = newLikesCount
+            notifyItemChanged(position)
+        }
+    }
+
 }

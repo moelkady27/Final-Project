@@ -55,6 +55,7 @@ import com.example.finalproject.ui.register.request.SignUpRequest
 import com.example.finalproject.ui.register.request.VerificationCodeSignUpRequest
 import com.example.finalproject.ui.residence_details.models.AddReviewResponse
 import com.example.finalproject.ui.residence_details.models.GetReviewsResponse
+import com.example.finalproject.ui.residence_details.models.LikeReviewResponse
 import com.example.finalproject.ui.residence_details.request.AddReviewRequest
 import com.example.finalproject.ui.search.SearchResponse
 import com.example.finalproject.ui.setting.models.DeleteAccountResponse
@@ -64,7 +65,6 @@ import com.example.finalproject.ui.update_listing.models.GetResidenceResponse
 import com.example.finalproject.ui.update_listing.models.UpdateResidenceResponse
 import com.example.finalproject.ui.update_listing.request.FirstUpdateRequest
 import com.example.finalproject.ui.update_listing.request.FourthUpdateRequest
-//import com.example.finalproject.ui.update_listing.request.FourthUpdateRequest
 import com.example.finalproject.ui.update_listing.request.SecondUpdateRequest
 import com.example.finalproject.ui.update_listing.request.ThirdUpdateRequest
 import com.example.finalproject.ui.update_listing.request.UpdateResidenceRequest
@@ -401,5 +401,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("residenceId") residenceId: String
     ): Call<GetReviewsResponse>
+
+    @GET("api/v1/review/like/{reviewId}")
+    fun likeReview(
+        @Header("Authorization") token: String,
+        @Path("reviewId") reviewId: String
+    ): Call<LikeReviewResponse>
 
 }
