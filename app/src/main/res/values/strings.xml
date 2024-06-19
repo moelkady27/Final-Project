@@ -106,7 +106,7 @@
     <string name="photo_chat" translatable="false">Photo</string>
     <string name="save" translatable="false">Save</string>
     <string name="favourites" translatable="false">Favourites</string>
-    <string name="estates" translatable="false">estates</string>
+    <string name="estates" translatable="false">Estates</string>
     <string name="apartment" translatable="false">Apartment</string>
     <string name="location_home" translatable="false">Location</string>
     <string name="tv_home_title_1" translatable="false">Discover\nFind your\nBest Living Places.</string>
@@ -370,6 +370,10 @@
     <string name="recommended_for_you" translatable="false">
         <font color='#FF6C63FF'>Recommended</font>
         <font color='#FF413F58'>For You</font>
+    </string>
+    <string name="recommended_properties_you_may_like" translatable="false">
+        <font color='#FF6C63FF'>Recommended Properties</font>
+        <font color='#FF413F58'>\nYou May Like</font>
     </string>
 
 

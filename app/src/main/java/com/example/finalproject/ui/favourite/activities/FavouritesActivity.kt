@@ -13,6 +13,7 @@ import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.favourite.adapter.FavouritesAdapter
+import com.example.finalproject.ui.favourite.adapter.RecommendedPropertiesAdapter
 import com.example.finalproject.ui.favourite.factory.AllFavouritesFactory
 import com.example.finalproject.ui.favourite.factory.DeleteAllFavouriteFactory
 import com.example.finalproject.ui.favourite.factory.DeleteFavouriteFactory
@@ -27,10 +28,12 @@ import kotlinx.android.synthetic.main.activity_favourites.iv_delete_favourites
 import kotlinx.android.synthetic.main.activity_favourites.iv_empty_favourites
 import kotlinx.android.synthetic.main.activity_favourites.number_favourites
 import kotlinx.android.synthetic.main.activity_favourites.recycle_favourites
+import kotlinx.android.synthetic.main.activity_favourites.rv_recommended_properties_you_may_like
 import kotlinx.android.synthetic.main.activity_favourites.toolbar_favourites
 import kotlinx.android.synthetic.main.activity_favourites.tv_empty_favourites_title_2
 import kotlinx.android.synthetic.main.activity_favourites.tv_empty_favourites_title_3
 import kotlinx.android.synthetic.main.activity_favourites.tv_empty_favourites_title_4
+import kotlinx.android.synthetic.main.activity_favourites.tv_recommended_properties_fav
 import org.json.JSONObject
 
 class FavouritesActivity : BaseActivity() {
@@ -38,6 +41,8 @@ class FavouritesActivity : BaseActivity() {
     private lateinit var recyclerView: RecyclerView
 
     private lateinit var favouritesAdapter: FavouritesAdapter
+
+    private lateinit var recommendedPropertiesAdapter: RecommendedPropertiesAdapter
 
     private lateinit var allFavouritesViewModel: AllFavouritesViewModel
 
@@ -51,26 +56,30 @@ class FavouritesActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favourites)
 
-        setUpActionBar()
-
-        recyclerView = findViewById(R.id.recycle_favourites)
-        recyclerView.layoutManager = LinearLayoutManager(this@FavouritesActivity , LinearLayoutManager.VERTICAL , false)
+        recyclerView = findViewById(R.id.rv_recommended_properties_you_may_like)
+        recyclerView.layoutManager = LinearLayoutManager(this@FavouritesActivity ,
+            LinearLayoutManager.HORIZONTAL , false)
+        recommendedPropertiesAdapter = RecommendedPropertiesAdapter()
+        recyclerView.adapter = recommendedPropertiesAdapter
 
         networkUtils = NetworkUtils(this@FavouritesActivity)
 
-        val deleteFavouriteRepository = DeleteFavouriteRepository(RetrofitClient.instance)
-        val deleteFavouriteFactory = DeleteFavouriteFactory(deleteFavouriteRepository)
-        deleteFavouriteViewModel = ViewModelProvider(this@FavouritesActivity, deleteFavouriteFactory
-        )[DeleteFavouriteViewModel::class.java]
-
         initView()
+
+        setUpActionBar()
     }
 
     private fun initView() {
+                                    /* Get-Favourites */
+
         val allFavouritesRepository = AllFavouritesRepository(RetrofitClient.instance)
         val factory = AllFavouritesFactory(allFavouritesRepository)
         allFavouritesViewModel = ViewModelProvider(this@FavouritesActivity, factory
         )[AllFavouritesViewModel::class.java]
+
+        recyclerView = findViewById(R.id.recycle_favourites)
+        recyclerView.layoutManager = LinearLayoutManager(this@FavouritesActivity ,
+            LinearLayoutManager.VERTICAL , false)
 
         if (networkUtils.isNetworkAvailable()) {
             showProgressDialog(this@FavouritesActivity, "please wait...")
@@ -78,6 +87,13 @@ class FavouritesActivity : BaseActivity() {
         } else {
             showErrorSnackBar("No internet connection", true)
         }
+
+                                    /* Delete-Favourite */
+
+        val deleteFavouriteRepository = DeleteFavouriteRepository(RetrofitClient.instance)
+        val deleteFavouriteFactory = DeleteFavouriteFactory(deleteFavouriteRepository)
+        deleteFavouriteViewModel = ViewModelProvider(this@FavouritesActivity, deleteFavouriteFactory
+        )[DeleteFavouriteViewModel::class.java]
     }
 
     private fun getFavourites() {
@@ -102,12 +118,16 @@ class FavouritesActivity : BaseActivity() {
                     tv_empty_favourites_title_2.visibility = View.GONE
                     tv_empty_favourites_title_3.visibility = View.GONE
                     tv_empty_favourites_title_4.visibility = View.GONE
+                    tv_recommended_properties_fav.visibility = View.VISIBLE
+                    rv_recommended_properties_you_may_like.visibility = View.VISIBLE
                 } else {
                     recycle_favourites.visibility = View.GONE
                     iv_empty_favourites.visibility = View.VISIBLE
                     tv_empty_favourites_title_2.visibility = View.VISIBLE
                     tv_empty_favourites_title_3.visibility = View.VISIBLE
                     tv_empty_favourites_title_4.visibility = View.VISIBLE
+                    tv_recommended_properties_fav.visibility = View.GONE
+                    rv_recommended_properties_you_may_like.visibility = View.GONE
                 }
             }
         }
@@ -138,7 +158,6 @@ class FavouritesActivity : BaseActivity() {
             deleteFavouriteViewModel.deleteFavouriteLiveData.observe(this@FavouritesActivity) { response ->
                 hideProgressDialog()
                 response.let {
-//                    Toast.makeText(this@FavouritesActivity, it.message, Toast.LENGTH_LONG).show()
                     Log.e("deleteFavourite", it.message)
 
                     favouritesAdapter.removeFavourite(wishlist)
@@ -151,6 +170,8 @@ class FavouritesActivity : BaseActivity() {
                         tv_empty_favourites_title_2.visibility = View.VISIBLE
                         tv_empty_favourites_title_3.visibility = View.VISIBLE
                         tv_empty_favourites_title_4.visibility = View.VISIBLE
+                        tv_recommended_properties_fav.visibility = View.GONE
+                        rv_recommended_properties_you_may_like.visibility = View.GONE
                     }
                 }
             }
@@ -194,6 +215,8 @@ class FavouritesActivity : BaseActivity() {
                     tv_empty_favourites_title_2.visibility = View.VISIBLE
                     tv_empty_favourites_title_3.visibility = View.VISIBLE
                     tv_empty_favourites_title_4.visibility = View.VISIBLE
+                    tv_recommended_properties_fav.visibility = View.GONE
+                    rv_recommended_properties_you_may_like.visibility = View.GONE
                 }
             }
 

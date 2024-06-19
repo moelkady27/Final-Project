@@ -93,7 +93,7 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="10dp"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_recommended_properties_fav"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/number_favourites" />
@@ -163,6 +163,33 @@
                 app:layout_constraintEnd_toEndOf="@+id/tv_empty_favourites_title_3"
                 app:layout_constraintStart_toStartOf="@+id/tv_empty_favourites_title_3"
                 app:layout_constraintTop_toBottomOf="@+id/tv_empty_favourites_title_3" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_recommended_properties_fav"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/recommended_properties_you_may_like"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                app:fontFamily="@font/poppins_bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/recycle_favourites"
+                app:layout_constraintStart_toStartOf="@+id/recycle_favourites"
+                app:layout_constraintTop_toBottomOf="@+id/recycle_favourites" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recommended_properties_you_may_like"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/tv_recommended_properties_fav"
+                app:layout_constraintStart_toStartOf="@+id/tv_recommended_properties_fav"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recommended_properties_fav" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
