@@ -375,7 +375,13 @@
         <font color='#FF6C63FF'>Recommended Properties</font>
         <font color='#FF413F58'>\nYou May Like</font>
     </string>
-
+    <string name="predicted_price" translatable="false">
+        <font color='#FF413F58'>Your Listing is now Published Check out the</font>
+        <font color='#FF6C63FF'><u><b>Predicted Price</b></u></font>
+        <font color='#FF413F58'>below</font>
+    </string>
+    <string name="change_price" translatable="false">Change Price</string>
+    <string name="change_predicted_price" translatable="false">Change Predicted Price</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>

@@ -60,6 +60,9 @@ class FourthCompleteActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fourth_complete)
 
+        val residenceId = intent.getStringExtra("residenceId").toString()
+        Log.e("residenceId" , "third is $residenceId")
+
         networkUtils = NetworkUtils(this@FourthCompleteActivity)
 
         initView()
@@ -78,7 +81,6 @@ class FourthCompleteActivity : BaseActivity() {
         btn_submit_fourth_complete.setOnClickListener {
             if (networkUtils.isNetworkAvailable()) {
                 fourthComplete()
-                showCompletedAddListingSuccess()
             } else {
                 showErrorSnackBar("No internet connection", true)
             }
@@ -151,6 +153,12 @@ class FourthCompleteActivity : BaseActivity() {
                 response?.let {
                     val status = it.status
                     Log.e("FourthCompleteActivity", "Status: $status")
+
+                    val id = it.residence._id
+                    val intent = Intent(
+                        this@FourthCompleteActivity, AddListingPredictionActivity::class.java)
+                    intent.putExtra("residenceId", id)
+                    startActivity(intent)
                 }
             }
             fourthCompleteViewModel.errorLiveData.observe(this) { error ->
@@ -348,30 +356,6 @@ class FourthCompleteActivity : BaseActivity() {
             chip.setTextColor(resources.getColor(R.color.colorPrimaryText))
             chip.setChipBackgroundColorResource(R.color.home_search)
         }
-    }
-
-    private fun showCompletedAddListingSuccess() {
-        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialog)
-
-        val messageDialogView =
-            layoutInflater.inflate(R.layout.extra_information_success, null)
-
-        messageDialogView.background =
-            ContextCompat.getDrawable(this, R.drawable.message_options_dialog_background)
-
-        val addMoreButton = messageDialogView.findViewById<TextView>(R.id.add_more_extra_information_success)
-        val finishButton = messageDialogView.findViewById<TextView>(R.id.finish_extra_information_success)
-
-        addMoreButton.setOnClickListener {
-            // TODO - Navigate to the first screen from add listing
-        }
-
-        finishButton.setOnClickListener {
-            // TODO - Navigate to the home fragment
-        }
-
-        bottomSheetDialog.setContentView(messageDialogView)
-        bottomSheetDialog.show()
     }
 
     private fun setupActionBar() {

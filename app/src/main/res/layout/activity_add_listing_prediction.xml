@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.add_listing.activities.AddListingPredictionActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_predicted_price_success"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/content_description"
+        android:src="@drawable/iv_success"
+        app:layout_constraintBottom_toTopOf="@id/tv_predicted_price_title_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_predicted_price_title_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="15dp"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/predicted_price"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_predicted_price_2"
+        app:layout_constraintEnd_toEndOf="@+id/iv_predicted_price_success"
+        app:layout_constraintStart_toStartOf="@+id/iv_predicted_price_success"
+        app:layout_constraintTop_toBottomOf="@+id/iv_predicted_price_success" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_predicted_price_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="40dp"
+        android:padding="25dp"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_semibold"
+        android:background="@drawable/profile_background"
+        android:text="$ 45000000"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/con_predicted_price"
+        app:layout_constraintEnd_toEndOf="@+id/tv_predicted_price_title_1"
+        app:layout_constraintStart_toStartOf="@+id/tv_predicted_price_title_1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_predicted_price_title_1" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/con_predicted_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_predicted_price_title_1"
+        app:layout_constraintEnd_toEndOf="@id/tv_predicted_price_title_1"
+        app:layout_constraintTop_toBottomOf="@id/tv_predicted_price_2">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/finish_predicted_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/finish"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/change_price_predicted_price"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/change_price_predicted_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/button_background_add_more"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:text="@string/change_price"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/finish_predicted_price"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
