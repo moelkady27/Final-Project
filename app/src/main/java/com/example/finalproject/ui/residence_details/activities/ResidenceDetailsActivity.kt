@@ -61,7 +61,7 @@ class ResidenceDetailsActivity : BaseActivity() {
 
         viewPager2 = findViewById(R.id.view_pager_residence_details)
 
-        adapter = DetailsViewAdapter(supportFragmentManager, lifecycle, residenceId!!)
+        adapter = DetailsViewAdapter(supportFragmentManager, lifecycle, residenceId!!,residence_Id!!)
         viewPager2.adapter = adapter
 
         TabLayoutMediator(tabLayout_residence_details, viewPager2) { tab, position ->

@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.residence_details.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,14 +9,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
+import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.complete_register.activities.MapActivity
+import com.example.finalproject.ui.recommendation.factory.RecommendationFactory
+import com.example.finalproject.ui.recommendation.models.Data
+import com.example.finalproject.ui.recommendation.repository.RecommendationRepository
+import com.example.finalproject.ui.recommendation.viewModel.RecommendationViewModel
+import com.example.finalproject.ui.residence_details.activities.MapResidenceActivity
 import com.example.finalproject.ui.residence_details.adapter.RecommendedAdapter
 import com.example.finalproject.ui.update_listing.factory.GetResidenceFactory
 import com.example.finalproject.ui.update_listing.repository.GetResidenceRepository
@@ -34,9 +43,17 @@ class DescriptionFragment : Fragment() {
 
     private lateinit var getResidenceViewModel: GetResidenceViewModel
 
+    private lateinit var networkUtils: NetworkUtils
+
+    private val REQUEST_CODE_MAP = 102
+
+    private lateinit var recommendationViewModel: RecommendationViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         baseActivity = BaseActivity()
+
+        networkUtils = NetworkUtils(requireContext())
     }
 
     override fun onCreateView(
@@ -53,7 +70,7 @@ class DescriptionFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext() ,
             LinearLayoutManager.HORIZONTAL , false)
 
-        recommendedAdapter = RecommendedAdapter()
+        recommendedAdapter = RecommendedAdapter(emptyList())
         recyclerView.adapter = recommendedAdapter
 
         initView()
@@ -65,6 +82,13 @@ class DescriptionFragment : Fragment() {
         getResidenceViewModel = ViewModelProvider(
             this@DescriptionFragment, factoryGetResidence)[GetResidenceViewModel::class.java]
         getResidence()
+
+        val recommendationRepository = RecommendationRepository(RetrofitClient.instance)
+        val recommendationFactory = RecommendationFactory(recommendationRepository)
+        recommendationViewModel = ViewModelProvider(
+            this@DescriptionFragment, recommendationFactory)[RecommendationViewModel::class.java]
+
+        getRecommendedEstates()
     }
 
     private fun getResidence() {
@@ -150,6 +174,22 @@ class DescriptionFragment : Fragment() {
                 tv_exterior_quality_details_2.text = response.residence.exterQual ?: "N/A"
                 tv_exterior_condition_details_2.text = response.residence.exterCond ?: "N/A"
                 tv_kitchen_quality_details_2.text = response.residence.kitchenQual ?: "N/A"
+
+//                val residenceLocation = response.residence.location
+//                val latitude = residenceLocation?.coordinates?.get(0) ?: 0.0
+//                val longitude = residenceLocation?.coordinates?.get(1) ?: 0.0
+//
+//                select_map_update_listing.setOnClickListener {
+//                    if (networkUtils.isNetworkAvailable()) {
+//                        val mapIntent = Intent(requireContext(), MapResidenceActivity::class.java)
+//                        mapIntent.putExtra("latitude", latitude)
+//                        mapIntent.putExtra("longitude", longitude)
+//                        startActivityForResult(mapIntent, REQUEST_CODE_MAP)
+//                    } else {
+//                        baseActivity.showErrorSnackBar("No internet connection", true)
+//                    }
+//                }
+
             }
 
             getResidenceViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
@@ -172,4 +212,46 @@ class DescriptionFragment : Fragment() {
             }
         }
     }
+
+    private fun getRecommendedEstates() {
+        val token = AppReferences.getToken(requireContext())
+        val residenceId = arguments?.getString("residence_Id")
+
+        if (residenceId == null) {
+            Log.e("DescriptionFragment", "Residence ID is null")
+            return
+        }
+
+        recommendationViewModel.getRecommendation(token, residenceId)
+
+        recommendationViewModel.getRecommendedEstatesResponseLiveData.observe(viewLifecycleOwner) { response ->
+            baseActivity.hideProgressDialog()
+            response?.let {
+                val recommendedEstates: List<Data> = response.data
+                recommendedAdapter.list = recommendedEstates
+                recommendedAdapter.notifyDataSetChanged()
+            }
+        }
+
+        recommendationViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
+            baseActivity.hideProgressDialog()
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(
+                        requireContext(),
+                        errorMessage,
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    Log.e("DescriptionFragment", "Description Fragment Error: $errorMessage")
+
+                } catch (e: JSONException) {
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                    Log.e("DescriptionFragment", "Description Fragment Error: $error")
+                }
+            }
+        }
+    }
+
 }

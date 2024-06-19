@@ -12,7 +12,8 @@ import com.example.finalproject.ui.residence_details.fragment.ReviewFragment
 class DetailsViewAdapter(
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle,
-    private val residenceId: String
+    private val residenceId: String,
+    private val residence_Id: String
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {
@@ -29,6 +30,7 @@ class DetailsViewAdapter(
 
         fragment.arguments = Bundle().apply {
             putString("residenceId", residenceId)
+            putString("residence_Id", residence_Id)
         }
         return fragment
     }

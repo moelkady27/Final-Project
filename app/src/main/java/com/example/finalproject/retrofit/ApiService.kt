@@ -46,6 +46,7 @@ import com.example.finalproject.ui.profile.models.EditProfileResponse
 import com.example.finalproject.ui.profile.models.GetUserResponse
 import com.example.finalproject.ui.profile.models.ResidenceResponse
 import com.example.finalproject.ui.profile.request.EditProfileRequest
+import com.example.finalproject.ui.recommendation.models.GetRecommendedEstatesResponse
 import com.example.finalproject.ui.register.models.ResendCodeResponse
 import com.example.finalproject.ui.register.models.SignInResponse
 import com.example.finalproject.ui.register.models.SignUpResponse
@@ -426,4 +427,9 @@ interface ApiService {
         @Path("reviewId") reviewId: String
     ): Call<LikeReviewResponse>
 
+    @GET("api/v1/residence/recommend/{residenceId}")
+    fun getRecommendedEstates(
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String
+    ): Call<GetRecommendedEstatesResponse>
 }
