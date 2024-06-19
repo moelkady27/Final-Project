@@ -84,6 +84,7 @@ class FeaturedViewAllAdapter(
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, ResidenceDetailsActivity::class.java)
             intent.putExtra("residenceId", featuredEstates._id)
+            intent.putExtra("residence_Id", featuredEstates.Id)
             holder.itemView.context.startActivity(intent)
         }
 

@@ -3,6 +3,7 @@ package com.example.finalproject.ui.home.models
 data class Residence(
     val Functional: String,
     val _id: String,
+    val Id: String,
     val alley: String,
     val bedroomAbvGr: Int,
     val bldgType: String,

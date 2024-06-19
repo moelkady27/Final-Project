@@ -5,6 +5,7 @@ data class ResidenceX(
 //    val KitchenAbvGr: Int,
     val kitchenAboveGrade: Int,
     val _id: String,
+    val Id: String,
     val alley: String,
     val bedroomAbvGr: Int,
     val bldgType: String,

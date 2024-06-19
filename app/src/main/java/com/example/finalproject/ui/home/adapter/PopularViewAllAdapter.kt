@@ -77,6 +77,7 @@ class PopularViewAllAdapter(
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, ResidenceDetailsActivity::class.java)
             intent.putExtra("residenceId", popularEstates._id)
+            intent.putExtra("residence_Id", popularEstates.Id)
             holder.itemView.context.startActivity(intent)
         }
     }
