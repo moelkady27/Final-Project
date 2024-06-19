@@ -414,4 +414,10 @@ interface ApiService {
         @Path("reviewId") reviewId: String
     ): Call<LikeReviewResponse>
 
+    @GET("api/v1/review/unlike/{reviewId}")
+    fun unlikeReview(
+        @Header("Authorization") token: String,
+        @Path("reviewId") reviewId: String
+    ): Call<LikeReviewResponse>
+
 }

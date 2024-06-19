@@ -17,7 +17,8 @@ import java.util.*
 class ReviewAdapter(
     var list: MutableList<Review>,
     private val onLikeClicked: (Review) -> Unit,
-    private val onRemoveLikeClicked: (Review) -> Unit
+    private val onRemoveLikeClicked: (Review) -> Unit,
+    private val onUnLikeClicked: (Review) -> Unit
 ) : RecyclerView.Adapter<ReviewAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -107,6 +108,10 @@ class ReviewAdapter(
                     review.userId.username
                 )
             }
+        }
+
+        holder.itemView.iv_dislike_review.setOnClickListener {
+            onUnLikeClicked(review)
         }
 
     }

@@ -19,13 +19,16 @@ import com.example.finalproject.ui.residence_details.adapter.ReviewAdapter
 import com.example.finalproject.ui.residence_details.factory.GetReviewsFactory
 import com.example.finalproject.ui.residence_details.factory.LikeReviewFactory
 import com.example.finalproject.ui.residence_details.factory.RemoveLikeFactory
+import com.example.finalproject.ui.residence_details.factory.UnLikeReviewFactory
 import com.example.finalproject.ui.residence_details.models.Review
 import com.example.finalproject.ui.residence_details.repository.GetReviewsRepository
 import com.example.finalproject.ui.residence_details.repository.LikeReviewRepository
 import com.example.finalproject.ui.residence_details.repository.RemoveLikeRepository
+import com.example.finalproject.ui.residence_details.repository.UnLikeReviewRepository
 import com.example.finalproject.ui.residence_details.viewModel.GetReviewsViewModel
 import com.example.finalproject.ui.residence_details.viewModel.LikeReviewViewModel
 import com.example.finalproject.ui.residence_details.viewModel.RemoveLikeViewModel
+import com.example.finalproject.ui.residence_details.viewModel.UnLikeReviewViewModel
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -42,6 +45,8 @@ class ReviewFragment : Fragment() {
     private lateinit var likeReviewViewModel: LikeReviewViewModel
 
     private lateinit var removeLikeViewModel: RemoveLikeViewModel
+
+    private lateinit var unLikeReviewViewModel: UnLikeReviewViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,6 +96,14 @@ class ReviewFragment : Fragment() {
             this, removeLikeFactory
         )[RemoveLikeViewModel::class.java]
 
+                                    /* UnLike-Review */
+
+        val unLikeReviewRepository = UnLikeReviewRepository(RetrofitClient.instance)
+        val unLikeReviewFactory = UnLikeReviewFactory(unLikeReviewRepository)
+        unLikeReviewViewModel = ViewModelProvider(
+            this, unLikeReviewFactory
+        )[UnLikeReviewViewModel::class.java]
+
     }
 
     private fun initRecyclerView() {
@@ -103,6 +116,9 @@ class ReviewFragment : Fragment() {
             },
             onRemoveLikeClicked = { review ->
                 removeLike(review)
+            },
+            onUnLikeClicked = { review ->
+                unLikeReview(review)
             }
         )
 
@@ -196,6 +212,37 @@ class ReviewFragment : Fragment() {
         }
 
         removeLikeViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
+            BaseActivity().hideProgressDialog()
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun unLikeReview(review: Review) {
+        val token = AppReferences.getToken(requireContext())
+        val reviewId = review._id
+
+        unLikeReviewViewModel.unLikeReview(token, reviewId)
+
+        unLikeReviewViewModel.unLikeReviewLiveData.observe(viewLifecycleOwner) { response ->
+            baseActivity.hideProgressDialog()
+            response?.let {
+                val message = it.message
+                Log.e("UnLikeReview", "UnLikeMessage: $message")
+                Log.e("ReviewLikes", "ReviewLikes: ${it.likes}")
+                Log.e("ReviewUnLikes", "ReviewUnLikes: ${it.unLikes}")
+
+                reviewAdapter.updateLikes(reviewId, it.likes, it.unLikes)
+            }
+        }
+
+        unLikeReviewViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
             BaseActivity().hideProgressDialog()
             error?.let {
                 try {
