@@ -97,9 +97,12 @@ class ReviewFragment : Fragment() {
         recyclerView = requireView().findViewById(R.id.recycle_review_details)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        reviewAdapter = ReviewAdapter(mutableListOf()) { review, _ ->
+        reviewAdapter = ReviewAdapter(mutableListOf(), { review, _ ->
             likeReview(review)
-        }
+        }, { review, _ ->
+            removeLike(review)
+        })
+
         recyclerView.adapter = reviewAdapter
     }
 
@@ -151,9 +154,10 @@ class ReviewFragment : Fragment() {
             response?.let {
                 val message = it.message
                 Log.e("LikeReview", "LikeReviewMessage: $message")
-                Log.e("ReviewLikes", "AllReviewLikes: ${it.reviewLikes}")
+                Log.e("ReviewLikes", "ReviewLikes: ${it.likes}")
+                Log.e("ReviewUnLikes", "ReviewUnLikes: ${it.unLikes}")
 
-                reviewAdapter.updateLikes(reviewId, it.reviewLikes)
+                reviewAdapter.updateLikes(reviewId, it.likes, it.unLikes)
             }
         }
 
@@ -181,9 +185,10 @@ class ReviewFragment : Fragment() {
             response?.let {
                 val message = it.message
                 Log.e("RemoveLike", "RemoveLikeMessage: $message")
-                Log.e("ReviewLikes", "AllReviewLikes: ${it.reviewLikes}")
+                Log.e("ReviewLikes", "ReviewLikes: ${it.likes}")
+                Log.e("ReviewUnLikes", "ReviewUnLikes: ${it.unLikes}")
 
-                reviewAdapter.updateLikes(reviewId, it.reviewLikes)
+                reviewAdapter.updateLikes(reviewId, it.likes, it.unLikes)
             }
         }
 

@@ -4,7 +4,7 @@ data class ResidenceId(
     val _id: String,
     val avgRating: Int,
     val category: String,
-    val images: List<ImageX>,
+    val images: List<Image>,
     val isLiked: Boolean,
     val location: Location,
     val ownerId: OwnerId,

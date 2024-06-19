@@ -14,7 +14,8 @@ import java.util.*
 
 class ReviewAdapter(
     var list: MutableList<Review>,
-    private val onLikeClicked: (Review, Int) -> Unit
+    private val onLikeClicked: (Review, Int) -> Unit,
+    private val onRemoveLikeClicked: (Review, Int) -> Unit
 ) : RecyclerView.Adapter<ReviewAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -68,19 +69,34 @@ class ReviewAdapter(
 
         holder.itemView.number_star_review_details.text = review.rating.toString()
 
-        holder.itemView.number_of_likes_review_details.text = review.reviewLikes.toString()
+        holder.itemView.number_of_likes_review_details.text = review.likes.toString()
 
         holder.itemView.number_of_dislikes_review_details.text = review.unLikes.toString()
 
-        holder.itemView.iv_like_review.setOnClickListener {
-            onLikeClicked(review, position)
+        if (holder.itemView.iv_like_review.isSelected) {
+            holder.itemView.iv_like_review.backgroundTintList =
+                ContextCompat.getColorStateList(holder.itemView.context, R.color.colorPrimary)
+        } else {
+            holder.itemView.iv_like_review.backgroundTintList =
+                ContextCompat.getColorStateList(holder.itemView.context, R.color.edit_text)
         }
+
+        holder.itemView.iv_like_review.setOnClickListener {
+            if (holder.itemView.iv_like_review.isSelected) {
+                onRemoveLikeClicked(review, position)
+            } else {
+                onLikeClicked(review, position)
+            }
+            holder.itemView.iv_like_review.isSelected = !holder.itemView.iv_like_review.isSelected
+        }
+
     }
 
-    fun updateLikes(reviewId: String, newLikesCount: Int) {
+    fun updateLikes(reviewId: String, newLikesCount: Int, newUnlikesCount: Int) {
         val position = list.indexOfFirst { it._id == reviewId }
         if (position != -1) {
-            list[position].reviewLikes = newLikesCount
+            list[position].likes = newLikesCount
+            list[position].unLikes = newUnlikesCount
             notifyItemChanged(position)
         }
     }
