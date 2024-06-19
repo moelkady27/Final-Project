@@ -7,6 +7,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
+import com.example.finalproject.storage.AppReferences
+import com.example.finalproject.ui.residence_details.models.LikedBy
 import com.example.finalproject.ui.residence_details.models.Review
 import kotlinx.android.synthetic.main.each_row_review_details.view.*
 import java.text.SimpleDateFormat
@@ -14,8 +16,8 @@ import java.util.*
 
 class ReviewAdapter(
     var list: MutableList<Review>,
-    private val onLikeClicked: (Review, Int) -> Unit,
-    private val onRemoveLikeClicked: (Review, Int) -> Unit
+    private val onLikeClicked: (Review) -> Unit,
+    private val onRemoveLikeClicked: (Review) -> Unit
 ) : RecyclerView.Adapter<ReviewAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -73,21 +75,38 @@ class ReviewAdapter(
 
         holder.itemView.number_of_dislikes_review_details.text = review.unLikes.toString()
 
-        if (holder.itemView.iv_like_review.isSelected) {
-            holder.itemView.iv_like_review.backgroundTintList =
-                ContextCompat.getColorStateList(holder.itemView.context, R.color.colorPrimary)
-        } else {
-            holder.itemView.iv_like_review.backgroundTintList =
-                ContextCompat.getColorStateList(holder.itemView.context, R.color.edit_text)
+                                /* Like-Remove */
+
+        val currentUserLiked = review.likedBy.any {
+            it._id == AppReferences.getUserId(holder.itemView.context)
         }
 
+        if (currentUserLiked) {
+            holder.itemView.iv_like_review.setColorFilter(
+                ContextCompat.getColor(holder.itemView.context, R.color.colorPrimary))
+        } else {
+            holder.itemView.iv_like_review.setColorFilter(
+                ContextCompat.getColor(holder.itemView.context, R.color.colorPrimaryText))
+        }
+
+        holder.itemView.iv_like_review.isSelected = currentUserLiked
+
         holder.itemView.iv_like_review.setOnClickListener {
-            if (holder.itemView.iv_like_review.isSelected) {
-                onRemoveLikeClicked(review, position)
+            if (currentUserLiked) {
+                onRemoveLikeClicked(review)
             } else {
-                onLikeClicked(review, position)
+                onLikeClicked(review)
             }
-            holder.itemView.iv_like_review.isSelected = !holder.itemView.iv_like_review.isSelected
+
+            review.likedBy = if (currentUserLiked) {
+                review.likedBy.filterNot { it._id == AppReferences.getUserId(holder.itemView.context) }
+            } else {
+                review.likedBy + LikedBy(
+                    AppReferences.getUserId(holder.itemView.context),
+                    review.userId.image,
+                    review.userId.username
+                )
+            }
         }
 
     }

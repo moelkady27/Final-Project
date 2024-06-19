@@ -97,11 +97,14 @@ class ReviewFragment : Fragment() {
         recyclerView = requireView().findViewById(R.id.recycle_review_details)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        reviewAdapter = ReviewAdapter(mutableListOf(), { review, _ ->
-            likeReview(review)
-        }, { review, _ ->
-            removeLike(review)
-        })
+        reviewAdapter = ReviewAdapter(mutableListOf(),
+            onLikeClicked = { review ->
+                likeReview(review)
+            },
+            onRemoveLikeClicked = { review ->
+                removeLike(review)
+            }
+        )
 
         recyclerView.adapter = reviewAdapter
     }
@@ -153,7 +156,7 @@ class ReviewFragment : Fragment() {
             baseActivity.hideProgressDialog()
             response?.let {
                 val message = it.message
-                Log.e("LikeReview", "LikeReviewMessage: $message")
+                Log.e("LikeReview", "LikeMessage: $message")
                 Log.e("ReviewLikes", "ReviewLikes: ${it.likes}")
                 Log.e("ReviewUnLikes", "ReviewUnLikes: ${it.unLikes}")
 
@@ -184,7 +187,7 @@ class ReviewFragment : Fragment() {
             baseActivity.hideProgressDialog()
             response?.let {
                 val message = it.message
-                Log.e("RemoveLike", "RemoveLikeMessage: $message")
+                Log.e("RemoveLike", "RemoveMessage: $message")
                 Log.e("ReviewLikes", "ReviewLikes: ${it.likes}")
                 Log.e("ReviewUnLikes", "ReviewUnLikes: ${it.unLikes}")
 

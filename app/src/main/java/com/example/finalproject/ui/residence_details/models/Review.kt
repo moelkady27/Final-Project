@@ -5,7 +5,7 @@ data class Review(
     val _id: String,
     val comment: String,
     val createdAt: String,
-    val likedBy: List<Any>,
+    var likedBy: List<LikedBy>,
     var likes: Int,
     val rating: Int,
     val residenceId: ResidenceId,
