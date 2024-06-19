@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -29,7 +28,6 @@ import kotlinx.android.synthetic.main.activity_residence_details.sale_type_resid
 import kotlinx.android.synthetic.main.activity_residence_details.tabLayout_residence_details
 import kotlinx.android.synthetic.main.activity_residence_details.tv_apartment_residence_category_details
 import kotlinx.android.synthetic.main.activity_residence_details.view_pager_residence_details
-import kotlinx.android.synthetic.main.activity_update_residence.image_update_residence
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -46,8 +44,20 @@ class ResidenceDetailsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_residence_details)
 
+
         val residenceId = intent.getStringExtra("residenceId")
-        Log.e("ResidenceDetailsActivity", "residenceId: $residenceId")
+        residenceId?.let {
+            Log.e("residenceId", it)
+        } ?: run {
+            Log.e("ResidenceDetailsActivity", "residenceId is null")
+        }
+
+        val residence_Id = intent.getStringExtra("residence_Id")
+        residence_Id?.let {
+            Log.e("Id", it)
+        } ?: run {
+            Log.e("ResidenceDetailsActivity", "residence_Id is null")
+        }
 
         viewPager2 = findViewById(R.id.view_pager_residence_details)
 
