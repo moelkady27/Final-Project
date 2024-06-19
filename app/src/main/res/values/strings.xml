@@ -367,6 +367,10 @@
     <string name="cars" translatable="false">Cars</string>
     <string name="property_details" translatable="false">Property Details</string>
     <string name="how_was_experience" translatable="false">How was your experience with %1$s ?</string>
+    <string name="recommended_for_you" translatable="false">
+        <font color='#FF6C63FF'>Recommended</font>
+        <font color='#FF413F58'>For You</font>
+    </string>
 
 
     <string-array name="sale_type_items" translatable="false">

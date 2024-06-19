@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.residence_details.adapter.RecommendedAdapter
 import com.example.finalproject.ui.update_listing.factory.GetResidenceFactory
 import com.example.finalproject.ui.update_listing.repository.GetResidenceRepository
 import com.example.finalproject.ui.update_listing.viewModel.GetResidenceViewModel
@@ -24,6 +27,11 @@ import org.json.JSONObject
 class DescriptionFragment : Fragment() {
 
     private lateinit var baseActivity: BaseActivity
+
+    private lateinit var recyclerView: RecyclerView
+
+    private lateinit var recommendedAdapter: RecommendedAdapter
+
     private lateinit var getResidenceViewModel: GetResidenceViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +48,14 @@ class DescriptionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        recyclerView = requireView().findViewById(R.id.rv_recommended_for_you)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext() ,
+            LinearLayoutManager.HORIZONTAL , false)
+
+        recommendedAdapter = RecommendedAdapter()
+        recyclerView.adapter = recommendedAdapter
+
         initView()
     }
 
