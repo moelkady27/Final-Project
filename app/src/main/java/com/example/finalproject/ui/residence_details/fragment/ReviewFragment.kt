@@ -19,15 +19,18 @@ import com.example.finalproject.ui.residence_details.adapter.ReviewAdapter
 import com.example.finalproject.ui.residence_details.factory.GetReviewsFactory
 import com.example.finalproject.ui.residence_details.factory.LikeReviewFactory
 import com.example.finalproject.ui.residence_details.factory.RemoveLikeFactory
+import com.example.finalproject.ui.residence_details.factory.RemoveUnLikeFactory
 import com.example.finalproject.ui.residence_details.factory.UnLikeReviewFactory
 import com.example.finalproject.ui.residence_details.models.Review
 import com.example.finalproject.ui.residence_details.repository.GetReviewsRepository
 import com.example.finalproject.ui.residence_details.repository.LikeReviewRepository
 import com.example.finalproject.ui.residence_details.repository.RemoveLikeRepository
+import com.example.finalproject.ui.residence_details.repository.RemoveUnLikeRepository
 import com.example.finalproject.ui.residence_details.repository.UnLikeReviewRepository
 import com.example.finalproject.ui.residence_details.viewModel.GetReviewsViewModel
 import com.example.finalproject.ui.residence_details.viewModel.LikeReviewViewModel
 import com.example.finalproject.ui.residence_details.viewModel.RemoveLikeViewModel
+import com.example.finalproject.ui.residence_details.viewModel.RemoveUnLikeViewModel
 import com.example.finalproject.ui.residence_details.viewModel.UnLikeReviewViewModel
 import org.json.JSONException
 import org.json.JSONObject
@@ -47,6 +50,8 @@ class ReviewFragment : Fragment() {
     private lateinit var removeLikeViewModel: RemoveLikeViewModel
 
     private lateinit var unLikeReviewViewModel: UnLikeReviewViewModel
+
+    private lateinit var removeUnLikeViewModel: RemoveUnLikeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -104,6 +109,13 @@ class ReviewFragment : Fragment() {
             this, unLikeReviewFactory
         )[UnLikeReviewViewModel::class.java]
 
+                                    /* Remove-UnLike */
+
+        val removeUnLikeRepository = RemoveUnLikeRepository(RetrofitClient.instance)
+        val removeUnLikeFactory = RemoveUnLikeFactory(removeUnLikeRepository)
+        removeUnLikeViewModel = ViewModelProvider(
+            this, removeUnLikeFactory
+        )[RemoveUnLikeViewModel::class.java]
     }
 
     private fun initRecyclerView() {
@@ -119,6 +131,9 @@ class ReviewFragment : Fragment() {
             },
             onUnLikeClicked = { review ->
                 unLikeReview(review)
+            },
+            onRemoveUnLikeClicked = { review ->
+                removeUnLike(review)
             }
         )
 
@@ -243,6 +258,37 @@ class ReviewFragment : Fragment() {
         }
 
         unLikeReviewViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
+            BaseActivity().hideProgressDialog()
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun removeUnLike(review: Review) {
+        val token = AppReferences.getToken(requireContext())
+        val reviewId = review._id
+
+        removeUnLikeViewModel.removeUnLike(token, reviewId)
+
+        removeUnLikeViewModel.removeUnLikeLiveData.observe(viewLifecycleOwner) { response ->
+            baseActivity.hideProgressDialog()
+            response?.let {
+                val message = it.message
+                Log.e("RemoveUnLike", "RemoveUnLikeMessage: $message")
+                Log.e("ReviewLikes", "ReviewLikes: ${it.likes}")
+                Log.e("ReviewUnLikes", "ReviewUnLikes: ${it.unLikes}")
+
+                reviewAdapter.updateLikes(reviewId, it.likes, it.unLikes)
+            }
+        }
+
+        removeUnLikeViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
             BaseActivity().hideProgressDialog()
             error?.let {
                 try {

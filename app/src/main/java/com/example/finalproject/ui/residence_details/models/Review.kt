@@ -9,7 +9,7 @@ data class Review(
     var likes: Int,
     val rating: Int,
     val residenceId: ResidenceId,
-    val unLikedBy: List<Any>,
+    var unLikedBy: List<String>,
     var unLikes: Int,
     val updatedAt: String,
     val userId: UserId

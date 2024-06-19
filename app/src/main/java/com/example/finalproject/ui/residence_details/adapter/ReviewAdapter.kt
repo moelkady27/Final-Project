@@ -3,6 +3,7 @@ package com.example.finalproject.ui.residence_details.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -18,7 +19,8 @@ class ReviewAdapter(
     var list: MutableList<Review>,
     private val onLikeClicked: (Review) -> Unit,
     private val onRemoveLikeClicked: (Review) -> Unit,
-    private val onUnLikeClicked: (Review) -> Unit
+    private val onUnLikeClicked: (Review) -> Unit,
+    private val onRemoveUnLikeClicked: (Review) -> Unit
 ) : RecyclerView.Adapter<ReviewAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -64,9 +66,19 @@ class ReviewAdapter(
         )
         for (i in stars.indices) {
             if (i < review.rating) {
-                stars[i].setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.starColor))
+                stars[i].setColorFilter(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.starColor
+                    )
+                )
             } else {
-                stars[i].setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.home_popular))
+                stars[i].setColorFilter(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.home_popular
+                    )
+                )
             }
         }
 
@@ -76,44 +88,9 @@ class ReviewAdapter(
 
         holder.itemView.number_of_dislikes_review_details.text = review.unLikes.toString()
 
-                                /* Like-Remove */
+        setLikeReview(review, holder)
 
-        val currentUserLiked = review.likedBy.any {
-            it._id == AppReferences.getUserId(holder.itemView.context)
-        }
-
-        if (currentUserLiked) {
-            holder.itemView.iv_like_review.setColorFilter(
-                ContextCompat.getColor(holder.itemView.context, R.color.colorPrimary))
-        } else {
-            holder.itemView.iv_like_review.setColorFilter(
-                ContextCompat.getColor(holder.itemView.context, R.color.colorPrimaryText))
-        }
-
-        holder.itemView.iv_like_review.isSelected = currentUserLiked
-
-        holder.itemView.iv_like_review.setOnClickListener {
-            if (currentUserLiked) {
-                onRemoveLikeClicked(review)
-            } else {
-                onLikeClicked(review)
-            }
-
-            review.likedBy = if (currentUserLiked) {
-                review.likedBy.filterNot { it._id == AppReferences.getUserId(holder.itemView.context) }
-            } else {
-                review.likedBy + LikedBy(
-                    AppReferences.getUserId(holder.itemView.context),
-                    review.userId.image,
-                    review.userId.username
-                )
-            }
-        }
-
-        holder.itemView.iv_dislike_review.setOnClickListener {
-            onUnLikeClicked(review)
-        }
-
+        setUnLikeReview(review, holder)
     }
 
     fun updateLikes(reviewId: String, newLikesCount: Int, newUnlikesCount: Int) {
@@ -124,5 +101,89 @@ class ReviewAdapter(
             notifyItemChanged(position)
         }
     }
+
+    private fun setLikeReview(review: Review, holder: MyViewHolder) {
+        val currentUserId = AppReferences.getUserId(holder.itemView.context)
+        val currentUserLiked = review.likedBy.any { it._id == currentUserId }
+        val currentUserUnLiked = review.unLikedBy.contains(currentUserId)
+
+        if (currentUserLiked) {
+            holder.itemView.iv_like_review.setColorFilter(
+                ContextCompat.getColor(holder.itemView.context, R.color.colorPrimary)
+            )
+        } else {
+            holder.itemView.iv_like_review.setColorFilter(
+                ContextCompat.getColor(holder.itemView.context, R.color.colorPrimaryText)
+            )
+        }
+
+        holder.itemView.iv_like_review.isSelected = currentUserLiked
+
+        holder.itemView.iv_like_review.setOnClickListener {
+            if (!currentUserUnLiked) {
+                if (currentUserLiked) {
+                    onRemoveLikeClicked(review)
+                } else {
+                    onLikeClicked(review)
+                }
+
+                review.likedBy = if (currentUserLiked) {
+                    review.likedBy.filterNot { it._id == currentUserId }
+                } else {
+                    review.likedBy + LikedBy(
+                        currentUserId,
+                        review.userId.image,
+                        review.userId.username
+                    )
+                }
+            } else {
+                Toast.makeText(
+                    holder.itemView.context,
+                    "Remove UnLike First",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+        private fun setUnLikeReview(review: Review, holder: MyViewHolder) {
+            val currentUserId = AppReferences.getUserId(holder.itemView.context)
+            val currentUserLiked = review.likedBy.any { it._id == currentUserId }
+            val currentUserUnLiked = review.unLikedBy.contains(currentUserId)
+
+            if (currentUserUnLiked) {
+                holder.itemView.iv_dislike_review.setColorFilter(
+                    ContextCompat.getColor(holder.itemView.context, R.color.colorPrimary)
+                )
+            } else {
+                holder.itemView.iv_dislike_review.setColorFilter(
+                    ContextCompat.getColor(holder.itemView.context, R.color.colorPrimaryText)
+                )
+            }
+
+            holder.itemView.iv_dislike_review.isSelected = currentUserUnLiked
+
+            holder.itemView.iv_dislike_review.setOnClickListener {
+                if (!currentUserLiked) {
+                    if (currentUserUnLiked) {
+                        onRemoveUnLikeClicked(review)
+                    } else {
+                        onUnLikeClicked(review)
+                    }
+
+                    review.unLikedBy = if (currentUserUnLiked) {
+                        review.unLikedBy.filterNot { it == currentUserId }
+                    } else {
+                        review.unLikedBy + currentUserId
+                    }
+                } else {
+                    Toast.makeText(
+                        holder.itemView.context,
+                        "Remove Like First",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
 
 }
