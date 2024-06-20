@@ -84,28 +84,10 @@
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="26sp"
                 android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tv_empty_booked_title_1"
                 app:layout_constraintStart_toStartOf="@+id/tv_empty_booked_title_1"
                 app:layout_constraintTop_toBottomOf="@+id/tv_empty_booked_title_1" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_empty_booked_title_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/poppins_light"
-                android:gravity="center"
-                android:text="@string/tv_empty_booked_title_3"
-                android:textColor="@color/colorPrimaryText"
-                android:textSize="16sp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/tv_empty_booked_title_2"
-                app:layout_constraintStart_toStartOf="@+id/tv_empty_booked_title_2"
-                app:layout_constraintTop_toBottomOf="@+id/tv_empty_booked_title_2" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycle_booked"

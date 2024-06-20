@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
 import com.example.finalproject.storage.BaseActivity
-import com.example.finalproject.ui.booked_residences.adapter.BookedAdapter
+import com.example.finalproject.ui.booking.adapter.BookedAdapter
 
 class BookedFragment : Fragment() {
 

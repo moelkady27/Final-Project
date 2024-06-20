@@ -391,7 +391,7 @@
     <string name="tv_predicted_price" translatable="false">Predicted Price</string>
     <string name="tv_continue" translatable="false">Continue</string>
     <string name="booked_residences" translatable="false">Booked Residences</string>
-    <string name="your_booked_estates_page_is" translatable="false">Your booked estates page is</string>
+    <string name="your_booked_estates_page_is" translatable="false">Your booked requests page is</string>
     <string name="tv_empty_booked_title_3" translatable="false">Click add button above to start exploring and choose your booked estates.</string>
     <string name="booked_requests" translatable="false">Booked Requests</string>
     <string name="residences" translatable="false">Residences</string>
