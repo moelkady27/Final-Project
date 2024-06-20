@@ -17,7 +17,7 @@ import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.chat.activities.ChatListUsersActivity
-import com.example.finalproject.ui.booked_residences.activities.AcceptCancelBookedActivity
+import com.example.finalproject.ui.booking.activities.AcceptCancelBookedActivity
 import com.example.finalproject.ui.register.activities.SignInActivity
 import com.example.finalproject.ui.password.activities.ChangePasswordActivity
 import com.example.finalproject.ui.setting.activities.DeleteAccountActivity

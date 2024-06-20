@@ -1,11 +1,11 @@
-package com.example.finalproject.ui.booked_residences.activities
+package com.example.finalproject.ui.booking.activities
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
 import com.example.finalproject.storage.BaseActivity
-import com.example.finalproject.ui.booked_residences.adapter.AcceptCancelBookedAdapter
+import com.example.finalproject.ui.booking.adapter.AcceptCancelBookedAdapter
 import kotlinx.android.synthetic.main.activity_accept_cancel_booked.toolbar_accept_cancel_booked
 
 class AcceptCancelBookedActivity : BaseActivity() {

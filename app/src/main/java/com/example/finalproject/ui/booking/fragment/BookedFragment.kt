@@ -1,4 +1,4 @@
-package com.example.finalproject.ui.booked_residences.fragment
+package com.example.finalproject.ui.booking.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.example.finalproject.ui.booked_residences.adapter
+package com.example.finalproject.ui.booking.adapter
 
 import android.view.LayoutInflater
 import android.view.View
