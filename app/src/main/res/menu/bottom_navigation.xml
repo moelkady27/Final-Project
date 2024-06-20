@@ -4,9 +4,9 @@
     android:icon="@drawable/ic_home"
     android:id="@+id/homeFragment" />
 
-    <item android:title="Location"
-        android:icon="@drawable/ic_location_home"
-        android:id="@+id/locationFragment" />
+    <item android:title="Booked Residences"
+        android:icon="@drawable/ic_book"
+        android:id="@+id/bookedFragment" />
 
     <item android:title="Settings"
         android:icon="@drawable/ic_settings"

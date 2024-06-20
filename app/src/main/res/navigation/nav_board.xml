@@ -11,10 +11,10 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/locationFragment"
-        android:name="com.example.finalproject.LocationFragment"
-        android:label="fragment_location"
-        tools:layout="@layout/fragment_location" />
+        android:id="@+id/bookedFragment"
+        android:name="com.example.finalproject.BookedFragment"
+        android:label="fragment_booked"
+        tools:layout="@layout/fragment_booked" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.finalproject.ui.setting.fragment.SettingsFragment"
