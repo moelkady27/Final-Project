@@ -39,7 +39,7 @@ data class Data(
     val houseremodelage: Int,
     val images: List<Image>,
     val isCompleted: Boolean,
-    val isLiked: Boolean,
+    var isLiked: Boolean,
     val isSold: Boolean,
     val kitchenQual: String,
     val landContour: String,

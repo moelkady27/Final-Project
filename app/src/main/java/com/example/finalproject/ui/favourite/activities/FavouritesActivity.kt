@@ -1,9 +1,11 @@
 package com.example.finalproject.ui.favourite.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.finalproject.ui.recommendation.models.Data
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,16 +16,22 @@ import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.favourite.adapter.FavouritesAdapter
 import com.example.finalproject.ui.favourite.adapter.RecommendedPropertiesAdapter
+import com.example.finalproject.ui.favourite.factory.AddToFavouritesFactory
 import com.example.finalproject.ui.favourite.factory.AllFavouritesFactory
 import com.example.finalproject.ui.favourite.factory.DeleteAllFavouriteFactory
 import com.example.finalproject.ui.favourite.factory.DeleteFavouriteFactory
 import com.example.finalproject.ui.favourite.models.Wishlist
+import com.example.finalproject.ui.favourite.repository.AddToFavouritesRepository
 import com.example.finalproject.ui.favourite.repository.AllFavouritesRepository
 import com.example.finalproject.ui.favourite.repository.DeleteAllFavouriteRepository
 import com.example.finalproject.ui.favourite.repository.DeleteFavouriteRepository
+import com.example.finalproject.ui.favourite.viewModel.AddToFavouritesViewModel
 import com.example.finalproject.ui.favourite.viewModel.AllFavouritesViewModel
 import com.example.finalproject.ui.favourite.viewModel.DeleteAllFavouriteViewModel
 import com.example.finalproject.ui.favourite.viewModel.DeleteFavouriteViewModel
+import com.example.finalproject.ui.recommendation.factory.RecommendationFactory
+import com.example.finalproject.ui.recommendation.repository.RecommendationRepository
+import com.example.finalproject.ui.recommendation.viewModel.RecommendationViewModel
 import kotlinx.android.synthetic.main.activity_favourites.iv_delete_favourites
 import kotlinx.android.synthetic.main.activity_favourites.iv_empty_favourites
 import kotlinx.android.synthetic.main.activity_favourites.number_favourites
@@ -34,6 +42,7 @@ import kotlinx.android.synthetic.main.activity_favourites.tv_empty_favourites_ti
 import kotlinx.android.synthetic.main.activity_favourites.tv_empty_favourites_title_3
 import kotlinx.android.synthetic.main.activity_favourites.tv_empty_favourites_title_4
 import kotlinx.android.synthetic.main.activity_favourites.tv_recommended_properties_fav
+import org.json.JSONException
 import org.json.JSONObject
 
 class FavouritesActivity : BaseActivity() {
@@ -52,6 +61,11 @@ class FavouritesActivity : BaseActivity() {
 
     private lateinit var networkUtils: NetworkUtils
 
+    private lateinit var recommendationViewModel: RecommendationViewModel
+
+    private lateinit var addToFavouritesViewModel: AddToFavouritesViewModel
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favourites)
@@ -59,7 +73,7 @@ class FavouritesActivity : BaseActivity() {
         recyclerView = findViewById(R.id.rv_recommended_properties_you_may_like)
         recyclerView.layoutManager = LinearLayoutManager(this@FavouritesActivity ,
             LinearLayoutManager.HORIZONTAL , false)
-        recommendedPropertiesAdapter = RecommendedPropertiesAdapter()
+        recommendedPropertiesAdapter = RecommendedPropertiesAdapter(emptyList(),::handleFavouriteClick)
         recyclerView.adapter = recommendedPropertiesAdapter
 
         networkUtils = NetworkUtils(this@FavouritesActivity)
@@ -70,6 +84,12 @@ class FavouritesActivity : BaseActivity() {
     }
 
     private fun initView() {
+
+        val addToFavouritesRepository = AddToFavouritesRepository(RetrofitClient.instance)
+        val addToFavouritesFactory = AddToFavouritesFactory(addToFavouritesRepository)
+        addToFavouritesViewModel = ViewModelProvider(
+            this@FavouritesActivity, addToFavouritesFactory
+        )[AddToFavouritesViewModel::class.java]
                                     /* Get-Favourites */
 
         val allFavouritesRepository = AllFavouritesRepository(RetrofitClient.instance)
@@ -94,6 +114,15 @@ class FavouritesActivity : BaseActivity() {
         val deleteFavouriteFactory = DeleteFavouriteFactory(deleteFavouriteRepository)
         deleteFavouriteViewModel = ViewModelProvider(this@FavouritesActivity, deleteFavouriteFactory
         )[DeleteFavouriteViewModel::class.java]
+
+                                /* Get-Recommend */
+
+        val recommendationRepository = RecommendationRepository(RetrofitClient.instance)
+        val recommendationFactory = RecommendationFactory(recommendationRepository)
+        recommendationViewModel = ViewModelProvider(
+            this@FavouritesActivity, recommendationFactory)[RecommendationViewModel::class.java]
+
+        getRecommendedEstates()
     }
 
     private fun getFavourites() {
@@ -234,6 +263,106 @@ class FavouritesActivity : BaseActivity() {
             }
         } else {
             showErrorSnackBar("No internet connection", true)
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun getRecommendedEstates() {
+        val token = AppReferences.getToken(this@FavouritesActivity)
+        val residenceId = "1001"
+
+        if (residenceId == null) {
+            Log.e("DescriptionFragment", "Residence ID is null")
+            return
+        }
+
+        recommendationViewModel.getRecommendation(token, residenceId)
+
+        recommendationViewModel.getRecommendedEstatesResponseLiveData.observe(this@FavouritesActivity) { response ->
+            hideProgressDialog()
+            response?.let {
+                val recommendedEstates: List<Data> = response.data
+                recommendedPropertiesAdapter.list = recommendedEstates
+                recommendedPropertiesAdapter.notifyDataSetChanged()
+
+                Log.e("data" , recommendedEstates.toString())
+            }
+        }
+
+        recommendationViewModel.errorLiveData.observe(this@FavouritesActivity) { error ->
+            hideProgressDialog()
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(
+                        this@FavouritesActivity,
+                        errorMessage,
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    Log.e("DescriptionFragment", "Recommendation Error: $errorMessage")
+
+                } catch (e: JSONException) {
+                    Toast.makeText(this@FavouritesActivity, error, Toast.LENGTH_LONG).show()
+                    Log.e("DescriptionFragment", "Recommendation Error: $error")
+                }
+            }
+        }
+    }
+
+    private fun handleFavouriteClick(residenceId: String, isLiked: Boolean) {
+        if (!isLiked) {
+            val token = AppReferences.getToken(this@FavouritesActivity)
+            addToFavouritesViewModel.addToFavourites(token, residenceId)
+
+            addToFavouritesViewModel.addToFavouritesLiveData.observe(this@FavouritesActivity) { response ->
+                hideProgressDialog()
+                response?.let {
+                    val status = it.status
+                    Log.e("AddToFavourites", "Added to Favourites $status")
+                    recommendedPropertiesAdapter.updateFavouriteStatus(residenceId, true)
+
+                    getFavourites()
+
+                }
+            }
+
+            addToFavouritesViewModel.errorLiveData.observe(this@FavouritesActivity) { error ->
+                hideProgressDialog()
+                error.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(this@FavouritesActivity, errorMessage, Toast.LENGTH_LONG)
+                            .show()
+                    } catch (e: JSONException) {
+//                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        } else {
+            val token = AppReferences.getToken(this@FavouritesActivity)
+            deleteFavouriteViewModel.deleteFavourite(token, residenceId)
+
+            deleteFavouriteViewModel.deleteFavouriteLiveData.observe(this@FavouritesActivity) { response ->
+                hideProgressDialog()
+                response?.let {
+                    val status = it.status
+                    Log.e("DeleteFavourite", "Deleted from Favourites $status")
+                    recommendedPropertiesAdapter.updateFavouriteStatus(residenceId, false)
+                }
+            }
+
+            deleteFavouriteViewModel.errorLiveData.observe(this@FavouritesActivity) { error ->
+                hideProgressDialog()
+                error.let {
+                    try {
+                        val errorMessage = JSONObject(error).getString("message")
+                        Toast.makeText(this@FavouritesActivity, errorMessage, Toast.LENGTH_LONG).show()
+                    } catch (e: JSONException) {
+//                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
     }
 
