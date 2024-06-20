@@ -76,7 +76,7 @@
         android:layout_marginBottom="20dp"
         android:gravity="center"
         android:fontFamily="@font/poppins_semibold"
-        android:text="@string/accept_residenec_price"
+        android:text="@string/accept_residence_price"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textAllCaps="true"/>
