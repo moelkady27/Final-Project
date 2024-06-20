@@ -45,18 +45,32 @@ class ResidenceDetailsActivity : BaseActivity() {
         setContentView(R.layout.activity_residence_details)
 
 
+//        val residenceId = intent.getStringExtra("residenceId")
+//        residenceId?.let {
+//            Log.e("residenceId", it)
+//        } ?: run {
+//            Log.e("ResidenceDetailsActivity", "residenceId is null")
+//        }
+//
+//        val residence_Id = intent.getStringExtra("residence_Id")
+//        residence_Id?.let {
+//            Log.e("Id", it)
+//        } ?: run {
+//            Log.e("ResidenceDetailsActivity", "residence_Id is null")
+//        }
+
         val residenceId = intent.getStringExtra("residenceId")
-        residenceId?.let {
-            Log.e("residenceId", it)
-        } ?: run {
+        if (residenceId == null) {
             Log.e("ResidenceDetailsActivity", "residenceId is null")
+            finish()
+            return
         }
 
         val residence_Id = intent.getStringExtra("residence_Id")
-        residence_Id?.let {
-            Log.e("Id", it)
-        } ?: run {
+        if (residence_Id == null) {
             Log.e("ResidenceDetailsActivity", "residence_Id is null")
+            finish()
+            return
         }
 
         viewPager2 = findViewById(R.id.view_pager_residence_details)

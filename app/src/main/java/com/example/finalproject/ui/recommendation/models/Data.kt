@@ -55,7 +55,7 @@ data class Data(
     val masVnrType: String,
     val miscVal: Int,
     val moSold: Int,
-    val msSubClass: Int,
+    val msSubClass: String,
     val mszoning: String,
     val neighborhood: String,
     val overallCond: Int,

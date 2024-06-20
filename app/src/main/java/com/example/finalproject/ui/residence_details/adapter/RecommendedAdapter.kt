@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.residence_details.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.ui.recommendation.models.Data
+import com.example.finalproject.ui.residence_details.activities.ResidenceDetailsActivity
 import kotlinx.android.synthetic.main.each_row_recommended_for_you.view.image_recommended
+import kotlinx.android.synthetic.main.each_row_recommended_for_you.view.iv_recommended_favourite
 import kotlinx.android.synthetic.main.each_row_recommended_for_you.view.recommended_title_1
 import kotlinx.android.synthetic.main.each_row_recommended_for_you.view.recommended_title_3
 import kotlinx.android.synthetic.main.each_row_recommended_for_you.view.tv_recommended_location
@@ -46,6 +49,15 @@ class RecommendedAdapter(
                     .into(image_recommended)
             }
 
+            iv_recommended_favourite.visibility = View.GONE
+
+            holder.itemView.setOnClickListener {
+                val context = holder.itemView.context
+                val intent = Intent(context, ResidenceDetailsActivity::class.java)
+                intent.putExtra("residenceId", x._id)
+                intent.putExtra("residence_Id", x.Id.toString())
+                context.startActivity(intent)
+            }
         }
     }
 }

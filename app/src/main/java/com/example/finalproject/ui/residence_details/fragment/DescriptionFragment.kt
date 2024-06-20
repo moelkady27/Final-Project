@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.residence_details.fragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -213,6 +214,7 @@ class DescriptionFragment : Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun getRecommendedEstates() {
         val token = AppReferences.getToken(requireContext())
         val residenceId = arguments?.getString("residence_Id")
@@ -230,6 +232,8 @@ class DescriptionFragment : Fragment() {
                 val recommendedEstates: List<Data> = response.data
                 recommendedAdapter.list = recommendedEstates
                 recommendedAdapter.notifyDataSetChanged()
+
+                Log.e("data" , recommendedEstates.toString())
             }
         }
 
@@ -244,11 +248,11 @@ class DescriptionFragment : Fragment() {
                         Toast.LENGTH_LONG
                     ).show()
 
-                    Log.e("DescriptionFragment", "Description Fragment Error: $errorMessage")
+                    Log.e("DescriptionFragment", "Recommendation Error: $errorMessage")
 
                 } catch (e: JSONException) {
                     Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
-                    Log.e("DescriptionFragment", "Description Fragment Error: $error")
+                    Log.e("DescriptionFragment", "Recommendation Error: $error")
                 }
             }
         }
