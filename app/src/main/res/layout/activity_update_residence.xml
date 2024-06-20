@@ -488,7 +488,7 @@
                         android:src="@drawable/location_image" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/select_map_update_listing"
+                        android:id="@+id/select_map_update_listingg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"

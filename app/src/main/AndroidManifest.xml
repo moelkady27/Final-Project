@@ -26,10 +26,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.add_listing.activities.AddListingPredictionActivity"
+            android:name=".ui.residence_details.activities.MapResidenceActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.add_listing.activities.AddListingPredictionActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.residence_details.activities.ResidenceDetailsActivity"
             android:exported="false"

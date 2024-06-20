@@ -23,6 +23,7 @@ import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.add_listing.factory.AddPhotoResidenceFactory
 import com.example.finalproject.ui.add_listing.repository.AddPhotoResidenceRepository
 import com.example.finalproject.ui.add_listing.viewModel.AddPhotoResidenceViewModel
+import com.example.finalproject.ui.complete_register.activities.MapActivity
 import com.example.finalproject.ui.update_listing.adapter.UpdateListingPhotosAdapter
 import com.example.finalproject.ui.update_listing.factory.DeleteResidenceImageFactory
 import com.example.finalproject.ui.update_listing.factory.GetResidenceFactory
@@ -49,6 +50,7 @@ import kotlinx.android.synthetic.main.activity_update_residence.chip_villa_updat
 import kotlinx.android.synthetic.main.activity_update_residence.et_home_name_update_listing
 import kotlinx.android.synthetic.main.activity_update_residence.image_update_residence
 import kotlinx.android.synthetic.main.activity_update_residence.number_star_update_residence
+import kotlinx.android.synthetic.main.activity_update_residence.select_map_update_listingg
 import kotlinx.android.synthetic.main.activity_update_residence.toolbar_update_residence
 import kotlinx.android.synthetic.main.activity_update_residence.tv_apartment_update_residence
 import kotlinx.android.synthetic.main.activity_update_residence.tv_update_residence_3
@@ -79,7 +81,7 @@ class UpdateResidenceActivity : BaseActivity() {
 
     private var REQUEST_CODE_GALLERY = 0
 
-//    private var REQUEST_CODE_MAP = 1
+    private var REQUEST_CODE_MAP = 1
 
     private val imageList = arrayListOf(
         Image("", "", "", isAddButton = true)
@@ -333,6 +335,13 @@ class UpdateResidenceActivity : BaseActivity() {
                         Log.e("UpdateResidenceActivity", "No images found for this residence")
                     }
 
+                    select_map_update_listingg.setOnClickListener {
+                        val mapIntent = Intent(this@UpdateResidenceActivity, MapActivity::class.java)
+                        val residenceLocation = getResidenceViewModel.getResidenceResponseLiveData.value?.residence?.location
+                        mapIntent.putExtra("latitude", residenceLocation?.coordinates?.get(0))
+                        mapIntent.putExtra("longitude", residenceLocation?.coordinates?.get(1))
+                        startActivityForResult(mapIntent, REQUEST_CODE_MAP)
+                    }
 
                 }
 
@@ -519,4 +528,15 @@ class UpdateResidenceActivity : BaseActivity() {
 //        }
 //    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_MAP && resultCode == Activity.RESULT_OK) {
+            data?.let {
+                val latitude = it.getDoubleExtra("lat", 0.0)
+                val longitude = it.getDoubleExtra("lng", 0.0)
+
+                Log.e("Selected LocationSignIn:" , "$latitude, $longitude")
+            }
+        }
+    }
 }
