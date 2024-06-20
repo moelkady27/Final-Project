@@ -3,6 +3,7 @@ package com.example.finalproject.retrofit
 import com.example.finalproject.ui.add_listing.models.CreateResidenceResponse
 import com.example.finalproject.ui.add_listing.models.FirstCompleteResponse
 import com.example.finalproject.ui.add_listing.models.FourthCompleteResponse
+import com.example.finalproject.ui.add_listing.models.GetPriceResponse
 import com.example.finalproject.ui.add_listing.models.SecondCompleteResponse
 import com.example.finalproject.ui.add_listing.models.SetLocationResidenceResponse
 import com.example.finalproject.ui.add_listing.models.ThirdCompleteResponse
@@ -476,4 +477,10 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("residenceId") residenceId: String
     ): Call<PredictPriceResponse>
+
+    @GET("api/v1/residence/price/{residenceId}")
+    fun getPrice(
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String
+    ): Call<GetPriceResponse>
 }

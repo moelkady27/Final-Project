@@ -12,19 +12,26 @@ import com.example.finalproject.R
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.ui.MainActivity
+import com.example.finalproject.ui.add_listing.factory.GetPriceFactory
+import com.example.finalproject.ui.add_listing.repository.GetPriceRepository
+import com.example.finalproject.ui.add_listing.viewModel.GetPriceViewModel
 import com.example.finalproject.ui.residence_details.factory.PredictPriceFactory
 import com.example.finalproject.ui.residence_details.repository.PredictPriceRepository
 import com.example.finalproject.ui.residence_details.viewModel.PredictPriceViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_add_listing_prediction.change_price_predicted_price
 import kotlinx.android.synthetic.main.activity_add_listing_prediction.finish_predicted_price
 import kotlinx.android.synthetic.main.activity_add_listing_prediction.tv_predicted_price_2
+import kotlinx.android.synthetic.main.edit_predicted_price_dialog.et_change_predicted_price
 import org.json.JSONException
 import org.json.JSONObject
 
 class AddListingPredictionActivity : AppCompatActivity() {
 
     private lateinit var predictPriceViewModel: PredictPriceViewModel
+
+    private lateinit var getPriceViewModel: GetPriceViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +43,9 @@ class AddListingPredictionActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+
+                                //        predicted price
+
         val predictPriceRepository = PredictPriceRepository(RetrofitClient.instance)
         val predictPriceFactory = PredictPriceFactory(predictPriceRepository)
         predictPriceViewModel = ViewModelProvider(this, predictPriceFactory
@@ -64,6 +74,12 @@ class AddListingPredictionActivity : AppCompatActivity() {
             }
         }
 
+                                    //        get price
+        val getPriceRepository = GetPriceRepository(RetrofitClient.instance)
+        val getPriceFactory = GetPriceFactory(getPriceRepository)
+        getPriceViewModel = ViewModelProvider(this@AddListingPredictionActivity, getPriceFactory
+        )[GetPriceViewModel::class.java]
+
     }
 
     private fun initButtons() {
@@ -89,17 +105,25 @@ class AddListingPredictionActivity : AppCompatActivity() {
         val editPriceButton = editDialogView.findViewById<ImageView>(R.id.iv_change_predicted_price_edit)
         val cancelButton = editDialogView.findViewById<TextView>(R.id.btn_cancel_change_predicted_price)
 
+        val newPriceEditText = editDialogView.findViewById<TextInputEditText>(R.id.et_change_predicted_price)
 
-        editPriceButton.setOnClickListener {
+        val token = AppReferences.getToken(this@AddListingPredictionActivity)
+        val residenceId = intent.getStringExtra("residenceId").toString()
 
-        }
+        getPriceViewModel.getPrice(token, residenceId)
 
-        cancelButton.setOnClickListener {
-            bottomSheetDialog.dismiss()
+        getPriceViewModel.getPriceResponseLiveData.observe(this) { response ->
+            response?.let {
+                val salePrice = it.salePrice.toString()
+                newPriceEditText.setText(salePrice)
+            }
         }
 
         bottomSheetDialog.setContentView(editDialogView)
         bottomSheetDialog.show()
-    }
 
+        cancelButton.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+    }
 }
