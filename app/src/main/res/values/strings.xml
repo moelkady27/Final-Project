@@ -396,9 +396,9 @@
     <string name="booked_requests" translatable="false">Booked Requests</string>
     <string name="residences" translatable="false">Residences</string>
     <string name="no_residences_booked" translatable="false">No Residences Booked</string>
-    <string name="residence_price">Residence Price</string>
-    <string name="accept_residenec_price">Accept Residenec Price</string>
-
+    <string name="residence_price" translatable="false">Residence Price</string>
+    <string name="accept_residence_price" translatable="false">Accept Residence Price</string>
+    <string name="search" translatable="false">Search ...</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>

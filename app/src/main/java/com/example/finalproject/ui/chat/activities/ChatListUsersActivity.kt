@@ -3,8 +3,9 @@ package com.example.finalproject.ui.chat.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +21,7 @@ import com.example.finalproject.ui.chat.models.Image
 import com.example.finalproject.ui.chat.models.LastMessage
 import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModel
 import com.example.finalproject.ui.chat.viewModels.ChatListUsersViewModelFactory
-import kotlinx.android.synthetic.main.activity_chat_list.sv_user_chat_list
+import kotlinx.android.synthetic.main.activity_chat_list.et_search_chat_list
 import kotlinx.android.synthetic.main.activity_chat_list.toolbar_message
 import org.json.JSONArray
 import org.json.JSONException
@@ -149,21 +150,16 @@ class ChatListUsersActivity : BaseActivity() {
             }
         }
 
-        sv_user_chat_list.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
-                    searchForUsers(query)
-                    timer.cancel()
-                }
-                return true
-            }
+        et_search_chat_list.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-            override fun onQueryTextChange(newText: String?): Boolean {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(newText: Editable?) {
                 if (newText != null) {
-                    searchForUsers(newText)
+                    searchForUsers(newText.toString())
                     timer.cancel()
                 }
-                return true
             }
         })
 
