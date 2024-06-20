@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.example.finalproject.ui.chat.models.ChatUser
 import com.example.finalproject.ui.chat.models.MessageConversation
 
-@Database(entities = [ChatUser::class], version = 1)
+@Database(entities = [ChatUser::class], version = 2)
 @TypeConverters(ChatUsersConverters::class)
 abstract class ChatUsersDatabase : RoomDatabase() {
     abstract fun chatUsersDao(): ChatUsersDao

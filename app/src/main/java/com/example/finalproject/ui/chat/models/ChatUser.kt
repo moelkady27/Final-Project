@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class ChatUser(
     @PrimaryKey
     val _id: String,
-    val fullName: String,
+    val fullName: String?,
     val image: Image,
     val lastMessage: LastMessage,
     val username: String
