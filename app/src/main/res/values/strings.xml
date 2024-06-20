@@ -394,6 +394,8 @@
     <string name="your_booked_estates_page_is" translatable="false">Your booked estates page is</string>
     <string name="tv_empty_booked_title_3" translatable="false">Click add button above to start exploring and choose your booked estates.</string>
     <string name="booked_requests" translatable="false">Booked Requests</string>
+    <string name="residences" translatable="false">Residences</string>
+    <string name="no_residences_booked" translatable="false">No Residences Booked</string>
 
 
     <string-array name="sale_type_items" translatable="false">
