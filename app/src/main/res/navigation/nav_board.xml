@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/bookedFragment"
-        android:name="com.example.finalproject.BookedFragment"
+        android:name="com.example.finalproject.ui.booked_residences.fragment.BookedFragment"
         android:label="fragment_booked"
         tools:layout="@layout/fragment_booked" />
     <fragment

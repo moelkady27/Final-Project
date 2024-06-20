@@ -143,11 +143,11 @@
                     app:layout_constraintTop_toBottomOf="@id/btn_edit_profile"
                     app:layout_constraintEnd_toEndOf="@+id/btn_edit_profile"
                     app:layout_constraintStart_toStartOf="@+id/btn_edit_profile"
-                    app:layout_constraintBottom_toTopOf="@id/btn_notification"
+                    app:layout_constraintBottom_toTopOf="@id/btn_booked_requests"
                     tools:ignore="RtlSymmetry" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_notification"
+                    android:id="@+id/btn_booked_requests"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -158,7 +158,7 @@
                     android:paddingTop="10dp"
                     android:paddingStart="25dp"
                     android:paddingBottom="10dp"
-                    android:text="@string/tv_notifications"
+                    android:text="@string/booked_requests"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="16sp"
@@ -191,9 +191,9 @@
                     app:iconGravity="textStart"
                     app:iconTint="@color/colorPrimaryText"
                     app:layout_constraintBottom_toTopOf="@id/btn_favourites"
-                    app:layout_constraintTop_toBottomOf="@id/btn_notification"
-                    app:layout_constraintEnd_toEndOf="@+id/btn_notification"
-                    app:layout_constraintStart_toStartOf="@+id/btn_notification"
+                    app:layout_constraintTop_toBottomOf="@id/btn_booked_requests"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_booked_requests"
+                    app:layout_constraintStart_toStartOf="@+id/btn_booked_requests"
                     tools:ignore="RtlSymmetry" />
 
                 <com.google.android.material.button.MaterialButton
@@ -260,11 +260,11 @@
                     android:paddingBottom="10dp"
                     android:text="@string/btn_delete_account"
                     android:textAllCaps="false"
-                    android:textColor="@color/colorPrimaryText"
+                    android:textColor="@color/colorSnackBarError"
                     android:textSize="16sp"
                     app:icon="@drawable/ic_delete"
                     app:iconGravity="textStart"
-                    app:iconTint="@color/colorPrimaryText"
+                    app:iconTint="@color/colorSnackBarError"
                     app:layout_constraintTop_toBottomOf="@id/btn_logout"
                     app:layout_constraintEnd_toEndOf="@+id/btn_logout"
                     app:layout_constraintStart_toStartOf="@+id/btn_logout"

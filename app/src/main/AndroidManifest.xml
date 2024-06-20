@@ -151,7 +151,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.notification.activity.NotificationActivity"
+            android:name=".ui.booked_residences.activities.AcceptCancelBookedActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -17,7 +17,7 @@ import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.chat.activities.ChatListUsersActivity
-import com.example.finalproject.ui.notification.activity.NotificationActivity
+import com.example.finalproject.ui.booked_residences.activities.AcceptCancelBookedActivity
 import com.example.finalproject.ui.register.activities.SignInActivity
 import com.example.finalproject.ui.password.activities.ChangePasswordActivity
 import com.example.finalproject.ui.setting.activities.DeleteAccountActivity
@@ -33,13 +33,13 @@ import com.example.finalproject.ui.setting.factory.LogOutFactory
 import com.example.finalproject.ui.setting.repository.LogOutRepository
 import com.example.finalproject.ui.setting.viewModels.LogOutViewModel
 import com.google.android.material.button.MaterialButton
+import kotlinx.android.synthetic.main.fragment_settings.btn_booked_requests
 import kotlinx.android.synthetic.main.fragment_settings.btn_change_password
 import kotlinx.android.synthetic.main.fragment_settings.btn_chats
 import kotlinx.android.synthetic.main.fragment_settings.btn_delete_account
 import kotlinx.android.synthetic.main.fragment_settings.btn_edit_profile
 import kotlinx.android.synthetic.main.fragment_settings.btn_favourites
 import kotlinx.android.synthetic.main.fragment_settings.btn_logout
-import kotlinx.android.synthetic.main.fragment_settings.btn_notification
 import kotlinx.android.synthetic.main.fragment_settings.iv_user_settings
 import kotlinx.android.synthetic.main.fragment_settings.search_for_user
 import kotlinx.android.synthetic.main.fragment_settings.tv_email_name
@@ -290,14 +290,14 @@ class SettingsFragment : Fragment() {
             resetButtonColor(btn_change_password)
         }
 
-        btn_notification.setOnClickListener {
-            btn_notification.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            btn_notification.setTextColor(resources.getColor(R.color.white))
-            btn_notification.setIconTintResource(R.color.white)
+        btn_booked_requests.setOnClickListener {
+            btn_booked_requests.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            btn_booked_requests.setTextColor(resources.getColor(R.color.white))
+            btn_booked_requests.setIconTintResource(R.color.white)
 
-            val intent = Intent(requireContext(), NotificationActivity::class.java)
+            val intent = Intent(requireContext(), AcceptCancelBookedActivity::class.java)
             startActivity(intent)
-            resetButtonColor(btn_notification)
+            resetButtonColor(btn_booked_requests)
         }
 
         btn_chats.setOnClickListener {
