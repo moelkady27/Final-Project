@@ -62,6 +62,7 @@ import com.example.finalproject.ui.register.request.VerificationCodeSignUpReques
 import com.example.finalproject.ui.residence_details.models.AddReviewResponse
 import com.example.finalproject.ui.residence_details.models.GetReviewsResponse
 import com.example.finalproject.ui.residence_details.models.LikeReviewResponse
+import com.example.finalproject.ui.residence_details.models.PredictPriceResponse
 import com.example.finalproject.ui.residence_details.request.AddReviewRequest
 import com.example.finalproject.ui.search.SearchResponse
 import com.example.finalproject.ui.setting.models.DeleteAccountResponse
@@ -470,4 +471,9 @@ interface ApiService {
         @Query("page") page: Int
     ): Call<PurchaseResidenceResponse>
 
+    @GET("api/v1/residence/predict/{residenceId}")
+    fun predictPrice(
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String
+    ): Call<PredictPriceResponse>
 }
