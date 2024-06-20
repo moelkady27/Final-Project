@@ -40,6 +40,9 @@ class AcceptCancelBookedActivity : BaseActivity() {
 
         initRecyclerView()
 
+        val x = intent.getStringExtra("Residence Id")
+        Log.e("x" , x.toString())
+
         initView()
     }
 
@@ -66,7 +69,7 @@ class AcceptCancelBookedActivity : BaseActivity() {
     @SuppressLint("NotifyDataSetChanged")
     private fun getBookedUsers() {
         val token = AppReferences.getToken(this@AcceptCancelBookedActivity)
-        val residenceId = "6672251bd752e05ce29fd1d7"
+        val residenceId = intent.getStringExtra("Residence Id").toString()
 
         showProgressDialog(this@AcceptCancelBookedActivity, "please wait...")
         getBookedUsersViewModel.getBookedUsers(token, residenceId)

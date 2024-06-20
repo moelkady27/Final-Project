@@ -139,6 +139,25 @@
                 app:layout_constraintStart_toEndOf="@+id/iv_location_featured_estates"
                 app:layout_constraintTop_toTopOf="@+id/iv_location_featured_estates" />
 
+            <Button
+                android:id="@+id/booked_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_background"
+                android:backgroundTint="@color/edit_text"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Booked by"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/apartment_location_residence_detailss"
+                app:layout_constraintStart_toStartOf="@+id/iv_location_featured_estates"
+                app:layout_constraintTop_toBottomOf="@+id/apartment_location_residence_detailss" />
+
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout_residence_details"
                 android:layout_width="0dp"
@@ -146,7 +165,7 @@
                 android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/apartment_location_residence_detailss"
                 app:layout_constraintStart_toStartOf="@+id/apartment_residence_title_details"
-                app:layout_constraintTop_toBottomOf="@+id/apartment_location_residence_detailss"
+                app:layout_constraintTop_toBottomOf="@+id/booked_by"
                 app:tabGravity="fill"
                 app:tabMode="fixed"
                 app:tabRippleColor="@null"

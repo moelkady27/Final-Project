@@ -290,15 +290,15 @@ class SettingsFragment : Fragment() {
             resetButtonColor(btn_change_password)
         }
 
-        btn_booked_requests.setOnClickListener {
-            btn_booked_requests.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            btn_booked_requests.setTextColor(resources.getColor(R.color.white))
-            btn_booked_requests.setIconTintResource(R.color.white)
-
-            val intent = Intent(requireContext(), AcceptCancelBookedActivity::class.java)
-            startActivity(intent)
-            resetButtonColor(btn_booked_requests)
-        }
+//        btn_booked_requests.setOnClickListener {
+//            btn_booked_requests.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+//            btn_booked_requests.setTextColor(resources.getColor(R.color.white))
+//            btn_booked_requests.setIconTintResource(R.color.white)
+//
+//            val intent = Intent(requireContext(), AcceptCancelBookedActivity::class.java)
+//            startActivity(intent)
+//            resetButtonColor(btn_booked_requests)
+//        }
 
         btn_chats.setOnClickListener {
             btn_chats.setBackgroundColor(resources.getColor(R.color.colorPrimary))

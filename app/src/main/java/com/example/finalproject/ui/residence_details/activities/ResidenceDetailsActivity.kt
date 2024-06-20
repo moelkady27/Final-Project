@@ -14,6 +14,7 @@ import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.booking.activities.AcceptCancelBookedActivity
 import com.example.finalproject.ui.residence_details.adapter.DetailsViewAdapter
 import com.example.finalproject.ui.update_listing.factory.GetResidenceFactory
 import com.example.finalproject.ui.update_listing.repository.GetResidenceRepository
@@ -21,6 +22,7 @@ import com.example.finalproject.ui.update_listing.viewModel.GetResidenceViewMode
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_residence_details.apartment_location_residence_detailss
 import kotlinx.android.synthetic.main.activity_residence_details.apartment_residence_title_details
+import kotlinx.android.synthetic.main.activity_residence_details.booked_by
 import kotlinx.android.synthetic.main.activity_residence_details.btn_add_review
 import kotlinx.android.synthetic.main.activity_residence_details.btn_book_now
 import kotlinx.android.synthetic.main.activity_residence_details.con_total_and_book_now
@@ -176,6 +178,27 @@ class ResidenceDetailsActivity : BaseActivity() {
                     tv_price_number_2.text = response.residence.salePrice
 
                     tv_price_number_4.text = response.residence.paymentPeriod
+
+                    val getCurrentUserId = AppReferences.getUserId(this@ResidenceDetailsActivity)
+                    Log.e("ResidenceDetailsActivity", "Current User Id: $getCurrentUserId")
+                    val ownerId = response.residence.ownerId?._id
+                    if (ownerId != null) {
+                        Log.e("ResidenceDetailsActivity", "Owner Id: $ownerId")
+
+                        if (getCurrentUserId == ownerId) {
+                            booked_by.visibility = View.VISIBLE
+                        } else {
+                            booked_by.visibility = View.GONE
+                        }
+                    } else {
+                        Log.e("ResidenceDetailsActivity", "Owner Id is null")
+                    }
+
+                    booked_by.setOnClickListener{
+                        val intent = Intent(this@ResidenceDetailsActivity, AcceptCancelBookedActivity::class.java)
+                        intent.putExtra("Residence Id", id)
+                        startActivity(intent)
+                    }
                 }
 
                 getResidenceViewModel.errorLiveData.observe(this@ResidenceDetailsActivity) { error ->
