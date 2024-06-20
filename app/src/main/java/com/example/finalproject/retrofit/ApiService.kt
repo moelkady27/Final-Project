@@ -7,12 +7,14 @@ import com.example.finalproject.ui.add_listing.models.GetPriceResponse
 import com.example.finalproject.ui.add_listing.models.SecondCompleteResponse
 import com.example.finalproject.ui.add_listing.models.SetLocationResidenceResponse
 import com.example.finalproject.ui.add_listing.models.ThirdCompleteResponse
+import com.example.finalproject.ui.add_listing.models.UpdatePriceResponse
 import com.example.finalproject.ui.add_listing.models.UploadPhotoResidenceResponse
 import com.example.finalproject.ui.add_listing.request.CreateResidenceRequest
 import com.example.finalproject.ui.add_listing.request.FirstCompleteRequest
 import com.example.finalproject.ui.add_listing.request.FourthCompleteRequest
 import com.example.finalproject.ui.add_listing.request.SecondCompleteRequest
 import com.example.finalproject.ui.add_listing.request.ThirdCompleteRequest
+import com.example.finalproject.ui.add_listing.request.UpdatePriceRequest
 import com.example.finalproject.ui.booking.models.AcceptResponse
 import com.example.finalproject.ui.booking.models.CancelBookResponse
 import com.example.finalproject.ui.booking.models.GetBookedUsersResponse
@@ -483,4 +485,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("residenceId") residenceId: String
     ): Call<GetPriceResponse>
+
+    @PATCH("api/v1/residence/price/{residenceId}")
+    fun updatePrice(
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String,
+        @Body req: UpdatePriceRequest
+    ): Call<UpdatePriceResponse>
 }

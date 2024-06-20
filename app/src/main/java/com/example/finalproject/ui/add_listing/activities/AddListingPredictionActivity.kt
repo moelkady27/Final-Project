@@ -13,8 +13,11 @@ import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.ui.MainActivity
 import com.example.finalproject.ui.add_listing.factory.GetPriceFactory
+import com.example.finalproject.ui.add_listing.factory.UpdatePriceFactory
 import com.example.finalproject.ui.add_listing.repository.GetPriceRepository
+import com.example.finalproject.ui.add_listing.repository.UpdatePriceRepository
 import com.example.finalproject.ui.add_listing.viewModel.GetPriceViewModel
+import com.example.finalproject.ui.add_listing.viewModel.UpdatePriceViewModel
 import com.example.finalproject.ui.residence_details.factory.PredictPriceFactory
 import com.example.finalproject.ui.residence_details.repository.PredictPriceRepository
 import com.example.finalproject.ui.residence_details.viewModel.PredictPriceViewModel
@@ -23,7 +26,6 @@ import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_add_listing_prediction.change_price_predicted_price
 import kotlinx.android.synthetic.main.activity_add_listing_prediction.finish_predicted_price
 import kotlinx.android.synthetic.main.activity_add_listing_prediction.tv_predicted_price_2
-import kotlinx.android.synthetic.main.edit_predicted_price_dialog.et_change_predicted_price
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -32,6 +34,8 @@ class AddListingPredictionActivity : AppCompatActivity() {
     private lateinit var predictPriceViewModel: PredictPriceViewModel
 
     private lateinit var getPriceViewModel: GetPriceViewModel
+
+    private lateinit var updatePriceViewModel: UpdatePriceViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +84,13 @@ class AddListingPredictionActivity : AppCompatActivity() {
         getPriceViewModel = ViewModelProvider(this@AddListingPredictionActivity, getPriceFactory
         )[GetPriceViewModel::class.java]
 
+                                //        update price
+
+        val updatePriceRepository = UpdatePriceRepository(RetrofitClient.instance)
+        val updatePriceFactory = UpdatePriceFactory(updatePriceRepository)
+        updatePriceViewModel = ViewModelProvider(this@AddListingPredictionActivity, updatePriceFactory
+        )[UpdatePriceViewModel::class.java]
+
     }
 
     private fun initButtons() {
@@ -116,6 +127,49 @@ class AddListingPredictionActivity : AppCompatActivity() {
             response?.let {
                 val salePrice = it.salePrice.toString()
                 newPriceEditText.setText(salePrice)
+            }
+        }
+
+        getPriceViewModel.errorLiveData.observe(this) { error ->
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(it).getString("message")
+                    Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+        editPriceButton.setOnClickListener {
+            val newPrice = newPriceEditText.text.toString().toIntOrNull()
+            if (newPrice != null) {
+                val token = AppReferences.getToken(this@AddListingPredictionActivity)
+                val residenceId = intent.getStringExtra("residenceId").toString()
+
+                updatePriceViewModel.updatePrice(token, residenceId, newPrice)
+
+                updatePriceViewModel.updatePriceResponseLiveData.observe(this) { response ->
+                    response?.let {
+                        val status = it.status
+                        Toast.makeText(this, status, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                updatePriceViewModel.errorLiveData.observe(this) { error ->
+                    error?.let {
+                        try {
+                            val errorMessage = JSONObject(it).getString("message")
+                            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+                        } catch (e: JSONException) {
+                            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+
+                bottomSheetDialog.dismiss()
+            } else {
+                Toast.makeText(this, "Please enter a valid price", Toast.LENGTH_SHORT).show()
             }
         }
 
