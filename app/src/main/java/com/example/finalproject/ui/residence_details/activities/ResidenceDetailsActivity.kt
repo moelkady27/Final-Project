@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.example.finalproject.AddReviewActivity
 import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.retrofit.RetrofitClient

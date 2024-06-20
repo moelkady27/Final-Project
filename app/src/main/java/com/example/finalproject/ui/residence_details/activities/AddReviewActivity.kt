@@ -1,4 +1,4 @@
-package com.example.finalproject
+package com.example.finalproject.ui.residence_details.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,11 +6,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.finalproject.R
 import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
-import com.example.finalproject.ui.residence_details.activities.ResidenceDetailsActivity
 import com.example.finalproject.ui.residence_details.factory.AddReviewFactory
 import com.example.finalproject.ui.residence_details.factory.GetReviewsFactory
 import com.example.finalproject.ui.residence_details.repository.AddReviewRepository
