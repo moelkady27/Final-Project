@@ -13,8 +13,12 @@ import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.booking.adapter.AcceptCancelBookedAdapter
+import com.example.finalproject.ui.booking.factory.AcceptFactory
 import com.example.finalproject.ui.booking.factory.GetBookedUsersFactory
+import com.example.finalproject.ui.booking.models.BookedBy
+import com.example.finalproject.ui.booking.repository.AcceptRepository
 import com.example.finalproject.ui.booking.repository.GetBookedUsersRepository
+import com.example.finalproject.ui.booking.viewModel.AcceptViewModel
 import com.example.finalproject.ui.booking.viewModel.GetBookedUsersViewModel
 import kotlinx.android.synthetic.main.activity_accept_cancel_booked.iv_empty_booked
 import kotlinx.android.synthetic.main.activity_accept_cancel_booked.recycle_booked
@@ -31,6 +35,8 @@ class AcceptCancelBookedActivity : BaseActivity() {
     private lateinit var bookedAdapter: AcceptCancelBookedAdapter
 
     private lateinit var getBookedUsersViewModel: GetBookedUsersViewModel
+
+    private lateinit var acceptViewModel: AcceptViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +56,10 @@ class AcceptCancelBookedActivity : BaseActivity() {
         recyclerView = findViewById(R.id.recycle_booked)
         recyclerView.layoutManager = LinearLayoutManager(this@AcceptCancelBookedActivity ,
             LinearLayoutManager.VERTICAL , false)
-        bookedAdapter = AcceptCancelBookedAdapter(mutableListOf())
+        bookedAdapter = AcceptCancelBookedAdapter(
+            mutableListOf(),
+            this::onAcceptClick
+        )
         recyclerView.adapter = bookedAdapter
     }
 
@@ -64,6 +73,35 @@ class AcceptCancelBookedActivity : BaseActivity() {
         )[GetBookedUsersViewModel::class.java]
 
         getBookedUsers()
+
+        val acceptRepository = AcceptRepository(RetrofitClient.instance)
+        val acceptFactory = AcceptFactory(acceptRepository)
+        acceptViewModel = ViewModelProvider(
+            this@AcceptCancelBookedActivity, acceptFactory
+        )[AcceptViewModel::class.java]
+
+        acceptViewModel.acceptResponseLiveData.observe(this) { response ->
+            response?.let {
+                val status = response.status
+                Log.e("Status", "Accept: $status")
+                getBookedUsers()
+            }
+        }
+
+        acceptViewModel.errorLiveData.observe(this) { error ->
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(
+                        this@AcceptCancelBookedActivity, errorMessage, Toast.LENGTH_LONG
+                    ).show()
+                } catch (e: JSONException) {
+                    Toast.makeText(
+                        this@AcceptCancelBookedActivity, error, Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -113,6 +151,13 @@ class AcceptCancelBookedActivity : BaseActivity() {
                 }
             }
         }
+    }
+
+    private fun onAcceptClick(bookedBy: BookedBy) {
+        val token = AppReferences.getToken(this@AcceptCancelBookedActivity)
+        val residenceId = intent.getStringExtra("Residence Id").toString()
+
+        acceptViewModel.acceptBooking(token, residenceId, bookedBy._id)
     }
 
     private fun setupActionBar() {

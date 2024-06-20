@@ -12,6 +12,7 @@ import com.example.finalproject.ui.add_listing.request.FirstCompleteRequest
 import com.example.finalproject.ui.add_listing.request.FourthCompleteRequest
 import com.example.finalproject.ui.add_listing.request.SecondCompleteRequest
 import com.example.finalproject.ui.add_listing.request.ThirdCompleteRequest
+import com.example.finalproject.ui.booking.models.AcceptResponse
 import com.example.finalproject.ui.booking.models.GetBookedUsersResponse
 import com.example.finalproject.ui.booking.models.MakeBookResponse
 import com.example.finalproject.ui.chat.models.ChatListUsersResponse
@@ -446,4 +447,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("residenceId") residenceId: String
     ): Call<GetBookedUsersResponse>
+
+    @GET("api/v1/residence/accept-book/{residenceId}/{userId}")
+    fun acceptBook(
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String,
+        @Path("userId") userId: String
+    ): Call<AcceptResponse>
 }
