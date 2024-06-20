@@ -15,6 +15,7 @@ import com.example.finalproject.ui.add_listing.request.ThirdCompleteRequest
 import com.example.finalproject.ui.booking.models.AcceptResponse
 import com.example.finalproject.ui.booking.models.GetBookedUsersResponse
 import com.example.finalproject.ui.booking.models.MakeBookResponse
+import com.example.finalproject.ui.booking.models.PurchaseResidenceResponse
 import com.example.finalproject.ui.chat.models.ChatListUsersResponse
 import com.example.finalproject.ui.chat.models.DeleteMessageResponse
 import com.example.finalproject.ui.chat.models.EditMessageResponse
@@ -454,4 +455,11 @@ interface ApiService {
         @Path("residenceId") residenceId: String,
         @Path("userId") userId: String
     ): Call<AcceptResponse>
+
+    @GET("api/v1/residence/all/purchase")
+    fun getPurchaseResidence(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int
+    ): Call<PurchaseResidenceResponse>
+
 }
