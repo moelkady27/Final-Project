@@ -31,6 +31,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name=".ui.residence_details.activities.PredictedPriceDetailsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".ui.add_listing.activities.AddListingPredictionActivity"
             android:exported="false"
             android:screenOrientation="portrait"

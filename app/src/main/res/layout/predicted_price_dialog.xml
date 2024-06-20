@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <View
+        android:layout_width="50dp"
+        android:layout_height="3dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_background_edit"
+        android:backgroundTint="@color/colorPrimaryText"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_predicted_price_details_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/tv_predicted_price"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="20sp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_predicted_price_details_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="40dp"
+        android:padding="25dp"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_semibold"
+        android:background="@drawable/profile_background"
+        android:text="$ 45000000"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="30sp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_continue_predicted_price_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/tv_continue"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textAllCaps="true"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_cancel_predicted_price_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/cancel"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="18sp"
+        android:textAllCaps="true"/>
+
+</LinearLayout>

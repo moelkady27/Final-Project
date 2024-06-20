@@ -22,11 +22,15 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_residence_details.apartment_location_residence_detailss
 import kotlinx.android.synthetic.main.activity_residence_details.apartment_residence_title_details
 import kotlinx.android.synthetic.main.activity_residence_details.btn_add_review
+import kotlinx.android.synthetic.main.activity_residence_details.btn_book_now
+import kotlinx.android.synthetic.main.activity_residence_details.con_total_and_book_now
 import kotlinx.android.synthetic.main.activity_residence_details.number_star_residence_details
 import kotlinx.android.synthetic.main.activity_residence_details.residence_image_details
 import kotlinx.android.synthetic.main.activity_residence_details.sale_type_residence_details
 import kotlinx.android.synthetic.main.activity_residence_details.tabLayout_residence_details
 import kotlinx.android.synthetic.main.activity_residence_details.tv_apartment_residence_category_details
+import kotlinx.android.synthetic.main.activity_residence_details.tv_price_number_2
+import kotlinx.android.synthetic.main.activity_residence_details.tv_price_number_4
 import kotlinx.android.synthetic.main.activity_residence_details.view_pager_residence_details
 import org.json.JSONException
 import org.json.JSONObject
@@ -97,6 +101,13 @@ class ResidenceDetailsActivity : BaseActivity() {
                 } else {
                     btn_add_review.visibility = View.GONE
                 }
+
+                if (position == 0 || position == 1) {
+                    con_total_and_book_now.visibility = View.VISIBLE
+                } else {
+                    con_total_and_book_now.visibility = View.GONE
+                }
+
             }
         })
 
@@ -106,6 +117,14 @@ class ResidenceDetailsActivity : BaseActivity() {
             intent.putExtra("residenceId", residenceId)
             startActivity(intent)
         }
+
+        btn_book_now.setOnClickListener {
+            val intent = Intent(
+                this@ResidenceDetailsActivity, PredictedPriceDetailsActivity::class.java)
+            intent.putExtra("residenceId", residenceId)
+            startActivity(intent)
+        }
+
 
         networkUtils = NetworkUtils(this@ResidenceDetailsActivity)
 
@@ -153,6 +172,10 @@ class ResidenceDetailsActivity : BaseActivity() {
                     apartment_location_residence_detailss.text = response.residence.location.fullAddress
 
                     sale_type_residence_details.text = response.residence.type
+
+                    tv_price_number_2.text = response.residence.salePrice
+
+                    tv_price_number_4.text = response.residence.paymentPeriod
                 }
 
                 getResidenceViewModel.errorLiveData.observe(this@ResidenceDetailsActivity) { error ->

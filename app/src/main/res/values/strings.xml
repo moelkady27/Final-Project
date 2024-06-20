@@ -382,6 +382,14 @@
     </string>
     <string name="change_price" translatable="false">Change Price</string>
     <string name="change_predicted_price" translatable="false">Change Predicted Price</string>
+    <string name="total_price" translatable="false">Total Price</string>
+    <string name="book_now" translatable="false">Book Now</string>
+    <string name="property" translatable="false">Property</string>
+    <string name="price_for_this" translatable="false">Price For This</string>
+    <string name="check_the_predicted" translatable="false">Check The Predicted</string>
+    <string name="show" translatable="false">Show</string>
+    <string name="tv_predicted_price" translatable="false">Predicted Price</string>
+    <string name="tv_continue" translatable="false">Continue</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>

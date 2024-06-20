@@ -9,7 +9,7 @@ data class ResidenceId(
     val location: Location,
     val ownerId: OwnerId,
     val paymentPeriod: String,
-    val salePrice: Int,
+    val salePrice: Double,
     val title: String,
     val type: String
 )
