@@ -14,11 +14,14 @@ import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
 import com.example.finalproject.ui.booking.adapter.AcceptCancelBookedAdapter
 import com.example.finalproject.ui.booking.factory.AcceptFactory
+import com.example.finalproject.ui.booking.factory.CancelFactory
 import com.example.finalproject.ui.booking.factory.GetBookedUsersFactory
 import com.example.finalproject.ui.booking.models.BookedBy
 import com.example.finalproject.ui.booking.repository.AcceptRepository
+import com.example.finalproject.ui.booking.repository.CancelBookRepository
 import com.example.finalproject.ui.booking.repository.GetBookedUsersRepository
 import com.example.finalproject.ui.booking.viewModel.AcceptViewModel
+import com.example.finalproject.ui.booking.viewModel.CancelViewModel
 import com.example.finalproject.ui.booking.viewModel.GetBookedUsersViewModel
 import kotlinx.android.synthetic.main.activity_accept_cancel_booked.iv_empty_booked
 import kotlinx.android.synthetic.main.activity_accept_cancel_booked.recycle_booked
@@ -37,6 +40,8 @@ class AcceptCancelBookedActivity : BaseActivity() {
     private lateinit var getBookedUsersViewModel: GetBookedUsersViewModel
 
     private lateinit var acceptViewModel: AcceptViewModel
+
+    private lateinit var cancelViewModel: CancelViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +63,8 @@ class AcceptCancelBookedActivity : BaseActivity() {
             LinearLayoutManager.VERTICAL , false)
         bookedAdapter = AcceptCancelBookedAdapter(
             mutableListOf(),
-            this::onAcceptClick
+            this::onAcceptClick,
+            this::onCancelClick
         )
         recyclerView.adapter = bookedAdapter
     }
@@ -89,6 +95,35 @@ class AcceptCancelBookedActivity : BaseActivity() {
         }
 
         acceptViewModel.errorLiveData.observe(this) { error ->
+            error?.let {
+                try {
+                    val errorMessage = JSONObject(error).getString("message")
+                    Toast.makeText(
+                        this@AcceptCancelBookedActivity, errorMessage, Toast.LENGTH_LONG
+                    ).show()
+                } catch (e: JSONException) {
+                    Toast.makeText(
+                        this@AcceptCancelBookedActivity, error, Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
+        val cancelRepository = CancelBookRepository(RetrofitClient.instance)
+        val cancelFactory = CancelFactory(cancelRepository)
+        cancelViewModel = ViewModelProvider(
+            this@AcceptCancelBookedActivity, cancelFactory
+        )[CancelViewModel::class.java]
+
+        cancelViewModel.cancelResponseLiveData.observe(this) { response ->
+            response?.let {
+                val status = response.status
+                Log.e("Status", "Accept: $status")
+                getBookedUsers()
+            }
+        }
+
+        cancelViewModel.errorLiveData.observe(this) { error ->
             error?.let {
                 try {
                     val errorMessage = JSONObject(error).getString("message")
@@ -153,11 +188,30 @@ class AcceptCancelBookedActivity : BaseActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun onAcceptClick(bookedBy: BookedBy) {
         val token = AppReferences.getToken(this@AcceptCancelBookedActivity)
         val residenceId = intent.getStringExtra("Residence Id").toString()
 
         acceptViewModel.acceptBooking(token, residenceId, bookedBy._id)
+
+        bookedAdapter.list.clear()
+        bookedAdapter.notifyDataSetChanged()
+
+        iv_empty_booked.visibility = View.VISIBLE
+        tv_empty_booked_title_1.visibility = View.VISIBLE
+        tv_empty_booked_title_2.visibility = View.VISIBLE
+        recycle_booked.visibility = View.GONE
+
+        Toast.makeText(this, "All bookings have been accepted and list is cleared!", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onCancelClick(bookedBy: BookedBy) {
+        val token = AppReferences.getToken(this@AcceptCancelBookedActivity)
+        val residenceId = intent.getStringExtra("Residence Id").toString()
+        val userId = bookedBy._id
+
+        cancelViewModel.cancelBooking(token, residenceId, userId)
     }
 
     private fun setupActionBar() {

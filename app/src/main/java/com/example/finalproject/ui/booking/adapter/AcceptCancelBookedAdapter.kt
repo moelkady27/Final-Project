@@ -7,13 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.ui.booking.models.BookedBy
+import kotlinx.android.synthetic.main.each_row_accept_cancel_booked.view.iv_no
 import kotlinx.android.synthetic.main.each_row_accept_cancel_booked.view.iv_user_accept_cancel
 import kotlinx.android.synthetic.main.each_row_accept_cancel_booked.view.iv_yes
 import kotlinx.android.synthetic.main.each_row_accept_cancel_booked.view.tv_user_name_accept_cancel
 
 class AcceptCancelBookedAdapter(
     var list: MutableList<BookedBy>,
-    private val onAcceptClick: (BookedBy) -> Unit
+    private val onAcceptClick: (BookedBy) -> Unit,
+    private val onCancelClick: (BookedBy) -> Unit
 ) : RecyclerView.Adapter<AcceptCancelBookedAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -44,6 +46,10 @@ class AcceptCancelBookedAdapter(
 
         holder.itemView.iv_yes.setOnClickListener {
             onAcceptClick(booked)
+        }
+
+        holder.itemView.iv_no.setOnClickListener {
+            onCancelClick(booked)
         }
     }
 

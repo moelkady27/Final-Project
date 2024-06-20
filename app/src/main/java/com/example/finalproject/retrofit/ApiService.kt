@@ -13,6 +13,7 @@ import com.example.finalproject.ui.add_listing.request.FourthCompleteRequest
 import com.example.finalproject.ui.add_listing.request.SecondCompleteRequest
 import com.example.finalproject.ui.add_listing.request.ThirdCompleteRequest
 import com.example.finalproject.ui.booking.models.AcceptResponse
+import com.example.finalproject.ui.booking.models.CancelBookResponse
 import com.example.finalproject.ui.booking.models.GetBookedUsersResponse
 import com.example.finalproject.ui.booking.models.MakeBookResponse
 import com.example.finalproject.ui.booking.models.PurchaseResidenceResponse
@@ -94,12 +95,12 @@ interface ApiService {
     @POST("api/v1/auth/signup")
     fun signup(
         @Body req: SignUpRequest
-    ) : Call<SignUpResponse>
+    ): Call<SignUpResponse>
 
     @POST("api/v1/auth/login")
     fun login(
         @Body req: SignInRequest
-    ) : Call<SignInResponse>
+    ): Call<SignInResponse>
 
     @POST("api/v1/auth/verification")
     fun verifyAccount(
@@ -116,7 +117,7 @@ interface ApiService {
     fun complete(
         @Header("Authorization") token: String,
         @Body req: CompleteSignUpRequest
-    ) : Call<CompleteSignUpResponse>
+    ): Call<CompleteSignUpResponse>
 
     @Multipart
     @POST("api/v1/user/upload-image")
@@ -140,13 +141,13 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("longitude") longitude: Double,
         @Query("latitude") latitude: Double
-    ) : Call<LocationResponse>
+    ): Call<LocationResponse>
 
     @PATCH("api/v1/user/change-password")
     fun changePass(
         @Header("Authorization") token: String,
         @Body req: ChangePasswordRequest
-    ) : Call<ChangePasswordResponse>
+    ): Call<ChangePasswordResponse>
 
     @POST("api/v1/auth/forgot-pass")
     fun forgotPassword(
@@ -202,7 +203,7 @@ interface ApiService {
     @GET("api/v1/chat/get-conversations")
     fun getChatUsers(
         @Header("Authorization") token: String,
-        ): Call<ChatListUsersResponse>
+    ): Call<ChatListUsersResponse>
 
     @POST("api/v1/chat/send/{receiverId}")
     fun sendMessage(
@@ -235,7 +236,7 @@ interface ApiService {
     fun search(
         @Header("Authorization") token: String,
         @Query("search") search: String,
-    ) : Call<SearchResponse>
+    ): Call<SearchResponse>
 
     @Multipart
     @POST("api/v1/chat/send/{receiverId}")
@@ -455,6 +456,13 @@ interface ApiService {
         @Path("residenceId") residenceId: String,
         @Path("userId") userId: String
     ): Call<AcceptResponse>
+
+    @GET("api/v1/residence/cancel-book/{residenceId}/{userId}")
+    fun cancelBook(
+        @Header("Authorization") token: String,
+        @Path("residenceId") residenceId: String,
+        @Path("userId") userId: String
+    ): Call<CancelBookResponse>
 
     @GET("api/v1/residence/all/purchase")
     fun getPurchaseResidence(
