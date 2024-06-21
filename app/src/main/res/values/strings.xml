@@ -399,6 +399,11 @@
     <string name="residence_price" translatable="false">Residence Price</string>
     <string name="accept_residence_price" translatable="false">Accept Residence Price</string>
     <string name="search" translatable="false">Search ...</string>
+    <string name="filter" translatable="false">Filter</string>
+    <string name="price_range" translatable="false">Price Range</string>
+    <string name="min_price" translatable="false">Min Price</string>
+    <string name="max_price" translatable="false">Max Price</string>
+    <string name="apply" translatable="false">Apply</string>
 
     <string-array name="sale_type_items" translatable="false">
         <item>Conventional</item>

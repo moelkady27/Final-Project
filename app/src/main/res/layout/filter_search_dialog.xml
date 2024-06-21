@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+    <View
+        android:id="@+id/view_filter_dialog"
+        android:layout_width="50dp"
+        android:layout_height="3dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_background_edit"
+        android:backgroundTint="@color/colorPrimaryText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_filter_dialog_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/filter"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@+id/view_filter_dialog"
+        app:layout_constraintEnd_toEndOf="@+id/view_filter_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/view_filter_dialog"/>
+
+    <ScrollView
+        android:id="@+id/sv_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="75dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_filter_dialog_1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_filter_dialog_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="start"
+        android:text="@string/price_range"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/ll_filter_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tv_filter_dialog_2"
+        app:layout_constraintStart_toStartOf="@+id/tv_filter_dialog_2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_filter_dialog_2"
+        android:baselineAligned="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_min_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/min_price"
+                android:textColor="@color/edit_text"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_min_price"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:background="@drawable/button_background_edit"
+                android:fontFamily="@font/poppins_bold"
+                android:padding="20dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="16sp"
+                android:hint="Min"
+                android:textColorHint="@color/home_popular"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="@+id/tv_min_price"
+                app:layout_constraintStart_toStartOf="@+id/tv_min_price"
+                app:layout_constraintTop_toBottomOf="@+id/tv_min_price"
+                tools:text="2000" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/con_filter_price"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_max_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/max_price"
+                android:textColor="@color/edit_text"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_max_price"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:background="@drawable/button_background_edit"
+                android:fontFamily="@font/poppins_bold"
+                android:padding="20dp"
+                android:layout_marginTop="10dp"
+                android:inputType="text"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="16sp"
+                android:hint="Max"
+                android:textColorHint="@color/home_popular"
+                app:layout_constraintEnd_toEndOf="@+id/tv_max_price"
+                app:layout_constraintStart_toStartOf="@+id/tv_max_price"
+                app:layout_constraintTop_toBottomOf="@+id/tv_max_price"
+                tools:text="4000" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_filter_dialog_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="start"
+        android:text="@string/reviews"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/ll_filter_price"
+        app:layout_constraintStart_toStartOf="@id/ll_filter_price"
+        app:layout_constraintTop_toBottomOf="@id/ll_filter_price"/>
+
+    <RadioGroup
+        android:id="@+id/rg_filter_dialog"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/tv_filter_dialog_3"
+        app:layout_constraintStart_toStartOf="@+id/tv_filter_dialog_3"
+        app:layout_constraintTop_toBottomOf="@+id/tv_filter_dialog_3" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_5_filter_dialog_1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_5_filter_dialog_2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintStart_toEndOf="@+id/star_5_filter_dialog_1"
+                app:layout_constraintTop_toTopOf="@+id/star_5_filter_dialog_1"
+                app:layout_constraintBottom_toBottomOf="@+id/star_5_filter_dialog_1"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_5_filter_dialog_3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintStart_toEndOf="@+id/star_5_filter_dialog_2"
+                app:layout_constraintTop_toTopOf="@+id/star_5_filter_dialog_2"
+                app:layout_constraintBottom_toBottomOf="@+id/star_5_filter_dialog_2"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_5_filter_dialog_4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintStart_toEndOf="@+id/star_5_filter_dialog_3"
+                app:layout_constraintTop_toTopOf="@+id/star_5_filter_dialog_3"
+                app:layout_constraintBottom_toBottomOf="@+id/star_5_filter_dialog_3"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_5_filter_dialog_5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintStart_toEndOf="@+id/star_5_filter_dialog_4"
+                app:layout_constraintTop_toTopOf="@+id/star_5_filter_dialog_4"
+                app:layout_constraintBottom_toBottomOf="@+id/star_5_filter_dialog_4"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/number_5_star_filter_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="5"
+                android:textColor="@color/edit_text"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/star_5_filter_dialog_5"
+                app:layout_constraintTop_toTopOf="@+id/star_5_filter_dialog_5"
+                app:layout_constraintBottom_toBottomOf="@+id/star_5_filter_dialog_5" />
+
+            <RadioButton
+                android:id="@+id/btn_5_star_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/home_popular"
+                app:layout_constraintTop_toTopOf="@+id/number_5_star_filter_dialog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/number_5_star_filter_dialog"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_4_filter_dialog_1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_4_filter_dialog_2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintStart_toEndOf="@+id/star_4_filter_dialog_1"
+                app:layout_constraintTop_toTopOf="@+id/star_4_filter_dialog_1"
+                app:layout_constraintBottom_toBottomOf="@+id/star_4_filter_dialog_1"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_4_filter_dialog_3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintStart_toEndOf="@+id/star_4_filter_dialog_2"
+                app:layout_constraintTop_toTopOf="@+id/star_4_filter_dialog_2"
+                app:layout_constraintBottom_toBottomOf="@+id/star_4_filter_dialog_2"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_4_filter_dialog_4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintStart_toEndOf="@+id/star_4_filter_dialog_3"
+                app:layout_constraintTop_toTopOf="@+id/star_4_filter_dialog_3"
+                app:layout_constraintBottom_toBottomOf="@+id/star_4_filter_dialog_3"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_4_filter_dialog_5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/home_popular"
+                app:layout_constraintStart_toEndOf="@+id/star_4_filter_dialog_4"
+                app:layout_constraintTop_toTopOf="@+id/star_4_filter_dialog_4"
+                app:layout_constraintBottom_toBottomOf="@+id/star_4_filter_dialog_4"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/number_4_star_filter_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="4"
+                android:textColor="@color/edit_text"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/star_4_filter_dialog_5"
+                app:layout_constraintTop_toTopOf="@+id/star_4_filter_dialog_5"
+                app:layout_constraintBottom_toBottomOf="@+id/star_4_filter_dialog_5" />
+
+            <RadioButton
+                android:id="@+id/btn_4_star_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/home_popular"
+                app:layout_constraintTop_toTopOf="@+id/number_4_star_filter_dialog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/number_4_star_filter_dialog"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_3_filter_dialog_1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_3_filter_dialog_2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintStart_toEndOf="@+id/star_3_filter_dialog_1"
+                app:layout_constraintTop_toTopOf="@+id/star_3_filter_dialog_1"
+                app:layout_constraintBottom_toBottomOf="@+id/star_3_filter_dialog_1"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_3_filter_dialog_3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintStart_toEndOf="@+id/star_3_filter_dialog_2"
+                app:layout_constraintTop_toTopOf="@+id/star_3_filter_dialog_2"
+                app:layout_constraintBottom_toBottomOf="@+id/star_3_filter_dialog_2"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_3_filter_dialog_4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/home_popular"
+                app:layout_constraintStart_toEndOf="@+id/star_3_filter_dialog_3"
+                app:layout_constraintTop_toTopOf="@+id/star_3_filter_dialog_3"
+                app:layout_constraintBottom_toBottomOf="@+id/star_3_filter_dialog_3"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_3_filter_dialog_5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/home_popular"
+                app:layout_constraintStart_toEndOf="@+id/star_3_filter_dialog_4"
+                app:layout_constraintTop_toTopOf="@+id/star_3_filter_dialog_4"
+                app:layout_constraintBottom_toBottomOf="@+id/star_3_filter_dialog_4"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/number_3_star_filter_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="3"
+                android:textColor="@color/edit_text"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/star_3_filter_dialog_5"
+                app:layout_constraintTop_toTopOf="@+id/star_3_filter_dialog_5"
+                app:layout_constraintBottom_toBottomOf="@+id/star_3_filter_dialog_5" />
+
+            <RadioButton
+                android:id="@+id/btn_3_star_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/home_popular"
+                app:layout_constraintTop_toTopOf="@+id/number_3_star_filter_dialog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/number_3_star_filter_dialog"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_2_filter_dialog_1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_2_filter_dialog_2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintStart_toEndOf="@+id/star_2_filter_dialog_1"
+                app:layout_constraintTop_toTopOf="@+id/star_2_filter_dialog_1"
+                app:layout_constraintBottom_toBottomOf="@+id/star_2_filter_dialog_1"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_2_filter_dialog_3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/home_popular"
+                app:layout_constraintStart_toEndOf="@+id/star_2_filter_dialog_2"
+                app:layout_constraintTop_toTopOf="@+id/star_2_filter_dialog_2"
+                app:layout_constraintBottom_toBottomOf="@+id/star_2_filter_dialog_2"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_2_filter_dialog_4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/home_popular"
+                app:layout_constraintStart_toEndOf="@+id/star_2_filter_dialog_3"
+                app:layout_constraintTop_toTopOf="@+id/star_2_filter_dialog_3"
+                app:layout_constraintBottom_toBottomOf="@+id/star_2_filter_dialog_3"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_2_filter_dialog_5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/home_popular"
+                app:layout_constraintStart_toEndOf="@+id/star_2_filter_dialog_4"
+                app:layout_constraintTop_toTopOf="@+id/star_2_filter_dialog_4"
+                app:layout_constraintBottom_toBottomOf="@+id/star_2_filter_dialog_4"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/number_2_star_filter_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="7dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="2"
+                android:textColor="@color/edit_text"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/star_2_filter_dialog_5"
+                app:layout_constraintTop_toTopOf="@+id/star_2_filter_dialog_5"
+                app:layout_constraintBottom_toBottomOf="@+id/star_2_filter_dialog_5" />
+
+            <RadioButton
+                android:id="@+id/btn_2_star_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/home_popular"
+                app:layout_constraintTop_toTopOf="@+id/number_2_star_filter_dialog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/number_2_star_filter_dialog"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_1_filter_dialog_1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/starColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_1_filter_dialog_2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/home_popular"
+                app:layout_constraintStart_toEndOf="@+id/star_1_filter_dialog_1"
+                app:layout_constraintTop_toTopOf="@+id/star_1_filter_dialog_1"
+                app:layout_constraintBottom_toBottomOf="@+id/star_1_filter_dialog_1"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_1_filter_dialog_3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/home_popular"
+                app:layout_constraintStart_toEndOf="@+id/star_1_filter_dialog_2"
+                app:layout_constraintTop_toTopOf="@+id/star_1_filter_dialog_2"
+                app:layout_constraintBottom_toBottomOf="@+id/star_1_filter_dialog_2"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_1_filter_dialog_4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/home_popular"
+                app:layout_constraintStart_toEndOf="@+id/star_1_filter_dialog_3"
+                app:layout_constraintTop_toTopOf="@+id/star_1_filter_dialog_3"
+                app:layout_constraintBottom_toBottomOf="@+id/star_1_filter_dialog_3"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star_1_filter_dialog_5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_star_24"
+                android:tint="@color/home_popular"
+                app:layout_constraintStart_toEndOf="@+id/star_1_filter_dialog_4"
+                app:layout_constraintTop_toTopOf="@+id/star_1_filter_dialog_4"
+                app:layout_constraintBottom_toBottomOf="@+id/star_1_filter_dialog_4"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/number_1_star_filter_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="1"
+                android:textColor="@color/edit_text"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/star_1_filter_dialog_5"
+                app:layout_constraintTop_toTopOf="@+id/star_1_filter_dialog_5"
+                app:layout_constraintBottom_toBottomOf="@+id/star_1_filter_dialog_5" />
+
+            <RadioButton
+                android:id="@+id/btn_1_star_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/home_popular"
+                app:layout_constraintTop_toTopOf="@+id/number_1_star_filter_dialog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/number_1_star_filter_dialog"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_filter_dialog_4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="start"
+        android:text="@string/bedroom"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/rg_filter_dialog"
+        app:layout_constraintStart_toStartOf="@id/rg_filter_dialog"
+        app:layout_constraintTop_toBottomOf="@id/rg_filter_dialog"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/con_bedroom_filter_dialog"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/search_border"
+        app:layout_constraintEnd_toEndOf="@+id/tv_filter_dialog_4"
+        app:layout_constraintStart_toStartOf="@+id/tv_filter_dialog_4"
+        app:layout_constraintTop_toBottomOf="@+id/tv_filter_dialog_4">
+
+        <TextView
+            android:id="@+id/tv_bedroom_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/bedroom"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/minus_bedroom_filter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/plus_bedroom_filter"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/add"
+            android:textColor="@color/white"
+            android:background="@drawable/button_background_add"
+            android:gravity="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/count_bedroom_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/minus_bedroom_filter"
+            app:layout_constraintEnd_toStartOf="@+id/plus_bedroom_filter"
+            app:layout_constraintTop_toTopOf="@+id/minus_bedroom_filter" />
+
+        <Button
+            android:id="@+id/minus_bedroom_filter"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="18dp"
+            android:background="@drawable/button_background_add"
+            android:text="@string/minus"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:fontFamily="@font/poppins_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/count_bedroom_filter"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_filter_dialog_5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="start"
+        android:text="@string/bathroom"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/con_bedroom_filter_dialog"
+        app:layout_constraintStart_toStartOf="@id/con_bedroom_filter_dialog"
+        app:layout_constraintTop_toBottomOf="@id/con_bedroom_filter_dialog"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/con_bathroom_filter_dialog"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/search_border"
+        app:layout_constraintEnd_toEndOf="@+id/tv_filter_dialog_5"
+        app:layout_constraintStart_toStartOf="@+id/tv_filter_dialog_5"
+        app:layout_constraintTop_toBottomOf="@+id/tv_filter_dialog_5">
+
+        <TextView
+            android:id="@+id/tv_bathroom_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/bathroom"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/minus_bathroom_filter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/plus_bathroom_filter"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/add"
+            android:textColor="@color/white"
+            android:background="@drawable/button_background_add"
+            android:gravity="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/count_bathroom_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/minus_bathroom_filter"
+            app:layout_constraintEnd_toStartOf="@+id/plus_bathroom_filter"
+            app:layout_constraintTop_toTopOf="@+id/minus_bathroom_filter" />
+
+        <Button
+            android:id="@+id/minus_bathroom_filter"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="18dp"
+            android:background="@drawable/button_background_add"
+            android:text="@string/minus"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:fontFamily="@font/poppins_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/count_bathroom_filter"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_filter_dialog_6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="start"
+        android:text="@string/location_home"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/con_bathroom_filter_dialog"
+        app:layout_constraintStart_toStartOf="@id/con_bathroom_filter_dialog"
+        app:layout_constraintTop_toBottomOf="@id/con_bathroom_filter_dialog"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tv_location_filter_dialog"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/location_home"
+        android:textColorHint="@color/colorPrimaryText"
+        app:layout_constraintStart_toStartOf="@id/tv_filter_dialog_6"
+        app:layout_constraintEnd_toEndOf="@id/tv_filter_dialog_6"
+        app:layout_constraintTop_toBottomOf="@id/tv_filter_dialog_6">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_complete_location_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/colorPrimaryText"
+            android:inputType="none"
+            android:hint="@null"
+            android:textSize="18sp"
+            tools:text="Gilbert" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/con_apply_filter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_location_filter_dialog"
+        app:layout_constraintEnd_toEndOf="@id/tv_location_filter_dialog"
+        app:layout_constraintTop_toBottomOf="@id/tv_location_filter_dialog">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_apply_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/apply"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_cancel_filter"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_cancel_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/button_background_add_more"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_apply_filter"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

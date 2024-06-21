@@ -5,6 +5,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,9 +25,10 @@ import com.example.finalproject.ui.home.adapter.SearchResultsAdapter
 import com.example.finalproject.ui.home.factory.HomeFeaturedEstatesFactory
 import com.example.finalproject.ui.home.repository.HomeFeaturedEstatesRepository
 import com.example.finalproject.ui.home.viewModel.HomeFeaturedEstatesViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_search_results.et_search_results
+import kotlinx.android.synthetic.main.activity_search_results.iv_filter_search_results
 import kotlinx.android.synthetic.main.activity_search_results.toolbar_search_results
-import kotlinx.android.synthetic.main.activity_search_results.tv_search_results_title_1
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -48,6 +51,10 @@ class SearchResultsActivity : BaseActivity() {
         setContentView(R.layout.activity_search_results)
 
         networkUtils = NetworkUtils(this@SearchResultsActivity)
+
+        iv_filter_search_results.setOnClickListener {
+            showFilterDialog()
+        }
 
         initRecyclerView()
 
@@ -201,6 +208,30 @@ class SearchResultsActivity : BaseActivity() {
             this@SearchResultsActivity, mutableListOf(), ::handleFavouriteClick
         )
         recyclerView.adapter = searchResultsAdapter
+    }
+
+    private fun showFilterDialog() {
+        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialog)
+
+        val filterDialogView = layoutInflater.inflate(R.layout.filter_search_dialog, null)
+        filterDialogView.background = ContextCompat.getDrawable(
+            this, R.drawable.message_options_dialog_background)
+
+        val btnApply = filterDialogView.findViewById<AppCompatTextView>(R.id.btn_apply_filter)
+        val btnCancel = filterDialogView.findViewById<AppCompatTextView>(R.id.btn_cancel_filter)
+
+        btnApply.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+
+        btnCancel.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+
+        bottomSheetDialog.setCanceledOnTouchOutside(false)
+        bottomSheetDialog.setCancelable(false)
+        bottomSheetDialog.setContentView(filterDialogView)
+        bottomSheetDialog.show()
     }
 
     private fun setUpActionBar() {

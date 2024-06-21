@@ -171,17 +171,6 @@
                 app:layout_constraintStart_toStartOf="@id/cl_home_title">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_filter_home"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/ic_filter"
-                    android:backgroundTint="@color/colorPrimaryText"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_search_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -199,7 +188,7 @@
                     android:layout_marginStart="10dp"
                     android:background="@drawable/search_border"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_filter_home"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_search_home"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -214,8 +203,8 @@
                         android:fontFamily="@font/poppins"
                         android:hint="@string/et_search_popular"
                         android:inputType="textMultiLine"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
                         android:textColor="@color/colorPrimaryText"
                         android:textColorHint="@color/home_popular"
                         android:textSize="16sp"
