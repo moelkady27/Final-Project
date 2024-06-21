@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.ui.profile.models.Residence
 import kotlinx.android.synthetic.main.each_row_sold_profile.view.iv_image_sold_profile
-import kotlinx.android.synthetic.main.each_row_sold_profile.view.iv_sold_profile_edit
 import kotlinx.android.synthetic.main.each_row_sold_profile.view.sold_profile_price_2
 import kotlinx.android.synthetic.main.each_row_sold_profile.view.sold_profile_price_4
 import kotlinx.android.synthetic.main.each_row_sold_profile.view.tv_sold_profile_title_1
@@ -55,7 +54,6 @@ class SoldAdapter(
                     .into(iv_image_sold_profile)
             }
 
-            iv_sold_profile_edit.visibility = View.GONE
         }
     }
 

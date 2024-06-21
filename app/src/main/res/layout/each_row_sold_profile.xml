@@ -33,33 +33,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:targetApi="s" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_sold_profile_edit"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/ic_chat_home_background"
-            android:backgroundTint="@color/colorPrimary"
-            android:contentDescription="@string/content_description"
-            android:tint="@color/white"
-            app:layout_constraintStart_toStartOf="@id/iv_image_sold_profile"
-            app:layout_constraintTop_toTopOf="@id/iv_image_sold_profile"
-            app:srcCompat="@drawable/ic_edit" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_sold_profile_favourite"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/ic_chat_home_background"
-            android:backgroundTint="@color/home_search"
-            android:contentDescription="@string/content_description"
-            android:tint="@color/colorPrimaryText"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_sold_profile_edit"
-            app:layout_constraintEnd_toEndOf="@id/iv_image_sold_profile"
-            app:layout_constraintTop_toTopOf="@+id/iv_sold_profile_edit"
-            app:srcCompat="@drawable/ic_favorites" />
-
         <LinearLayout
             android:id="@+id/ll_sold_profile_price"
             android:layout_width="wrap_content"

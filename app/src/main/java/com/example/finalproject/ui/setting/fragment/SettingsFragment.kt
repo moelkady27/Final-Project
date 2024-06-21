@@ -16,8 +16,8 @@ import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.add_listing.activities.CreateResidenceActivity
 import com.example.finalproject.ui.chat.activities.ChatListUsersActivity
-import com.example.finalproject.ui.booking.activities.AcceptCancelBookedActivity
 import com.example.finalproject.ui.register.activities.SignInActivity
 import com.example.finalproject.ui.password.activities.ChangePasswordActivity
 import com.example.finalproject.ui.setting.activities.DeleteAccountActivity
@@ -33,7 +33,7 @@ import com.example.finalproject.ui.setting.factory.LogOutFactory
 import com.example.finalproject.ui.setting.repository.LogOutRepository
 import com.example.finalproject.ui.setting.viewModels.LogOutViewModel
 import com.google.android.material.button.MaterialButton
-import kotlinx.android.synthetic.main.fragment_settings.btn_booked_requests
+import kotlinx.android.synthetic.main.fragment_settings.btn_add_listings
 import kotlinx.android.synthetic.main.fragment_settings.btn_change_password
 import kotlinx.android.synthetic.main.fragment_settings.btn_chats
 import kotlinx.android.synthetic.main.fragment_settings.btn_delete_account
@@ -290,15 +290,15 @@ class SettingsFragment : Fragment() {
             resetButtonColor(btn_change_password)
         }
 
-//        btn_booked_requests.setOnClickListener {
-//            btn_booked_requests.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-//            btn_booked_requests.setTextColor(resources.getColor(R.color.white))
-//            btn_booked_requests.setIconTintResource(R.color.white)
-//
-//            val intent = Intent(requireContext(), AcceptCancelBookedActivity::class.java)
-//            startActivity(intent)
-//            resetButtonColor(btn_booked_requests)
-//        }
+        btn_add_listings.setOnClickListener {
+            btn_add_listings.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            btn_add_listings.setTextColor(resources.getColor(R.color.white))
+            btn_add_listings.setIconTintResource(R.color.white)
+
+            val intent = Intent(requireContext(), CreateResidenceActivity::class.java)
+            startActivity(intent)
+            resetButtonColor(btn_add_listings)
+        }
 
         btn_chats.setOnClickListener {
             btn_chats.setBackgroundColor(resources.getColor(R.color.colorPrimary))

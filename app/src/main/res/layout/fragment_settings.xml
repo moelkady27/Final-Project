@@ -143,11 +143,11 @@
                     app:layout_constraintTop_toBottomOf="@id/btn_edit_profile"
                     app:layout_constraintEnd_toEndOf="@+id/btn_edit_profile"
                     app:layout_constraintStart_toStartOf="@+id/btn_edit_profile"
-                    app:layout_constraintBottom_toTopOf="@id/btn_booked_requests"
+                    app:layout_constraintBottom_toTopOf="@id/btn_add_listings"
                     tools:ignore="RtlSymmetry" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_booked_requests"
+                    android:id="@+id/btn_add_listings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -158,11 +158,11 @@
                     android:paddingTop="10dp"
                     android:paddingStart="25dp"
                     android:paddingBottom="10dp"
-                    android:text="@string/booked_requests"
+                    android:text="@string/add_listing"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="16sp"
-                    app:icon="@drawable/ic_notifications"
+                    app:icon="@drawable/ic_add"
                     app:iconGravity="textStart"
                     app:iconTint="@color/colorPrimaryText"
                     app:layout_constraintBottom_toTopOf="@id/btn_chats"
@@ -191,9 +191,9 @@
                     app:iconGravity="textStart"
                     app:iconTint="@color/colorPrimaryText"
                     app:layout_constraintBottom_toTopOf="@id/btn_favourites"
-                    app:layout_constraintTop_toBottomOf="@id/btn_booked_requests"
-                    app:layout_constraintEnd_toEndOf="@+id/btn_booked_requests"
-                    app:layout_constraintStart_toStartOf="@+id/btn_booked_requests"
+                    app:layout_constraintTop_toBottomOf="@id/btn_add_listings"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_add_listings"
+                    app:layout_constraintStart_toStartOf="@+id/btn_add_listings"
                     tools:ignore="RtlSymmetry" />
 
                 <com.google.android.material.button.MaterialButton
