@@ -36,6 +36,7 @@ import com.example.finalproject.ui.favourite.models.AddToFavouritesResponse
 import com.example.finalproject.ui.favourite.models.DeleteAllFavouriteResponse
 import com.example.finalproject.ui.favourite.models.DeleteFavouriteResponse
 import com.example.finalproject.ui.favourite.models.GetAllFavouritesResponse
+import com.example.finalproject.ui.home.models.FiltrationSearchResponse
 import com.example.finalproject.ui.home.models.GetAllResidencesResponse
 import com.example.finalproject.ui.home.models.GetNearestResidencesResponse
 import com.example.finalproject.ui.password.models.ChangePasswordResponse
@@ -492,4 +493,16 @@ interface ApiService {
         @Path("residenceId") residenceId: String,
         @Body req: UpdatePriceRequest
     ): Call<UpdatePriceResponse>
+
+    @GET("api/v1/residence/filter")
+    fun filtrationSearch(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int,
+        @Query("min") minPrice: String,
+        @Query("max") maxPrice: String,
+        @Query("rating") rating: String,
+        @Query("bedroom") bedroom: String,
+        @Query("bathroom") bathroom: String,
+        @Query("neighborhood") neighborhood: String
+    ): Call<FiltrationSearchResponse>
 }
