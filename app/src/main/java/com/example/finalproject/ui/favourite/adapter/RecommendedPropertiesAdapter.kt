@@ -48,35 +48,42 @@ class RecommendedPropertiesAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val x = list[position]
 
-        holder.itemView.apply {
-            number_star_recommends_estates_fav_one.text = x.avgRating.toString()
-            tv_apartment_recommends_estates_fav.text = x.category
-            apartment_name_recommends_estates_fav.text = x.title
-            apartment_location_recommends_estates_fav.text = x.location.fullAddress
-            apartment_price_recommends_estates_fav.text = x.salePrice.toString()
+        x?.let {
+            holder.itemView.apply {
+//                number_star_recommends_estates_fav_one.text = x.avgRating.toString()
+                tv_apartment_recommends_estates_fav.text = x.category
+                apartment_name_recommends_estates_fav.text = x.title
+                apartment_location_recommends_estates_fav.text = x.location.fullAddress
+                apartment_price_recommends_estates_fav.text = x.salePrice.toString()
 
-            val isLiked = x.isLiked
+                val isLiked = x.isLiked
 
-            if (isLiked) {
-                holder.itemView.iv_recommends_estates_fav_fav.backgroundTintList =
-                    ContextCompat.getColorStateList(context, R.color.colorPrimary)
-            } else {
-                holder.itemView.iv_recommends_estates_fav_fav.backgroundTintList =
-                    ContextCompat.getColorStateList(context, R.color.edit_text)
-            }
+                if (isLiked) {
+                    holder.itemView.iv_recommends_estates_fav_fav.backgroundTintList =
+                        ContextCompat.getColorStateList(context, R.color.colorPrimary)
+                } else {
+                    holder.itemView.iv_recommends_estates_fav_fav.backgroundTintList =
+                        ContextCompat.getColorStateList(context, R.color.edit_text)
+                }
 
-            if (x.images.isNotEmpty()) {
-                Glide
-                    .with(this)
-                    .load(x.images[0].url)
-                    .into(image_recommends_estates_fav)
-            }
+                if (x.images.isNotEmpty()) {
+                    Glide
+                        .with(this)
+                        .load(x.images[0].url)
+                        .into(image_recommends_estates_fav)
+                }
 
-            holder.itemView.iv_recommends_estates_fav_fav.setOnClickListener {
-                onFavouriteClick(x._id, x.isLiked)
-                x.isLiked = !x.isLiked
-                notifyItemChanged(position)
-            }
+                if (it.avgRating != null) {
+                    number_star_recommends_estates_fav_one.text = it.avgRating.toString()
+                } else {
+                    // handle the case where avgRating is null
+                }
+
+                holder.itemView.iv_recommends_estates_fav_fav.setOnClickListener {
+                    onFavouriteClick(x._id, x.isLiked)
+                    x.isLiked = !x.isLiked
+                    notifyItemChanged(position)
+                }
 
 //            holder.itemView.setOnClickListener {
 //                val context = holder.itemView.context
@@ -85,12 +92,16 @@ class RecommendedPropertiesAdapter(
 //                intent.putExtra("residence_Id", x.Id.toString())
 //                context.startActivity(intent)
 //            }
+            }
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateFavouriteStatus(residenceId: String, isLiked: Boolean) {
-        list.find { it._id == residenceId }?.isLiked = isLiked
-        notifyDataSetChanged()
+        val item = list.find { it?._id == residenceId }
+        item?.let {
+            it.isLiked = isLiked
+            notifyDataSetChanged()
+        }
     }
 }

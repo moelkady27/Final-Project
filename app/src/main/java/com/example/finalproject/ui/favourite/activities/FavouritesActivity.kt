@@ -269,7 +269,7 @@ class FavouritesActivity : BaseActivity() {
     @SuppressLint("NotifyDataSetChanged")
     private fun getRecommendedEstates() {
         val token = AppReferences.getToken(this@FavouritesActivity)
-        val residenceId = "1001"
+        val residenceId = "15"
 
         if (residenceId == null) {
             Log.e("DescriptionFragment", "Residence ID is null")
