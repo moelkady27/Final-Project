@@ -82,6 +82,7 @@ class ResidenceDetailsActivity : BaseActivity() {
 
         adapter = DetailsViewAdapter(supportFragmentManager, lifecycle, residenceId!!,residence_Id!!)
         viewPager2.adapter = adapter
+        viewPager2.setUserInputEnabled(false)
 
         TabLayoutMediator(tabLayout_residence_details, viewPager2) { tab, position ->
             when (position) {
