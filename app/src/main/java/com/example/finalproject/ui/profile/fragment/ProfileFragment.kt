@@ -125,9 +125,10 @@ class ProfileFragment : Fragment() {
                     role = user.role,
                     updatedAt = user.updatedAt,
                     username = user.username,
-                    soldCount = response.soldCount,
+                    approvedCount = response.approvedCount,
                     pendingCount = response.pendingCount,
-                    approvedCount = response.approvedCount
+                    soldCount = response.soldCount,
+                    wishlist = user.wishlist
                 )
 
                 lifecycleScope.launch {

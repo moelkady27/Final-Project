@@ -6,8 +6,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.finalproject.ui.profile.models.User
 
-@Database(entities = [User::class], version = 1)
-@TypeConverters(UserImageConverters::class, UserLocationConverters::class)
+@Database(entities = [User::class], version = 2)
+@TypeConverters(UserImageConverters::class, UserLocationConverters::class, WishListConverter::class)
 abstract class UserDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
 

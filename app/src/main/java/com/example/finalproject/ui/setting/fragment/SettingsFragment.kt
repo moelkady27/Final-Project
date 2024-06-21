@@ -158,7 +158,8 @@ class SettingsFragment : Fragment() {
                     username = user.username,
                     soldCount = response.soldCount,
                     pendingCount = response.pendingCount,
-                    approvedCount = response.approvedCount
+                    approvedCount = response.approvedCount,
+                    wishlist = user.wishlist
                 )
 
                 lifecycleScope.launch {

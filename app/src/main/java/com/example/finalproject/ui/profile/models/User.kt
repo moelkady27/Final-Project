@@ -20,7 +20,8 @@ data class User(
     val role: String,
     val updatedAt: String,
     val username: String,
-    val soldCount: Int,
+    val approvedCount: Int,
     val pendingCount: Int,
-    val approvedCount: Int
+    val soldCount: Int,
+    val wishlist: List<String>
 )
