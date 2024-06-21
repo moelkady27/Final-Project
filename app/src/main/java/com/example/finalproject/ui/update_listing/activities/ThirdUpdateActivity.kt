@@ -848,17 +848,17 @@ class ThirdUpdateActivity : BaseActivity() {
 
     private fun increaseCountBathRooms() {
         val currentText = count_bathrooms_update.text.toString()
-        val currentNumber = currentText.toInt()
-        val newNumber = currentNumber + 1
+        val currentNumber = currentText.toDouble()
+        val newNumber = currentNumber + 0.5
         count_bathrooms_update.text = newNumber.toString()
         Log.e("Count Fire Place", newNumber.toString())
     }
 
     private fun decreaseCountBathRooms() {
         val currentText = count_bathrooms_update.text.toString()
-        val currentNumber = currentText.toInt()
+        val currentNumber = currentText.toDouble()
         if (currentNumber > 0) {
-            val newNumber = currentNumber - 1
+            val newNumber = currentNumber - 0.5
             count_bathrooms_update.text = newNumber.toString()
             Log.e("Count Fire Place", newNumber.toString())
         } else {
