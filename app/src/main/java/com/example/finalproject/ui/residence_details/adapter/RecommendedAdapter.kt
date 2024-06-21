@@ -37,26 +37,28 @@ class RecommendedAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val x = list[position]
 
-        holder.itemView.apply {
-            recommended_title_1.text = x.title
-            recommended_title_3.text = x.salePrice.toString()
-            tv_recommended_location.text = x.location.fullAddress
+        x?.let {
+            holder.itemView.apply {
+                recommended_title_1.text = it.title
+                recommended_title_3.text = it.salePrice.toString()
+                tv_recommended_location.text = it.location.fullAddress
 
-            if (x.images.isNotEmpty()) {
-                Glide
-                    .with(this)
-                    .load(x.images[0].url)
-                    .into(image_recommended)
-            }
+                if (it.images.isNotEmpty()) {
+                    Glide
+                        .with(this)
+                        .load(it.images[0].url)
+                        .into(image_recommended)
+                }
 
             iv_recommended_favourite.visibility = View.GONE
 
-            holder.itemView.setOnClickListener {
-                val context = holder.itemView.context
-                val intent = Intent(context, ResidenceDetailsActivity::class.java)
-                intent.putExtra("residenceId", x._id)
-                intent.putExtra("residence_Id", x.Id.toString())
-                context.startActivity(intent)
+                holder.itemView.setOnClickListener {
+                    val context = holder.itemView.context
+                    val intent = Intent(context, ResidenceDetailsActivity::class.java)
+                    intent.putExtra("residenceId", x._id)
+                    intent.putExtra("residence_Id", x.Id.toString())
+                    context.startActivity(intent)
+                }
             }
         }
     }
