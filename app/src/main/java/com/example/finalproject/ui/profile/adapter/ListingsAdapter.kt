@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
-import com.example.finalproject.ui.profile.models.Residence
+import com.example.finalproject.ui.profile.models.ResidenceX
 import com.example.finalproject.ui.update_listing.activities.UpdateResidenceActivity
 import kotlinx.android.synthetic.main.each_row_listings_profile.iv_listings_profile_edit
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.iv_image_listings_profile
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.each_row_listings_profile.view.tv_listings
 import kotlinx.android.synthetic.main.each_row_listings_profile.view.tv_listings_profile_title_2
 
 class ListingsAdapter(
-    private val list: MutableList<Residence>
+    private val list: MutableList<ResidenceX>
 ): RecyclerView.Adapter<ListingsAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -73,7 +73,7 @@ class ListingsAdapter(
         }
     }
 
-    fun addItems(newItems: List<Residence>) {
+    fun addItems(newItems: List<ResidenceX>) {
         val uniqueItems = newItems.filter { item ->
             item._id !in itemIds
         }

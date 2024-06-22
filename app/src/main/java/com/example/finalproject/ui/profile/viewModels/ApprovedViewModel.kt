@@ -2,6 +2,7 @@ package com.example.finalproject.ui.profile.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.finalproject.ui.profile.models.GetApprovedResponse
 import com.example.finalproject.ui.profile.models.ResidenceResponse
 import com.example.finalproject.ui.profile.repository.ApprovedRepository
 import retrofit2.Call
@@ -11,7 +12,7 @@ import retrofit2.Response
 class ApprovedViewModel(
     private val approvedRepository: ApprovedRepository
 ): ViewModel() {
-    val approvedResponseLiveData: MutableLiveData<ResidenceResponse> = MutableLiveData()
+    val approvedResponseLiveData: MutableLiveData<GetApprovedResponse> = MutableLiveData()
     val errorLiveData: MutableLiveData<String> = MutableLiveData()
     val loadingLiveData: MutableLiveData<Boolean> = MutableLiveData(false)
 
@@ -25,10 +26,10 @@ class ApprovedViewModel(
 
         loadingLiveData.value = true
         approvedRepository.getApproved(token, currentPage)
-            .enqueue(object : Callback<ResidenceResponse>{
+            .enqueue(object : Callback<GetApprovedResponse>{
                 override fun onResponse(
-                    call: Call<ResidenceResponse>,
-                    response: Response<ResidenceResponse>)
+                    call: Call<GetApprovedResponse>,
+                    response: Response<GetApprovedResponse>)
                 {
                     loadingLiveData.value = false
                     if (response.isSuccessful) {
@@ -43,7 +44,7 @@ class ApprovedViewModel(
                     }
                 }
 
-                override fun onFailure(call: Call<ResidenceResponse>, t: Throwable) {
+                override fun onFailure(call: Call<GetApprovedResponse>, t: Throwable) {
                     errorLiveData.value = t.message
                 }
             })

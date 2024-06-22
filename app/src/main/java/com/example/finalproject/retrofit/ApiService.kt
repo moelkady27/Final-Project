@@ -52,6 +52,7 @@ import com.example.finalproject.ui.password.request.VerificationCodeForgetPasswo
 import com.example.finalproject.ui.profile.models.ChangeProfileImageResponse
 import com.example.finalproject.ui.profile.models.DeleteProfileImageResponse
 import com.example.finalproject.ui.profile.models.EditProfileResponse
+import com.example.finalproject.ui.profile.models.GetApprovedResponse
 import com.example.finalproject.ui.profile.models.GetUserResponse
 import com.example.finalproject.ui.profile.models.ResidenceResponse
 import com.example.finalproject.ui.profile.request.EditProfileRequest
@@ -311,7 +312,7 @@ interface ApiService {
     fun getApprovedResidence(
         @Header("Authorization") token: String,
         @Query("page") page: Int
-    ): Call<ResidenceResponse>
+    ): Call<GetApprovedResponse>
 
     @GET("api/v1/residence/sold")
     fun getSoldResidence(
