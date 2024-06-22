@@ -570,16 +570,17 @@ class ThirdUpdateActivity : BaseActivity() {
                 error?.let {
                     try {
                         val errorMessage = JSONObject(error).getString("message")
-                        Toast.makeText(
-                            this@ThirdUpdateActivity, errorMessage, Toast.LENGTH_LONG
-                        ).show()
+//                        Toast.makeText(
+//                            this@ThirdUpdateActivity, errorMessage, Toast.LENGTH_LONG
+//                        ).show()
 
                         Log.e("ThirdUpdateActivity", "Third Update Error: $errorMessage")
 
                     } catch (e: JSONException) {
-                        Toast.makeText(
-                            this@ThirdUpdateActivity, error, Toast.LENGTH_LONG
-                        ).show()
+//                        Toast.makeText(
+//                            this@ThirdUpdateActivity, error, Toast.LENGTH_LONG
+//                        ).show()
+                        Log.e("ThirdUpdateActivity", "Third Update Error: $error")
                     }
                 }
             }
