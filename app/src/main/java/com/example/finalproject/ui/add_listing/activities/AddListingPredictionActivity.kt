@@ -2,6 +2,7 @@ package com.example.finalproject.ui.add_listing.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -44,6 +45,9 @@ class AddListingPredictionActivity : AppCompatActivity() {
         initView()
 
         initButtons()
+
+        val residenceId = intent.getStringExtra("residence_Id").toString()
+        Log.e("residenceId", residenceId)
     }
 
     private fun initView() {
@@ -56,7 +60,7 @@ class AddListingPredictionActivity : AppCompatActivity() {
         )[PredictPriceViewModel::class.java]
 
         val token = AppReferences.getToken(this@AddListingPredictionActivity)
-        val residenceId = intent.getStringExtra("residenceId").toString()
+        val residenceId = intent.getStringExtra("residence_Id").toString()
 
         predictPriceViewModel.predictPrice(token, residenceId)
 
@@ -71,9 +75,10 @@ class AddListingPredictionActivity : AppCompatActivity() {
             error?.let {
                 try {
                     val errorMessage = JSONObject(it).getString("message")
-                    Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("errorMessage", it)
                 } catch (e: JSONException) {
                     Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+                    Log.e("error", it)
                 }
             }
         }
