@@ -155,9 +155,11 @@ class FourthCompleteActivity : BaseActivity() {
                     Log.e("FourthCompleteActivity", "Status: $status")
 
                     val id = it.residence._id
+                    val Id = it.residence.Id
                     val intent = Intent(
                         this@FourthCompleteActivity, AddListingPredictionActivity::class.java)
                     intent.putExtra("residenceId", id)
+                    intent.putExtra("residence_Id", Id)
                     startActivity(intent)
                 }
             }

@@ -13,6 +13,8 @@ import com.example.finalproject.network.NetworkUtils
 import com.example.finalproject.retrofit.RetrofitClient
 import com.example.finalproject.storage.AppReferences
 import com.example.finalproject.storage.BaseActivity
+import com.example.finalproject.ui.MainActivity
+import com.example.finalproject.ui.home.fragment.HomeFragment
 import com.example.finalproject.ui.profile.activities.EditProfileActivity
 import com.example.finalproject.ui.profile.fragment.ListingsFragment
 import com.example.finalproject.ui.profile.fragment.ProfileFragment
@@ -475,7 +477,10 @@ class FourthUpdateActivity : BaseActivity() {
         val closeButton = messageDialogView.findViewById<TextView>(R.id.close_edit_list_success)
 
         closeButton.setOnClickListener {
-            // TODO - Navigate to the next screen
+            bottomSheetDialog.dismiss()
+            val intent = Intent(this@FourthUpdateActivity, MainActivity::class.java)
+            intent.putExtra("fragment", "HomeFragment")
+            startActivity(intent)
         }
 
         bottomSheetDialog.setContentView(messageDialogView)
