@@ -63,7 +63,7 @@ class AddListingPredictionActivity : AppCompatActivity() {
         )[PredictPriceViewModel::class.java]
 
         val token = AppReferences.getToken(this@AddListingPredictionActivity)
-        val residenceId = intent.getStringExtra("residence_Id").toString()
+        val residenceId = intent.getStringExtra("residenceId").toString()
 
         predictPriceViewModel.predictPrice(token, residenceId)
 
