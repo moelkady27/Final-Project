@@ -1,6 +1,7 @@
 package com.example.finalproject.ui.add_listing.models
 
 data class ResidenceFirst(
+    val Id: String,
     val _id: String,
     val category: String,
     val hasBasement: Boolean,

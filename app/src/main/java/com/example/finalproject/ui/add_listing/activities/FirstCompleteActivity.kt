@@ -66,6 +66,12 @@ class FirstCompleteActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first_complete)
 
+        val residenceId = intent.getStringExtra("residenceId").toString()
+        Log.e("residenceId" , "first get $residenceId")
+
+        val residence_Id = intent.getStringExtra("residence_Id").toString()
+        Log.e("residence_Id", "first get $residence_Id")
+
         networkUtils = NetworkUtils(this@FirstCompleteActivity)
 
         initView()
@@ -168,10 +174,15 @@ class FirstCompleteActivity : BaseActivity() {
                     val status = it.status
                     Log.e("FirstCompleteActivity", "Status: $status")
 
+                    val id = it.residence._id
+                    val Id = it.residence.Id
+
                     val intent = Intent(
                         this@FirstCompleteActivity, SecondCompleteActivity::class.java)
-                    intent.putExtra("residenceId", residenceId)
-                    Log.e("residenceId" , "First Complete is $residenceId")
+                    intent.putExtra("residenceId", id)
+                    intent.putExtra("residence_Id", Id)
+                    Log.e("id" , "First Complete id send $id")
+                    Log.e("Id" , "First Complete Id send $Id")
                     startActivity(intent)
                 }
             }

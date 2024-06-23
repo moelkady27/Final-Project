@@ -61,7 +61,10 @@ class AddListingMapActivity : BaseActivity(), OnMapReadyCallback {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         val residenceId = intent.getStringExtra("residenceId").toString()
-        Log.e("residenceId" , "Map is $residenceId")
+        Log.e("residenceId" , "map get $residenceId")
+
+        val residence_Id = intent.getStringExtra("residence_Id").toString()
+        Log.e("residence_Id", "map get $residence_Id")
 
         initView()
     }
@@ -187,10 +190,14 @@ class AddListingMapActivity : BaseActivity(), OnMapReadyCallback {
                     Log.e("MapActivity", "Status: $status")
 
                     val id = it.residenceId
-                    Log.e("MapActivity", "id: $id")
+                    val residence_Id = it.Id
+
+                    Log.e("MapActivitySend", "id: $id")
+                    Log.e("MapActivitySend", "Id $residence_Id")
 
                     val intent = Intent(this@AddListingMapActivity, AddListingPhotosActivity::class.java)
                     intent.putExtra("residenceId", id)
+                    intent.putExtra("residence_Id", residence_Id )
                     startActivity(intent)
 
                 }

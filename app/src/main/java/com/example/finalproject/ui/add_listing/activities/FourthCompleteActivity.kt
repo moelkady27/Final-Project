@@ -61,7 +61,10 @@ class FourthCompleteActivity : BaseActivity() {
         setContentView(R.layout.activity_fourth_complete)
 
         val residenceId = intent.getStringExtra("residenceId").toString()
-        Log.e("residenceId" , "third is $residenceId")
+        Log.e("residenceId" , "fourth get $residenceId")
+
+        val residence_Id = intent.getStringExtra("residence_Id").toString()
+        Log.e("residence_Id", "fourth get $residence_Id")
 
         networkUtils = NetworkUtils(this@FourthCompleteActivity)
 
@@ -156,10 +159,13 @@ class FourthCompleteActivity : BaseActivity() {
 
                     val id = it.residence._id
                     val Id = it.residence.Id
+
                     val intent = Intent(
                         this@FourthCompleteActivity, AddListingPredictionActivity::class.java)
                     intent.putExtra("residenceId", id)
                     intent.putExtra("residence_Id", Id)
+                    Log.e("id" , "Fourth Complete id send $id")
+                    Log.e("Id" , "Fourth Complete Id send $Id")
                     startActivity(intent)
                 }
             }

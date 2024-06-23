@@ -93,11 +93,15 @@ class CreateResidenceActivity : BaseActivity() {
 
                     val residenceId = response.residence._id
 
+                    val residence_Id = response.residence.Id
+
                     Log.e("CreateResidenceActivity", "Status: $status")
 
                     val intent = Intent(this@CreateResidenceActivity, AddListingLocationActivity::class.java)
                     intent.putExtra("residenceId", residenceId)
-                    Log.e("residenceId" , "create is $residenceId")
+                    intent.putExtra("residence_Id", residence_Id)
+                    Log.e("residenceId" , "create send $residenceId")
+                    Log.e("residence_Id", "Create send $residence_Id")
                     startActivity(intent)
                 }
             }

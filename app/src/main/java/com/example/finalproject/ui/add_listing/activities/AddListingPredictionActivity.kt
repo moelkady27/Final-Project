@@ -46,8 +46,11 @@ class AddListingPredictionActivity : AppCompatActivity() {
 
         initButtons()
 
-        val residenceId = intent.getStringExtra("residence_Id").toString()
-        Log.e("residenceId", residenceId)
+        val residenceId = intent.getStringExtra("residenceId").toString()
+        Log.e("residenceId" , "prediction get $residenceId")
+
+        val residence_Id = intent.getStringExtra("residence_Id").toString()
+        Log.e("residence_Id", "prediction get $residence_Id")
     }
 
     private fun initView() {

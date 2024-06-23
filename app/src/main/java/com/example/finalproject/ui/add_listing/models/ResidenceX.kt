@@ -1,6 +1,7 @@
 package com.example.finalproject.ui.add_listing.models
 
 data class ResidenceX(
+    val Id: String,
     val KitchenAbvGr: Int,
     val _id: String,
     val bedroomAbvGr: Int,

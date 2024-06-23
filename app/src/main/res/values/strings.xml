@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">FinalProject</string>
+    <string name="app_name" translatable="false">Home Finder</string>
 
     <string name="content_description" translatable="false">image</string>
     <string name="tv_welcome_title_1" translatable="false">

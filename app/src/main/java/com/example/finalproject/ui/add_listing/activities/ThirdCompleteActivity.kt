@@ -124,7 +124,10 @@ class ThirdCompleteActivity : BaseActivity() {
         setContentView(R.layout.activity_third_complete)
 
         val residenceId = intent.getStringExtra("residenceId").toString()
-        Log.e("residenceId" , "third is $residenceId")
+        Log.e("residenceId" , "location get $residenceId")
+
+        val residence_Id = intent.getStringExtra("residence_Id").toString()
+        Log.e("residence_Id", "location get $residence_Id")
 
         networkUtils = NetworkUtils(this@ThirdCompleteActivity)
 
@@ -433,13 +436,18 @@ class ThirdCompleteActivity : BaseActivity() {
             thirdCompleteViewModel.thirdCompleteLiveData.observe(this) { response ->
                 hideProgressDialog()
                 response.let {
-                    val message = response.status
-
-                    Log.e("Third Complete", message)
+                    val status = it.status
+                    Log.e("ThirdCompleteActivity", "Status: $status")
 
                     val id = it.residence._id
-                    val intent = Intent(this@ThirdCompleteActivity, FourthCompleteActivity::class.java)
+                    val Id = it.residence.Id
+
+                    val intent = Intent(
+                        this@ThirdCompleteActivity, FourthCompleteActivity::class.java)
                     intent.putExtra("residenceId", id)
+                    intent.putExtra("residence_Id", Id)
+                    Log.e("id" , "Third Complete id send $id")
+                    Log.e("Id" , "Third Complete Id send $Id")
                     startActivity(intent)
                 }
             }

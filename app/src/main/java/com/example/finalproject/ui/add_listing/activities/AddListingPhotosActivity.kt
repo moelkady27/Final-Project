@@ -74,7 +74,10 @@ class AddListingPhotosActivity : BaseActivity() {
         setContentView(R.layout.activity_add_listing_photos)
 
         val residenceId = intent.getStringExtra("residenceId").toString()
-        Log.e("residenceId" , "Photo is $residenceId")
+        Log.e("residenceId" , "photos get $residenceId")
+
+        val residence_Id = intent.getStringExtra("residence_Id").toString()
+        Log.e("residence_Id", "photos get $residence_Id")
 
         initView()
 
@@ -180,8 +183,14 @@ class AddListingPhotosActivity : BaseActivity() {
                     Log.e("status", status)
 
                     val id = it.residenceId
+                    val residence_Id = it.Id
+
+                    Log.e("PhotoSend", "id: $id")
+                    Log.e("PhotoSendSend", "Id $residence_Id")
+
                     val intent = Intent(this@AddListingPhotosActivity, FirstCompleteActivity::class.java)
                     intent.putExtra("residenceId", id)
+                    intent.putExtra("residence_Id", residence_Id)
                     startActivity(intent)
                 }
             }

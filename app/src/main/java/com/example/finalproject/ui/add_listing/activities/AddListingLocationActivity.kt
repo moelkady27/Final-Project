@@ -16,12 +16,16 @@ class AddListingLocationActivity : AppCompatActivity() {
         setUpActionBar()
 
         val residenceId = intent.getStringExtra("residenceId").toString()
-        Log.e("residenceId" , "location is $residenceId")
+        Log.e("residenceId" , "location get $residenceId")
+
+        val residence_Id = intent.getStringExtra("residence_Id").toString()
+        Log.e("residence_Id", "location get $residence_Id")
 
         select_on_the_map.setOnClickListener {
             val intent = Intent(this@AddListingLocationActivity,
                 AddListingMapActivity::class.java)
             intent.putExtra("residenceId", residenceId)
+            intent.putExtra("residence_Id", residence_Id)
             startActivity(intent)
         }
     }
