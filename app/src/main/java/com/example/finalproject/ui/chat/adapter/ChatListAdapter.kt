@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.ui.chat.models.ChatUser
+import kotlinx.android.synthetic.main.each_row_chat_list.view.card
 import kotlinx.android.synthetic.main.each_row_chat_list.view.floatingActionButtonOnline
 import kotlinx.android.synthetic.main.each_row_chat_list.view.image_chat_list
 import kotlinx.android.synthetic.main.each_row_chat_list.view.message_list_content
@@ -115,6 +116,8 @@ class ChatListAdapter(
         } else {
             holder.itemView.floatingActionButtonOnline.visibility = View.GONE
         }
+
+        holder.itemView.card.visibility = View.GONE
 
         holder.itemView.setOnClickListener {
             onItemClick(chatUser)
