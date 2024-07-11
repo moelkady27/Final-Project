@@ -6,6 +6,8 @@ Welcome to the Home Finder app, a comprehensive platform designed to simplify th
 - [Technology Stack](#api-documentation)
 
 
+## Screenshots
+
 
 # Technology Stack
 # Platform :
