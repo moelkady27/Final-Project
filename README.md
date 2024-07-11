@@ -87,6 +87,16 @@ System
 ## Screenshots
 
 
+# Libraries and technologies used
+
+* Navigation Component: One activity contains multiple fragments instead of creating multiple activities.
+* Retrofit: Making HTTP connections with the REST API and converting meal JSON files to Kotlin/Java objects.
+* Room: Save meals in the local database.
+* MVVM & LiveData: Separate logic code from views and save the state in case the screen configuration changes.
+* Coroutines: Perform some code in the background.
+* View Binding: Instead of inflating views manually, view binding will take care of that.
+* Glide: Cache images and load them in ImageView.
+  
 # Technology Stack
 # Platform :
 - Android  
